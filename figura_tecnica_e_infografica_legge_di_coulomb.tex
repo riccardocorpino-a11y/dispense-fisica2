@@ -1,0 +1,104 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage[a4paper, margin=2.5cm]{geometry}
+\usepackage{fontspec}
+\usepackage[italian, bidi=basic, provide=*]{babel}
+\babelprovide[import, onchar=ids fonts]{italian}
+\babelfont{rm}{Noto Sans}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta, calc, backgrounds}
+
+\begin{document}
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[>=Stealth, font=\small]
+
+    % Stili personalizzati per elementi grafici
+    \tikzset{
+      gridline/.style={draw=gray!25, line width=0.3pt, dashed},
+      badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+      forcearrow/.style={line width=1.3pt, ->},
+      posarrow/.style={line width=0.8pt, ->, color=black!80}
+    }
+
+    % ==========================================
+    % CASO 1: Repulsivo (q q' > 0)
+    % ==========================================
+    \begin{scope}[shift={(0,0)}]
+      % Griglia tecnica di sfondo
+      \draw[gridline] (-2.0,-1.1) grid (7.8,1.1);
+
+      % Anelli concentrici (rappresentazione infografica di campo/potenziale)
+      \foreach \r in {0.25, 0.45, 0.65} {
+        \draw[gray!45, line width=0.4pt, dashed] (0,0) circle (\r);
+        \draw[gray!45, line width=0.4pt, dashed] (4.2,0) circle (\r);
+      }
+
+      % Vettore Posizione r
+      \draw[posarrow] (0,0) -- (4.2,0) node[midway, below=3pt] {$\vec{r}$};
+
+      % Vettori Forza F' e F con prolungamento tratteggiato
+      \draw[forcearrow, color=orange!90!red] (0,0) -- (-1.4,0) node[above=2pt] {$\vec{F}'$};
+      \draw[dashed, color=orange!90!red, line width=0.8pt] (-1.4,0) -- (-1.8,0);
+
+      \draw[forcearrow, color=orange!90!red] (4.2,0) -- (5.6,0) node[above=2pt] {$\vec{F}$};
+      \draw[dashed, color=orange!90!red, line width=0.8pt] (5.6,0) -- (6.0,0);
+
+      % Particelle / Cariche
+      \filldraw[fill=orange!80!red, draw=black!80, line width=0.6pt] (0,0) circle (3.2pt);
+      \filldraw[fill=purple!70!blue, draw=black!80, line width=0.6pt] (4.2,0) circle (3.2pt);
+
+      % Etichette P, q, P', q'
+      \node[above=4pt, font=\small\bfseries] at (0,0) {$P$};
+      \node[below=4pt] at (0,0) {$q$};
+      \node[above=4pt, font=\small\bfseries] at (4.2,0) {$P'$};
+      \node[below=4pt] at (4.2,0) {$q'$};
+
+      % Badge identificativo della condizione
+      \node[badge] at (6.8,0) {$q\,q' > 0$};
+    \end{scope}
+
+    % ==========================================
+    % CASO 2: Attrattivo (q q' < 0)
+    % ==========================================
+    \begin{scope}[shift={(0,-2.5)}]
+      % Griglia tecnica di sfondo
+      \draw[gridline] (-2.0,-1.1) grid (7.8,1.1);
+
+      % Anelli concentrici
+      \foreach \r in {0.25, 0.45, 0.65} {
+        \draw[teal!40, line width=0.4pt, densely dotted] (0,0) circle (\r);
+        \draw[teal!40, line width=0.4pt, densely dotted] (4.2,0) circle (\r);
+      }
+
+      % Vettore Posizione r
+      \draw[posarrow] (0,0) -- (4.2,0) node[midway, below=3pt] {$\vec{r}$};
+
+      % Vettori Forza F' e F (elevati per evitare sovrapposizioni)
+      \draw[forcearrow, color=teal!80!black] (0,0.3) -- (1.4,0.3) node[midway, above=1pt] {$\vec{F}'$};
+      \draw[dotted, color=teal!60, line width=0.6pt] (0,0) -- (0,0.3);
+
+      \draw[forcearrow, color=teal!80!black] (4.2,0.3) -- (2.8,0.3) node[midway, above=1pt] {$\vec{F}$};
+      \draw[dotted, color=teal!60, line width=0.6pt] (4.2,0) -- (4.2,0.3);
+
+      % Particelle / Cariche
+      \filldraw[fill=cyan!80!black, draw=black!80, line width=0.6pt] (0,0) circle (3.2pt);
+      \filldraw[fill=blue!80!black, draw=black!80, line width=0.6pt] (4.2,0) circle (3.2pt);
+
+      % Etichette P, q, P', q'
+      \node[above=4pt, font=\small\bfseries] at (0,0) {$P$};
+      \node[below=4pt] at (0,0) {$q$};
+      \node[above=4pt, font=\small\bfseries] at (4.2,0) {$P'$};
+      \node[below=4pt] at (4.2,0) {$q'$};
+
+      % Badge identificativo della condizione
+      \node[badge] at (6.8,0) {$q\,q' < 0$};
+    \end{scope}
+
+  \end{tikzpicture}
+  \caption{Interazione elettrostatica tra due cariche puntiformi $q$ e $q'$ nei casi repulsivo ($q\,q' > 0$) ed attrattivo ($q\,q' < 0$).}
+  \label{fig:legge_coulomb_infografica}
+\end{figure}
+
+\end{document}

@@ -1,0 +1,32 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\begin{document}
+
+Consideriamo la configurazione standard con le quattro cariche $q$ disposte sui vertici del quadrato di lato $l$ centrato nell'origine, giacente nel piano $xy$ e con i lati paralleli agli assi coordinati:
+\begin{equation*}
+V_1 = \left(\frac{l}{2}, \frac{l}{2}, 0\right), \quad 
+V_2 = \left(-\frac{l}{2}, \frac{l}{2}, 0\right), \quad 
+V_3 = \left(-\frac{l}{2}, -\frac{l}{2}, 0\right), \quad 
+V_4 = \left(\frac{l}{2}, -\frac{l}{2}, 0\right)
+\end{equation*}
+
+Un generico punto sull'asse $x$ ha coordinate $P = (x, 0, 0)$. Per simmetria speculare rispetto all'asse $x$, le componenti trasverse del campo si annullano a coppie ($E_y = 0$, $E_z = 0$), lasciando una componente netta soltanto lungo la direzione $\hat{i}$.
+
+Il contributo delle due cariche sulla destra ($x = l/2$) alla componente $x$ del campo è dato da:
+\begin{equation*}
+E_{x,\text{destra}}(x) = \frac{2q}{4\pi\varepsilon_0} \frac{x - \frac{l}{2}}{\left[\left(x - \frac{l}{2}\right)^2 + \frac{l^2}{4}\right]^{3/2}}
+\end{equation*}
+
+Analogamente, il contributo delle due cariche sulla sinistra ($x = -l/2$) è:
+\begin{equation*}
+E_{x,\text{sinistra}}(x) = \frac{2q}{4\pi\varepsilon_0} \frac{x + \frac{l}{2}}{\left[\left(x + \frac{l}{2}\right)^2 + \frac{l^2}{4}\right]^{3/2}}
+\end{equation*}
+
+Sommando i contributi, l'espressione del campo elettrico vettoriale lungo l'asse $x$ in funzione della coordinata $x$ risulta:
+\begin{equation*}
+\mathbf{E}(x) = \frac{q}{2\pi\varepsilon_0} \left( \frac{x - \frac{l}{2}}{\left[\left(x - \frac{l}{2}\right)^2 + \frac{l^2}{4}\right]^{3/2}} + \frac{x + \frac{l}{2}}{\left[\left(x + \frac{l}{2}\right)^2 + \frac{l^2}{4}\right]^{3/2}} \right) \hat{i}
+\end{equation*}
+
+\end{document}

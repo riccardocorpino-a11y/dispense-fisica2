@@ -1,0 +1,379 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[italian]{babel}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{geometry}
+\geometry{top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\tcbset{
+    boxrule=0.5pt,
+    arc=2mm,
+    breakable
+}
+
+\newtcolorbox{boxrichiamo}[1]{
+    colback=blue!5!white,
+    colframe=blue!75!black,
+    fonttitle=\bfseries,
+    title=#1
+}
+
+\title{\textbf{Dispensa d'Esame: Algebra Vettoriale, Concetto di Campo e Operatore Gradiente}}
+\author{Corso di Laurea in Ingegneria --- Insegnamento di Fisica II}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Titolo dell'Argomento e Sintesi Concettuale}
+
+\subsection{Mappa Concettuale della Lezione}
+La comprensione dei fenomeni elettromagnetici e gravitazionali in tre dimensioni richiede una padronanza rigorosa del calcolo vettoriale e differenziale~\cite{3}. Il percorso teorico muove dal ripasso formale dell'algebra vettoriale (con particolare attenzione al prodotto vettoriale e alla sua rappresentazione matriciale)~\cite{1, 3} per giungere alla definizione generale del concetto di \textbf{campo} come associazione univoca di una grandezza fisica (scalare, vettoriale o tensoriale) a ogni punto dello spazio~\cite{1}. Attraverso l'analisi del campo gravitazionale newtoniano come modello prototipico di campo radiale a forza centrale~\cite{1, 2}, si formalizzano le \textbf{linee di campo} e le loro proprietà topologiche fondamentali (tangenza, densità e non intersezione)~\cite{2}. La trattazione culmina con l'analisi differenziale dei campi scalari tramite l'\textbf{operatore gradiente} ($\nabla$), fornendo lo strumento matematico chiave per connettere le funzioni potenziale ai rispettivi campi vettoriali~\cite{2}.
+
+\section{Prerequisiti e Strumenti di Calcolo}
+
+\begin{boxrichiamo}{Richiamo Matematico / Fisica 1: Algebra Vettoriale Avanzata}
+\textbf{Grandezze Scalari e Vettoriali} \\
+Una grandezza \textbf{scalare} è completamente definita da un numero reale corredato da un'unità di misura (es. massa $m$, energia $E$, temperatura $T$)~\cite{3}. Una grandezza \textbf{vettoriale} necessita di modulo, direzione e verso (es. spostamento $\mathbf{r}$, velocità $\mathbf{v}$, accelerazione $\mathbf{a}$, forza $\mathbf{F}$, quantità di moto $\mathbf{p}$, momento angolare $\mathbf{L}$)~\cite{3}.
+
+\vspace{0.3cm}
+\textbf{Rappresentazione in Componenti Cartesiane} \\
+Assegnata una base ortonormale destrogira definita dai versori unitari $\{\hat{\mathbf{i}}, \hat{\mathbf{j}}, \hat{\mathbf{k}}\}$ lungo gli assi $x, y, z$~\cite{3}, un generico vettore $\mathbf{u}$ si esprime come~\cite{3}:
+\[
+\mathbf{u} = u_x \hat{\mathbf{i}} + u_y \hat{\mathbf{j}} + u_z \hat{\mathbf{k}} \quad \text{\cite{3}}
+\]
+Il modulo del vettore è espresso dalla norma euclidea:
+\[
+|\mathbf{u}| = u = \sqrt{u_x^2 + u_y^2 + u_z^2}
+\]
+
+\vspace{0.3cm}
+\textbf{Prodotto Scalare} \\
+Dati due vettori $\mathbf{u}$ e $\mathbf{v}$ separati da un angolo $\theta \in [0, \pi]$, il prodotto scalare associa ai due vettori uno scalare~\cite{1}:
+\[
+\mathbf{u} \cdot \mathbf{v} = |\mathbf{u}| |\mathbf{v}| \cos\theta = u_x v_x + u_y v_y + u_z v_z
+\]
+Condizione di ortogonalità: due vettori non nulli sono perpendicolari se e solo se $\mathbf{u} \cdot \mathbf{v} = 0$~\cite{1}.
+\end{boxrichiamo}
+
+\vspace{0.5cm}
+
+\begin{boxrichiamo}{Richiamo Matematico / Fisica 1: Il Prodotto Vettoriale}
+\textbf{Definizione e Proprietà} \\
+Il prodotto vettoriale tra due vettori $\mathbf{u}$ e $\mathbf{v}$, indicato con $\mathbf{w} = \mathbf{u} \times \mathbf{v}$, genera un nuovo vettore $\mathbf{w}$ caratterizzato da~\cite{1}:
+\begin{enumerate}
+    \item \textbf{Modulo}: $|\mathbf{w}| = |\mathbf{u}| |\mathbf{v}| \sin\theta$, dove $\theta$ è l'angolo compreso tra $\mathbf{u}$ e $\mathbf{v}$~\cite{1}.
+    \item \textbf{Direzione}: perpendicolare al piano individuato dai vettori $\mathbf{u}$ e $\mathbf{v}$~\cite{1}.
+    \item \textbf{Verso}: determinato dalla regola della mano destra (o della vite destrogira)~\cite{1}.
+\end{enumerate}
+
+\vspace{0.3cm}
+\textbf{Proprietà di Anticommutatività} \\
+Il prodotto vettoriale non è commutativo~\cite{1}:
+\[
+\mathbf{u} \times \mathbf{v} = - (\mathbf{v} \times \mathbf{u}) \quad \text{\cite{1}}
+\]
+
+\vspace{0.3cm}
+\textbf{Interpretazione Geometrica del Modulo} \\
+Il valore $|\mathbf{u} \times \mathbf{v}| = |\mathbf{u}| |\mathbf{v}| \sin\theta$ corrisponde all'area del parallelogramma formato dai vettori $\mathbf{u}$ e $\mathbf{v}$~\cite{1}.
+
+\vspace{0.3cm}
+\textbf{Condizione di Parallelismo} \\
+Se $\mathbf{u} \times \mathbf{v} = \mathbf{0}$ con vettori non nulli, risulta $\sin\theta = 0$, ovvero $\theta = 0$ oppure $\theta = \pi$. I vettori sono paralleli o antiparalleli~\cite{1}.
+\end{boxrichiamo}
+
+\vspace{0.5cm}
+
+\begin{boxrichiamo}{Richiamo Matematico / Fisica 1: Operatori Differenziali e Gradiente}
+\textbf{Derivate Parziali} \\
+Data una funzione scalare $f(x,y,z)$, la derivata parziale $\frac{\partial f}{\partial x}$ rappresenta il tasso di variazione di $f$ lungo l'asse $x$ mantenendo costanti $y$ e $z$.
+
+\vspace{0.3cm}
+\textbf{Operatore Differenziale Nabla ($\nabla$)} \\
+Nelle coordinate cartesiane, l'operatore simbolico vettoriale $\nabla$ è definito come~\cite{2}:
+\[
+\nabla = \hat{\mathbf{i}} \frac{\partial}{\partial x} + \hat{\mathbf{j}} \frac{\partial}{\partial y} + \hat{\mathbf{k}} \frac{\partial}{\partial z} \quad \text{\cite{2}}
+\]
+Tale operatore possiede proprietà differenziali e vettoriali~\cite{2}.
+\end{boxrichiamo}
+
+\section{Teoria, Modelli e Dimostrazioni}
+
+\subsection{Il Prodotto Vettoriale in Componenti Cartesiane}
+
+Per calcolare le componenti cartesiane del vettore risultante dal prodotto vettoriale $\mathbf{w} = \mathbf{u} \times \mathbf{v}$, si impiega lo sviluppo formale del determinante di una matrice $3 \times 3$ lungo la prima riga~\cite{1}:
+
+\[
+\mathbf{w} = \mathbf{u} \times \mathbf{v} = 
+\begin{vmatrix} 
+\hat{\mathbf{i}} & \hat{\mathbf{j}} & \hat{\mathbf{k}} \\ 
+u_x & u_y & u_z \\ 
+v_x & v_y & v_z 
+\end{vmatrix} \quad \text{\cite{1}}
+\]
+
+Sviluppando il determinante tramite i minori complementari~\cite{1}:
+
+\[
+\mathbf{w} = \hat{\mathbf{i}} \begin{vmatrix} u_y & u_z \\ v_y & v_z \end{vmatrix} - \hat{\mathbf{j}} \begin{vmatrix} u_x & u_z \\ v_x & v_z \end{vmatrix} + \hat{\mathbf{k}} \begin{vmatrix} u_x & u_y \\ v_x & v_y \end{vmatrix} \quad \text{\cite{1}}
+\]
+
+Calcolando i determinanti $2 \times 2$ si ottengono le tre componenti algebriche~\cite{1}:
+
+\[
+\mathbf{w} = (u_y v_z - u_z v_y) \hat{\mathbf{i}} + (u_z v_x - u_x v_z) \hat{\mathbf{j}} + (u_x v_y - u_y v_x) \hat{\mathbf{k}} \quad \text{\cite{1}}
+\]
+
+Esplicitando ciascuna componente vettoriale~\cite{1}:
+\begin{itemize}
+    \item $w_x = u_y v_z - u_z v_y$~\cite{1}
+    \item $w_y = u_z v_x - u_x v_z$~\cite{1}
+    \item $w_z = u_x v_y - u_y v_x$~\cite{1}
+\end{itemize}
+
+\paragraph{Regola Mnemonica delle Permutazioni Cicliche}
+L'ordine degli indici rispetta la permutazione ciclica positiva $(1, 2, 3) \equiv (x, y, z)$~\cite{1}. Partendo dalla componente $1$ ($x$), i termini positivi accoppiano gli indici $2$ ($y$) e $3$ ($z$), seguiti dalla permutazione invertita~\cite{1}:
+\begin{align*}
+1 \to 2 \to 3 &\quad \implies \quad w_1 = u_2 v_3 - u_3 v_2 \quad \text{\cite{1}} \\
+2 \to 3 \to 1 &\quad \implies \quad w_2 = u_3 v_1 - u_1 v_3 \quad \text{\cite{1}} \\
+3 \to 1 \to 2 &\quad \implies \quad w_3 = u_1 v_2 - u_2 v_1 \quad \text{\cite{1}}
+\end{align*}
+
+\subsection{Il Concetto Formale di Campo in Fisica}
+
+Un \textbf{campo} è una legge matematica che assegna in modo univoco una determinata grandezza fisica a ciascun punto $\mathbf{r} = (x,y,z)$ di una regione dello spazio (eventualmente in funzione del tempo $t$)~\cite{1}:
+
+\begin{enumerate}
+    \item \textbf{Campo Scalare}: ad ogni punto corrisponde un singolo valore numerico (es. temperatura $T(x,y,z)$~\cite{1, 3}, potenziale elettrico $V(x,y,z)$~\cite{2}).
+    \item \textbf{Campo Vettoriale}: ad ogni punto è associato un vettore dotato di modulo, direzione e verso (es. velocità di un fluido $\mathbf{v}(x,y,z)$, campo gravitazionale $\mathbf{g}(x,y,z)$~\cite{1}, campo elettrico $\mathbf{E}(x,y,z)$~\cite{2}, campo magnetico $\mathbf{B}(x,y,z)$~\cite{1, 3}).
+    \item \textbf{Campo Tensoriale}: associazione di un tensore ad ogni punto dello spazio~\cite{1}.
+\end{enumerate}
+
+\paragraph{Distinzione Concettuale Tra Campo e Forza}
+La forza $\mathbf{F}$ descrive l'interazione dinamica ed esiste solo in presenza di un oggetto di prova (massa $m$ o carica $q$)~\cite{1}. Il campo rappresenta la modificazione delle proprietà fisiche dello spazio prodotta dalle sorgenti, prescindendo dalla presenza di un oggetto di prova~\cite{1, 2}.
+
+\subsection{Il Campo Gravitazionale Newtoniano}
+
+Consideriamo una massa sorgente puntiforme $M_1$ posta nell'origine e una massa di prova $M_2$ situata a distanza $r$ da $M_1$~\cite{1}. La Legge di Gravitazione Universale di Newton stabilisce che la forza vettoriale $\mathbf{F}_{12}$ esercitata da $M_1$ su $M_2$ è data da~\cite{1}:
+
+\[
+\mathbf{F}_{12} = - G \frac{M_1 M_2}{r^2} \hat{\mathbf{u}}_r \quad \text{\cite{1}}
+\]
+
+dove:
+\begin{itemize}
+    \item $G \approx 6.674 \times 10^{-11} \, \text{N} \cdot \text{m}^2/\text{kg}^2$ è la costante di gravitazione universale.
+    \item $r = |\mathbf{r}|$ rappresenta la distanza tra le due masse~\cite{1}.
+    \item $\hat{\mathbf{u}}_r = \frac{\mathbf{r}}{r}$ è il versore radiale uscente diretto dalla sorgente $M_1$ verso $M_2$~\cite{1}.
+    \item Il segno meno ($-$) formalizza la natura attrattiva della forza gravitazionale~\cite{1}.
+\end{itemize}
+
+\paragraph{Definizione Operativa del Campo Gravitazionale}
+Si definisce il campo gravitazionale $\mathbf{g}(\mathbf{r})$ come la forza per unità di massa di prova~\cite{2}:
+
+\[
+\mathbf{g}(\mathbf{r}) \equiv \frac{\mathbf{F}_{12}}{M_2} = - G \frac{M_1}{r^2} \hat{\mathbf{u}}_r \quad \text{\cite{1, 2}}
+\]
+
+Le dimensioni fisiche del campo $\mathbf{g}(\mathbf{r})$ corrispondono ad un'accelerazione ($\text{m/s}^2$ oppure $\text{N/kg}$)~\cite{2}.
+
+\subsection{Linee di Campo e Loro Proprietà Topologiche}
+
+\paragraph{Definizione Formale}
+Una linea di campo è una curva continua e orientata in cui, in ogni punto $\mathbf{r}$, il vettore campo risulta tangente alla curva~\cite{2}. L'equazione differenziale vettoriale che esprime tale condizione è:
+
+\[
+\text{d}\mathbf{r} \times \mathbf{g}(\mathbf{r}) = \mathbf{0} \quad \iff \quad \frac{\text{d}x}{g_x} = \frac{\text{d}y}{g_y} = \frac{\text{d}z}{g_z}
+\]
+
+\paragraph{Proprietà Fondamentali}
+\begin{enumerate}
+    \item \textbf{Tangenza Locale}: la direzione e il verso del vettore campo coincidono con la retta tangente alla linea di campo orientata~\cite{2}.
+    \item \textbf{Proporzionalità della Densità}: l'intensità del campo è proporzionale al numero di linee che attraversano l'unità di superficie perpendicolare ($N/S$)~\cite{2}.
+    \item \textbf{Impossibilità di Intersezione}: due linee di campo non si intersecano mai in punti regolari dello spazio~\cite{2}.
+\end{enumerate}
+
+\paragraph{Dimostrazione per Assurdo della Non-Intersezione}
+Se due linee di campo $L_1$ e $L_2$ si intersecassero in un punto $P$~\cite{2}, nel punto $P$ esisterebbero due tangenti distinte, associando due differenti vettori campo $\mathbf{g}_1(P)$ e $\mathbf{g}_2(P)$ al medesimo punto~\cite{2}. Ciò viola l'unicità della funzione di campo~\cite{1, 2}. Pertanto, le linee di campo non si incrociano mai~\cite{2}.
+
+\subsection{Classificazione Tipologica dei Campi Vettoriali}
+
+\paragraph{Campo Uniforme}
+Un campo si dice uniforme se il suo vettore è identico in modulo, direzione e verso in ogni punto della regione considerata~\cite{2}. Le linee di campo sono rette parallele ed equispaziate~\cite{2}.
+
+\paragraph{Campo Radiale (Centrale)}
+Un campo vettoriale si dice radiale se le sue linee di campo giacciono su rette passanti per un unico centro di simmetria~\cite{2}. Il modulo dipende unicamente dalla distanza $r$ dal centro: $g = g(r)$~\cite{2}.
+
+\subsection{L'Operatore Gradiente e la Connessione con il Potenziale}
+
+Sia $\phi(x,y,z)$ una funzione scalare differenziabile~\cite{2}. L'operatore $\nabla$ agisce su $\phi$ definendo il gradiente $\nabla \phi$~\cite{2}:
+
+\[
+\nabla \phi = \frac{\partial \phi}{\partial x} \hat{\mathbf{i}} + \frac{\partial \phi}{\partial y} \hat{\mathbf{j}} + \frac{\partial \phi}{\partial z} \hat{\mathbf{k}} \quad \text{\cite{2}}
+\]
+
+\paragraph{Significato Geometrico del Gradiente}
+Il vettore $\nabla \phi$ è diretto lungo la direzione di massima crescita della funzione scalare $\phi$ e ha per modulo il valore di tale derivata direzionale massima~\cite{2}. Risulta inoltre perpendicolare alle superfici isoscalari definite da $\phi(x,y,z) = C$~\cite{2}, poiché il differenziale totale soddisfa:
+\[
+\text{d}\phi = \nabla \phi \cdot \text{d}\mathbf{r} = 0
+\]
+
+\paragraph{Legame con i Campi Conservativi}
+In elettrostatica, il campo vettoriale $\mathbf{E}$ si ottiene dall'opposto del gradiente del potenziale scalare $V(x,y,z)$~\cite{2}:
+
+\[
+\mathbf{E}(\mathbf{r}) = - \nabla V(\mathbf{r}) \quad \text{\cite{2}}
+\]
+
+\section{Interpretazione Fisica e Casi Limite}
+
+\subsection{Comportamento Asintotico ($r \to \infty$)}
+Per campi radiali che variano con l'inverso del quadrato della distanza~\cite{1, 2}:
+\[
+\lim_{r \to \infty} \mathbf{g}(r) = \lim_{r \to \infty} \left( -G \frac{M}{r^2} \hat{\mathbf{u}}_r \right) = \mathbf{0}
+\]
+L'interazione si annulla a distanza infinita.
+
+\subsection{Approssimazione di Campo Uniforme Locale ($z \ll R_E$)}
+Per una quota $z \ll R_E$ rispetto al raggio terrestre $R_E$:
+\[
+g(R_E + z) = \frac{G M_E}{(R_E + z)^2} = \frac{G M_E}{R_E^2 \left(1 + \frac{z}{R_E}\right)^2}
+\]
+Sviluppando in serie di Taylor al primo ordine:
+\[
+g(z) \approx \frac{G M_E}{R_E^2} \left( 1 - 2\frac{z}{R_E} \right) \approx \frac{G M_E}{R_E^2} = g_0 \approx 9.81 \, \text{m/s}^2
+\]
+Il campo radiale converge localmente all'approssimazione di campo uniforme $\mathbf{g} = - g_0 \hat{\mathbf{k}}$~\cite{2}.
+
+\subsection{Analisi Dimensionale e Unità di Misura SI}
+\begin{itemize}
+    \item \textbf{Forza ($\mathbf{F}$)}: $[\text{M} \cdot \text{L} \cdot \text{T}^{-2}] \longrightarrow \text{Newton} \, (\text{N})$~\cite{3}.
+    \item \textbf{Campo Gravitazionale ($\mathbf{g}$)}: $[\text{L} \cdot \text{T}^{-2}] \longrightarrow \text{m/s}^2$ oppure $\text{N/kg}$~\cite{2}.
+    \item \textbf{Campo Elettrico ($\mathbf{E}$)}: $[\text{M} \cdot \text{L} \cdot \text{T}^{-3} \cdot \text{I}^{-1}] \longrightarrow \text{V/m}$ oppure $\text{N/C}$~\cite{2}.
+    \item \textbf{Potenziale Elettrico ($V$)}: $[\text{M} \cdot \text{L}^2 \cdot \text{T}^{-3} \cdot \text{I}^{-1}] \longrightarrow \text{Volt} \, (\text{V})$~\cite{2}.
+    \item \textbf{Operatore Nabla ($\nabla$)}: $[\text{L}^{-1}] \longrightarrow \text{m}^{-1}$~\cite{2}.
+\end{itemize}
+
+\section{Speciale Esami Precedenti}
+
+\subsection{Domande Orali Tipiche}
+\begin{enumerate}
+    \item \textbf{Perché due linee di campo non possono mai intersecarsi?} \\
+    L'intersezione implicherebbe la coesistenza di due vettori campo distinti nel medesimo punto, violando l'unicità del campo vettoriale~\cite{1, 2}.
+    \item \textbf{Qual è la differenza fondamentale tra campo e forza?} \\
+    Il campo è una proprietà intrinseca dello spazio modificato dalle sorgenti~\cite{1, 2}; la forza nasce dall'interazione tra campo e carica/massa di prova~\cite{1}.
+    \item \textbf{Qual è il significato geometrico del gradiente e perché è ortogonale alle superfici equipotenziali?} \\
+    Indica la direzione di massima crescita della funzione scalare~\cite{2}. È ortogonale alle superfici equipotenziali poiché lungo di esse il differenziale della funzione è nullo ($\text{d}\phi = 0 \implies \nabla \phi \cdot \text{d}\mathbf{r} = 0$)~\cite{2}.
+\end{enumerate}
+
+\subsection{Tipologie di Esercizi Scritti}
+\begin{itemize}
+    \item Calcolo del campo elettrico noto il potenziale scalare ($\mathbf{E} = -\nabla V$)~\cite{2}.
+    \item Calcolo del prodotto vettoriale per forza di Lorentz o momenti delle forze~\cite{1, 3}.
+    \item Verifica delle condizioni di ortogonalità e parallelismo tra vettori~\cite{1}.
+\end{itemize}
+
+\subsection{Gli Errori Più Penalizzati}
+\begin{itemize}
+    \item Errore di segno nella legge di forza o campo radiale attrattivo~\cite{1}.
+    \item Inversione dei vettori nel prodotto vettoriale ($\mathbf{u} \times \mathbf{v} = -\mathbf{v} \times \mathbf{u}$)~\cite{1}.
+    \item Omissione delle dimensioni spaziali inverse ($\text{m}^{-1}$) dell'operatore gradiente~\cite{2}.
+\end{itemize}
+
+\section{Esercizio Guida Risolto}
+
+\subsection{Testo del Problema}
+In una regione dello spazio, il potenziale elettrico è descritto dalla funzione:
+\[
+V(x,y,z) = V_0 \left( \frac{x^2 + y^2 - 2z^2}{a^2} \right)
+\]
+con $V_0 = 100 \, \text{V}$ e $a = 0.20 \, \text{m}$.
+
+Si richiede di:
+\begin{enumerate}
+    \item Determinare l'espressione vettoriale di $\mathbf{E}(x,y,z)$ in coordinate cartesiane.
+    \item Calcolare il modulo del campo nel punto $P = (0.10, 0.20, 0.10) \, \text{m}$.
+    \item Dati $\mathbf{u} = 2\hat{\mathbf{i}} - \hat{\mathbf{j}} + 3\hat{\mathbf{k}}$ e $\mathbf{v} = \mathbf{E}(P)$, calcolare $\mathbf{w} = \mathbf{u} \times \mathbf{v}$.
+\end{enumerate}
+
+\subsection{Soluzione Passo-Passo}
+
+\paragraph{Punto 1: Calcolo del campo elettrico $\mathbf{E}(x,y,z)$}
+Applicando il gradiente con segno negativo~\cite{2}:
+\[
+\mathbf{E}(x,y,z) = -\nabla V(x,y,z) = -\left( \frac{\partial V}{\partial x} \hat{\mathbf{i}} + \frac{\partial V}{\partial y} \hat{\mathbf{j}} + \frac{\partial V}{\partial z} \hat{\mathbf{k}} \right) \quad \text{\cite{2}}
+\]
+
+Le derivate parziali risultano:
+\begin{align*}
+\frac{\partial V}{\partial x} &= \frac{2 V_0}{a^2} x \\
+\frac{\partial V}{\partial y} &= \frac{2 V_0}{a^2} y \\
+\frac{\partial V}{\partial z} &= -\frac{4 V_0}{a^2} z
+\end{align*}
+
+Sostituendo:
+\[
+\mathbf{E}(x,y,z) = -\frac{2 V_0}{a^2} x \, \hat{\mathbf{i}} - \frac{2 V_0}{a^2} y \, \hat{\mathbf{j}} + \frac{4 V_0}{a^2} z \, \hat{\mathbf{k}}
+\]
+
+\paragraph{Punto 2: Calcolo numerico nel punto $P(0.10, 0.20, 0.10) \, \text{m}$}
+Il fattore di scala è:
+\[
+K = \frac{2 V_0}{a^2} = \frac{200}{0.04} = 5000 \, \text{V/m}^2
+\]
+
+Valutando nel punto $P$:
+\begin{align*}
+E_x(P) &= -5000 \cdot (0.10) = -500 \, \text{V/m} \\
+E_y(P) &= -5000 \cdot (0.20) = -1000 \, \text{V/m} \\
+E_z(P) &= 2 \cdot 5000 \cdot (0.10) = +1000 \, \text{V/m}
+\end{align*}
+
+Quindi $\mathbf{E}(P) = -500 \, \hat{\mathbf{i}} - 1000 \, \hat{\mathbf{j}} + 1000 \, \hat{\mathbf{k}} \quad [\text{V/m}]$.
+
+Il modulo risulta:
+\[
+|\mathbf{E}(P)| = \sqrt{(-500)^2 + (-1000)^2 + (1000)^2} = \sqrt{2250000} = 1500 \, \text{V/m}
+\]
+
+\paragraph{Punto 3: Calcolo del Prodotto Vettoriale $\mathbf{w} = \mathbf{u} \times \mathbf{E}(P)$}
+Con $\mathbf{u} = (2, -1, 3)$ e $\mathbf{v} = (-500, -1000, 1000)$~\cite{1}:
+
+\[
+\mathbf{w} = 
+\begin{vmatrix} 
+\hat{\mathbf{i}} & \hat{\mathbf{j}} & \hat{\mathbf{k}} \\ 
+2 & -1 & 3 \\ 
+-500 & -1000 & 1000 
+\end{vmatrix} \quad \text{\cite{1}}
+\]
+
+Sviluppando il determinante~\cite{1}:
+\begin{align*}
+w_x &= (-1)(1000) - (3)(-1000) = 2000 \, \text{V/m} \quad \text{\cite{1}} \\
+w_y &= (3)(-500) - (2)(1000) = -3500 \, \text{V/m} \quad \text{\cite{1}} \\
+w_z &= (2)(-1000) - (-1)(-500) = -2500 \, \text{V/m} \quad \text{\cite{1}}
+\end{align*}
+
+\[
+\mathbf{w} = 2000 \, \hat{\mathbf{i}} - 3500 \, \hat{\mathbf{j}} - 2500 \, \hat{\mathbf{k}} \quad [\text{V/m}] \quad \text{\cite{1}}
+\]
+
+\begin{thebibliography}{9}
+\bibitem{1} Trascrizione lezione di Fisica II, Parte 1 (Prodotto vettoriale, concetto di campo e gravitazione newtoniana).
+\bibitem{2} Trascrizione lezione di Fisica II, Parte 2 (Linee di campo, campo uniforme, operatore gradiente e derivazione).
+\bibitem{3} Trascrizione lezione di Fisica II, Parte 3 (Algebra vettoriale, unità di misura nel SI e definizioni di base).
+\end{thebibliography}
+
+\end{document}

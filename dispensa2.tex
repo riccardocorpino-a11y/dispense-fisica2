@@ -1,0 +1,292 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{geometry}
+\geometry{a4paper, margin=2.5cm}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\tcbset{
+    enhanced,
+    colback=blue!5!white,
+    colframe=blue!75!black,
+    fonttitle=\bfseries,
+    arc=2mm,
+    breakable
+}
+
+\title{\textbf{DISPENSA DI FISICA 2}\\ \Large Algebra e Operazioni Differenziali sui Vettori per l'Elettromagnetismo}
+\author{Corso di Fisica Generale: Elettromagnetismo}
+\date{Anno Accademico 2025/2026}
+
+\begin{document}
+
+\maketitle
+
+\section{Titolo dell'argomento e Sintesi concettuale}
+
+\textbf{Calcolo Vettoriale e Operatori Differenziali nei Campi Elettromagnetici}
+
+I fenomeni elettromagnetici richiedono una formulazione matematica in grado di descrivere grandezze fisiche distribuite nello spazio tridimensionale. La presente trattazione sviluppa gli strumenti dell'algebra e dell'analisi vettoriale necessari per la comprensione delle equazioni fondamentali della fisica. Si parte dalle operazioni algebriche di base, quali somma, prodotto scalare e prodotto vettoriale, indispensabili per rappresentare forze, momenti e flussi. Si passa in seguito alla teoria dei campi scalari e vettoriali, introducendo la nozione di linea di campo e la derivata direzionale. Infine, si formalizza l'operatore differenziale Nabla insieme al gradiente di un campo scalare, elemento essenziale per collegare il potenziale elettrico al campo elettrico.
+
+\section{Prerequisiti e Strumenti di Calcolo}
+
+\begin{tcolorbox}[title={BOX 1: Richiamo Matematico, Vettori, Componenti e Trigonometria}]
+Un vettore nello spazio tridimensionale $\mathbb{R}^3$ viene individuato mediante le sue componenti cartesiane lungo una terna ortonormale destra di versori $(\vec{i}_1, \vec{i}_2, \vec{i}_3)$ oppure $(\vec{i}, \vec{j}, \vec{k})$. Un generico vettore $\vec{u}$ si esprime come $\vec{u} = u_1 \vec{i}_1 + u_2 \vec{i}_2 + u_3 \vec{i}_3$. Il modulo di $\vec{u}$ risulta $u = |\vec{u}| = \sqrt{u_1^2 + u_2^2 + u_3^2}$. Trigonometricamente, la proiezione ortogonale di un vettore lungo una direzione forma un angolo $\theta$, e il teorema di Carnot per un triangolo di lati $u$, $v$ e $|\vec{u}-\vec{v}|$ stabilisce la relazione $|\vec{u}-\vec{v}|^2 = u^2 + v^2 - 2uv \cos\theta$.
+\end{tcolorbox}
+
+\begin{tcolorbox}[title={BOX 2: Richiamo di Analisi, Derivate Parziali, Differenziale Totale e Limiti Direzionali}]
+Data una funzione scalare $f(x,y,z)$, la derivata parziale rispetto a $x$, indicata con $\frac{\partial f}{\partial x}$, rappresenta il tasso di variazione di $f$ lungo l'asse $x$ mantenendo costanti le variabili $y$ e $z$. Il differenziale totale della funzione $f$ misura la variazione infinitesima di $f$ a fronte di uno spostamento infinitesimo $(dx, dy, dz)$ ed è espresso da $df = \frac{\partial f}{\partial x}dx + \frac{\partial f}{\partial y}dy + \frac{\partial f}{\partial z}dz$. Quando ci si sposta lungo una retta individuata da un versore generico $\vec{a} = \alpha \vec{i} + \beta \vec{j} + \gamma \vec{k}$, la variazione per unità di lunghezza viene calcolata tramite il limite del rapporto incrementale, che definisce la derivata direzionale.
+\end{tcolorbox}
+
+\section{Teoria, Modelli e Dimostrazioni}
+
+\subsection{Operazioni algebriche sui vettori}
+
+La somma di due vettori $\vec{u}$ e $\vec{v}$ restituisce un vettore $\vec{w}$ le cui componenti risultano la somma algebrica delle componenti omonime:
+\[
+\vec{w} = \vec{u} + \vec{v} \equiv \begin{pmatrix} u_1 + v_1 \\ u_2 + v_2 \\ u_3 + v_3 \end{pmatrix}
+\]
+Il vettore somma $\vec{w}$ mantiene la medesima unità di misura dei vettori addendi.
+
+Il prodotto scalare tra due vettori $\vec{u}$ e $\vec{v}$ viene definito come la grandezza scalare:
+\[
+\vec{u} \cdot \vec{v} = u v \cos\theta
+\]
+in cui $u = |\vec{u}|$ e $v = |\vec{v}|$ rappresentano i moduli dei due vettori e $\theta$ indica l'angolo compreso tra essi. Nel Sistema Internazionale, l'unità di misura del prodotto scalare equivale al prodotto delle unità di misura delle due grandezze vettoriali.
+
+Dimostrazione della rappresentazione cartesiana del prodotto scalare:
+Consideriamo il vettore differenza $\vec{u} - \vec{v}$, il cui modulo al quadrato espresso in componenti cartesiane vale:
+\[
+|\vec{u} - \vec{v}|^2 = (u_1 - v_1)^2 + (u_2 - v_2)^2 + (u_3 - v_3)^2
+\]
+Sviluppando i quadrati dei binomi otteniamo:
+\[
+|\vec{u} - \vec{v}|^2 = u_1^2 - 2u_1 v_1 + v_1^2 + u_2^2 - 2u_2 v_2 + v_2^2 + u_3^2 - 2u_3 v_3 + v_3^2
+\]
+Raggruppando i termini $u_1^2 + u_2^2 + u_3^2 = u^2$ e $v_1^2 + v_2^2 + v_3^2 = v^2$, l'espressione diventa:
+\[
+|\vec{u} - \vec{v}|^2 = u^2 + v^2 - 2(u_1 v_1 + u_2 v_2 + u_3 v_3)
+\]
+Uguagliando tale espressione con la formula geometrica del teorema di Carnot:
+\[
+|\vec{u} - \vec{v}|^2 = u^2 + v^2 - 2uv \cos\theta
+\]
+si deduce la relazione fondamentale tra componenti cartesiane e definizione geometrica:
+\[
+\vec{u} \cdot \vec{v} = u_1 v_1 + u_2 v_2 + u_3 v_3 = uv \cos\theta
+\]
+Qualora i due vettori non nulli siano ortogonali ($\theta = \pi/2$), il prodotto scalare si annulla, fornendo la condizione di ortogonalità $\vec{u} \cdot \vec{v} = 0$.
+
+Il prodotto vettoriale tra $\vec{u}$ e $\vec{v}$ genera un nuovo vettore $\vec{w} = \vec{u} \times \vec{v}$ caratterizzato dalle seguenti proprietà geometriche:
+\begin{enumerate}
+    \item Direzione ortogonale al piano individuato dai vettori $\vec{u}$ e $\vec{v}$.
+    \item Verso determinato dalla regola della mano destra, per la quale un osservatore vede il primo vettore $\vec{u}$ ruotare in senso antiorario per sovrapporsi al secondo vettore $\vec{v}$.
+    \item Modulo pari all'area del parallelogramma costruito sui due vettori dati:
+    \[
+    w = |\vec{u} \times \vec{v}| = uv \sin\theta
+    \]
+\end{enumerate}
+
+In coordinate cartesiane, il prodotto vettoriale si esprime tramite lo sviluppo del determinante simbolico:
+\[
+\vec{w} = \vec{u} \times \vec{v} = \begin{vmatrix} \vec{i}_1 & \vec{i}_2 & \vec{i}_3 \\ u_1 & u_2 & u_3 \\ v_1 & v_2 & v_3 \end{vmatrix} = (u_2 v_3 - u_3 v_2)\vec{i}_1 + (u_3 v_1 - u_1 v_3)\vec{i}_2 + (u_1 v_2 - u_2 v_1)\vec{i}_3
+\]
+oppure nella forma vettoriale colonna:
+\[
+\vec{w} = \vec{u} \times \vec{v} \equiv \begin{pmatrix} u_2 v_3 - u_3 v_2 \\ u_3 v_1 - u_1 v_3 \\ u_1 v_2 - u_2 v_1 \end{pmatrix}
+\]
+
+\subsection{Campi scalari, vettoriali e linee di campo}
+
+Una determinata regione dello spazio è sede di un campo fisico quando a ogni suo punto $\vec{r} = (x, y, z)$ viene associata in modo univoco una grandezza scalare, vettoriale o tensoriale:
+\begin{itemize}
+    \item Campo scalare: funzione $\phi = \phi(\vec{r})$, come il potenziale elettrico $V(\vec{r})$ espresso in Volt ($\text{V}$).
+    \item Campo vettoriale: funzione $\vec{u} = \vec{u}(\vec{r})$, come il campo elettrico $\vec{E}(\vec{r})$ espresso in Volt al metro ($\text{V/m}$).
+    \item Campo tensoriale: funzione $\mathbf{T} = \mathbf{T}(\vec{r})$, come il tensore della permittività dielettrica nei mezzi anisotropi.
+\end{itemize}
+
+Una linea di forza o di campo è una linea immaginaria avente in ogni suo punto per tangente la direzione del campo vettoriale, con il verso fissato da quello del campo medesimo.
+
+\subsection{Derivata direzionale e operatore Gradiente}
+
+Consideriamo un campo scalare continuo e derivabile $\phi(\vec{r})$ ed un punto $P_0$ individuato dal vettore posizione $\vec{r}_0 = (x_0, y_0, z_0)$. Assegniamo una direzione nello spazio definita dal versore unitario $\vec{a} = \alpha \vec{i} + \beta \vec{j} + \gamma \vec{k}$, per il quale $\alpha^2 + \beta^2 + \gamma^2 = 1$.
+Un generico punto $P$ sulla retta passante per $P_0$ e parallela ad $\vec{a}$ possiede coordinata vettoriale $\vec{r} = \vec{r}_0 + s \vec{a}$, dove $s$ rappresenta l'ascissa curvilinea.
+
+La derivata direzionale di $\phi$ lungo la direzione $\vec{a}$ nel punto $P_0$ quantifica la velocità di variazione del campo ed è espressa dal limite:
+\[
+\frac{\partial \phi}{\partial s} = \lim_{\Delta s \to 0} \frac{\phi(\vec{r}_0 + \Delta s \vec{a}) - \phi(\vec{r}_0)}{\Delta s} = \lim_{\Delta s \to 0} \frac{\phi(x_0+\alpha\Delta s, y_0+\beta\Delta s, z_0+\gamma\Delta s) - \phi(x_0, y_0, z_0)}{\Delta s}
+\]
+
+Sviluppando il differenziale totale del campo scalare per uno spostamento infinitesimo $d\vec{r} = ds \, \vec{a} = (dx, dy, dz)$, otteniamo:
+\[
+d\phi = \frac{\partial \phi}{\partial x} dx + \frac{\partial \phi}{\partial y} dy + \frac{\partial \phi}{\partial z} dz
+\]
+Dividendo ambo i membri per $ds$ e identificando i coseni direttori $\alpha = \frac{dx}{ds}$, $\beta = \frac{dy}{ds}$, $\gamma = \frac{dz}{ds}$, la relazione diventa:
+\[
+\frac{\partial \phi}{\partial s} = \frac{\partial \phi}{\partial x}\alpha + \frac{\partial \phi}{\partial y}\beta + \frac{\partial \phi}{\partial z}\gamma
+\]
+
+Tale combinazione algebrica coincide con il prodotto scalare tra il versore della direzione $\vec{a}$ e un vettore contenente le tre derivate parziali del campo scalare.
+
+Questo vettore prende il nome di \textbf{gradiente del campo scalare $\phi$}:
+\[
+\text{grad}\,\phi = \frac{\partial \phi}{\partial x}\vec{i} + \frac{\partial \phi}{\partial y}\vec{j} + \frac{\partial \phi}{\partial z}\vec{k}
+\]
+
+Si introduce l'operatore differenziale vettoriale \textbf{Nabla} ($\vec{\nabla}$):
+\[
+\vec{\nabla} = \vec{i}\frac{\partial}{\partial x} + \vec{j}\frac{\partial}{\partial y} + \vec{k}\frac{\partial}{\partial z} = \vec{i}_1\frac{\partial}{\partial x_1} + \vec{i}_2\frac{\partial}{\partial x_2} + \vec{i}_3\frac{\partial}{\partial x_3}
+\]
+che consente di scrivere il gradiente nella forma sintetica:
+\[
+\text{grad}\,\phi = \vec{\nabla}\phi
+\]
+
+La derivata direzionale assume così la forma geometrica:
+\[
+\frac{\partial \phi}{\partial s} = \vec{\nabla}\phi \cdot \vec{a} = |\vec{\nabla}\phi| |\vec{a}| \cos\theta = |\vec{\nabla}\phi| \cos\theta
+\]
+dove $\theta$ rappresenta l'angolo compreso tra il vettore gradiente $\vec{\nabla}\phi$ e la direzione scelta $\vec{a}$.
+
+Inoltre, il differenziale totale di $\phi$ lungo uno spostamento $d\vec{r} = dx \vec{i} + dy \vec{j} + dz \vec{k}$ si scrive:
+\[
+d\phi = \vec{\nabla}\phi \cdot d\vec{r}
+\]
+
+Indicando con $\vec{a}_n$ il versore normale ortogonale alla superficie di livello ($\phi = \text{costante}$), il gradiente possiede modulo pari alla massima derivata direzionale ed è orientato lungo la normale alla superficie di livello nel verso dei valori crescenti di $\phi$:
+\[
+\vec{\nabla}\phi = \frac{\partial \phi}{\partial n} \vec{a}_n
+\]
+
+Nelle applicazioni dell'elettromagnetismo, questa relazione collega il potenziale elettrostatico $V(\vec{r})$ al campo elettrico $\vec{E}(\vec{r})$ mediante l'equazione $\vec{E} = -\vec{\nabla}V$.
+
+\section{Interpretazione Fisica e Casi Limite}
+
+La nozione di gradiente possiede implicazioni fisiche e geometriche ben definite:
+\begin{itemize}
+    \item \textbf{Direzione di massima crescita}: La derivata direzionale $\frac{\partial \phi}{\partial s} = |\vec{\nabla}\phi|\cos\theta$ raggiunge il valore massimo per $\cos\theta = 1$, vale a dire quando la direzione orientata $\vec{a}$ coincide con il verso di $\vec{\nabla}\phi$. Di conseguenza, il vettore gradiente punta sempre verso l'incremento più rapido del campo scalare.
+    \item \textbf{Ortogonalità rispetto alle superfici equipotenziali}: Per uno spostamento giacente su una superficie equipotenziale ($\phi = \text{costante}$), la variazione del campo annulla il proprio valore ($d\phi = 0$). Ne deriva che $\vec{\nabla}\phi \cdot d\vec{r} = 0$, dimostrando che il gradiente risulta perpendicolare alle superfici equipotenziali in ogni punto.
+    \item \textbf{Comportamento a grande distanza ($r \to \infty$)}: Per distribuzioni limitate di carica elettrica, il potenziale elettrico tende a zero a grande distanza ($V \to 0$), ed il relativo gradiente decresce con il quadrato della distanza per configurazioni con carica netta non nulla.
+\end{itemize}
+
+\section{Speciale Esami Precedenti}
+
+\subsection{Domande orali tipiche}
+\begin{itemize}
+    \item \textbf{Significato geometrico del gradiente di un campo scalare e relazione con le superfici equipotenziali}: Il gradiente è un vettore orientato lungo la linea di massima variazione del campo scalare, con modulo pari al tasso massimo di variazione spaziale. Risulta in ogni punto ortogonale alla superficie equipotenziale passante per il punto stesso.
+    \item \textbf{Differenza tra campi scalari, vettoriali e linee di campo}: Un campo scalare assegna un valore numerico ad ogni punto dello spazio, mentre un campo vettoriale associa un vettore avente modulo, direzione e verso. Le linee di campo sono curve la cui retta tangente coincide con la direzione del campo vettoriale in ciascun punto.
+    \item \textbf{Espressione del differenziale totale tramite l'operatore Nabla}: Il differenziale totale equivale al prodotto scalare tra il gradiente della funzione e lo spostamento infinitesimo $d\vec{r}$, ovvero $d\phi = \vec{\nabla}\phi \cdot d\vec{r}$.
+\end{itemize}
+
+\subsection{Tipologie di esercizi scritti}
+\begin{itemize}
+    \item Calcolo del gradiente di funzioni di potenziale in coordinate cartesiane o sferiche per ricavare il campo elettrico.
+    \item Verifica dell'ortogonalità tra le linee del campo elettrico e la famiglia delle superfici equipotenziali.
+    \item Determinazione delle derivate direzionali del potenziale lungo direzioni assegnate nello spazio.
+\end{itemize}
+
+\subsection{Gli errori più penalizzati}
+\begin{itemize}
+    \item Omissione del segno negativo nella relazione tra campo elettrico e gradiente del potenziale ($\vec{E} = -\vec{\nabla}V$).
+    \item Confusione tra la derivata parziale rispetto ad una coordinata cartesiana e la derivata direzionale lungo un versore generico.
+    \item Trattare l'operatore Nabla come una quantità vettoriale ordinaria anziché come un operatore differenziale.
+\end{itemize}
+
+\section{Esercizio Guida Risolto}
+
+\subsection{Testo del problema}
+In una regione dello spazio si definisce un potenziale elettrico espresso in coordinate cartesiane dalla funzione:
+\[
+V(x, y, z) = C (x^2 y - z^2)
+\]
+in cui $C = 100 \text{ V/m}^3$ rappresenta una costante dimensionale.
+\begin{enumerate}
+    \item Ricavare l'espressione analitica del campo elettrico $\vec{E}(x, y, z)$.
+    \item Calcolare il vettore campo elettrico nel punto $P_0 = (1, 2, -1) \text{ m}$.
+    \item Calcolare la derivata direzionale del potenziale $V$ nel punto $P_0$ lungo la direzione del vettore $\vec{v} = 2\vec{i} + 1\vec{j} + 2\vec{k}$.
+\end{enumerate}
+
+\subsection{Svolgimento passo-passo}
+
+\textbf{Passo 1: Calcolo del gradiente e del campo elettrico}
+
+Il campo elettrico è legato al potenziale dalla relazione $\vec{E} = -\vec{\nabla}V$.
+Calcoliamo le tre derivate parziali di $V(x,y,z)$:
+\[
+\frac{\partial V}{\partial x} = \frac{\partial}{\partial x} \left[ C(x^2 y - z^2) \right] = 2 C x y
+\]
+\[
+\frac{\partial V}{\partial y} = \frac{\partial}{\partial y} \left[ C(x^2 y - z^2) \right] = C x^2
+\]
+\[
+\frac{\partial V}{\partial z} = \frac{\partial}{\partial z} \left[ C(x^2 y - z^2) \right] = -2 C z
+\]
+
+Sostituendo nell'espressione dell'operatore gradiente:
+\[
+\vec{\nabla}V = 2Cxy \vec{i} + Cx^2 \vec{j} - 2Cz \vec{k}
+\]
+
+Otteniamo il campo elettrico:
+\[
+\vec{E}(x,y,z) = -\vec{\nabla}V = -2Cxy \vec{i} - Cx^2 \vec{j} + 2Cz \vec{k}
+\]
+
+\textbf{Passo 2: Valutazione nel punto $P_0 = (1, 2, -1) \text{ m}$}
+
+Inserendo le coordinate $x_0 = 1 \text{ m}$, $y_0 = 2 \text{ m}$, $z_0 = -1 \text{ m}$ ed il valore della costante $C = 100 \text{ V/m}^3$:
+\[
+E_x(P_0) = -2 (100) (1) (2) = -400 \text{ V/m}
+\]
+\[
+E_y(P_0) = -(100) (1)^2 = -100 \text{ V/m}
+\]
+\[
+E_z(P_0) = 2 (100) (-1) = -200 \text{ V/m}
+\]
+
+Il campo elettrico espresso in forma vettoriale nel punto $P_0$ risulta:
+\[
+\vec{E}(P_0) = -400 \vec{i} - 100 \vec{j} - 200 \vec{k} \quad (\text{V/m})
+\]
+
+Il modulo del campo elettrico vale:
+\[
+|\vec{E}(P_0)| = \sqrt{(-400)^2 + (-100)^2 + (-200)^2} = \sqrt{160000 + 10000 + 40000} = \sqrt{210000} \approx 458{,}26 \text{ V/m}
+\]
+
+\textbf{Passo 3: Calcolo della derivata direzionale lungo $\vec{v}$}
+
+Calcoliamo il modulo del vettore $\vec{v}$ per determinare il versore unitario $\vec{a}$:
+\[
+|\vec{v}| = \sqrt{2^2 + 1^2 + 2^2} = \sqrt{4 + 1 + 4} = \sqrt{9} = 3
+\]
+\[
+\vec{a} = \frac{\vec{v}}{|\vec{v}|} = \frac{2}{3}\vec{i} + \frac{1}{3}\vec{j} + \frac{2}{3}\vec{k}
+\]
+
+Nel punto $P_0$, il vettore gradiente del potenziale vale:
+\[
+\vec{\nabla}V(P_0) = -\vec{E}(P_0) = 400 \vec{i} + 100 \vec{j} + 200 \vec{k} \quad (\text{V/m})
+\]
+
+La derivata direzionale $\frac{\partial V}{\partial s}$ si ottiene mediante il prodotto scalare tra $\vec{\nabla}V(P_0)$ e il versore $\vec{a}$:
+\[
+\frac{\partial V}{\partial s} = \vec{\nabla}V(P_0) \cdot \vec{a} = (400)\left(\frac{2}{3}\right) + (100)\left(\frac{1}{3}\right) + (200)\left(\frac{2}{3}\right)
+\]
+\[
+\frac{\partial V}{\partial s} = \frac{800 + 100 + 400}{3} = \frac{1300}{3} \approx 433{,}33 \text{ V/m}
+\]
+
+Il valore numerico ottenuto esprime il tasso di variazione spaziale del potenziale elettrico per unità di lunghezza lungo la direzione ed il verso del vettore assegnato.
+
+\end{document}

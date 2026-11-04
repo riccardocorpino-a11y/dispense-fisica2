@@ -1,0 +1,110 @@
+% =====================================================================
+%  preambolo.tex  -  Dispense di Fisica 2
+%
+%  Uso in ogni dispensa (e nel testo unico):
+%      \documentclass[11pt,a4paper]{article}
+%      \input{preambolo}
+%      \begin{document} ... \end{document}
+%
+%  Compatibile con pdfLaTeX, XeLaTeX e LuaLaTeX (il motore viene
+%  riconosciuto da solo). Le macro e gli ambienti di tutte le
+%  dispense precedenti sono qui riuniti senza conflitti.
+% =====================================================================
+
+% ---------------------------------------------------------------------
+%  1. Motore, codifica e font
+% ---------------------------------------------------------------------
+\RequirePackage{iftex}
+\ifPDFTeX
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+\else
+  \usepackage{fontspec}          % XeLaTeX / LuaLaTeX
+\fi
+\usepackage{lmodern}
+\usepackage[italian]{babel}
+\usepackage{csquotes}            % \enquote{...}, virgolette corrette
+
+% ---------------------------------------------------------------------
+%  2. Matematica
+% ---------------------------------------------------------------------
+\usepackage{amsmath,amssymb,mathtools}
+
+% ---------------------------------------------------------------------
+%  3. Pagina, interlinea, tipografia
+% ---------------------------------------------------------------------
+\usepackage{microtype}
+\usepackage[a4paper,margin=2.6cm]{geometry}
+\usepackage{setspace}
+\usepackage{needspace}
+\usepackage{graphicx}
+
+% Interlinea: lasciare attivo un solo comando
+\doublespacing
+%\onehalfspacing
+%\setstretch{1.25}
+
+% Paragrafi e tolleranze di composizione
+\setlength{\parindent}{1.4em}
+\setlength{\parskip}{0.35ex plus 0.2ex}
+\setlength{\emergencystretch}{2em}
+
+% ---------------------------------------------------------------------
+%  4. Colori, riquadri e grafica
+% ---------------------------------------------------------------------
+\usepackage[most]{tcolorbox}     % carica anche xcolor e tikz
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, calc, backgrounds}
+\usetikzlibrary{decorations.markings, decorations.pathreplacing}
+\usetikzlibrary{3d}
+
+% ---------------------------------------------------------------------
+%  5. Notazione fisica e matematica
+% ---------------------------------------------------------------------
+\newcommand{\dd}{\mathrm{d}}                          % differenziale
+\newcommand{\nab}{\vec{\nabla}}                       % nabla vettoriale
+\newcommand{\un}[1]{\,\mathrm{#1}}                    % unita' di misura: 5\un{m}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\Div}{div}
+\DeclareMathOperator{\rot}{rot}
+
+\newcommand{\epz}{\varepsilon_0}                      % permittivita' del vuoto
+\newcommand{\Ev}{\vec{E}}                             % campo elettrico
+\newcommand{\Fv}{\vec{F}}                             % forza
+\newcommand{\uv}{\hat{u}}                             % versore generico
+\newcommand{\ur}{\ensuremath{\hat{u}_r}}              % versore radiale
+\newcommand{\kc}{\ensuremath{\frac{1}{4\pi\epz}}}     % 1/(4 pi eps_0)
+
+% ---------------------------------------------------------------------
+%  6. Titoli di paragrafo (maiuscoletto, senza grassetto ne' corsivo)
+% ---------------------------------------------------------------------
+\newcommand{\titoletto}[1]{%
+  \par\Needspace{4\baselineskip}\medskip
+  \noindent{\large\scshape #1}\par\nopagebreak\smallskip\noindent}
+
+% ---------------------------------------------------------------------
+%  7. Riquadri di richiamo
+%     \begin{richiamo}{titolo} ... \end{richiamo}
+%     \begin{riquadro}{titolo} ... \end{riquadro}   (identico, alias)
+%     Per anteporre un prefisso fisso ai titoli:
+%         \renewcommand{\richiamoprefix}{Richiamo di Fisica 1 --- }
+% ---------------------------------------------------------------------
+\newcommand{\richiamoprefix}{}
+
+\tcbset{richiamo style/.style={
+  enhanced, breakable,
+  colback=gray!5, colframe=gray!55!black,
+  boxrule=0.6pt, arc=2pt,
+  left=8pt, right=8pt, top=6pt, bottom=6pt,
+  before skip=10pt, after skip=10pt,
+  fonttitle=\normalfont\large, coltitle=white,
+  before upper={\singlespacing}
+}}
+
+\newtcolorbox{richiamo}[1]{richiamo style, title={\richiamoprefix #1}}
+\newtcolorbox{riquadro}[1]{richiamo style, title={\richiamoprefix #1}}
+
+% ---------------------------------------------------------------------
+%  8. Collegamenti ipertestuali (sempre per ultimo)
+% ---------------------------------------------------------------------
+\usepackage[hidelinks]{hyperref}

@@ -1,0 +1,431 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage[most]{tcolorbox}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue!50!black,urlcolor=blue!50!black}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em}
+
+% ---- macro ----
+\newcommand{\vv}[1]{\mathbf{#1}}
+\newcommand{\ur}{\hat{\mathbf{u}}_r}
+\newcommand{\ve}[1]{\hat{\mathbf{#1}}}
+\newcommand{\pd}[2]{\dfrac{\partial #1}{\partial #2}}
+\newcommand{\mo}[1]{\left|#1\right|}
+\DeclareMathOperator{\grad}{grad}
+\newcommand{\oiint}{\oint}
+\newcommand{\unit}[1]{\ \mathrm{#1}}
+\newcommand{\nab}{\boldsymbol{\nabla}}
+% ---- riquadri ----
+\newtcolorbox{richiamo}[1][Richiamo]{colback=blue!4,colframe=blue!50!black,fonttitle=\bfseries,title=#1,breakable}
+\newtcolorbox{nota}[1][Nota]{colback=yellow!8,colframe=orange!70!black,fonttitle=\bfseries,title=#1,breakable}
+\newtcolorbox{esame}[1][Esame]{colback=red!4,colframe=red!50!black,fonttitle=\bfseries,title=#1,breakable}
+
+\title{\textbf{Fisica 2 -- Vettori, campi, linee di campo e gradiente}\\[0.4em]\large Dispensa di studio dalle lezioni su algebra vettoriale, prodotti scalare e vettoriale,\\ linee di campo e campo gravitazionale}
+\author{Corso di Fisica generale: Elettromagnetismo -- Ingegneria}
+\date{3 ottobre 2026}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\bigskip
+
+Questa dispensa trasforma le tre lezioni registrate in un testo di studio autonomo: ogni strumento di Analisi o di Fisica~1 è richiamato in un riquadro e ogni dimostrazione è svolta passo per passo. Il docente ha dichiarato che la parte differenziale (\S\ref{sec:derdir}--\ref{sec:pot}) è \guillemotleft cultura\guillemotright\ e non sarà chiesta in dettaglio; saranno invece chieste all'orale le proprietà delle linee di campo, l'uso corretto di prodotto scalare e vettoriale e le unità di misura.
+
+% =====================================================================
+\section{Sintesi concettuale}
+Tutta la Fisica~2 (elettricità e magnetismo) parla di grandezze che hanno un valore in ogni punto dello spazio: i \textbf{campi}. Un campo può essere \textbf{scalare} (a ogni punto un numero: temperatura, pressione, potenziale) oppure \textbf{vettoriale} (a ogni punto un vettore: campo gravitazionale $\vv g$, poi campo elettrico $\vv E$ e magnetico $\vv B$). Per lavorare con i campi servono tre strumenti: (1) l'algebra dei vettori, cioè componenti, prodotto scalare (misura il \guillemotleft parallelismo\guillemotright\ e produce uno scalare) e prodotto vettoriale (produce un vettore perpendicolare, serve per il magnetismo); (2) la rappresentazione grafica del campo mediante le \textbf{linee di campo}, immaginarie ma con proprietà precise; (3) l'operatore \textbf{nabla} $\nab$, che applicato a un campo scalare dà il \textbf{gradiente}, un vettore che lega gli scalari ai vettori (in alcuni casi il potenziale al campo). Il campo gravitazionale è il primo esempio concreto: nasce dalla sola sorgente $M$, esiste anche senza masse di prova ed è la forza per unità di massa.
+
+% =====================================================================
+\section{Prerequisiti e strumenti di calcolo}
+
+\subsection{Grandezze scalari, vettoriali e unità di misura}
+\begin{richiamo}[Richiamo Fisica 1]
+Una grandezza è \textbf{scalare} se è completamente descritta da un numero (con unità di misura); è \textbf{vettoriale} se serve anche un'orientazione nello spazio. Un vettore è caratterizzato da: \textbf{modulo} (intensità, un numero con unità), \textbf{direzione} (la \emph{retta} su cui giace) e \textbf{verso} (da quale parte della retta punta, indicato dalla freccia) e il \textbf{punto di applicazione}. In algebra vettoriale \guillemotleft direzione\guillemotright\ e \guillemotleft verso\guillemotright\ \emph{non} sono sinonimi, come invece nel linguaggio comune.
+\end{richiamo}
+
+Esempi di vettori: forza, velocità, spostamento, accelerazione, quantità di moto, momento angolare, campo gravitazionale. Esempi di scalari: massa, energia, lavoro, calore, temperatura, pressione, potenziale. Nei testi i vettori sono in grassetto ($\vv u$); alla lavagna si scrive sempre la freccina sopra la lettera.
+
+\textbf{Unità di misura.} Un numero senza unità di misura, all'esame, vale zero. La forza si misura in newton:
+\begin{equation}
+[F]=\mathrm{N}=\mathrm{kg\cdot m\cdot s^{-2}}
+\end{equation}
+Il chilogrammo è unità di \textbf{massa}, non di forza. Il peso è una forza: $P=mg$. Per una persona di $65\unit{kg}$, con $g\approx10\unit{m/s^2}$, $P\approx650\unit{N}$. Il \guillemotleft chilogrammo peso\guillemotright\ non è unità del SI e va evitato. Bisogna avere l'ordine di grandezza dei numeri: $650\unit{N}$ distribuiti su una mano non fanno male, ma lo stesso peso concentrato in un salto può rompere un osso; cambia come la forza è esercitata (area, direzione, durata), non solo il modulo. In un push-up il peso si distribuisce su quattro appoggi e cambiano direzione e verso delle singole forze.
+
+Nota sull'altezza: una lunghezza misurata lungo una direzione fissata è uno scalare; lo \emph{spostamento} da un punto a un altro è un vettore.
+
+\subsection{Componenti, versori, modulo e operazioni lineari}
+Fissato un sistema di assi cartesiani $x,y,z$ con origine $O$, i \textbf{versori} $\vv i,\vv j,\vv k$ sono vettori di modulo $1$ diretti lungo gli assi nel verso positivo. Ogni vettore si scrive in modo unico come
+\begin{equation}
+\vv u=u_x\,\vv i+u_y\,\vv j+u_z\,\vv k
+\end{equation}
+dove $u_x,u_y,u_z$ sono le \textbf{componenti} (scalari, stessa unità di $\vv u$): proiezioni di $\vv u$ sugli assi, $u_x=\mo{\vv u}\cos\alpha$ con $\alpha$ angolo fra $\vv u$ e l'asse $x$ (analogamente $\beta,\gamma$ per $y,z$).
+
+\textbf{Modulo (dimostrazione).} Nel piano $xy$ la proiezione di $\vv u$ ha lunghezza $\sqrt{u_x^2+u_y^2}$ per Pitagora. Il vettore $\vv u$ è l'ipotenusa di un secondo triangolo rettangolo con cateti questa proiezione e $u_z$. Applicando ancora Pitagora:
+\begin{equation}
+\mo{\vv u}=\sqrt{u_x^2+u_y^2+u_z^2}
+\end{equation}
+
+\textbf{Versore associato.} Se $\vv u\neq0$, $\hat{\vv u}=\vv u/\mo{\vv u}$ ha modulo $1$, stessa direzione e verso di $\vv u$; le sue componenti sono i coseni direttori, perciò $\cos^2\alpha+\cos^2\beta+\cos^2\gamma=1$.
+
+\textbf{Somma e prodotto per uno scalare} (per componenti):
+\begin{equation}
+\vv u+\vv v=(u_x+v_x)\vv i+(u_y+v_y)\vv j+(u_z+v_z)\vv k,\qquad \lambda\vv u=\lambda u_x\vv i+\lambda u_y\vv j+\lambda u_z\vv k
+\end{equation}
+Con $\lambda<0$ il verso si inverte.
+
+\subsection{Prodotto scalare}
+Il prodotto scalare prende \textbf{due vettori} e restituisce \textbf{uno scalare}: somma dei prodotti delle componenti omonime.
+\begin{equation}
+\vv u\cdot\vv v=u_xv_x+u_yv_y+u_zv_z=\sum_{i=1}^{3}u_iv_i
+\end{equation}
+Unità: prodotto delle unità dei due vettori. Forma geometrica equivalente:
+\begin{equation}
+\vv u\cdot\vv v=\mo{\vv u}\,\mo{\vv v}\cos\theta
+\end{equation}
+con $\theta\in[0,\pi]$ angolo compreso fra i vettori applicati nello stesso punto.
+
+\textbf{Dimostrazione dell'equivalenza.} Si consideri il triangolo di lati $\mo{\vv u},\mo{\vv v},\mo{\vv u-\vv v}$. Per il teorema di Carnot
+\begin{equation}
+\mo{\vv u-\vv v}^2=\mo{\vv u}^2+\mo{\vv v}^2-2\mo{\vv u}\mo{\vv v}\cos\theta
+\end{equation}
+Dalle componenti:
+\begin{equation}
+\mo{\vv u-\vv v}^2=\sum_i(u_i-v_i)^2=\sum_iu_i^2+\sum_iv_i^2-2\sum_iu_iv_i=\mo{\vv u}^2+\mo{\vv v}^2-2\,\vv u\cdot\vv v
+\end{equation}
+Uguagliando e semplificando: $-2\mo{\vv u}\mo{\vv v}\cos\theta=-2\,\vv u\cdot\vv v$. \hfill$\blacksquare$
+
+\textbf{Proprietà.} Commutativo, distributivo; $\vv u\cdot\vv u=\mo{\vv u}^2$; $\vv i\cdot\vv i=1$, $\vv i\cdot\vv j=0$ (e analoghe).
+
+\textbf{Ortogonalità.} Per vettori non nulli, $\vv u\cdot\vv v=0\iff\cos\theta=0\iff\theta=\pi/2$. \guillemotleft Ortogonale\guillemotright\ è sinonimo di \guillemotleft perpendicolare\guillemotright.
+
+\begin{richiamo}[Richiamo Fisica 1]
+Il lavoro di una forza costante $\vv F$ per uno spostamento $\Delta\vv s$ è $W=\vv F\cdot\Delta\vv s=F\,\Delta s\cos\theta$, in joule ($1\unit{J}=1\unit{N\cdot m}$). Solo la componente di $\vv F$ lungo lo spostamento compie lavoro; se $\theta=\pi/2$ il lavoro è nullo (forza centripeta).
+\end{richiamo}
+
+\subsection{Prodotto vettoriale}
+Il prodotto vettoriale $\vv w=\vv u\times\vv v$ restituisce \textbf{un vettore} con:
+\begin{enumerate}[nosep]
+\item \textbf{direzione} perpendicolare al piano individuato da $\vv u$ e $\vv v$;
+\item \textbf{verso} dato dalla regola della mano destra;
+\item \textbf{modulo} $\mo{\vv u\times\vv v}=\mo{\vv u}\mo{\vv v}\sin\theta$.
+\end{enumerate}
+
+\textbf{Regola della mano destra.} Serve a fissare il verso. Con indice lungo $\vv u$ e medio lungo $\vv v$, il pollice indica $\vv u\times\vv v$. Equivalente: un osservatore attraversato da $\vv w$ dai piedi alla testa vede $\vv u$ ruotare in senso antiorario (di un angolo minore di $\pi$) per sovrapporsi a $\vv v$. Terza formulazione (vite destra): ruotando $\vv u$ verso $\vv v$ come si avvita una vite destra, la vite avanza nel verso di $\vv u\times\vv v$.
+
+\begin{richiamo}[Convenzione grafica]
+Un vettore che esce dal foglio verso chi guarda si indica con $\odot$ (punta della freccia); uno che entra con $\otimes$ (coda, o testa di vite a croce). Svitare = antiorario = vite che esce; avvitare = orario = vite che entra.
+\end{richiamo}
+
+\textbf{Calcolo per componenti.}
+\begin{equation}
+\vv u\times\vv v=\begin{vmatrix}\vv i&\vv j&\vv k\\u_x&u_y&u_z\\v_x&v_y&v_z\end{vmatrix}=(u_yv_z-u_zv_y)\vv i+(u_zv_x-u_xv_z)\vv j+(u_xv_y-u_yv_x)\vv k
+\end{equation}
+
+\textbf{Dimostrazione.} Il prodotto è bilineare e sui versori vale $\vv i\times\vv j=\vv k$, $\vv j\times\vv k=\vv i$, $\vv k\times\vv i=\vv j$, $\vv j\times\vv i=-\vv k$, $\vv k\times\vv j=-\vv i$, $\vv i\times\vv k=-\vv j$, $\vv i\times\vv i=\vv j\times\vv j=\vv k\times\vv k=0$. Sviluppando restano sei termini:
+\begin{align*}
+u_yv_z(\vv j\times\vv k)+u_zv_y(\vv k\times\vv j)&=(u_yv_z-u_zv_y)\vv i\\
+u_zv_x(\vv k\times\vv i)+u_xv_z(\vv i\times\vv k)&=(u_zv_x-u_xv_z)\vv j\\
+u_xv_y(\vv i\times\vv j)+u_yv_x(\vv j\times\vv i)&=(u_xv_y-u_yv_x)\vv k
+\end{align*}
+\hfill$\blacksquare$
+
+Sul segno: nello sviluppo del determinante rispetto alla prima riga il termine in $\vv j$ ha segno $(-1)^{1+2}=-$; chi inverte le colonne per eliminare il meno ottiene lo stesso risultato scritto come $(u_zv_x-u_xv_z)$.
+
+\textbf{Proprietà.}
+\begin{itemize}[nosep]
+\item \textbf{Anticommutativo}: $\vv u\times\vv v=-\vv v\times\vv u$. Il prodotto scalare è commutativo.
+\item \textbf{Nullo se i vettori sono paralleli} ($\theta=0,\pi$): $\vv u\times\vv v=0\iff\vv u\parallel\vv v$; mentre $\vv u\cdot\vv v=0\iff\vv u\perp\vv v$. Massimo per $\theta=\pi/2$.
+\item \textbf{Il modulo è l'area del parallelogramma} su $\vv u$ e $\vv v$: base $\mo{\vv u}$, altezza $\mo{\vv v}\sin\theta$.
+\item Nel modulo non si scrive la freccia: $\mo{\vv u\times\vv v}$ è uno scalare.
+\end{itemize}
+
+\textbf{Terna destra.} Gli assi cartesiani si scelgono in modo che $\vv i\times\vv j=\vv k$: disegnati $x,y$ nel piano della lavagna, $z$ esce verso chi guarda. È una convenzione, non una legge fisica; si può cambiare se conviene. Mnemonica: gli indici procedono ciclicamente $1\to2\to3\to1$; seguendo l'ordine (123, 231, 312) il prodotto è positivo, contro l'ordine negativo.
+
+Esempi: momento di una forza $\boldsymbol\tau=\vv r\times\vv F$ ($\mathrm{N\cdot m}$); forza di Lorentz $\vv F=q\,\vv v\times\vv B$ e $\vv F=I\,\vv l\times\vv B$ (magnetismo). La mnemonica \guillemotleft FBI\guillemotright\ (mano sinistra: pollice = Forza, indice = campo $B$, medio = corrente $I$) dà lo stesso risultato della mano destra.
+
+\subsection{Derivate parziali, differenziale totale, Taylor al primo ordine}
+\begin{richiamo}[Richiamo di Analisi]
+Sia $f(x,y,z)$ derivabile. La \textbf{derivata parziale} rispetto a $x$ è la derivata ordinaria con $y,z$ costanti:
+\[
+\pd fx=\lim_{\Delta x\to0}\frac{f(x+\Delta x,y,z)-f(x,y,z)}{\Delta x}.
+\]
+Esempio: $f=x\Rightarrow\partial f/\partial x=1$, $\partial f/\partial y=\partial f/\partial z=0$. Il \textbf{differenziale totale} è la variazione al primo ordine per spostamenti infinitesimi:
+\begin{equation}
+df=\pd fx\,dx+\pd fy\,dy+\pd fz\,dz
+\end{equation}
+Esempio: $d(x^2)=2x\,dx$. Equivale allo \textbf{sviluppo di Taylor al primo ordine}: $f(P+\Delta)\approx f(P)+f_x\Delta x+f_y\Delta y+f_z\Delta z$, con errore $O(\Delta^2)$. Per una \textbf{funzione composta} $f(\varphi(x,y,z))$: $\partial f/\partial x=(df/d\varphi)(\partial\varphi/\partial x)$, e analogamente per $y,z$.
+\end{richiamo}
+
+\subsection{Anteprima: divergenza, rotore, flusso, circuitazione, angolo solido}
+Le slide proseguono con strumenti solo annunciati a lezione; si riportano le definizioni minime.
+\begin{richiamo}[Richiamo matematico]
+Sia $\vv F$ un campo vettoriale. \textbf{Divergenza}: $\nab\cdot\vv F=\pd{F_x}x+\pd{F_y}y+\pd{F_z}z$ (sorgenti del campo). \textbf{Rotore}: $\nab\times\vv F$ (determinante con $\nab$ al posto della prima riga), misura la tendenza a circolare. \textbf{Flusso} attraverso $S$ ($\vv n$ normale, $dS$ elemento d'area): $\Phi=\iint_S\vv F\cdot\vv n\,dS$. \textbf{Teorema della divergenza}: per $S$ chiusa che racchiude $V$,
+\[
+\oiint_S\vv F\cdot\vv n\,dS=\iiint_V\nab\cdot\vv F\,dV .
+\]
+\textbf{Circuitazione} lungo una linea chiusa $\gamma$: $\oint_\gamma\vv F\cdot d\vv l$. \textbf{Teorema di Stokes}: $\oint_\gamma\vv F\cdot d\vv l=\iint_S(\nab\times\vv F)\cdot\vv n\,dS$, con $S$ superficie di bordo $\gamma$. Campo \textbf{solenoidale}: $\nab\cdot\vv F=0$. Campo \textbf{conservativo}: circuitazione nulla su ogni cammino chiuso $\iff\nab\times\vv F=0$ (regioni semplicemente connesse) $\iff\vv F=\pm\nab\varphi$.
+\end{richiamo}
+\begin{richiamo}[Richiamo: angolo solido]
+L'\textbf{angolo solido} $\Omega$ di un cono di vertice $O$ si misura in \textbf{steradianti} come rapporto fra l'area $S$ della calotta intercettata su una sfera centrata in $O$ e il quadrato del raggio: $\Omega=S/R^2$. Tutto lo spazio vale $4\pi\unit{sr}$. Per un cono di semiapertura $\alpha$, in coordinate sferiche $dS=R^2\sin\theta\,d\theta\,d\phi$ ($\theta$ dall'asse, $\phi$ azimutale):
+\[
+\Omega=\int_0^{2\pi}\!d\phi\int_0^{\alpha}\sin\theta\,d\theta=2\pi(1-\cos\alpha),
+\]
+che per $\alpha=\pi$ dà $4\pi$.
+\end{richiamo}
+
+% =====================================================================
+\section{Teoria, modelli e dimostrazioni}
+
+\subsection{Campi scalari, vettoriali e tensoriali}
+Una regione dello spazio è sede di un \textbf{campo scalare} $\varphi=\varphi(\vv r)$, di un \textbf{campo vettoriale} $\vv u=\vv u(\vv r)$ o, in generale, di un \textbf{campo tensoriale} $\vv T=\vv T(\vv r)$ quando in ogni suo punto è definito in modo \textbf{univoco} uno scalare, un vettore o un tensore. Un tensore generalizza il vettore; lo si incontra in Scienza delle costruzioni e in relatività.
+
+Esempi di campi \textbf{scalari} non uniformi: \textbf{temperatura} e \textbf{pressione}. La temperatura è definita dal \textbf{principio zero della termodinamica}: se $A$ è in equilibrio termico con $B$ e con $C$, allora $B$ e $C$ sono in equilibrio termico fra loro; questa proprietà transitiva permette di costruire un termometro (oggetto con una proprietà che varia, come un liquido che si espande, calibrato su sorgenti note: acqua e ghiaccio, acqua che bolle). La temperatura vicino alla pelle ($\approx37\,^\circ\mathrm{C}$) è diversa da quella al centro dell'aula: campo non uniforme. La \textbf{pressione} è la forza perpendicolare per unità di superficie, $p=dF_\perp/dS$, in pascal ($\mathrm{Pa}=\mathrm{N/m^2}$): pur derivando da una forza, la direzione è sempre la normale alla superficie, quindi resta uno scalare.
+
+Esempio di campo \textbf{vettoriale}: il campo gravitazionale. È diverso dalla forza: la forza si manifesta su una massa, il campo esiste in ogni punto \emph{indipendentemente} dalla massa di prova ed è generato solo dalla sorgente.
+
+\subsection{Gravitazione universale e campo gravitazionale}
+Due masse puntiformi $m_1,m_2$ a distanza $r$ si attraggono. Detto $\ur$ il versore da $m_1$ verso $m_2$, la forza di $m_1$ su $m_2$ è
+\begin{equation}
+\vv F_{1\to2}=-G\,\frac{m_1m_2}{r^{2}}\,\ur
+\end{equation}
+\begin{itemize}[nosep]
+\item $G=6{,}674\times10^{-11}\unit{N\,m^2/kg^2}$: costante di gravitazione universale (analisi dimensionale: $\mathrm{N\,m^2/kg^2\cdot kg^2/m^2=N}$).
+\item $m_1,m_2$ [kg]: masse; $r$ [m]: distanza. Dipendenza dall'\textbf{inverso del quadrato} della distanza: tornerà identica per la forza elettrica.
+\item Il segno \textbf{meno}: la forza è \textbf{attrattiva}, $\vv F_{1\to2}$ è diretta da $m_2$ verso $m_1$, opposta a $\ur$.
+\end{itemize}
+Per il \textbf{terzo principio} $\vv F_{2\to1}=-\vv F_{1\to2}$: l'attrazione è reciproca.
+
+\textbf{Perché $g=9{,}8\unit{m/s^2}$.} Con $m_1=M_T$ e $m_2=m$ vicino al suolo ($r\approx R_T$), $F=m\,GM_T/R_T^2=mg$, con
+\begin{equation}
+g=\frac{G\,M_T}{R_T^{2}}\approx\frac{6{,}674\times10^{-11}\cdot5{,}97\times10^{24}}{(6{,}37\times10^{6})^{2}}\unit{m/s^2}\approx9{,}8\unit{m/s^2}
+\end{equation}
+Controllo dimensionale: forza/massa = accelerazione ($\mathrm{N/kg=m/s^2}$); l'analisi dimensionale è un'ancora di salvezza. Su un altro pianeta la formula vale con $M$ e $R$ di quel pianeta.
+
+\textbf{Chi cade verso chi?} Le forze sono uguali, quindi $a=F/m$: l'accelerazione della Terra dovuta a una persona di $70\unit{kg}$ è $a_T=(m/M_T)g\approx(70/5{,}97\times10^{24})\cdot9{,}8\approx10^{-22}\unit{m/s^2}$, trascurabile. Cade il corpo di massa minore.
+
+\textbf{Il campo gravitazionale.} Dividendo la forza per la massa di prova $m$:
+\begin{equation}
+\vv g(\vv r)=\frac{\vv F}{m}=-G\,\frac{M}{r^{2}}\,\ur
+\end{equation}
+\begin{itemize}[nosep]
+\item $\vv g$ [$\mathrm{m/s^2}$, equivalente a $\mathrm{N/kg}$]: campo, vettore applicato nel punto $P$ dove lo si calcola.
+\item $GM/r^2$: modulo, decresce come $1/r^2$.
+\item $-\ur$: il verso punta \textbf{verso la sorgente} ($\ur$ uscente dalla sorgente verso $P$).
+\end{itemize}
+La massa di prova \guillemotleft sparisce\guillemotright: il campo è generato dalla sola sorgente. Una massa $m$ posta in $P$ risente di $\vv F=m\vv g$. Il campo del Sole esiste a prescindere dai pianeti, che sono masse di prova abbastanza piccole da non perturbarlo; il moto risultante è ellittico.
+
+\textbf{Campo uniforme.} In aula il campo di gravità è con ottima approssimazione \textbf{uniforme}: stesso modulo ($9{,}8\unit{m/s^2}$), direzione (verticale) e verso (verso il centro della Terra) ovunque. Il campo del Sole non lo è: dipende dalla distanza ed è \textbf{radiale}.
+
+\subsection{Linee di campo}
+Una \textbf{linea di campo} (o di forza) di un campo vettoriale $\vv u$ è una linea \emph{immaginaria} che ha in ogni punto per tangente la direzione del campo e come verso quello del campo. È una rappresentazione pittorica; il campo vero è un \textbf{vettore} con punto di applicazione, modulo, direzione e verso.
+
+\begin{esame}[Errore classico]
+Alla richiesta \guillemotleft descrivi il campo nel punto $P$\guillemotright\ la risposta corretta è un vettore \textbf{applicato in $P$}, tangente alla linea per $P$, con verso quello della linea e modulo dato dalla legge del campo ($GM/r^2$); per la gravità punta verso la sorgente. Errore: disegnare il vettore \emph{dalla sorgente al punto}: quello è $\vv r$, non il campo.
+\end{esame}
+
+\textbf{Equazione delle linee.} Se $d\vv r=(dx,dy,dz)$ è un tratto infinitesimo della linea, per tangenza $d\vv r=\lambda\vv u$; componente per componente $dx=\lambda u_x$, $dy=\lambda u_y$, $dz=\lambda u_z$; eliminando $\lambda$:
+\begin{equation}
+\frac{dx}{u_x(x,y,z)}=\frac{dy}{u_y(x,y,z)}=\frac{dz}{u_z(x,y,z)}
+\end{equation}
+Per una retta la tangente è la retta stessa, quindi il campo giace sulla retta.
+
+\textbf{Proprietà (domanda d'esame ricorrente).}
+\begin{enumerate}[nosep]
+\item In ogni punto il campo è \textbf{tangente} alla linea e ne ha il verso.
+\item Le linee \textbf{non si intersecano mai}: il campo è univoco in ogni punto, quindi ha una sola direzione; due linee incrociate darebbero due tangenti. (Eccezione: punti dove il campo è nullo o singolare, come la sorgente puntiforme.)
+\item \textbf{Dove il campo è più intenso le linee sono più fitte}: il numero di linee per unità di superficie perpendicolare è proporzionale a $\mo{\text{campo}}$. Per una sorgente puntiforme il numero totale $N$ di linee attraverso una sfera di raggio $r$ non dipende da $r$, quindi la densità è $N/(4\pi r^2)\propto1/r^2$, esattamente la dipendenza di $\mo{\vv g}$.
+\item \textbf{Campo uniforme}: modulo, direzione e verso uguali ovunque; linee \textbf{rette parallele ed equispaziate}.
+\item \textbf{Campo radiale} (Sole): semirette concorrenti nella sorgente; per la gravità \emph{entranti}, provenienti dall'infinito; più fitte vicino alla sorgente.
+\end{enumerate}
+
+\subsection{Derivata direzionale e gradiente}\label{sec:derdir}
+\begin{nota}[Nota del docente]
+Questa parte è un'anticipazione e \guillemotleft cultura\guillemotright: le dimostrazioni non verranno chieste all'esame, ma saranno il linguaggio che collega potenziale (scalare) e campo (vettore).
+\end{nota}
+
+\textbf{Problema.} Dato $\varphi(x,y,z)$, quanto varia $\varphi$ spostandosi di poco da $P_0$ lungo una direzione assegnata?
+
+\textbf{Definizione.} Sia $\vv a=(\cos\alpha,\cos\beta,\cos\gamma)$ un versore e $P=P_0+s\,\vv a$. La derivata direzionale in $P_0$ è
+\begin{equation}
+\left.\frac{d\varphi}{ds}\right|_{P_0}=\lim_{\Delta s\to0}\frac{\varphi(P_0+\Delta s\,\vv a)-\varphi(P_0)}{\Delta s}
+\end{equation}
+Unità: $[\varphi]/\mathrm{m}$.
+
+\textbf{Calcolo.} Gli spostamenti sono $\Delta x=\Delta s\cos\alpha$, $\Delta y=\Delta s\cos\beta$, $\Delta z=\Delta s\cos\gamma$. Sviluppando al primo ordine:
+\begin{equation}
+\varphi(P)-\varphi(P_0)=\pd\varphi x\Delta s\cos\alpha+\pd\varphi y\Delta s\cos\beta+\pd\varphi z\Delta s\cos\gamma+o(\Delta s)
+\end{equation}
+Dividendo per $\Delta s$ e passando al limite il resto sparisce:
+\begin{equation}
+\frac{d\varphi}{ds}=\pd\varphi x\cos\alpha+\pd\varphi y\cos\beta+\pd\varphi z\cos\gamma
+\end{equation}
+Il secondo membro è un prodotto scalare. Si \textbf{definisce gradiente}:
+\begin{equation}
+\nab\varphi=\grad\varphi=\pd\varphi x\vv i+\pd\varphi y\vv j+\pd\varphi z\vv k,\qquad\frac{d\varphi}{ds}=\nab\varphi\cdot\vv a=\mo{\nab\varphi}\cos\theta
+\end{equation}
+con $\theta$ angolo fra $\nab\varphi$ e $\vv a$; unità $[\varphi]/\mathrm{m}$. Il gradiente trasforma uno scalare in un vettore.
+
+\textbf{Proprietà geometriche.}
+\begin{enumerate}[nosep]
+\item \textbf{$\nab\varphi\perp$ superficie di livello} $\varphi=c$. Sia $\vv r(t)$ una curva sulla superficie: $\varphi(\vv r(t))=c$. Derivando con la regola della catena: $0=\varphi_x\dot x+\varphi_y\dot y+\varphi_z\dot z=\nab\varphi\cdot d\vv r/dt$. I vettori $d\vv r/dt$ generano il piano tangente, quindi $\nab\varphi$ è ortogonale ad esso; la derivata lungo direzioni tangenti è nulla.
+\item \textbf{Verso delle $\varphi$ crescenti}: lungo $\vv a=\nab\varphi/\mo{\nab\varphi}$, $d\varphi/ds=\mo{\nab\varphi}>0$.
+\item \textbf{Modulo}: $\mo{\nab\varphi}$ è la derivata lungo la normale ed è il \textbf{massimo} di $d\varphi/ds$ (da $\mo{\nab\varphi}\cos\theta$, massimo a $\theta=0$); il minimo è $-\mo{\nab\varphi}$ per $\theta=\pi$.
+\end{enumerate}
+Interpretazione: se $\varphi$ è la quota di una collina, $\nab\varphi$ punta nella direzione di massima salita, perpendicolare alle curve di livello, ed è più grande dove queste sono più fitte.
+
+\subsection{L'operatore nabla}\label{sec:nabla}
+\begin{equation}
+\nab=\vv i\,\pd{}x+\vv j\,\pd{}y+\vv k\,\pd{}z
+\end{equation}
+È \emph{contemporaneamente} un vettore formale (contiene $\vv i,\vv j,\vv k$: può entrare in prodotti scalari e vettoriali) e un operatore differenziale. Il nome deriva dal greco e indica uno strumento musicale simile a un'arpa, la cui forma ricorda un delta rovesciato. Applicato a uno scalare dà il gradiente.
+
+\textbf{Esempi svolti.}
+\begin{itemize}[nosep]
+\item $\varphi=x$: $\nab x=\vv i\cdot1+0+0=\vv i$; analogamente $\nab y=\vv j$, $\nab z=\vv k$.
+\item $\varphi=r=\sqrt{x^2+y^2+z^2}$: $\partial r/\partial x=\tfrac12(x^2+y^2+z^2)^{-1/2}\cdot2x=x/r$, e così per $y,z$. Quindi
+\[
+\nab r=\frac{x\vv i+y\vv j+z\vv k}{r}=\frac{\vv r}{r}=\ur,
+\]
+versore radiale, di modulo $1$, verso le $r$ crescenti.
+\item Potenze: $\nab r^n=nr^{n-1}\nab r=nr^{n-1}\ur$; in particolare $\nab(1/r)=-\ur/r^2=-\vv r/r^3$ (servirà per la carica puntiforme e il dipolo).
+\end{itemize}
+
+\textbf{Differenziale e nabla.} Con $d\vv r=(dx,dy,dz)$:
+\begin{equation}
+d\varphi=\pd\varphi xdx+\pd\varphi ydy+\pd\varphi zdz=\nab\varphi\cdot d\vv r
+\end{equation}
+Regole formali (lineare, come ogni derivata):
+\begin{itemize}[nosep]
+\item $\nab(\varphi+\psi)=\nab\varphi+\nab\psi$, $\nab(c\varphi)=c\nab\varphi$.
+\item $\nab(\varphi\psi)=\varphi\nab\psi+\psi\nab\varphi$. Dimostrazione sulla componente $x$: $\partial_x(\varphi\psi)=\varphi\,\partial_x\psi+\psi\,\partial_x\varphi$; idem per $y,z$.
+\item $\nab f(\varphi)=\dfrac{df}{d\varphi}\nab\varphi$, perché $\partial_xf=(df/d\varphi)\partial_x\varphi$. L'esempio $\nab r^n$ è un'applicazione.
+\end{itemize}
+Per l'esame si può anche non usare $\nab$, ma conviene perché rende i calcoli compatti.
+
+\subsection{Collegamento anticipato: potenziale e campo gravitazionale}\label{sec:pot}
+Per una massa $m$ nel campo di $M$ l'energia potenziale (zero all'infinito) è $U(r)=-GMm/r$ [J]. Usando $\nab(1/r)=-\ur/r^2$:
+\begin{equation}
+-\nab U=GMm\,\nab\!\left(\frac1r\right)=-\frac{GMm}{r^2}\,\ur=\vv F
+\end{equation}
+Dividendo per $m$: \textbf{potenziale} $V=U/m=-GM/r$ (J/kg $=\mathrm{m^2/s^2}$) e
+\begin{equation}
+\vv g=-\nab V
+\end{equation}
+L'\textbf{energia potenziale} $U$ dipende dalla massa di prova (joule), il \textbf{potenziale} $V$ no (in elettrostatica sarà il volt, J/C). Le superfici di livello di $V$ sono sfere centrate sulla sorgente; $\vv g$ è perpendicolare ad esse e punta verso i valori decrescenti di $V$, cioè verso la sorgente.
+
+% =====================================================================
+\section{Interpretazione fisica e casi limite}
+\begin{itemize}
+\item \textbf{$r\to\infty$.} $\mo{\vv g}=GM/r^2\to0$ come $1/r^2$; le linee si diradano; $V\to0$.
+\item \textbf{$r\to0$.} La formula diverge: il modello di massa puntiforme cade avvicinandosi a un corpo reale di estensione finita; dentro una sfera omogenea il campo cresce linearmente con $r$ (si ricava con Gauss).
+\item \textbf{Campo uniforme come caso limite.} A quota $h\ll R_T$: $g(R_T+h)=g_0(1+h/R_T)^{-2}\approx g_0(1-2h/R_T)$, con $g_0=GM_T/R_T^2$. Per $h=1\unit{km}$ la variazione relativa è $2\cdot10^3/6{,}37\cdot10^6\approx3\cdot10^{-4}$ ($0{,}03\%$): in aula il campo è uniforme; anche la direzione è \guillemotleft verticale\guillemotright\ perché le linee radiali su pochi metri sono praticamente parallele.
+\item \textbf{Campo del Sole alla distanza della Terra.} $GM_S\approx1{,}327\cdot10^{20}\unit{m^3/s^2}$, $d\approx1{,}496\cdot10^{11}\unit m$: $g_S=GM_S/d^2\approx5{,}9\cdot10^{-3}\unit{m/s^2}$, circa $1/1650$ di $g_0$.
+\item \textbf{Massa di prova $\to0$.} Il campo è definito come limite di $\vv F/m$ per $m$ tanto piccola da non perturbare la sorgente: è presente anche senza masse.
+\item \textbf{Regime stazionario vs tempo-variante.} Una sorgente ferma genera un campo indipendente dal tempo; con sorgenti in moto (elettromagnetismo) il campo diventa tempo-variante e si propaga con velocità finita.
+\item \textbf{Gradiente nullo.} Dove $\nab\varphi=0$ il campo scalare è stazionario (massimo, minimo, sella); derivata direzionale nulla lungo $\vv a$ significa $\vv a\perp\nab\varphi$, cioè $\vv a$ tangente alla superficie di livello.
+\item \textbf{Sistema di coordinate.} Radiale per campi centrali (es.\ $\nab r$), cartesiane per campi uniformi.
+\end{itemize}
+
+% =====================================================================
+\section{Speciale esami precedenti}
+
+\subsection{Domande orali tipiche}
+\begin{enumerate}
+\item \textbf{Proprietà delle linee di campo?} Immaginarie; campo tangente alla linea e concorde; non si intersecano (altrimenti due direzioni nello stesso punto); più fitte dove il campo è più intenso. Tranello: dimenticare perché non si incrociano.
+\item \textbf{Come si rappresenta un campo uniforme?} Rette parallele ed equispaziate; non inventare altro. Uniforme = stesso modulo, direzione e verso ovunque; il campo del Sole non lo è.
+\item \textbf{Differenza fra linee di campo e campo?} Le linee sono rappresentazione pittorica; il campo è un vettore applicato in $P$. Tranello: \guillemotleft il campo è il vettore dalla sorgente al punto\guillemotright\ (falso).
+\item \textbf{Forza e campo gravitazionale?} La forza richiede una massa, $\vv F=m\vv g$; il campo esiste per la sola sorgente ed è forza per unità di massa. \guillemotleft Il campo del Sole esiste senza pianeti?\guillemotright\ Sì.
+\item \textbf{Quanto pesi in newton? Il kg è unità di peso?} No: kg è massa; peso $P=mg$ in N ($65\unit{kg}\to\approx650\unit N$).
+\item \textbf{Chi cade verso chi?} Forze uguali e contrarie, ma $a=F/m$: $a_T\approx10^{-22}\unit{m/s^2}$.
+\item \textbf{Segno meno nella gravitazione?} Forza attrattiva, $\ur$ dalla sorgente al punto: $\vv F$ e $\ur$ hanno versi opposti.
+\item \textbf{Prodotto scalare e vettoriale: tipo di oggetto e annullamento?} Scalare $\to$ scalare, nullo se perpendicolari; vettoriale $\to$ vettore, nullo se paralleli. Tranello: \guillemotleft $\vv u\times\vv v=0$ significa perpendicolari\guillemotright\ (falso); il vettoriale è anticommutativo.
+\item \textbf{Direzione e verso?} Direzione = retta; verso = da che parte della retta.
+\item \textbf{Significato di $\mo{\vv u\times\vv v}$?} Area del parallelogramma, $\mo{\vv u}\mo{\vv v}\sin\theta$; tranello: $\sin$ al posto di $\cos$.
+\item \textbf{Cos'è il gradiente?} Vettore delle derivate parziali di uno scalare; $\perp$ alle superfici di livello, verso le $\varphi$ crescenti, modulo = massima derivata direzionale; $\vv g=-\nab V$.
+\item \textbf{Potenziale ed energia potenziale?} $U$ [J] dipende da $m$; $V=U/m$ [J/kg]. Entrambi scalari.
+\item \textbf{Pressione: scalare o vettore?} Scalare, anche se definita da una forza normale per unità di superficie.
+\item \textbf{Se non sai rispondere}: il docente ha ironizzato sul fatto che un bilancio energetico è sempre una frase vera, ma non sostituisce la risposta richiesta; meglio dire cosa si sa e ragionare dal fenomeno.
+\end{enumerate}
+
+\subsection{Tipologie di esercizi scritti}
+\begin{itemize}[nosep]
+\item \textbf{Algebra vettoriale}: prodotto scalare, angolo, ortogonalità/parallelismo, versore, proiezione, prodotto vettoriale per componenti, area di parallelogramma o triangolo (metà del modulo), momento $\boldsymbol\tau=\vv r\times\vv F$.
+\item \textbf{Gradiente e derivata direzionale}: $\nab\varphi$ in un punto, derivata lungo una direzione (normalizzare!), direzione e valore di massima crescita, piano tangente alla superficie di livello.
+\item \textbf{Campo gravitazionale}: $g=GM/R^2$ su altri pianeti o a una certa distanza, rapporti fra campi, sovrapposizione di più sorgenti (si sommano i \emph{vettori}, mai i moduli), punti di campo nullo, $\vv F=m\vv g$.
+\item \textbf{Linee di campo}: integrare $dx/u_x=dy/u_y=dz/u_z$, riconoscere campo uniforme o radiale, confrontare intensità dalla densità delle linee.
+\item \textbf{Ordini di grandezza e analisi dimensionale}: unità (N, $\mathrm{m/s^2}$, J/kg) e valori ragionevoli.
+\item \textbf{In anticipo sul corso}: distribuzioni non uniformi di carica, dipolo (si userà $\nab(1/r)$), potenziale e campo elettrico, forza di Lorentz con $\vv v\times\vv B$.
+\end{itemize}
+
+\subsection{Gli errori più penalizzati}
+\begin{itemize}[nosep]
+\item \textbf{Unità di misura} mancanti o sbagliate; kg usati come forza.
+\item \textbf{Segno di $\vv g$}: $\vv g=-(GM/r^2)\ur$ punta verso la sorgente; il meno si perde passando dal vettore al modulo o con assi orientati diversamente.
+\item \textbf{Campo disegnato dalla sorgente al punto}; linee che si incrociano; frecce uscenti dal Sole.
+\item \textbf{Direzione e verso} scambiati; mano sinistra al posto della destra; ordine dei fattori invertito in $\vv u\times\vv v$.
+\item \textbf{Segno del termine in $\vv j$} nel determinante (è $-(u_xv_z-u_zv_x)$).
+\item \textbf{$\sin/\cos$ scambiati}; freccia dentro il modulo; confondere $\cdot$ e $\times$.
+\item \textbf{Terna sinistra}: gli assi devono verificare $\vv i\times\vv j=\vv k$.
+\item \textbf{Gradiente}: derivare rispetto a una sola variabile; dimenticare di dividere per $r$ in $\nab r$; usare una direzione non normalizzata; dimenticare che $\nab\varphi$ punta verso le $\varphi$ \emph{crescenti} (e $\vv g=-\nab V$ verso le decrescenti).
+\item \textbf{Pressione o potenziale trattati come vettori.}
+\item \textbf{Sistema di coordinate} non adatto alla simmetria.
+\end{itemize}
+
+% =====================================================================
+\section{Esercizio guida risolto}
+\textbf{Testo.} (a) Dati $\vv u=(1,2,0)\unit m$ e $\vv v=(0,1,3)\unit m$ calcolare $\vv u\cdot\vv v$, l'angolo $\theta$, $\vv u\times\vv v$, l'area del parallelogramma e verificare che $\vv u\times\vv v$ è perpendicolare a entrambi.
+(b) Dato $\varphi(x,y,z)=x^2y-yz^2$ (unità arbitrarie), nel punto $P(1,2,-1)$ calcolare $\nab\varphi$, la derivata direzionale lungo la direzione di $(1,2,2)$, direzione e valore della massima crescita e il piano tangente alla superficie di livello per $P$.
+(c) Una massa puntiforme $M$ nell'origine genera $\vv g=-GM\,\vv r/r^3$. Mostrare che le linee di campo sono rette uscenti dall'origine e calcolare $\mo{\vv g}$ a distanza $2R_T$ dal centro della Terra, con $g_0=9{,}8\unit{m/s^2}$ alla superficie.
+
+\subsection*{Soluzione (a)}
+\[
+\vv u\cdot\vv v=1\cdot0+2\cdot1+0\cdot3=2\unit{m^2}
+\]
+$\mo{\vv u}=\sqrt5\unit m$, $\mo{\vv v}=\sqrt{10}\unit m$, quindi $\cos\theta=2/\sqrt{50}\approx0{,}283$, $\theta\approx73{,}6^\circ$ (non perpendicolari perché $\vv u\cdot\vv v\neq0$).
+\[
+\vv u\times\vv v=(2\cdot3-0\cdot1)\vv i+(0\cdot0-1\cdot3)\vv j+(1\cdot1-2\cdot0)\vv k=(6,-3,1)\unit{m^2}
+\]
+Modulo $\sqrt{36+9+1}=\sqrt{46}\approx6{,}78\unit{m^2}$, area del parallelogramma. Controllo: $\mo{\vv u}\mo{\vv v}\sin\theta=\sqrt{50}\sqrt{1-0{,}08}\approx7{,}07\cdot0{,}959\approx6{,}78$ \checkmark. Perpendicolarità: $(\vv u\times\vv v)\cdot\vv u=6-6+0=0$, $(\vv u\times\vv v)\cdot\vv v=0-3+3=0$ \checkmark.
+
+\emph{Passaggi critici}: segno del termine in $\vv j$; il controllo su modulo e perpendicolarità intercetta quasi tutti gli errori di segno; unità $\mathrm{m^2}$ per entrambi i prodotti.
+
+\subsection*{Soluzione (b)}
+\[
+\nab\varphi=\left(\pd\varphi x,\pd\varphi y,\pd\varphi z\right)=\left(2xy,\;x^2-z^2,\;-2yz\right)
+\]
+In $P(1,2,-1)$: $2xy=4$; $x^2-z^2=0$; $-2yz=4$. Dunque $\nab\varphi(P)=(4,0,4)$. Inoltre $\varphi(P)=2-2=0$: $P$ è sulla superficie $\varphi=0$.
+
+Il vettore $(1,2,2)$ ha modulo $3$: $\vv a=(1,2,2)/3$. Allora
+\[
+\frac{d\varphi}{ds}=\nab\varphi\cdot\vv a=\frac{4\cdot1+0\cdot2+4\cdot2}{3}=4
+\]
+(senza normalizzare si otterrebbe $12$: errore tipico). Massima crescita lungo $\nab\varphi$: direzione $(1,0,1)/\sqrt2$, valore $\mo{\nab\varphi}=\sqrt{32}=4\sqrt2\approx5{,}66>4$, coerente ($4=5{,}66\cos\theta$, $\theta\approx45^\circ$).
+
+Piano tangente alla superficie di livello: $\nab\varphi(P)\cdot(\vv r-\vv r_P)=0$:
+\[
+4(x-1)+0\cdot(y-2)+4(z+1)=0\;\Longrightarrow\;x+z=0
+\]
+Controllo: $\nab\varphi\cdot\vv j=0$, la direzione $\vv j$ è tangente.
+
+\subsection*{Soluzione (c)}
+$g_x=-GMx/r^3$, $g_y=-GMy/r^3$, $g_z=-GMz/r^3$. Nell'equazione $dx/g_x=dy/g_y=dz/g_z$ il fattore comune $-GM/r^3$ si semplifica:
+\[
+\frac{dx}{x}=\frac{dy}{y}=\frac{dz}{z}\;\Longrightarrow\;\ln\mo y=\ln\mo x+c_1,\ \ln\mo z=\ln\mo x+c_2\;\Longrightarrow\;y=C_1x,\ z=C_2x
+\]
+Rette per l'origine (linee radiali); poiché $\vv g=-(GM/r^2)\ur$ sono \emph{entranti}. A $r=2R_T$: $\mo{\vv g}=GM_T/(2R_T)^2=g_0/4\approx2{,}45\unit{m/s^2}$. Verifica con il potenziale: $V=-GM/r\Rightarrow\nab V=(GM/r^2)\ur\Rightarrow-\nab V=\vv g$ \checkmark.
+
+\emph{Passaggi critici}: semplificare il fattore comune prima di integrare; il segno meno decide il verso; $2{,}45\unit{m/s^2}$ è un modulo, il verso è verso il centro; controllo dimensionale $\mathrm{N\,m^2/kg^2\cdot kg/m^2=N/kg=m/s^2}$.
+
+\bigskip\hrule\medskip
+\small\emph{Fonti e note.} Trascrizioni delle tre lezioni e slide \guillemotleft Operazioni algebriche e differenziali su vettori\guillemotright\ (Fisica generale: Elettromagnetismo, Università di Cagliari, A.A.\ 2025/2026). Le definizioni di divergenza, rotore, flusso, circuitazione e angolo solido sono quelle standard e vanno confrontate con le slide. Costanti numeriche approssimate.
+
+\end{document}
