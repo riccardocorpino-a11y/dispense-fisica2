@@ -1,0 +1,1467 @@
+\documentclass[11pt,a4paper]{article}
+\input{preambolo}
+
+% Prefisso fisso dei riquadri di richiamo (definito nel preambolo)
+\renewcommand{\richiamoprefix}{Richiamo Matematico/Fisica 1 --- }
+
+\begin{document}
+
+\begin{center}
+{\Large Fisica Generale: Elettromagnetismo}\\[6pt]
+{\large Lezioni preliminari: richiami di meccanica, geometria e trigonometria,\\ algebra e analisi vettoriale, campi, angolo solido, legge di Coulomb}\\[6pt]
+Dispensa di studio autonoma per la preparazione dell'esame
+\end{center}
+\vspace{1ex}
+
+\noindent\textsc{Sintesi concettuale.} Il corso si propone di descrivere i due campi vettoriali dell'elettromagnetismo, il campo elettrico e il campo magnetico, e di condurre alle quattro equazioni di Maxwell, che devono essere sapute scrivere e interpretare dal punto di vista fisico. Le lezioni preliminari ne costruiscono il linguaggio. Il punto di partenza è la meccanica già nota: il lavoro, la forza conservativa e l'energia potenziale, il teorema dell'energia cinetica e il bilancio energetico, con la geometria e la trigonometria che servono a scomporre i vettori e a misurare gli angoli. Su questa base si innesta l'algebra vettoriale, poiché ogni fenomeno fisico è descritto da uno scalare o da un vettore, e da essa discende la nozione di campo, rappresentata dalle linee di campo e studiata con l'operatore simbolico nabla: gradiente, divergenza e rotore ne sono le tre applicazioni. Quando si passa alle grandezze integrali compaiono il flusso e la circuitazione, legati agli operatori locali dai teoremi della divergenza e di Stokes; da questi nascono i due aggettivi che accompagnano ogni campo studiato nel corso, conservativo (circuitazione nulla, rotore nullo, esistenza di un potenziale) e solenoidale (flusso nullo attraverso ogni superficie chiusa, divergenza nulla). L'angolo solido, indispensabile nei problemi a simmetria sferica, e la legge di Coulomb, prima relazione quantitativa dell'interazione elettrica, chiudono il blocco. Il quadro finale, da tenere a mente per l'orale, è il seguente: il campo elettrico (in regime stazionario) è conservativo e non solenoidale, il campo magnetico è solenoidale e non conservativo; due campi e due aggettivi forniscono quattro informazioni, e le quattro equazioni di Maxwell le contengono tutte.
+
+\medskip
+
+\titoletto{Prerequisiti e strumenti di calcolo.}
+I riquadri che seguono raccolgono quanto di Fisica 1, di Geometria e di Analisi viene usato nel resto del testo. Chi li padroneggia può scorrerli rapidamente; chi ha dubbi sul significato di una definizione operativa vi troverà ciò che serve per proseguire senza altri libri. L'ordine è quello d'uso: prima il linguaggio dei vettori e dell'analisi, poi la geometria con la trigonometria, infine la meccanica e le scale di grandezza.
+
+\begin{richiamo}{grandezze scalari e vettoriali, unità di misura}
+Una grandezza scalare è individuata da un solo numero accompagnato da un'unità di misura: sono scalari la massa, l'energia, la temperatura, la pressione, il calore. Una grandezza vettoriale richiede in più una direzione e un verso: sono vettori la forza, la velocità, lo spostamento, l'accelerazione, la quantità di moto, il momento angolare. Un vettore ha quindi tre caratteristiche, il modulo (l'intensità del fenomeno), la direzione e il verso, cui si aggiunge il punto di applicazione. Nel linguaggio comune «direzione» e «verso» si scambiano; nell'algebra vettoriale la direzione è la retta che contiene il vettore, mentre il verso indica quale dei due sensi di percorrenza di quella retta è scelto. Il verso si disegna con una freccia, che va tracciata in un solo punto della linea e non in ogni segmento, perché una linea non è un vettore.
+
+Il modulo è privo di significato senza l'unità. Per la forza l'unità del Sistema Internazionale è il newton,
+\[
+1\un{N}=1\un{kg\,m\,s^{-2}} .
+\]
+Il chilogrammo misura la massa. Il peso è una forza e si calcola con
+\[
+P=mg ,
+\]
+dove $m$ è la massa (in $\mathrm{kg}$), $g\simeq 9{,}8\un{m\,s^{-2}}$ è l'accelerazione di gravità (spesso arrotondata a $10\un{m\,s^{-2}}$ per stime rapide) e $P$ si misura in newton. Un corpo di $65\un{kg}$ pesa dunque circa $650\un{N}$. L'espressione «chilogrammo peso», che compare sulle bilance, è un'unità tecnica pari a circa $9{,}8\un{N}$. Per avere il senso dell'ordine di grandezza: $650\un{N}$ distribuiti su una mano sono una forza sensibile, mentre la stessa forza ripartita su quattro appoggi (come in un piegamento sulle braccia) cambia direzione di applicazione e intensità locale. Intensità, direzione e verso sono tre informazioni distinte.
+\end{richiamo}
+
+\begin{richiamo}{componenti, versori, derivate parziali e differenziale totale}
+Fissato un sistema di assi cartesiani $x,y,z$, i versori $\vec i,\vec j,\vec k$ sono vettori di modulo unitario orientati come gli assi; servono a identificare direzione e verso di ciascun asse. Ogni vettore si scrive come terna di scalari moltiplicati per i versori corrispondenti,
+\[
+\vec u = u_x\,\vec i + u_y\,\vec j + u_z\,\vec k ,
+\]
+dove $u_x,u_y,u_z$ sono le componenti di $\vec u$ lungo gli assi, con la stessa unità di misura di $\vec u$. Ciascuna componente si ricava dal modulo e dall'angolo con l'asse: $u_x=u\cos\alpha_x$, e analogamente per le altre. Il vettore si scrive anche come colonna $(u_1,u_2,u_3)$, notazione usata nelle slide con $x_1,x_2,x_3$ al posto di $x,y,z$.
+
+Per una funzione $\varphi(x,y,z)$ la derivata parziale $\partial\varphi/\partial x$ è la derivata rispetto a $x$ calcolata con $y$ e $z$ mantenute costanti. La derivata di una potenza segue la regola $\dfrac{\dd}{\dd x}x^n=n\,x^{n-1}$; ad esempio $\dfrac{\dd}{\dd x}x^2=2x$ e $\dfrac{\dd}{\dd r}\dfrac1r=-\dfrac1{r^2}$. Il differenziale totale di $\varphi$ è
+\[
+\dd\varphi=\frac{\partial\varphi}{\partial x}\dd x+\frac{\partial\varphi}{\partial y}\dd y+\frac{\partial\varphi}{\partial z}\dd z ,
+\]
+dove ogni addendo è la variazione di $\varphi$ dovuta alla sola variazione della coordinata corrispondente, e la somma è la variazione complessiva al primo ordine. Se $\varphi$ dipende da $u$ e $u$ dipende a sua volta da $x,y,z$, vale la regola di derivazione delle funzioni composte
+\[
+\frac{\partial\varphi}{\partial x}=\frac{\dd\varphi}{\dd u}\frac{\partial u}{\partial x}.
+\]
+Per le derivate seconde miste vale il teorema di Schwarz: se le derivate seconde sono continue, $\dfrac{\partial^2\varphi}{\partial x\,\partial y}=\dfrac{\partial^2\varphi}{\partial y\,\partial x}$.
+\end{richiamo}
+
+\begin{richiamo}{determinante $3\times3$}
+Il determinante di una matrice quadrata di ordine tre si sviluppa lungo una riga con la regola dei complementi algebrici, ossia con segni alternati più, meno, più:
+\[
+\begin{vmatrix} a_{11}&a_{12}&a_{13}\\ a_{21}&a_{22}&a_{23}\\ a_{31}&a_{32}&a_{33}\end{vmatrix}
+=a_{11}(a_{22}a_{33}-a_{23}a_{32})-a_{12}(a_{21}a_{33}-a_{23}a_{31})+a_{13}(a_{21}a_{32}-a_{22}a_{31}).
+\]
+Ciascun minore è il determinante $2\times2$ che resta dopo la cancellazione della riga e della colonna dell'elemento considerato. Il segno meno davanti al secondo termine è l'origine di un dubbio frequente quando il determinante serve a scrivere il prodotto vettoriale; lo si risolve notando che lo stesso risultato si ottiene se il termine centrale si scrive con le due colonne invertite e segno più.
+\end{richiamo}
+
+\begin{richiamo}{derivate e integrali elementari}
+La derivata di una funzione $f(x)$ è il limite del rapporto incrementale,
+\[
+f'(x)=\frac{\dd f}{\dd x}=\lim_{h\to0}\frac{f(x+h)-f(x)}{h},
+\]
+e misura la rapidità con cui $f$ varia al variare di $x$; geometricamente è il coefficiente angolare della tangente al grafico. Per $f=x^2$ si ha $(x+h)^2-x^2=2xh+h^2$, il rapporto incrementale vale $2x+h$ e il limite è $2x$. L'integrale è l'operazione inversa: una primitiva $F$ di $f$ soddisfa $F'=f$, e l'integrale definito tra $a$ e $b$, somma dei prodotti $f(x)\,\dd x$ estesa a tutti gli intervalli infinitesimi, si calcola come differenza dei valori della primitiva agli estremi,
+\[
+\int_a^b f(x)\,\dd x=F(b)-F(a).
+\]
+Le coppie derivata--primitiva da conoscere senza esitazione sono
+\begin{align*}
+\frac{\dd}{\dd x}\,x^n&=n\,x^{n-1}, & \int x^n\,\dd x&=\frac{x^{n+1}}{n+1}+c\quad(n\neq-1),\\
+\frac{\dd}{\dd x}\,e^{x}&=e^{x}, & \int e^{x}\,\dd x&=e^{x}+c,\\
+\frac{\dd}{\dd x}\,\ln|x|&=\frac1x, & \int\frac{\dd x}{x}&=\ln|x|+c ,
+\end{align*}
+dove $c$ è una costante additiva arbitraria, che scompare nell'integrale definito perché si cancella nella differenza $F(b)-F(a)$. Il caso $n=-1$ sfugge alla regola generale, che darebbe una divisione per zero, e va ricordato a parte. Due integrali ricorrenti sono $\int_{x_i}^{x_f}\dd x=x_f-x_i$ e $\int_{x_i}^{x_f}x\,\dd x=\tfrac12\left(x_f^2-x_i^2\right)$. Il differenziale di una funzione è la sua variazione al primo ordine, ad esempio $\dd(x^2)=2x\,\dd x$. Non servono tecniche avanzate, come l'integrazione per parti: servono questi risultati, che devono essere disponibili con la stessa prontezza del proprio nome.
+\end{richiamo}
+
+\begin{richiamo}{geometria elementare: circonferenza, cerchio, sfera}
+Le formule da possedere a memoria sono la lunghezza della circonferenza di raggio $r$, l'area del cerchio, il volume e la superficie della sfera,
+\[
+C=2\pi r,\qquad A=\pi r^2,\qquad V=\frac43\,\pi r^3,\qquad S=4\pi r^2 ,
+\]
+con $r$ e $C$ in metri, $A$ e $S$ in $\mathrm{m^2}$, $V$ in $\mathrm{m^3}$. L'analisi dimensionale offre un controllo immediato: una lunghezza cresce come $r$, una superficie come $r^2$, un volume come $r^3$, per cui un'area del cerchio scritta come $\pi r$ è da scartare. Il fattore $4/3$ del volume è una nozione di memoria. La superficie della sfera, invece, si ricostruisce dal volume, di cui è la derivata rispetto al raggio. Si considerano la sfera di raggio $r$ e quella di raggio $r+\dd r$: la differenza dei volumi è un guscio sottile, di spessore $\dd r$ e area $S(r)$, e dunque $V(r+\dd r)-V(r)\simeq S(r)\,\dd r$. Dallo sviluppo $(r+\dd r)^3=r^3+3r^2\,\dd r+3r\,\dd r^2+\dd r^3$ discende
+\[
+\frac{V(r+\dd r)-V(r)}{\dd r}=\frac43\,\pi\left(3r^2+3r\,\dd r+\dd r^2\right)\ \longrightarrow\ 4\pi r^2\qquad(\dd r\to0),
+\]
+cioè $S=\dd V/\dd r=4\pi r^2$. Lo stesso argomento mostra che la circonferenza è la derivata dell'area del cerchio, $\dd(\pi r^2)/\dd r=2\pi r$. Il raggio medio della Terra vale circa $6{,}4\times10^{6}\un{m}$; non conta la cifra esatta, conta l'ordine di grandezza, perché è l'enorme estensione della Terra a far apparire piatta la sua superficie e pressoché uniforme il campo gravitazionale presso il suolo.
+\end{richiamo}
+
+\begin{richiamo}{trigonometria: triangolo rettangolo, circonferenza goniometrica, teorema di Carnot}
+Si consideri un triangolo rettangolo di ipotenusa $c$, cateti $a$ e $b$, e angoli acuti $\alpha$ (adiacente ad $a$) e $\beta$ (adiacente a $b$). Il teorema di Pitagora afferma che
+\[
+a^2+b^2=c^2 ,
+\]
+e le definizioni di seno e coseno legano i cateti all'ipotenusa e agli angoli,
+\[
+a=c\cos\alpha,\qquad b=c\sin\alpha,\qquad a=c\sin\beta,\qquad b=c\cos\beta ,
+\]
+dove il coseno proietta l'ipotenusa sul cateto adiacente all'angolo e il seno sul cateto opposto; $a$, $b$ e $c$ hanno la stessa unità di lunghezza, mentre angoli e funzioni goniometriche sono adimensionali. La tangente è il rapporto $\tan\alpha=\sin\alpha/\cos\alpha=b/a$, come risulta dal rapporto tra la seconda uguaglianza e la prima. Se $a=c\cos\alpha$ e $b=c\sin\alpha$ si sostituiscono in $a^2+b^2=c^2$ e si divide per $c^2$, si trova
+\[
+\sin^2\alpha+\cos^2\alpha=1 ,
+\]
+che è il teorema di Pitagora in veste goniometrica; l'esponente va scritto sulla funzione, $\sin^2\alpha=(\sin\alpha)^2$, e mai sull'angolo.
+
+La circonferenza goniometrica ha raggio unitario e centro nell'origine degli assi. Un punto $P$ della circonferenza, individuato dall'angolo $\alpha$ misurato dall'asse delle ascisse in senso antiorario, ha per ascissa $\cos\alpha$ e per ordinata $\sin\alpha$: il coseno è la proiezione di $P$ sull'asse $x$, il seno quella sull'asse $y$. Ne seguono subito $\cos0=1$, $\cos(\pi/2)=0$ e il fatto che seno e coseno restano compresi tra $-1$ e $1$. I valori degli angoli notevoli si ricostruiscono con la geometria. Un triangolo rettangolo isoscele (metà di un quadrato) con ipotenusa 1 ha $2a^2=1$, quindi $a=b=\sqrt2/2$, e corrisponde a $\alpha=\pi/4$. Un triangolo equilatero di lato 1, tagliato a metà dall'altezza, ha ipotenusa 1, base $1/2$ e altezza $\sqrt{1-1/4}=\sqrt3/2$; l'angolo opposto alla semibase è $\pi/6$, quello adiacente è $\pi/3$. Si ottiene la tabella
+\[
+\begin{array}{c|ccccc}
+\alpha & 0 & \pi/6 & \pi/4 & \pi/3 & \pi/2\\ \hline
+\sin\alpha & 0 & \tfrac12 & \tfrac{\sqrt2}{2} & \tfrac{\sqrt3}{2} & 1\\[4pt]
+\cos\alpha & 1 & \tfrac{\sqrt3}{2} & \tfrac{\sqrt2}{2} & \tfrac12 & 0
+\end{array}
+\]
+nella quale seno e coseno di angoli complementari si scambiano. La tabella va memorizzata; in caso di vuoto di memoria la circonferenza goniometrica permette di ricostruirle, ad esempio notando che per $\pi/6$ la proiezione sull'asse $y$ è circa metà del raggio.
+
+Il teorema di Carnot (o del coseno) estende Pitagora a un triangolo qualunque. Sia $OAB$ un triangolo con $\overline{OA}=u$, $\overline{OB}=v$ e angolo $\theta$ in $O$. Il piede $H$ dell'altezza condotta da $B$ sulla retta $OA$ dista da $O$ di $v\cos\theta$, e l'altezza misura $v\sin\theta$; il segmento $AH$ vale perciò $u-v\cos\theta$, con segno, anche per $\theta>\pi/2$. Il teorema di Pitagora applicato al triangolo rettangolo $AHB$ dà
+\[
+\overline{AB}^{\,2}=v^2\sin^2\theta+(u-v\cos\theta)^2=u^2+v^2\left(\sin^2\theta+\cos^2\theta\right)-2uv\cos\theta=u^2+v^2-2uv\cos\theta ,
+\]
+dove ogni termine è il quadrato di una lunghezza. Per $\theta=\pi/2$ il termine in coseno si annulla e si ritrova Pitagora.
+\end{richiamo}
+
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+		
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			axisline/.style={draw=gray!70, line width=0.9pt, ->},
+			cosline/.style={line width=1.5pt, color=orange!90!red},
+			sinline/.style={line width=1.5pt, color=teal!80!black}
+		}
+		
+		\def\Rg{3}
+		\def\alfa{35}
+		
+		\draw[gridline] (-3.6,-3.4) grid (4.2,3.9);
+		\draw[axisline] (-3.6,0) -- (4.1,0) node[right=2pt] {$x$};
+		\draw[axisline] (0,-3.4) -- (0,3.8) node[above=2pt] {$y$};
+		
+		\draw[draw=black!70, line width=0.8pt] (0,0) circle (\Rg cm);
+		
+		\coordinate (O) at (0,0);
+		\coordinate (P) at ({\Rg*cos(\alfa)},{\Rg*sin(\alfa)});
+		\coordinate (H) at ({\Rg*cos(\alfa)},0);
+		
+		\draw[line width=1.1pt, color=purple!85!black] (O) -- (P);
+		\draw[cosline] (O) -- (H);
+		\draw[sinline] (H) -- (P);
+		\draw[dashed, gray!70] (P) -- (0,{\Rg*sin(\alfa)});
+		
+		\draw[line width=0.6pt] (0.9,0) arc (0:\alfa:0.9);
+		\node[font=\small\sffamily] at ({1.25*cos(\alfa/2)},{1.25*sin(\alfa/2)}) {$\alpha$};
+		
+		\node[below=2pt, color=orange!90!red] at ({\Rg*cos(\alfa)/2},0) {$\cos\alpha$};
+		\node[right=2pt, color=teal!80!black] at ({\Rg*cos(\alfa)},{\Rg*sin(\alfa)/2}) {$\sin\alpha$};
+		\node[above left=-1pt, color=purple!85!black] at ({\Rg*cos(\alfa)/2},{\Rg*sin(\alfa)/2}) {$1$};
+		
+		\filldraw[fill=black!70, draw=black] (O) circle (1.8pt) node[below left=2pt] {$O$};
+		\filldraw[fill=purple!85!black, draw=black!80, line width=0.6pt] (P) circle (2.2pt) node[above right=2pt] {$P$};
+		
+		\node[badge] at (-1.9,-3.0) {$\cos^2\alpha+\sin^2\alpha=1$};
+		
+	\end{tikzpicture}
+	\caption{Circonferenza goniometrica: il punto $P$ ha coordinate $(\cos\alpha,\sin\alpha)$ e il triangolo rettangolo di vertici $O$, $P$ e la proiezione di $P$ sull'asse $x$ ha ipotenusa unitaria, cateto adiacente $\cos\alpha$ e cateto opposto $\sin\alpha$.}
+	\label{fig:circonferenza_goniometrica}
+\end{figure}
+
+\begin{richiamo}{radianti, angoli piccoli e sviluppo di Taylor}
+Un angolo piano si misura in radianti. Il radiante è l'angolo che, su una circonferenza, intercetta un arco di lunghezza pari al raggio; più in generale l'angolo in radianti è il rapporto tra la lunghezza $s$ dell'arco e il raggio $r$,
+\[
+\theta=\frac{s}{r},
+\]
+numero puro, perché rapporto di due lunghezze. Poiché la circonferenza intera misura $2\pi r$, l'angolo giro vale $2\pi$; un quarto di circonferenza misura $\tfrac12\pi r$, e l'angolo retto vale dunque $\tfrac12\pi r/r=\pi/2$. La conversione in gradi segue da una proporzione, $2\pi:360^\circ=1:x$, da cui
+\[
+1\ \mathrm{rad}=\frac{360^\circ}{2\pi}\simeq 57{,}3^\circ .
+\]
+In Fisica 2 si usano soltanto i radianti: ogni formula che contiene un angolo, o una funzione dell'angolo con sviluppo in serie, è scritta per $\theta$ in radianti.
+
+Lo sviluppo di Taylor al primo ordine di una funzione derivabile, valido per $h$ piccolo, è
+\[
+f(x+h)\simeq f(x)+f'(x)\,h ,
+\]
+con errore che va come $h^2$; la variazione di $f$ è proporzionale all'incremento della variabile, e il coefficiente è la derivata. Questo strumento ricorrerà nelle dimostrazioni, ogni volta che un campo si valuta in due punti vicini. Applicato al seno e al coseno nell'origine dà gli sviluppi
+\[
+\sin\theta=\theta-\frac{\theta^3}{6}+\dots,\qquad \cos\theta=1-\frac{\theta^2}{2}+\dots,
+\]
+da cui, per angoli piccoli, $\sin\theta\simeq\theta$ e $\cos\theta\simeq1$. L'errore relativo dell'approssimazione del seno è circa $\theta^2/6$. Non occorre che $\theta$ tenda a zero: l'approssimazione è accettabile per angoli inferiori a $1\ \mathrm{rad}$, ossia a circa $57^\circ$, e già per $\theta=\pi/6\simeq0{,}524$ si ha $\sin\theta=0{,}5$ contro $\theta=0{,}524$, con scarto di circa il $5\%$. Sotto i $30^\circ$ i due valori sono praticamente indistinguibili.
+\end{richiamo}
+
+\begin{richiamo}{coordinate sferiche, integrali multipli}
+Un punto dello spazio si individua con le coordinate sferiche $(r,\theta,\varphi)$: $r$ è la distanza dall'origine, $\theta$ l'angolo con l'asse $z$ (colatitudine) e $\varphi$ l'angolo che la proiezione sul piano $xy$ forma con l'asse $x$. Le coordinate cartesiane si ricavano da
+\[
+x=r\sin\theta\cos\varphi,\qquad y=r\sin\theta\sin\varphi,\qquad z=r\cos\theta ,
+\]
+con $r$ in metri e gli angoli in radianti. Un integrale doppio $\int_S f\,\dd S$ somma i contributi di tutti gli elementi di superficie $\dd S$ in cui è suddivisa $S$; un integrale triplo $\int_\tau f\,\dd\tau$ somma sui volumi elementari $\dd\tau$; un integrale di linea $\int_l f\,\dd l$ somma sugli archi elementari $\dd l$ di una curva. Se la funzione integranda dipende da una sola variabile, i tre integrali si riducono a integrali semplici. Il metodo è sempre lo stesso: un oggetto complicato (una superficie ondulata, un volume irregolare, una linea curva) si divide in parti infinitesime, ciascuna abbastanza piccola da essere trattata come semplice (una superficie piana, un cubetto, un segmento), si calcola il contributo elementare e si somma, cioè si integra.
+\end{richiamo}
+
+
+\begin{richiamo}{lavoro, energia potenziale, forza elastica e oscillatore armonico}
+Il lavoro elementare compiuto da una forza $\vec F$ in uno spostamento infinitesimo $\dd\vec l$ del suo punto di applicazione è il prodotto scalare
+\[
+\dd L=\vec F\cdot\dd\vec l ,
+\]
+con $\vec F$ in newton, $\dd\vec l$ in metri e $\dd L$ in joule ($1\un{J}=1\un{N\,m}$). La definizione elementare $L=Fs$ vale solo se la forza è costante e parallela allo spostamento; per forza costante ma inclinata di un angolo $\theta$ diventa $L=Fs\cos\theta$; per forza variabile lungo un percorso si suddivide questo in tratti infinitesimi, in ciascuno dei quali la forza è costante, e si somma, cioè si integra, $L_{A\to B}=\int_A^B\vec F\cdot\dd\vec l$. Una forza che sposta il proprio punto di applicazione non compie necessariamente lavoro: se forza e spostamento sono perpendicolari il prodotto scalare è nullo. Quando il percorso è chiuso l'integrale si chiama circuitazione e si indica con un cerchietto sul segno di integrale, $\oint\vec F\cdot\dd\vec l$. Una forza è conservativa quando la circuitazione è nulla per ogni percorso chiuso, senza eccezioni: l'affermazione è forte, perché basta un solo percorso con circuitazione diversa da zero per escludere la proprietà. Ciò equivale a dire che il lavoro tra due punti non dipende dal percorso, e comporta l'esistenza di una funzione $U$ delle coordinate, l'energia potenziale, tale che
+\[
+L_{A\to B}=-\Delta U=U_A-U_B,\qquad \dd L=-\dd U .
+\]
+L'associazione \enquote{forza conservativa $\Rightarrow$ energia potenziale} è automatica e va richiamata ogni volta che compare l'aggettivo.
+
+Per la forza peso, con asse $y$ verso l'alto, $\vec F=-mg\,\vec j$ e lo spostamento da quota $y_A$ a quota $y_B$ dà
+\[
+L_{A\to B}=\int_{y_A}^{y_B}(-mg)\,\dd y=-mg\,(y_B-y_A)=-(U_B-U_A)\qquad\text{con}\qquad U=mgy+c ,
+\]
+dove $m$ è in kg, $g\simeq9{,}8\un{m\,s^{-2}}$ (spesso arrotondata a $10\un{m\,s^{-2}}$ nelle stime), $y$ in m e $U$ in J; la forza e lo spostamento sono antiparalleli quando il corpo sale, e il lavoro della gravità è negativo. La costante additiva $c$ è arbitraria, perché hanno significato fisico soltanto le differenze di energia potenziale. Conviene fissarla con la condizione $U=0$ alla quota di riferimento $y=0$: allora $c=0$, $U=mgy$, e nessuna costante va portata nei calcoli successivi. La forza esterna che solleva il corpo a velocità costante compie il lavoro opposto, $+mg\,(y_B-y_A)$. La forza elastica di una molla ideale, con l'origine dell'asse $x$ nella posizione di riposo, è
+\[
+F_x=-kx ,
+\]
+dove $k$ è la costante elastica (in $\mathrm{N\,m^{-1}}$), caratteristica della molla (più è grande, più la molla è difficile da comprimere o da allungare), e il segno meno esprime il carattere di richiamo: la forza è diretta verso le $x$ negative se la molla è allungata, verso le positive se è compressa. Dal lavoro elementare $\dd L=-kx\,\dd x$ si ricava $L_{A\to B}=-\tfrac12k\,(x_B^2-x_A^2)$, cioè la forza è conservativa e la sua energia potenziale è $U=\tfrac12kx^2$. Ogni sistema in cui la forza è proporzionale allo spostamento, a meno di una costante e del segno, compie un moto armonico; questo modello, l'oscillatore armonico, descrive vibrazioni di legami chimici, oscillazioni di ponti e di edifici, e per questo riaffiora in molti esami. In presenza di attrito l'oscillazione è smorzata, e può essere anche forzata da una sollecitazione esterna.
+\end{richiamo}
+
+\begin{richiamo}{energia cinetica, bilancio energetico, attrito, calore}
+L'energia cinetica di un punto materiale di massa $m$ e velocità $v$ è
+\[
+K=\tfrac12\,mv^2 ,
+\]
+con $m$ in kg, $v$ in $\mathrm{m\,s^{-1}}$ e $K$ in joule. Dipende dalla velocità e non dalla configurazione del sistema, a differenza dell'energia potenziale. Il teorema dell'energia cinetica (o delle forze vive) afferma che il lavoro compiuto da tutte le forze agenti su un corpo, conservative o no, è uguale alla variazione di energia cinetica,
+\[
+L_{\mathrm{tot}}=\Delta K=K_f-K_i .
+\]
+Lo si dimostra dalla seconda legge di Newton, $\vec F=m\,\dd\vec v/\dd t$, con $\dd\vec l=\vec v\,\dd t$:
+\[
+\dd L=\vec F\cdot\dd\vec l=m\,\frac{\dd\vec v}{\dd t}\cdot\vec v\,\dd t=m\,\vec v\cdot\dd\vec v=\dd\!\left(\tfrac12\,mv^2\right),
+\]
+perché $\dd(\vec v\cdot\vec v)=2\,\vec v\cdot\dd\vec v$; l'integrale tra stato iniziale e finale conclude la dimostrazione. L'uguaglianza vale per ogni forza, ed è per questo più potente della relazione $L=-\Delta U$, che richiede forze conservative. Se in un sistema isolato agiscono soltanto forze conservative, i due lavori coincidono, $-\Delta U=\Delta K$, e dunque
+\[
+K_i+U_i=K_f+U_f ,
+\]
+cioè l'energia meccanica $E=K+U$ si conserva. In fisica si cerca sempre una grandezza che si conserva (energia, quantità di moto, momento angolare) e si imposta un bilancio: ciò che c'è all'inizio deve ritrovarsi alla fine, comunque ripartito tra le diverse forme.
+
+La forza non conservativa più comune è l'attrito, che trasforma energia meccanica in energia termica. L'energia non va perduta: il bilancio complessivo vale ancora, ma il contributo dissipato è difficile da calcolare. L'attrito tra solidi è statico o dinamico. L'attrito statico agisce finché non c'è scorrimento, e il suo modulo non supera $\mu_sN$; quello dinamico agisce sulle superfici che strisciano e vale $\mu_dN$, con $N$ componente normale della reazione del vincolo e $\mu_s>\mu_d$ coefficienti adimensionali. Camminare è possibile grazie all'attrito statico tra suola e pavimento, perché il piede che spinge non scivola. Una ruota d'automobile che rotola senza strisciare è soggetta ad attrito statico, e passa a quello dinamico se si blocca. Poiché $\mu_s>\mu_d$, una ruota che rotola frena meglio di una ruota bloccata: su questo si fonda il sistema antibloccaggio (ABS). La dissipazione si manifesta come riscaldamento di freni, pneumatici, trasformatori e scudi termici di un veicolo che rientra in atmosfera.
+
+Il calore è energia che passa da un corpo a un altro per effetto di una differenza di temperatura $\Delta T$, e non della temperatura in sé: lo stesso scambio è possibile a $1000\un{K}$ come a $10\un{K}$, purché sia presente $\Delta T$ (con $0\un{K}\simeq-273{,}15^\circ\mathrm{C}$). La temperatura è definita dal principio zero della termodinamica: se un corpo $A$ è in equilibrio termico con $B$ e con $C$, allora $B$ e $C$ sono in equilibrio termico tra loro; il termometro realizza questo confronto con sistemi di riferimento noti (acqua e ghiaccio a $0^\circ\mathrm{C}$, acqua in ebollizione a $100^\circ\mathrm{C}$). Il primo principio è un bilancio energetico, $\Delta E_{\mathrm{int}}=Q-L$, dove $E_{\mathrm{int}}$ è l'energia interna, $Q$ il calore assorbito dal sistema e $L$ il lavoro da esso compiuto (convenzione adottata), in joule. Il secondo principio introduce l'entropia, che aumenta nelle trasformazioni spontanee e ne indica il verso: il ghiaccio posato sulla mano assorbe calore dalla mano, e mai il contrario.
+\end{richiamo}
+
+\begin{richiamo}{prefissi del Sistema Internazionale e ordini di grandezza}
+Per le scale piccole si usano i prefissi nano ($10^{-9}$), pico ($10^{-12}$) e femto ($10^{-15}$). Un capello ha diametro di alcune decine di micrometri, cioè dell'ordine di $10^{-4}\un{m}$; la distanza tra primi vicini nel cristallo di cloruro di sodio è circa $0{,}28\un{nm}$; le distanze tra nucleoni in un nucleo sono dell'ordine del femtometro, $10^{-15}\un{m}$. Un impulso laser di pochi nanosecondi è già molto breve, ma esistono misure con impulsi di qualche femtosecondo. Altri numeri da avere in mente: il raggio medio della Terra, circa $6{,}4\times10^{6}\un{m}$; la superficie di un'aula, circa $300\un{m^2}$; il peso di una persona di $65\un{kg}$, circa $650\un{N}$. Disporre di molti dati numerici aiuta a giudicare la plausibilità di un risultato e a riconoscere grafici o percentuali presentati con scale scelte ad arte.
+\end{richiamo}
+
+\begin{richiamo}{onde: lunghezza d'onda, onde longitudinali e trasversali}
+Un'onda è una perturbazione che si propaga e trasporta energia, senza trasporto netto di materia. La lunghezza d'onda $\lambda$ (in metri) è la distanza tra due massimi consecutivi, la frequenza $f$ (in hertz) è il numero di oscillazioni al secondo e la velocità di propagazione è
+\[
+v=\lambda f .
+\]
+Un'onda è longitudinale se la grandezza che oscilla (lo spostamento di un elemento del mezzo, nel caso del suono, con compressioni e rarefazioni dell'aria) è parallela alla direzione di propagazione; è trasversale se oscilla perpendicolarmente a essa. Le onde del mare sono un esempio di onda trasversale: una boa sale e scende mentre l'onda avanza in orizzontale. In entrambi i casi l'energia fluisce nella direzione di propagazione. Le onde elettromagnetiche sono trasversali: i campi elettrico e magnetico oscillano perpendicolarmente alla direzione di propagazione.
+\end{richiamo}
+
+
+\titoletto{Teoria, modelli e dimostrazioni.}
+L'algebra dei vettori si fonda sulla scrittura per componenti. Dati $\vec u=(u_1,u_2,u_3)$ e $\vec v=(v_1,v_2,v_3)$, la somma e il prodotto per uno scalare $\alpha$ sono definiti componente per componente,
+\[
+\vec w=\vec u+\vec v\equiv\begin{pmatrix}u_1+v_1\\u_2+v_2\\u_3+v_3\end{pmatrix},\qquad
+\vec w=\alpha\vec u\equiv\begin{pmatrix}\alpha u_1\\\alpha u_2\\\alpha u_3\end{pmatrix},
+\]
+dove $\vec w$ è il vettore risultante, con la stessa unità di misura di $\vec u$ e $\vec v$ (che devono essere omogenei), e $\alpha$ è un numero puro. Sommare vettori significa dunque sommare scalari, operazione immediata, purché le componenti siano note.
+
+\titoletto{Prodotto scalare}
+Il prodotto scalare trasforma due vettori in un numero. Si definisce come somma dei prodotti delle componenti omonime,
+\[
+\vec u\cdot\vec v=\sum_{h=1}^{3}u_hv_h=u_1v_1+u_2v_2+u_3v_3 ,
+\]
+e il modulo di un vettore ne discende come
+\[
+|\vec u|=u=\sqrt{\vec u\cdot\vec u}=\sqrt{\sum_{h=1}^{3}u_h^2}.
+\]
+Il risultato è uno scalare, la cui unità di misura è il prodotto delle unità dei due fattori (il lavoro, ad esempio, è un prodotto scalare tra newton e metri e si misura in joule). Esiste una seconda espressione, legata all'angolo $\theta$ tra i due vettori, che si dimostra come segue. Si considerino i vettori $\vec u$ e $\vec v$ applicati nell'origine O, con estremi A e B, e il vettore differenza $\vec u-\vec v$, che congiunge B ad A.
+
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+		
+		% Stili grafici
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			axisline/.style={draw=gray!70, line width=0.9pt, ->},
+			vectoru/.style={line width=1.3pt, ->, color=orange!90!red},
+			vectorv/.style={line width=1.3pt, ->, color=teal!80!black},
+			vectordiff/.style={line width=1.2pt, ->, color=purple!85!black},
+			unitvector/.style={line width=1.1pt, ->, color=gray!80!black},
+			posline/.style={draw=gray!50, line width=0.6pt, dashed}
+		}
+		
+		% Griglia tecnica di sfondo
+		\draw[gridline] (-4.2,-3.2) grid (5.2,4.2);
+		
+		% Ambito con proiezione assonometrica 3D
+		\begin{scope}[x={(-0.75cm,-0.45cm)}, y={(0.85cm,-0.25cm)}, z={(0cm,1.1cm)}]
+			
+			% Coordinate principali
+			\coordinate (O) at (0,0,0);
+			\coordinate (A) at (2.4, 1.2, 2.5);   % Punta del vettore u (Punto A)
+			\coordinate (B) at (0.6, 3.2, 1.8);   % Punta del vettore v (Punto B)
+			
+			% Assi cartesiani X1, X2, X3
+			\draw[axisline] (O) -- (3.8, 0, 0) node[below left=1pt, font=\small\bfseries\itshape, color=gray!80!black] {$X_1$};
+			\draw[axisline] (O) -- (0, 4.2, 0) node[right=2pt, font=\small\bfseries\itshape, color=gray!80!black] {$X_2$};
+			\draw[axisline] (O) -- (0, 0, 3.6) node[above=2pt, font=\small\bfseries\itshape, color=gray!80!black] {$X_3$};
+			
+			% Versori degli assi i_1, i_2, i_3
+			\draw[unitvector] (O) -- (1, 0, 0) node[below left=-1pt, font=\small\bfseries] {$\vec{i}_1$};
+			\draw[unitvector] (O) -- (0, 1, 0) node[below right=-1pt, font=\small\bfseries] {$\vec{i}_2$};
+			\draw[unitvector] (O) -- (0, 0, 1) node[left=2pt, font=\small\bfseries] {$\vec{i}_3$};
+			
+			% Proiezioni tratteggiate sui piani coordinati per resa tridimensionale
+			\draw[posline] (A) -- (2.4, 1.2, 0) -- (2.4, 0, 0);
+			\draw[posline] (2.4, 1.2, 0) -- (0, 1.2, 0);
+			\draw[posline] (B) -- (0.6, 3.2, 0) -- (0.6, 0, 0);
+			\draw[posline] (0.6, 3.2, 0) -- (0, 3.2, 0);
+			
+			% Vettori u e v dall'origine O
+			\draw[vectoru] (O) -- (A) node[midway, above left=-1pt, font=\bfseries] {$\vec{u}$};
+			\draw[vectorv] (O) -- (B) node[midway, above right=-1pt, font=\bfseries] {$\vec{v}$};
+			
+			% Vettore differenza da B ad A (u - v)
+			\draw[vectordiff] (B) -- (A) node[midway, above=-1pt, font=\bfseries] {$\vec{u}-\vec{v}$};
+			
+			% Coordinate di supporto per l'arco dell'angolo theta
+			\coordinate (U) at ($(O)!0.8cm!(A)$);
+			\coordinate (V) at ($(O)!0.8cm!(B)$);
+			\coordinate (M) at ($(U)!0.5!(V)$);
+			
+			% Arco dell'angolo theta tra u e v
+			\draw[line width=0.5pt, color=gray!80!black] (U) .. controls (M) .. (V);
+			\node[font=\scriptsize\sffamily, color=gray!90!black] at ($(O)!1.35!(M)$) {$\theta$};
+			
+			% Punti A, B e Origine O
+			\filldraw[fill=black!70, draw=black] (O) circle (1.8pt) node[below left=2pt, font=\small\bfseries] {$O$};
+			\filldraw[fill=orange!90!red, draw=black!80, line width=0.6pt] (A) circle (2.2pt) node[above right=2pt, font=\small\bfseries] {$A$};
+			\filldraw[fill=teal!80!black, draw=black!80, line width=0.6pt] (B) circle (2.2pt) node[above left=2pt, font=\small\bfseries] {$B$};
+			
+		\end{scope}
+		
+		% Badge descrittivo superiore
+		\node[badge] at (0, 3.6) {$|\vec{u}-\vec{v}|^2 = u^2 + v^2 - 2uv\cos\theta$};
+		
+	\end{tikzpicture}
+	\caption{Rappresentazione tridimensionale dei vettori $\vec{u}$ e $\vec{v}$ nel sistema cartesiano $(X_1, X_2, X_3)$, con versori $\vec{i}_1, \vec{i}_2, \vec{i}_3$, angolo interposto $\theta$ e vettore differenza $\vec{u}-\vec{v}$.}
+	\label{fig:vettori_3d_differenza}
+\end{figure}
+
+Il teorema di Carnot (o del coseno), dimostrato nel riquadro di trigonometria, applicato al triangolo OAB dà
+\[
+|\vec u-\vec v|^2=u^2+v^2-2uv\cos\theta .
+\]
+D'altra parte, dalla definizione di modulo in componenti,
+\[
+|\vec u-\vec v|^2=(u_1-v_1)^2+(u_2-v_2)^2+(u_3-v_3)^2=\sum_h u_h^2+\sum_h v_h^2-2\sum_h u_hv_h=u^2+v^2-2\,\vec u\cdot\vec v .
+\]
+Dall'uguaglianza delle due espressioni, dopo la semplificazione di $u^2+v^2$, si ha
+\[
+\vec u\cdot\vec v=uv\cos\theta ,
+\]
+dove $u$ e $v$ sono i moduli e $\theta\in[0,\pi]$ è l'angolo compreso. Ne segue che il prodotto scalare è massimo (pari a $uv$) per vettori paralleli e concordi, nullo per $\theta=\pi/2$, negativo per $\theta>\pi/2$. La condizione di ortogonalità è perciò
+\[
+\vec u\cdot\vec v=0 \qquad(\vec u,\vec v\neq\vec 0),
+\]
+che vale tanto per la forma in componenti quanto per quella con il coseno. Va ricordato che questa formula non va memorizzata come nozione isolata: l'ortogonalità tra vettori ricorre di continuo, ad esempio nel flusso e nel lavoro. Inoltre il punto che indica il prodotto scalare va scritto in modo ben visibile e la freccia sopra ogni vettore non va omessa.
+
+\titoletto{Prodotto vettoriale}
+Il prodotto vettoriale associa a due vettori un terzo vettore. In componenti,
+\begin{align*}
+\vec w=\vec u\times\vec v&\equiv\begin{pmatrix}u_2v_3-u_3v_2\\u_3v_1-u_1v_3\\u_1v_2-u_2v_1\end{pmatrix}\\
+&=(u_2v_3-u_3v_2)\vec i_1+(u_3v_1-u_1v_3)\vec i_2+(u_1v_2-u_2v_1)\vec i_3 ,
+\end{align*}
+espressione che si ricorda con il determinante simbolico
+\[
+\vec w=\vec u\times\vec v=\begin{vmatrix}\vec i_1&\vec i_2&\vec i_3\\u_1&u_2&u_3\\v_1&v_2&v_3\end{vmatrix},
+\]
+dove nella prima riga stanno i versori, nella seconda le componenti del primo fattore, nella terza quelle del secondo. Lo sviluppo lungo la prima riga riproduce il risultato precedente: il secondo termine, $-\vec i_2(u_1v_3-u_3v_1)$, coincide con $\vec i_2(u_3v_1-u_1v_3)$, e così si risolve il dubbio sul segno meno. L'unità di misura di $\vec w$ è il prodotto delle unità dei fattori (il momento di una forza, ad esempio, ha unità $\mathrm{N\,m}$).
+
+Le proprietà del prodotto vettoriale si dimostrano direttamente dalle componenti. Scambiare $\vec u$ e $\vec v$ cambia segno a ciascuna delle tre differenze, sicché
+\[
+\vec v\times\vec u=-\,\vec u\times\vec v ,
+\]
+e il prodotto non è commutativo, a differenza del prodotto scalare. Dalla linearità di ogni componente rispetto a ciascun fattore segue la proprietà distributiva,
+\[
+(\vec u+\vec v)\times\vec w=\vec u\times\vec w+\vec v\times\vec w .
+\]
+Per i versori della terna cartesiana destrorsa, se ad esempio $\vec u=\vec i_1=(1,0,0)$ e $\vec v=\vec i_2=(0,1,0)$, le formule danno $(0\cdot0-0\cdot1,\;0\cdot0-1\cdot0,\;1\cdot1-0\cdot0)=(0,0,1)$; per permutazione ciclica degli indici si ricava
+\[
+\vec i_1\times\vec i_2=\vec i_3,\qquad \vec i_2\times\vec i_3=\vec i_1,\qquad \vec i_3\times\vec i_1=\vec i_2 .
+\]
+Se si scambia l'ordine dei fattori, ciascuna relazione cambia segno. La regola mnemonica è la ricorsività della sequenza $1,2,3,1,2,3$: se si parte da una coppia consecutiva nell'ordine ciclico non si sbaglia. La scelta dell'orientamento degli assi è una convenzione e non una legge fisica; quando si disegnano $x$ e $y$ sulla lavagna non si deve supporre che $z$ sia uscente: la direzione di $z$ è determinata proprio da $\vec i_1\times\vec i_2=\vec i_3$, e solo in caso di necessità fisica se ne sceglie una diversa, dichiarandolo.
+
+Il vettore $\vec w=\vec u\times\vec v$ è perpendicolare a entrambi i fattori. Infatti
+\[
+\vec w\cdot\vec u=u_1(u_2v_3-u_3v_2)+u_2(u_3v_1-u_1v_3)+u_3(u_1v_2-u_2v_1)=0 ,
+\]
+perché gli addendi si elidono a due a due, e il calcolo per $\vec w\cdot\vec v$ è identico. Per il modulo si parte dall'identità di Lagrange
+\[
+|\vec u\times\vec v|^2=u^2v^2-(\vec u\cdot\vec v)^2 .
+\]
+La si verifica con lo sviluppo dei due membri: il primo membro è $\sum_{i<j}(u_iv_j-u_jv_i)^2=\sum_{i<j}(u_i^2v_j^2+u_j^2v_i^2)-2\sum_{i<j}u_iv_iu_jv_j$, mentre nel secondo membro i termini $u_i^2v_i^2$ del prodotto $u^2v^2$ cancellano quelli di $(\vec u\cdot\vec v)^2$, e rimangono $\sum_{i\neq j}u_i^2v_j^2-2\sum_{i<j}u_iv_iu_jv_j$, che coincide con il primo membro. Poiché $\vec u\cdot\vec v=uv\cos\theta$, si ha
+\[
+|\vec u\times\vec v|^2=u^2v^2(1-\cos^2\theta)=u^2v^2\sin^2\theta ,
+\]
+e dunque, dopo l'estrazione della radice (con $\sin\theta\ge0$ per $\theta\in[0,\pi]$),
+\[
+|\vec u\times\vec v|=uv\sin\theta ,
+\]
+dove $u,v$ sono i moduli e $\theta$ l'angolo compreso. Questo numero è l'area del parallelogramma costruito sui due vettori. Il prodotto vettoriale è nullo se e solo se $\sin\theta=0$, cioè se i vettori sono paralleli (o antiparalleli); è massimo per vettori ortogonali. Direzione e modulo sono dunque fissati; resta il verso, che si determina con la regola della mano destra. Si dispongono pollice, indice e medio come una terna cartesiana: se il pollice rappresenta $\vec u$ e l'indice $\vec v$, il medio indica $\vec u\times\vec v$. Un'altra formulazione richiede che un osservatore attraversato dal vettore dai piedi alla testa veda il primo fattore ruotare in senso antiorario per sovrapporsi al secondo. Equivalente è la regola della vite: la rotazione oraria avvita, quella antioraria svita. Per questo un vettore perpendicolare al piano del disegno e uscente verso chi guarda si rappresenta con un punto (la punta della freccia), mentre uno entrante si rappresenta con una croce (la coda della freccia, ossia la testa della vite).
+
+Il prodotto vettoriale ricorre di continuo nello studio del campo magnetico, che si sviluppa spesso in tre dimensioni, e un errore sul verso si propaga a tutto il calcolo. Una regola affine riguarda la forza che un campo magnetico $\vec B$ esercita su un conduttore percorso da corrente $I$: la direzione si ricava con la regola della mano sinistra, ricordata con la sigla FBI (forza, campo magnetico, corrente), che verrà giustificata con la forza di Lorentz.
+
+\titoletto{Campi scalari, vettoriali e tensoriali}. 
+Una regione dello spazio è sede di un campo scalare, vettoriale o tensoriale quando in ogni suo punto è definito in modo univoco uno scalare $\varphi=\varphi(\vec r)$, un vettore $\vec u=\vec u(\vec r)$ oppure un tensore $\vec T=\vec T(\vec r)$. Il tensore generalizza il vettore a un numero maggiore di indici e compare, ad esempio, nelle scienze delle costruzioni e nella relatività. Nell'aula si possono individuare con facilità un campo vettoriale, il campo gravitazionale, e campi scalari, la pressione (rapporto tra la componente perpendicolare della forza e la superficie su cui agisce, in $\mathrm{N\,m^{-2}}=\mathrm{Pa}$, benché sia definita a partire da una forza, è uno scalare) e la temperatura (quest'ultima, definita dal principio zero della termodinamica, varia da punto a punto: vicino alla pelle è prossima a $37^\circ\mathrm{C}$ e altrove è minore). Il campo gravitazionale terrestre associa a ogni punto vicino al suolo il vettore $\vec g$, accelerazione di gravità, diretto verso il centro della Terra e di modulo circa $9{,}8\un{m\,s^{-2}}$. Il campo esiste a prescindere dalla presenza di una massa: la Terra lo genera, e solo se una massa $m$ viene collocata in quel punto compare la forza $\vec F=m\vec g$. Per questa ragione il corso non tratterà più forze ma campi, ottenuti idealmente dal rapporto tra la forza e la grandezza che la subisce. Poiché $\vec g$ ha ovunque (in prima approssimazione) lo stesso modulo, la stessa direzione e lo stesso verso, il campo gravitazionale vicino al suolo è uniforme.
+
+L'origine fisica di $\vec g$ è la legge di gravitazione universale: due masse $M_1$ e $M_2$ a distanza $r$ si attraggono con una forza che agisce su $M_2$ data da
+\[
+\vec F_{1\to2}=-G\,\frac{M_1M_2}{r^2}\,\hat u_r ,
+\]
+dove $G\simeq6{,}67\times10^{-11}\un{N\,m^2\,kg^{-2}}$ è la costante di gravitazione universale, $\hat u_r$ è il versore diretto da $M_1$ a $M_2$ e il segno meno traduce il carattere attrattivo (forza e versore sono orientati in senso opposto). La dipendenza è dall'inverso del quadrato della distanza: non dalla distanza, non dal quadrato della distanza. Per il terzo principio della dinamica (azione e reazione: forze di pari modulo, verso opposto e stessa retta d'azione) $M_2$ esercita su $M_1$ una forza uguale in modulo e opposta in verso. Se $M_1$ è la massa terrestre $M_T$ e $M_2$ una massa $m$ posta presso la superficie, a distanza $R_T$ dal centro,
+\[
+F=m\,\frac{GM_T}{R_T^2}=mg\quad\Rightarrow\quad g=\frac{GM_T}{R_T^2}\simeq\frac{6{,}67\times10^{-11}\cdot5{,}97\times10^{24}}{(6{,}37\times10^{6})^2}\simeq9{,}8\un{m\,s^{-2}} ,
+\]
+con $M_T$ in kg e $R_T$ in m. Il rapporto tra una forza e una massa è un'accelerazione; l'analisi dimensionale è un controllo sempre disponibile. Ne segue anche che l'accelerazione subita dalla Terra per effetto della forza esercitata da una persona è trascurabile: le forze sono uguali, le masse no, e a cadere è la persona.
+
+Un campo vettoriale si rappresenta con linee immaginarie. Una linea di campo (o linea di forza) è una linea che ha in ogni punto per tangente la direzione del campo e sulla quale è fissato come verso quello del campo. Le linee non sono grandezze fisiche; sono una rappresentazione pittorica, dotata però di proprietà precise. In ogni punto della linea il campo è tangente alla linea e ne segue il verso; per una linea rettilinea la tangente coincide con la retta stessa, sicché il campo giace su di essa. Le linee non si intersecano mai, perché in un punto comune a due linee non sarebbe definibile la tangente e dunque nemmeno il campo: per ogni punto passa una sola linea. Le linee sono più fitte dove il campo è più intenso, nel senso che il numero di linee per unità di superficie, è proporzionale al modulo del campo. Un campo uniforme, che ha in ogni punto stesso modulo, stessa direzione e stesso verso, si disegna con linee parallele ed equispaziate; non si deve aggiungere altro. Un campo radiale, come quello del Sole, ha linee che sono semirette; poiché il Sole attrae ogni massa, esse convergono verso di lui, provengono dall'infinito e sono più fitte vicino alla sorgente, dove il campo è più intenso. Il campo del Sole non è uniforme, perché il modulo diminuisce all'aumentare della distanza. Si badi a non confondere la linea con il campo, errore tipico: dato un punto P della linea, il campo in P si ottiene con l'applicazione in P di un vettore tangente, di modulo opportuno e verso concorde con la linea, e non con il tracciato del segmento tra la sorgente e P, né con il ricalco della linea stessa. La sorgente produce il campo; una massa di prova inserita in P subisce poi una forza $\vec F=m\vec g$, pari al campo moltiplicato per la massa.
+
+Il passaggio dalla forza al campo merita un chiarimento. Una massa di prova $m$ collocata nel campo gravitazionale del Sole risente della forza di gravitazione universale; il rapporto tra tale forza e $m$ elimina la massa di prova e lascia soltanto ciò che dipende dalla sorgente, ossia il campo $\vec g_S=\vec F/m$, che ha le dimensioni di un'accelerazione ($\mathrm{m\,s^{-2}}$) e che nel caso elettrico verrà indicato con $\vec E$. Il campo esiste a prescindere dalla presenza dei pianeti, a patto che le loro masse siano abbastanza piccole da non perturbare in modo sensibile il campo generato dal Sole. La figura riunisce le due rappresentazioni descritte: il campo uniforme, a linee parallele ed equispaziate, e il campo radiale di una sorgente puntiforme, a semirette convergenti verso la sorgente e più fitte in sua prossimità.
+
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+		
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			subpanel/.style={draw=gray!30, fill=gray!5, rounded corners=4pt, line width=0.6pt},
+			fline/.style={draw=orange!90!red, line width=1.0pt,
+				postaction={decorate, decoration={markings, mark=at position 0.55 with {\arrow[orange!90!red]{Stealth[length=6pt]}}}}},
+			fieldvec/.style={line width=1.8pt, ->, color=purple!85!black}
+		}
+		
+		\draw[gridline] (-5.6,-3.0) grid (5.6,3.2);
+		
+		% ====================================================
+		% PANNELLO SINISTRO: campo uniforme
+		% ====================================================
+		\node[subpanel, minimum width=4.8cm, minimum height=4.8cm] at (-2.8,0) {};
+		\foreach \y in {-1.6,-0.8,0,0.8,1.6} {
+			\draw[fline] (-4.9,\y) -- (-0.7,\y);
+		}
+		\node[font=\small\sffamily, color=gray!80!black] at (-2.8,2.0) {Campo uniforme};
+		\node[badge] at (-2.8,-2.1) {linee parallele, equispaziate};
+		
+		% ====================================================
+		% PANNELLO DESTRO: campo radiale (convergente)
+		% ====================================================
+		\coordinate (C) at (2.8,0);
+		\node[subpanel, minimum width=4.8cm, minimum height=4.8cm] at (C) {};
+		\foreach \ang in {0,30,60,90,120,150,180,210,240,270,300,330} {
+			\draw[fline] ($(C)+(\ang:1.95cm)$) -- ($(C)+(\ang:0.4cm)$);
+		}
+		\filldraw[fill=orange!35, draw=orange!90!red, line width=0.7pt] (C) circle (0.28cm);
+		\node[font=\scriptsize\sffamily] at (C) {S};
+		% campo in un punto P di una linea: vettore tangente, applicato in P
+		\coordinate (P) at ($(C)+(30:1.6cm)$);
+		\draw[fieldvec] (P) -- ($(P)+(210:0.7cm)$);
+		\filldraw[fill=purple!85!black, draw=black!80, line width=0.5pt] (P) circle (1.8pt) node[above right=1pt, font=\small] {$P$};
+		\node[font=\small\sffamily, color=purple!85!black] at ($(P)+(210:0.35cm)+(0.1,-0.28)$) {$\vec{E}$};
+		\node[font=\small\sffamily, color=gray!80!black] at (2.8,2.0) {Campo radiale};
+		\node[badge] at (2.8,-2.1) {più fitte vicino a S};
+		
+	\end{tikzpicture}
+	\caption{Linee di campo di un campo uniforme (a sinistra) e di un campo radiale di sorgente puntiforme $S$, come il campo gravitazionale del Sole (a destra). Le frecce di orientamento sono tracciate in un punto della linea. Il campo $\vec E$ in $P$ è un vettore applicato in $P$, tangente alla linea e concorde con essa, non il segmento che congiunge la sorgente a $P$.}
+	\label{fig:campo_uniforme_radiale}
+\end{figure}
+
+
+\titoletto{Derivata direzionale e gradiente di un campo
+	scalare}
+Sia $\varphi(x,y,z)$ un campo scalare con derivate parziali continue, $P_0=(x_0,y_0,z_0)$ un punto, e $\vec a=\alpha\vec i+\beta\vec j+\gamma\vec k$ il versore di una direzione assegnata, con $\alpha^2+\beta^2+\gamma^2=1$. I punti della retta per $P_0$ con direzione $\vec a$ sono $\vec r=\vec r_0+s\,\vec a$, con $s$ ascissa curvilinea (in m). 
+
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+		
+		% Stili grafici
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			posvector/.style={line width=1.1pt, ->, color=teal!80!black},
+			dirvector/.style={line width=1.4pt, ->, color=orange!90!red},
+			targetvector/.style={line width=1.2pt, ->, color=purple!85!black},
+			lineext/.style={draw=gray!80, line width=0.8pt}
+		}
+		
+		% Griglia tecnica di sfondo
+		\draw[gridline] (-1.2,-0.6) grid (6.2,5.2);
+		
+		% Coordinate principali
+		\coordinate (O)  at (0, 0);          % Origine O
+		\coordinate (P0) at (1.4, 3.2);      % Punto P0
+		\coordinate (P)  at (4.8, 4.333);    % Punto P generico sulla retta
+		
+		% Retta passante per P0 e P (estesa oltre i punti)
+		\coordinate (L_start) at (-0.8, 2.467);
+		\coordinate (L_end)   at (5.8, 4.667);
+		\draw[lineext] (L_start) -- (L_end);
+		
+		% Vettore posizione r_0 (da O a P0)
+		\draw[posvector] (O) -- (P0) node[midway, left=2pt, font=\bfseries] {$\vec{r}_0$};
+		
+		% Vettore posizione r (da O a P)
+		\draw[targetvector] (O) -- (P) node[midway, right=2pt, font=\bfseries] {$\vec{r}$};
+		
+		% Vettore direttore a (lungo la retta a partire da P0)
+		\coordinate (A_end) at ($(P0)!1.4cm!(P)$);
+		\draw[dirvector] (P0) -- (A_end) node[midway, below right=-1pt, font=\bfseries] {$\vec{a}$};
+		
+		% Punti ed etichette
+		\filldraw[fill=black!70, draw=black] (O) circle (1.8pt) node[below left=2pt, font=\small\bfseries] {$O$};
+		\filldraw[fill=teal!80!black, draw=black!80, line width=0.6pt] (P0) circle (2.2pt) node[above left=2pt, font=\small\bfseries] {$P_0$};
+		\filldraw[fill=purple!85!black, draw=black!80, line width=0.6pt] (P) circle (2.2pt) node[above left=2pt, font=\small\bfseries] {$P$};
+		
+		% Badge descrittivo superiore
+		\node[badge] at (2.4, 4.6) {$\vec{r}(t) = \vec{r}_0 + s\,\vec{a}$};
+		
+	\end{tikzpicture}
+	\caption{Rappresentazione vettoriale dell'equazione parametrica della retta: la posizione del punto generico $P$ è descritta dalla relazione $\vec{r} = \vec{r}_0 + s\vec{a}$.}
+	\label{fig:equazione_vettoriale_retta}
+\end{figure}
+
+La derivata direzionale in $P_0$ è il limite del rapporto incrementale
+\[
+\left(\frac{\dd\varphi}{\dd s}\right)_0=\lim_{\Delta s\to0}\frac{\varphi(x_0+\alpha\Delta s,\,y_0+\beta\Delta s,\,z_0+\gamma\Delta s)-\varphi(x_0,y_0,z_0)}{\Delta s}.
+\]
+Per calcolarlo si somma e si sottrae al numeratore, in due passi, il valore di $\varphi$ in punti intermedi in cui le coordinate vengono riportate ai valori iniziali una alla volta:
+\begin{gather*}
+\left(\frac{\dd\varphi}{\dd s}\right)_0=\lim_{\Delta s\to0}\bigl[T_1+T_2+T_3\bigr],\\[4pt]
+T_1=\frac{\varphi(x_0+\alpha\Delta s,\,y_0+\beta\Delta s,\,z_0+\gamma\Delta s)-\varphi(x_0,\,y_0+\beta\Delta s,\,z_0+\gamma\Delta s)}{\Delta s},\\[4pt]
+T_2=\frac{\varphi(x_0,\,y_0+\beta\Delta s,\,z_0+\gamma\Delta s)-\varphi(x_0,\,y_0,\,z_0+\gamma\Delta s)}{\Delta s},\\[4pt]
+T_3=\frac{\varphi(x_0,\,y_0,\,z_0+\gamma\Delta s)-\varphi(x_0,\,y_0,\,z_0)}{\Delta s}.
+\end{gather*}
+In ciascun termine varia una sola coordinata, di $\alpha\Delta s$, $\beta\Delta s$, $\gamma\Delta s$ rispettivamente. Se $T_1$ si moltiplica e si divide per $\alpha$, esso diventa $\alpha$ per il rapporto incrementale rispetto a $x$ con incremento $\alpha\Delta s$, che per $\Delta s\to0$ tende a $\partial\varphi/\partial x$ in $P_0$ (la continuità delle derivate parziali garantisce che gli altri argomenti, spostati di una quantità infinitesima, non alterino il limite); lo stesso vale per gli altri due con $\beta$ e $\gamma$. Si ha dunque
+\[
+\left(\frac{\dd\varphi}{\dd s}\right)_0=\left(\frac{\partial\varphi}{\partial x}\right)_0\alpha+\left(\frac{\partial\varphi}{\partial y}\right)_0\beta+\left(\frac{\partial\varphi}{\partial z}\right)_0\gamma ,
+\]
+e in forma vettoriale, nel generico punto,
+\[
+\frac{\dd\varphi}{\dd s}=(\alpha\vec i+\beta\vec j+\gamma\vec k)\cdot\left(\frac{\partial\varphi}{\partial x}\vec i+\frac{\partial\varphi}{\partial y}\vec j+\frac{\partial\varphi}{\partial z}\vec k\right)=\vec a\cdot\grad\varphi ,
+\]
+dove $\dd\varphi/\dd s$ ha l'unità di $\varphi$ divisa per il metro ed è la rapidità con cui $\varphi$ varia lungo $\vec a$. Il vettore che compare come secondo fattore,
+\[
+\grad\varphi=\frac{\partial\varphi}{\partial x}\vec i+\frac{\partial\varphi}{\partial y}\vec j+\frac{\partial\varphi}{\partial z}\vec k ,
+\]
+è il gradiente di $\varphi$. Tre proprietà lo caratterizzano. Anzitutto è perpendicolare alla superficie di livello $\varphi=\mathrm{cost.}$ passante per il punto: se $\vec a$ è tangente a quella superficie, lungo di essa $\varphi$ non varia, quindi $\dd\varphi/\dd s=\vec a\cdot\grad\varphi=0$ per ogni direzione tangente, e un vettore ortogonale a tutte le tangenti è ortogonale alla superficie. In secondo luogo, poiché $\vec a\cdot\grad\varphi=|\grad\varphi|\cos\theta$, con $\theta$ angolo tra $\vec a$ e $\grad\varphi$, la derivata direzionale è massima per $\theta=0$: il gradiente è volto nel verso delle $\varphi$ crescenti. In terzo luogo, il suo modulo coincide con tale valore massimo, cioè con la derivata di $\varphi$ lungo la normale $\vec a_n$ alla superficie di livello,
+\[
+\grad\varphi=\frac{\partial\varphi}{\partial n}\,\vec a_n .
+\]
+Un esempio pratico è l'altezza di una collina: il gradiente della quota punta verso la salita più ripida e un modulo grande indica forte pendenza, cioè forte variazione della grandezza.
+
+Per scrivere il gradiente in modo compatto si introduce l'operatore simbolico nabla (dal greco, nome di un'arpa a motivo della forma),
+\[
+\nab=\vec i\,\frac{\partial}{\partial x}+\vec j\,\frac{\partial}{\partial y}+\vec k\,\frac{\partial}{\partial z}=\vec i_1\frac{\partial}{\partial x_1}+\vec i_2\frac{\partial}{\partial x_2}+\vec i_3\frac{\partial}{\partial x_3},\qquad \grad\varphi=\nab\varphi ,
+\]
+dove ogni addendo contiene un versore e una derivata parziale, in attesa di una funzione su cui agire; l'unità di misura di $\nab$ è l'inverso del metro. L'oggetto ha una doppia natura: opera come derivata e si comporta come un vettore. Da solo non ha significato, perché la derivata resta vuota; applicato a uno scalare produce un vettore. Si possono usare le regole del calcolo vettoriale, prodotto scalare e prodotto vettoriale, anche con $\nab$, ma l'ordine dei fattori conta: l'operatore agisce su ciò che gli sta a destra.
+
+Alcuni risultati d'uso frequente si ricavano con l'applicazione meccanica di $\nab$. Per $\varphi=x$ restano non nulle solo le derivate rispetto a $x$, uguale a 1, mentre $\partial x/\partial y=\partial x/\partial z=0$ perché $x$ è costante rispetto a $y$ e a $z$; perciò $\nab x=\vec i$, e analogamente
+\[
+\nab x=\vec i,\qquad\nab y=\vec j,\qquad\nab z=\vec k .
+\]
+Per la distanza dall'origine $r=\sqrt{x^2+y^2+z^2}$ si ha $\partial r/\partial x=\dfrac{2x}{2\sqrt{x^2+y^2+z^2}}=\dfrac xr$, e simili per $y$ e $z$; ne segue
+\[
+\nab r=\frac{x\vec i+y\vec j+z\vec k}{r}=\frac{\vec r}{r}=\hat u_r ,
+\]
+dove $\hat u_r$ è il versore radiale (adimensionale). Il risultato è coerente con le proprietà: il gradiente di $x$ indica le $x$ crescenti, quello di $r$ indica le $r$ crescenti.
+
+Il differenziale totale $\dd\varphi=\frac{\partial\varphi}{\partial x}\dd x+\frac{\partial\varphi}{\partial y}\dd y+\frac{\partial\varphi}{\partial z}\dd z$ mostra che $\nab$ gode delle stesse proprietà formali, perché è un operatore differenziale lineare. Si scrive infatti
+\[
+\nab\varphi=\frac{\partial\varphi}{\partial x}\nab x+\frac{\partial\varphi}{\partial y}\nab y+\frac{\partial\varphi}{\partial z}\nab z ,
+\]
+dove si è usato $\nab x=\vec i$ e simili. Per la somma, $\nab(\varphi\pm\psi)=\nab\varphi\pm\nab\psi$, come $\dd(\varphi\pm\psi)=\dd\varphi\pm\dd\psi$. Nel caso del prodotto, ciascuna componente rispetta la regola di Leibniz, $\partial_x(\varphi\psi)=\psi\,\partial_x\varphi+\varphi\,\partial_x\psi$, e allora
+\[
+\nab(\varphi\psi)=\psi\,\nab\varphi+\varphi\,\nab\psi ,
+\]
+analogo di $\dd(\varphi\psi)=\psi\,\dd\varphi+\varphi\,\dd\psi$. Se la funzione è composta, $\varphi=\varphi[u(x,y,z)]$, la regola di derivazione a catena fornisce
+\begin{align*}
+\nab\varphi&=\frac{\partial\varphi}{\partial x}\vec i+\frac{\partial\varphi}{\partial y}\vec j+\frac{\partial\varphi}{\partial z}\vec k
+=\frac{\dd\varphi}{\dd u}\frac{\partial u}{\partial x}\vec i+\frac{\dd\varphi}{\dd u}\frac{\partial u}{\partial y}\vec j+\frac{\dd\varphi}{\dd u}\frac{\partial u}{\partial z}\vec k\\
+&=\frac{\dd\varphi}{\dd u}\left(\frac{\partial u}{\partial x}\vec i+\frac{\partial u}{\partial y}\vec j+\frac{\partial u}{\partial z}\vec k\right)=\frac{\dd\varphi}{\dd u}\,\nab u .
+\end{align*}
+Il passaggio equivale a moltiplicare e dividere per $\dd u$, operazione che a rigore richiederebbe ipotesi di regolarità sulle funzioni, e trova la sua giustificazione nella regola di derivazione delle funzioni composte. Se $u=r$ si ottiene la formula utile per i campi che dipendono solo dalla distanza,
+\[
+\nab\varphi(r)=\frac{\dd\varphi}{\dd r}\,\nab r=\frac{\dd\varphi}{\dd r}\,\frac{\vec r}{r}.
+\]
+
+Questa formula si applica subito a $\varphi=1/r$. Poiché $\dd(1/r)/\dd r=-1/r^2$ si ha
+\[
+\nab\!\left(\frac1r\right)=-\frac1{r^2}\,\frac{\vec r}{r}=-\frac{\vec r}{r^3},
+\]
+e, con $\dd(r^{-3})/\dd r=-3r^{-4}$,
+\[
+\nab\!\left(\frac1{r^3}\right)=-\frac{3}{r^4}\,\frac{\vec r}{r}=-\frac{3\vec r}{r^5}.
+\]
+Se $\vec p$ è un vettore costante, $\vec p\cdot\vec r=p_xx+p_yy+p_zz$ e quindi $\nab(\vec p\cdot\vec r)=p_x\nab x+p_y\nab y+p_z\nab z=\vec p$. I tre risultati si combinano nel calcolo del campo di un dipolo elettrico, dove compare il vettore $\nab\!\left(\dfrac{\vec p\cdot\vec r}{r^3}\right)$. Per la regola del prodotto con $\varphi=1/r^3$ e $\psi=\vec p\cdot\vec r$,
+\[
+\nab\!\left(\frac{\vec p\cdot\vec r}{r^3}\right)=\frac1{r^3}\nab(\vec p\cdot\vec r)+(\vec p\cdot\vec r)\,\nab\!\left(\frac1{r^3}\right)
+=\frac{\vec p}{r^3}-\frac{3(\vec p\cdot\vec r)\,\vec r}{r^5}=\frac{r^2\vec p-3(\vec p\cdot\vec r)\,\vec r}{r^5}.
+\]
+I termini hanno ciascuno l'unità di $p$ (momento di dipolo) divisa per il metro alla quarta; lo schema di calcolo, più che il risultato, è ciò che si deve saper ricostruire.
+
+Il legame con la fisica si legge nella relazione tra forza conservativa ed energia potenziale. Con $\dd L=\vec F\cdot\dd\vec l=F_x\dd x+F_y\dd y+F_z\dd z$ e $\dd L=-\dd U$, con $\dd U=\frac{\partial U}{\partial x}\dd x+\frac{\partial U}{\partial y}\dd y+\frac{\partial U}{\partial z}\dd z$, il confronto dei coefficienti degli incrementi indipendenti $\dd x,\dd y,\dd z$ dà
+\[
+F_x=-\frac{\partial U}{\partial x},\quad F_y=-\frac{\partial U}{\partial y},\quad F_z=-\frac{\partial U}{\partial z}\qquad\Longleftrightarrow\qquad \vec F=-\nab U ,
+\]
+dove $U$ è in joule, le coordinate in metri e $\vec F$ in newton. Questa è la relazione da portare all'orale come legame tra forza e potenziale: la forza conservativa è l'opposto del gradiente dell'energia potenziale, quindi il campo scalare $U$, un semplice numero in ogni punto, contiene tutta l'informazione sul vettore $\vec F$. Il segno meno ha un significato preciso: poiché il gradiente indica le $U$ crescenti, la forza ha verso di massima diminuzione dell'energia potenziale. 
+
+Per $U=mgy$ si ha $\partial U/\partial x=\partial U/\partial z=0$ (nessuna forza orizzontale), $\partial U/\partial y=mg$ e perciò $\vec F=-mg\,\vec j$, forza verso il basso; il segno meno compare perché $mg$ è rivolta verso il basso mentre $y$ cresce verso l'alto. Con $U=\tfrac12kx^2$ e $\dd(x^2)/\dd x=2x$ si ha $F_x=-kx$, la forza elastica. Nell'attrazione gravitazionale tra due masse l'energia potenziale è $U=-GMm/r$ e, per $\nab(1/r)=-\vec r/r^3$,
+\[
+\vec F=-\nab\!\left(-\frac{GMm}{r}\right)=GMm\,\nab\!\left(\frac1r\right)=-GMm\,\frac{\vec r}{r^3}=-\frac{GMm}{r^2}\,\hat u_r ,
+\]
+ossia la legge di gravitazione universale: il potenziale dipende da $1/r$, la forza da $1/r^2$. La divisione per $m$ dà il campo $\vec g=-\nab(U/m)$. Quando il campo è conservativo si possono perciò fare i conti con lo scalare e ricavare il vettore con un'unica operazione di derivazione.
+
+Sono possibili altre due operazioni con $\nab$ quando si applica a un campo vettoriale $\vec u=\vec u(\vec r)$. Il prodotto scalare con $\nab$ dà la divergenza e il prodotto vettoriale dà il rotore,
+\[
+\Div\vec u=\nab\cdot\vec u=\frac{\partial u_x}{\partial x}+\frac{\partial u_y}{\partial y}+\frac{\partial u_z}{\partial z},\qquad
+\rot\vec u=\nab\times\vec u=\begin{vmatrix}\vec i&\vec j&\vec k\\[2pt]\dfrac{\partial}{\partial x}&\dfrac{\partial}{\partial y}&\dfrac{\partial}{\partial z}\\[4pt]u_x&u_y&u_z\end{vmatrix},
+\]
+dove la divergenza è uno scalare e il rotore un vettore, entrambi con l'unità di $\vec u$ divisa per il metro. Un campo si dice divergente se la sua divergenza è diversa da zero, rotazionale se il suo rotore è diverso da zero; si dice irrotazionale se $\rot\vec u=0$. Il significato è questo: le linee di campo di una sorgente radiale divergono (o convergono): la divergenza segnala la presenza di sorgenti o di pozzi. 
+
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+		
+		% Stili grafici
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			arrowpos/.style={line width=1.2pt, ->, color=orange!90!red},
+			arrowneg/.style={line width=1.2pt, ->, color=teal!80!black},
+			subpanel/.style={draw=gray!30, fill=gray!5, rounded corners=4pt, line width=0.6pt}
+		}
+		
+		% Griglia tecnica di sfondo
+		\draw[gridline] (-5.6,-2.8) grid (5.6,3.6);
+		
+		% ====================================================
+		% PANNELLO SINISTRO: Sorgente (Divergenza Positiva)
+		% ====================================================
+		\coordinate (C1) at (-2.8, 0);
+		
+		% Sfondo pannello
+		\node[subpanel, minimum width=4.8cm, minimum height=4.8cm] at (C1) {};
+		
+		% Cerchi concentrici indicativi dell'espansione
+		\draw[orange!30, line width=0.5pt, dashed] (C1) circle (0.7cm);
+		\draw[orange!30, line width=0.5pt, dashed] (C1) circle (1.4cm);
+		
+		% Vettori radiali uscenti (8 direzioni equispaziate)
+		\foreach \angle in {0, 45, 90, 135, 180, 225, 270, 315} {
+			\draw[arrowpos] ($(C1)+(\angle:0.35cm)$) -- ($(C1)+(\angle:1.9cm)$);
+		}
+		
+		% Punto sorgente centrale
+		\filldraw[fill=orange!90!red, draw=black!80, line width=0.6pt] (C1) circle (3.0pt);
+		\node[right=-1pt, font=\small\bfseries, color=orange!90!red] at (C1) {$P$};
+		
+		% Titolo e badge pannello sinistro
+		\node[font=\bfseries, color=gray!80!black] at (-2.8, 2.1) {Sorgente};
+		\node[badge] at (-4.1, -2.1) {$\nabla \cdot \vec{u} > 0$};
+		
+		
+		% ====================================================
+		% PANNELLO DESTRO: Pozzo (Divergenza Negativa)
+		% ====================================================
+		\coordinate (C2) at (2.8, 0);
+		
+		% Sfondo pannello
+		\node[subpanel, minimum width=4.8cm, minimum height=4.8cm] at (C2) {};
+		
+		% Cerchi concentrici indicativi della compressione
+		\draw[teal!30, line width=0.5pt, dashed] (C2) circle (0.7cm);
+		\draw[teal!30, line width=0.5pt, dashed] (C2) circle (1.4cm);
+		
+		% Vettori radiali entranti (8 direzioni equispaziate)
+		\foreach \angle in {0, 45, 90, 135, 180, 225, 270, 315} {
+			\draw[arrowneg] ($(C2)+(\angle:1.9cm)$) -- ($(C2)+(\angle:0.35cm)$);
+		}
+		
+		% Punto pozzo centrale
+		\filldraw[fill=teal!80!black, draw=black!80, line width=0.6pt] (C2) circle (3.0pt);
+		\node[ right=-1pt, font=\small\bfseries, color=teal!80!black] at (C2) {$P$};
+		
+		% Titolo e badge pannello destro
+		\node[font=\bfseries, color=gray!80!black] at (2.8, 2.1) {Pozzo};
+		\node[badge] at (1.5, -2.1) {$\nabla \cdot \vec{u} < 0$};
+		
+	\end{tikzpicture}
+	\caption{Rappresentazione geometrica della divergenza di un campo vettoriale: sorgente con flusso uscente ($\nabla \cdot \vec{u} > 0$) e pozzo con flusso entrante ($\nabla \cdot \vec{u} < 0$).}
+	\label{fig:divergenza_sorgente_pozzo}
+\end{figure}
+
+Per il campo elettrico le sorgenti sono le cariche positive e i pozzi le cariche negative, linguaggio preso in prestito dalla fluidodinamica, dove la stessa matematica descrive il campo delle velocità di un fluido. Un campo con rotore non nullo ha invece la capacità di ruotare intorno a un punto e le sue linee si chiudono su sé stesse; così accade per il campo magnetico. 
+
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+		
+		% Stili grafici
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			fieldarrow/.style={line width=1.2pt, ->, color=orange!90!red},
+			curlvector/.style={line width=1.6pt, ->, color=purple!85!black},
+			axisline/.style={draw=gray!60, line width=0.7pt, ->}
+		}
+		
+		% Griglia tecnica di sfondo
+		\draw[gridline] (-5.2,-3.4) grid (5.2,4.2);
+		
+		% Ambito 3D con proiezione inclinata
+		\begin{scope}[x={(1.0cm,-0.3cm)}, y={(0.5cm,0.45cm)}, z={(0cm,1.2cm)}]
+			
+			\coordinate (P) at (0, 0, 0);
+			
+			% 1. PIANO xy PROIETTATO IN PROSPETTIVA
+			\begin{scope}[canvas is xy plane at z=0]
+				
+				% Sfondo del piano
+				\filldraw[draw=gray!50, fill=orange!5, opacity=0.85, line width=0.8pt] 
+				(-3.0, -3.0) rectangle (3.0, 3.0);
+				
+				% Griglia interna sul piano xy
+				\foreach \i in {-2, -1, 1, 2} {
+					\draw[gray!25, line width=0.4pt, dashed] (\i, -3) -- (\i, 3);
+					\draw[gray!25, line width=0.4pt, dashed] (-3, \i) -- (3, \i);
+				}
+				
+				% Assi x e y
+				\draw[axisline] (-3.2, 0) -- (3.6, 0) node[right=2pt, font=\small\bfseries\itshape, color=gray!80!black] {$x$};
+				\draw[axisline] (0, -3.2) -- (0, 3.6) node[above right=2pt, font=\small\bfseries\itshape, color=gray!80!black] {$y$};
+				
+				% Traiettoria circolare PROIETTATA IN PROSPETTIVA (Cerchi reali sul piano xy)
+				\draw[orange!40, line width=0.6pt, dashed] (0,0) circle (1.2cm);
+				\draw[orange!50!red, line width=0.8pt, dashed] (0,0) circle (1.95cm);
+				
+				% Ombra alla base
+				\fill[black!20, opacity=0.5] (0,0) circle (0.3cm);
+				
+				% Vettori di campo tangenziali circolari anch'essi giacenti sul piano xy
+				\foreach \angle in {0, 45, 90, 135, 180, 225, 270, 315} {
+					\draw[fieldarrow] 
+					(\angle:2.0cm) -- ($(\angle:2.0cm) + (\angle+90:1.1cm)$);
+				}
+				
+				% Arco indicativo del senso di rotazione sul piano xy
+				\draw[line width=1.0pt, ->, color=purple!85!black] 
+				(35:0.75cm) arc (35:325:0.75cm);
+				
+			\end{scope}
+			
+			% 2. VETTORE ROTORE PERPENDICOLARE (Lungo l'asse z verticale)
+			\draw[curlvector] (P) -- (0, 0, 3.1) node[above=2pt, font=\bfseries] {$\vec{\nabla} \times \vec{u}$};
+			
+			% Punto di valutazione P al centro
+			\filldraw[fill=purple!85!black, draw=black] (P) circle (2.2pt) node[below right=2pt, font=\small\bfseries] {$P$};
+			
+		\end{scope}
+		
+		% Badge descrittivo superiore
+		\node[badge] at (-2, -2) {$\vec{\nabla} \times \vec{u} = \text{rot}\,\vec{u}$};
+		
+	\end{tikzpicture}
+	\caption{Rappresentazione tridimensionale del vettore rotore $\nabla \times \vec{F}$ con linee di flusso circolari giacenti sul piano prospettico $xy$.}
+	\label{fig:rotore_3d_prospettiva_reale}
+\end{figure}
+
+In un fluido, una ruota a pale (come il timone di una nave) immersa nel flusso non gira se il flusso è irrotazionale, mentre gira se esistono vortici; l'ingegnere meccanico esamina la rotazionalità dei flussi attorno alle carenature perché i vortici sono spesso indesiderati.
+
+Su un campo scalare l'unica operazione disponibile è il gradiente; su un campo vettoriale si possono fare divergenza e rotore. Dalla combinazione di queste operazioni derivano i casi seguenti. La divergenza del gradiente è il laplaciano,
+\[
+\Div\grad\varphi=\nab\cdot\nab\varphi=\nab^2\varphi=\Delta\varphi=\frac{\partial^2\varphi}{\partial x^2}+\frac{\partial^2\varphi}{\partial y^2}+\frac{\partial^2\varphi}{\partial z^2},
+\]
+dove $\Delta=\nab\cdot\nab$ è l'operatore di Laplace, di unità l'inverso del metro quadrato, che ricorre in idraulica, in sismica e in ogni problema di onde. Il rotore del gradiente è identicamente nullo:
+\[
+\rot\grad\varphi=\nab\times\nab\varphi=\begin{vmatrix}\vec i&\vec j&\vec k\\[2pt]\partial_x&\partial_y&\partial_z\\[2pt]\partial_x\varphi&\partial_y\varphi&\partial_z\varphi\end{vmatrix}=0 .
+\]
+La prova è diretta: la componente lungo $\vec i$ vale $\partial_y\partial_z\varphi-\partial_z\partial_y\varphi$, che si annulla per il teorema di Schwarz, e lo stesso accade per le altre due. In modo geometrico, $\nab$ e $\nab\varphi$ sono vettori «paralleli» e il prodotto vettoriale di vettori paralleli è nullo. Ne segue che il gradiente di un campo scalare è irrotazionale. La divergenza del rotore è anch'essa nulla,
+\[
+\Div\rot\vec u=\nab\cdot(\nab\times\vec u)=\partial_x(\partial_yu_z-\partial_zu_y)+\partial_y(\partial_zu_x-\partial_xu_z)+\partial_z(\partial_xu_y-\partial_yu_x)=0 ,
+\]
+perché i sei termini si elidono a due a due per Schwarz. Sono poi definiti $\grad\Div\vec u=\nab(\nab\cdot\vec u)$ e il doppio rotore, per il quale vale
+\[
+\rot\rot\vec u=\nab\times(\nab\times\vec u)=\grad\Div\vec u-\nab^2\vec u ,
+\]
+dove $\nab^2\vec u$ è il vettore che ha per componenti i laplaciani delle componenti di $\vec u$. Si dimostra la componente lungo $x$. Posto $\vec w=\rot\vec u$, si ha
+\begin{align*}
+(\nab\times\vec w)_x&=\partial_yw_z-\partial_zw_y=\partial_y(\partial_xu_y-\partial_yu_x)-\partial_z(\partial_zu_x-\partial_xu_z)\\
+&=\partial_x\partial_yu_y+\partial_x\partial_zu_z-\partial_y^2u_x-\partial_z^2u_x\\
+&=\partial_x(\partial_xu_x+\partial_yu_y+\partial_zu_z)-(\partial_x^2+\partial_y^2+\partial_z^2)u_x ,
+\end{align*}
+dove nell'ultimo passaggio si è aggiunto e sottratto $\partial_x^2u_x$. Il risultato è la componente $x$ di $\grad\Div\vec u-\nab^2\vec u$; le altre due componenti si ricavano per permutazione ciclica degli indici.
+
+Una tavola riassuntiva elenca una tavola di identità che discendono dalla linearità e dalla regola di Leibniz. In particolare
+\begin{align*}
+\nab\cdot(\vec u+\vec v)&=\nab\cdot\vec u+\nab\cdot\vec v, &
+\nab\times(\vec u+\vec v)&=\nab\times\vec u+\nab\times\vec v,\\
+\nab\cdot(\varphi\vec u)&=\varphi\,\nab\cdot\vec u+\vec u\cdot\nab\varphi, &
+\nab\times(\varphi\vec u)&=\varphi\,\nab\times\vec u+\nab\varphi\times\vec u,\\
+\nab\cdot(\vec u\times\vec v)&=\vec v\cdot(\nab\times\vec u)-\vec u\cdot(\nab\times\vec v), &
+\nab\cdot(\nab\varphi\times\nab\psi)&=0 ,
+\end{align*}
+cui si aggiungono le formule di struttura per $\nab\times(\vec u\times\vec v)$ e $\nab(\vec u\cdot\vec v)$, più lunghe e non richieste all'esame. Per mostrare il metodo si prova la terza: 
+\begin{align*} 
+\nab\cdot(\varphi\vec u)&=\partial_x(\varphi u_x)+\partial_y(\varphi u_y)+\partial_z(\varphi u_z)= \\
+&=\varphi(\partial_xu_x+\partial_yu_y+\partial_zu_z)+(u_x\partial_x\varphi+u_y\partial_y\varphi+u_z\partial_z\varphi)=\\
+&=\varphi\,\nab\cdot\vec u+\vec u\cdot\nab\varphi 
+\end{align*}
+All'esame non si richiede la dimostrazione di queste identità, che sono riportate come strumento di consultazione.
+
+\titoletto{Flusso di un campo vettoriale e teorema della
+	divergenza}
+	
+Dopo gli operatori locali si passa alle grandezze integrali. Il flusso nasce dall'esigenza di contare quante linee di campo attraversano una superficie. Una superficie $S$ è uno scalare (l'aula, ad esempio, misura circa $300\un{m^2}$), ma si associa un vettore a un suo elemento infinitesimo $\dd S$: si prende il versore normale $\vec n$ e si definisce $\dd\vec S=\vec n\,\dd S$, di modulo pari all'area e direzione perpendicolare alla superficie. Un elemento infinitesimo può sempre considerarsi piano, perciò il campo $\vec u$ vi assume un solo valore e ha un solo angolo con $\vec n$. Il flusso elementare è
+\[
+\dd\Phi=\vec u\cdot\vec n\,\dd S=u\,\dd S\cos\theta ,
+\]
+dove $\vec u$ è il campo (di unità $[u]$), $\vec n$ il versore normale (adimensionale), $\dd S$ l'area elementare in $\mathrm{m^2}$, e $\theta$ l'angolo tra campo e normale; l'unità del flusso è $[u]\cdot\mathrm{m^2}$. Il flusso attraverso la superficie finita $S$ è la somma dei contributi elementari,
+\[
+\Phi=\int_S\dd\Phi=\int_S\vec u\cdot\vec n\,\dd S .
+\]
+Questo ragionamento, dividere in parti infinitesime, calcolare il contributo elementare e sommare con un integrale, si ripete in ogni problema fisico: non è tipico del flusso ma di tutta la fisica differenziale, ed è analogo al passaggio dal lavoro $L=F\Delta{l}$ al lavoro elementare $\dd L=\vec F\cdot\dd\vec l$ per forze variabili. Per un campo uniforme e una superficie piana di area $S$ si ha $\Phi=uS\cos\theta$: il flusso dipende dal campo (più linee, più flusso), dalla superficie (superficie maggiore, più linee intercettate) e dall'angolo. Lo si intuisce con l'immagine della porta del calcio: chi sta davanti e perpendicolare vede l'intera porta, chi si sposta lateralmente ne vede una parte sempre minore, fino a nessuna se guarda lungo il piano della porta stessa. Il flusso è massimo quando campo e normale sono paralleli, nullo quando sono perpendicolari, negativo quando hanno verso opposto: il segno dipende dalla scelta del verso di $\vec n$. Il flusso è sempre attraverso una superficie, e questa è la sola preposizione ammessa nell'esposizione orale, perché sono le linee che attraversano la superficie. Per una superficie chiusa, cioè un pallone, una sfera, un cubo, un cilindro, qualunque forma che racchiude un volume senza aperture, la normale si sceglie uscente e si indica integrale chiuso  $\oint_S$.
+
+Il teorema della divergenza (o di Ostrogradskij) collega il flusso attraverso una superficie chiusa alla divergenza nel volume racchiuso. Sia $\vec u$ un campo con componenti e derivate parziali prime continue in un dominio $D$ e sia $S$ una superficie chiusa semplicemente connessa contenuta in $D$, con $\tau$ il volume racchiuso. Allora
+\[
+\int_\tau\nab\cdot\vec u\,\dd\tau=\oint_S\vec u\cdot\vec n\,\dd S ,
+\]
+dove il primo membro è un integrale triplo ($\dd\tau$ in $\mathrm{m^3}$) e il secondo un integrale doppio sulla superficie (con $\vec n$ uscente). Per la dimostrazione si considera un cubetto di lati $\dd x,\dd y,\dd z$. Il flusso uscente dalle due facce perpendicolari a $x$ è
+\[
+\bigl[u_x(x+\dd x,y,z)-u_x(x,y,z)\bigr]\dd y\,\dd z\simeq\frac{\partial u_x}{\partial x}\,\dd x\,\dd y\,\dd z ,
+\]
+con lo sviluppo di Taylor al primo ordine $u_x(x+\dd x)\simeq u_x(x)+\partial_xu_x\,\dd x$; l'uscente dalla faccia in $x+\dd x$ ha normale $+\vec i$ e l'altra $-\vec i$, da cui la differenza. Contributi analoghi vengono dalle altre due coppie di facce. Il flusso totale è dunque $\left(\partial_xu_x+\partial_yu_y+\partial_zu_z\right)\dd\tau=\nab\cdot\vec u\,\dd\tau$. Un volume finito si suddivide in cubetti; per ogni faccia interna, comune a due cubetti, i flussi hanno normali opposte e si annullano, per cui resta solo la somma sulle facce che appartengono alla superficie esterna. Il teorema trasforma un integrale triplo in uno doppio (o viceversa), con evidente vantaggio di calcolo, e conduce a riscrivere in forma locale le equazioni di Maxwell scritte con gli integrali.
+
+
+
+Un campo è solenoidale quando la sua divergenza è nulla in tutti i punti del dominio,
+\[
+\nab\cdot\vec u=0 .
+\]
+Per il teorema della divergenza, ciò equivale a dire che il flusso attraverso ogni superficie chiusa è nullo,
+\[
+\oint_S\vec u\cdot\vec n\,\dd S=\int_\tau\nab\cdot\vec u\,\dd\tau=0 .
+\]
+Le due formulazioni dicono la stessa cosa, la prima in notazione locale e la seconda in notazione integrale. La locale è più precisa, nello stesso senso in cui la velocità istantanea è più precisa di quella media, o la derivata è più dettagliata dell'integrale: indica che cosa avviene in ogni punto. Una conseguenza visibile: se due superfici aperte $S_1$ e $S_2$ hanno lo stesso contorno $l$, e si indica con $\vec n$ la normale scelta in modo concorde con il verso di percorrenza di $l$, la superficie chiusa $S_1\cup S_2$ ha normale uscente $\vec n_1=\vec n$ su $S_1$ e $\vec n_2=-\vec n$ su $S_2$, e il flusso nullo comporta $\int_{S_1}\vec u\cdot\vec n\,\dd S=\int_{S_2}\vec u\cdot\vec n\,\dd S$. Il flusso di un campo solenoidale attraverso una superficie aperta dipende solo dal suo contorno. Il campo magnetico $\vec B$ ha flusso nullo attraverso qualsiasi superficie chiusa ed è dunque solenoidale; la seconda equazione di Maxwell esprime la non esistenza di monopoli magnetici (se si spezza un magnete ne risultano due, ciascuno con i propri poli).
+
+\titoletto{Teorema del rotazionale}
+
+Sia $l$ una curva regolare contenuta in $D$ e $\dd\vec l=\vec t\,\dd l$ un suo elemento, con $\vec t$ versore tangente. La circolazione elementare di $\vec u$ è
+\[
+\vec u\cdot\dd\vec l=u_x\dd x+u_y\dd y+u_z\dd z=\vec u\cdot\vec t\,\dd l ,
+\]
+con $\dd l$ in metri, e l'integrale curvilineo lungo l'arco $l$ è
+\[
+\int_l\vec u\cdot\vec t\,\dd l=\int_l\vec u\cdot\dd\vec r=\int_l(u_x\dd x+u_y\dd y+u_z\dd z) ,
+\]
+che per una forza è il lavoro lungo $l$. 
+
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+		
+		% Stili grafici
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			posvector/.style={line width=1.1pt, ->, color=teal!80!black},
+			dispvector/.style={line width=1.3pt, ->, color=orange!90!red},
+			curveline/.style={draw=black!85, line width=1.1pt}
+		}
+		
+		% Griglia tecnica di sfondo
+		\draw[gridline] (-0.8,-0.6) grid (6.8,4.8);
+		
+		% Coordinate fondamentali
+		\coordinate (O) at (5.8, 0.4);       % Origine O
+		\coordinate (P1) at (4.2, 3.59);     % Punto di partenza sulla curva (r)
+		\coordinate (P2) at (2.4, 2.79);     % Punto di arrivo sulla curva (r + dr)
+		
+		% Traiettoria/Curva orientata l
+		\draw[curveline, postaction={decorate, decoration={markings, mark=at position 0.85 with {\arrow{Stealth[length=6pt]}}}}] 
+		(0.2, 0.8) .. controls (1.5, 2.2) and (3.0, 3.8) .. (5.6, 3.8);
+		
+		% Etichetta della curva l
+		\node[left=4pt, font=\small\bfseries\itshape, color=black!85] at (0.2, 1.2) {$l$};
+		
+		% Vettore posizione r (da O a P1)
+		\draw[posvector] (O) -- (P1) node[midway, right=2pt, font=\bfseries] {$\vec{r}$};
+		
+		% Vettore posizione r + dr (da O a P2)
+		\draw[posvector] (O) -- (P2) node[midway, sloped, below=3pt, font=\bfseries] {$\vec{r} + \mathrm{d}\vec{r}$};
+		
+		% Elemento di spostamento/linea dr = dl (da P1 a P2)
+		\draw[dispvector] (P1) -- (P2);
+		
+		% Etichette del vettore spostamento/linea
+		\node[above=2pt, font=\bfseries, color=orange!90!red] at ($(P1)!0.5!(P2)$) {$\mathrm{d}\vec{l}$};
+		\node[below=2pt, font=\bfseries, color=orange!90!red] at ($(P1)!0.5!(P2)$) {$\mathrm{d}\vec{r}$};
+		
+		% Punti nei vertici ed origine
+		\filldraw[fill=black!70, draw=black] (O) circle (1.8pt) node[below right=2pt, font=\small\bfseries] {$O$};
+		\filldraw[fill=teal!80!black, draw=black!80, line width=0.6pt] (P1) circle (2.0pt);
+		\filldraw[fill=teal!80!black, draw=black!80, line width=0.6pt] (P2) circle (2.0pt);
+		
+		% Badge esplicativo superiore
+		\node[badge] at (2.8, 4.4) {$\mathrm{d}\vec{l} = \mathrm{d}\vec{r}$};
+		
+	\end{tikzpicture}
+	\caption{Elemento infinitesimo di linea tangenziale $\mathrm{d}\vec{l} = \mathrm{d}\vec{r}$ lungo la curva orientata $l$, con i vettori di posizione $\vec{r}$ e $\vec{r}+\mathrm{d}\vec{r}$ riferiti all'origine $O$.}
+	\label{fig:elemento_linea_curva}
+\end{figure}
+
+
+
+
+Se la linea è chiusa si parla di circuitazione e si scrive $\oint_l\vec u\cdot\dd\vec l$, con il simbolo di integrale circolare e la freccia sul vettore. Il teorema di Stokes lega la circuitazione di $\vec u$ lungo una linea chiusa $l$ al flusso del rotore attraverso una qualunque superficie $S$ che abbia $l$ per contorno,
+\[
+\int_S(\nab\times\vec u)\cdot\vec n\,\dd S=\oint_l\vec u\cdot\dd\vec l ,
+\]
+con $\vec n$ orientata secondo la regola della mano destra rispetto al verso di percorrenza. Per una circonferenza la superficie può essere il cerchio, ma anche una calotta che ha la circonferenza come contorno: l'integrale non cambia. Per giustificare l'enunciato si considera un rettangolo infinitesimo nel piano $xy$, percorso in senso antiorario, con lati $\dd x$ e $\dd y$. La circuitazione è
+\begin{align*}
+\oint\vec u\cdot\dd\vec l&\simeq u_x(x,y)\dd x+u_y(x+\dd x,y)\dd y-u_x(x,y+\dd y)\dd x-u_y(x,y)\dd y\\
+&=\bigl[u_y(x+\dd x,y)-u_y(x,y)\bigr]\dd y-\bigl[u_x(x,y+\dd y)-u_x(x,y)\bigr]\dd x\\
+&\simeq\left(\frac{\partial u_y}{\partial x}-\frac{\partial u_x}{\partial y}\right)\dd x\,\dd y=(\rot\vec u)_z\,\dd S ,
+\end{align*}
+dove i quattro addendi sono i contributi dei lati inferiore, destro, superiore e sinistro. Una superficie qualsiasi si suddivide in elementi di questo tipo; i lati interni, percorsi due volte in versi opposti, danno contributo nullo, e rimane la circuitazione lungo il contorno.
+
+Il passo conclusivo è la nozione di campo conservativo. Un campo $\vec u$ è conservativo se la sua circuitazione è nulla lungo ogni percorso chiuso,
+\[
+\oint_l\vec u\cdot\dd\vec l=0\qquad\text{per ogni }l .
+\]
+Le formulazioni equivalenti sono tre. La prima: l'integrale di linea tra due punti non dipende dal percorso. Infatti due percorsi $l_1$ e $l_2$ tra gli stessi estremi formano, percorsi uno in avanti e uno all'indietro, una linea chiusa, per cui $\oint=\int_{l_1}\vec u\cdot\dd\vec l-\int_{l_2}\vec u\cdot\dd\vec l=0$, cioè i due integrali coincidono. La seconda: il rotore è nullo. Per il teorema di Stokes la circuitazione nulla per ogni $l$ comporta $\int_S(\nab\times\vec u)\cdot\vec n\,\dd S=0$ per ogni superficie $S$, e poiché la funzione integranda è continua e $S$ è arbitraria,
+\[
+\nab\times\vec u=0 ,
+\]
+ossia $\vec u$ è irrotazionale; l'implicazione inversa segue ancora da Stokes. In un dominio semplicemente connesso, «conservativo» e «irrotazionale» sono dunque sinonimi. La terza: esiste una funzione scalare $\varphi$, il potenziale, tale che
+\[
+\vec u=-\nab\varphi .
+\]
+Se $\vec u=-\nab\varphi$, il rotore è nullo per quanto mostrato con Schwarz; viceversa, se la circuitazione è nulla, si fissa un punto $P_0$ e si definisce $\varphi(P)=-\int_{P_0}^{P}\vec u\cdot\dd\vec l$, ben posta per l'indipendenza dal percorso, e allora $\dd\varphi=-\vec u\cdot\dd\vec l$, ossia $\vec u=-\nab\varphi$. Per una variazione tra due punti, $\int_A^B\vec u\cdot\dd\vec l=-\int_A^B\dd\varphi=\varphi(A)-\varphi(B)$. Il segno meno è convenzionale ed è lo stesso che lega forza ed energia potenziale; il potenziale è definito a meno di una costante additiva. Ogni volta che si legge l'aggettivo «conservativo» si deve pensare subito alla presenza di un potenziale. Il campo elettrico, in regime stazionario, è conservativo; un'eventuale domanda d'esame «il campo elettrico è conservativo?» ha come risposta una frase grammaticalmente completa («il campo elettrico è conservativo») seguita dalla sua scrittura matematica: la circuitazione di $\vec E$ lungo ogni linea chiusa è nulla, ossia
+\[
+\oint_l\vec E\cdot\dd\vec l=0\quad\Longleftrightarrow\quad\nab\times\vec E=0 ,
+\]
+dove $\vec E$ ha unità $\mathrm{N\,C^{-1}}$ (o $\mathrm{V\,m^{-1}}$) e la circuitazione si misura in $\mathrm{V}$. Segue anche che il campo elettrico non è in grado di ruotare attorno a un punto, e infatti diverge dalle cariche: $\nab\cdot\vec E\neq0$. Il campo magnetico è invece solenoidale ma non conservativo: le sue linee sono chiuse.
+
+Le quattro equazioni di Maxwell, presentate fin dalle prime lezioni, condensano quanto appena detto e vanno ricordate nella forma integrale: costituiscono, di fatto, il programma dell'intero corso. Nello spazio vuoto e con le notazioni adottate si scrivono
+\begin{align*}
+\oint_S\vec E\cdot\vec n\,\dd S&=\frac{Q}{\varepsilon_0}, &
+\oint_S\vec B\cdot\vec n\,\dd S&=0,\\
+\oint_l\vec E\cdot\dd\vec l&=-\frac{\dd\Phi(\vec B)}{\dd t}, &
+\oint_l\vec B\cdot\dd\vec l&=\mu_0\left(I+\varepsilon_0\frac{\dd\Phi(\vec E)}{\dd t}\right),
+\end{align*}
+dove $Q$ è la carica contenuta nella superficie chiusa $S$ (in coulomb), $I$ la corrente concatenata con la linea chiusa $l$ (in ampere), $\Phi(\vec B)$ e $\Phi(\vec E)$ i flussi dei campi attraverso una superficie che ha $l$ per contorno (in $\mathrm{T\,m^2}=\mathrm{Wb}$ e in $\mathrm{V\,m}$ rispettivamente), $\varepsilon_0\simeq8{,}85\times10^{-12}\un{C^2\,N^{-1}\,m^{-2}}$ la costante dielettrica del vuoto e $\mu_0=4\pi\times10^{-7}\un{N\,A^{-2}}$ la permeabilità magnetica del vuoto. Nelle prime due equazioni $\vec E\cdot\vec n\,\dd S$ e $\vec B\cdot\vec n\,\dd S$ sono i flussi elementari, con $\vec n$ normale uscente; nelle ultime due $\vec E\cdot\dd\vec l$ e $\vec B\cdot\dd\vec l$ sono le circuitazioni elementari. Le prime due equazioni sono flussi, le ultime due circuitazioni. Ciascuna ha un significato fisico preciso. La prima afferma che le cariche elettriche generano campi elettrici, e che il flusso di $\vec E$ attraverso una superficie chiusa dipende soltanto dalla carica racchiusa. La seconda esprime l'inesistenza dei monopoli magnetici: il flusso di $\vec B$ attraverso ogni superficie chiusa è nullo, e un magnete spezzato dà due magneti, ciascuno con i propri poli. Per la terza, un campo magnetico variabile nel tempo è una seconda sorgente di campo elettrico. La quarta, detta di Ampère--Maxwell, assegna come sorgenti del campo magnetico le correnti e i campi elettrici variabili nel tempo.
+
+Le equazioni riportano in forma integrale la distinzione tra i due aggettivi. Il campo magnetico è solenoidale, il campo elettrico non lo è: il flusso di $\vec E$ dipende dalle cariche racchiuse, e le sue linee divergono dalle cariche positive per convergere in quelle negative. Dalle circuitazioni discende l'altra metà del quadro. Per campi indipendenti dal tempo la circuitazione di $\vec E$ è nulla, e il campo elettrostatico è conservativo; la circuitazione di $\vec B$ è invece proporzionale alla corrente concatenata, e il campo magnetico non è conservativo. Resta una cautela sull'ipotesi: la conservatività di $\vec E$ vale per campi che non dipendono dal tempo, perché la terza equazione mostra che, quando $\vec B$ varia, la circuitazione di $\vec E$ non è più nulla.
+
+Nello spazio privo di cariche e di correnti si ha $Q=0$ e $I=0$, le prime due equazioni hanno secondo membro nullo e le equazioni assumono una forma simmetrica, in cui nelle ultime due compaiono soltanto i campi variabili. Il sistema ammette soluzioni ondulatorie, le onde elettromagnetiche, che si propagano con velocità
+\[
+c=\frac{1}{\sqrt{\mu_0\varepsilon_0}}\simeq3{,}0\times10^{8}\un{m\,s^{-1}},
+\]
+dove $\mu_0$ ed $\varepsilon_0$ descrivono le proprietà del mezzo in cui le onde viaggiano, qui il vuoto, e $c$ coincide con la velocità della luce. Le onde sono trasversali: i campi $\vec E$ e $\vec B$ oscillano perpendicolarmente alla direzione di propagazione, lungo la quale fluisce l'energia. Con il termine luce si intende l'intervallo di lunghezze d'onda cui è sensibile l'occhio umano, da circa $400\un{nm}$ (violetto, la lunghezza d'onda minima) a circa $700$--$800\un{nm}$ (rosso, la massima); il bianco non è un colore dotato di una propria lunghezza d'onda, ma la sovrapposizione dei colori dello spettro. Al di sotto di $400\un{nm}$ si trovano ultravioletto, raggi X e raggi gamma, radiazioni che nelle componenti più energetiche sono in grado di ionizzare la materia e di danneggiare le cellule viventi; al di sopra si incontrano infrarosso, microonde e onde radio, queste ultime con lunghezze d'onda fino a molti metri, impiegate nelle comunicazioni. Microonde e onde radio non sono ionizzanti.
+
+\titoletto{Angolo solido}
+La misura di un angolo piano in radianti è il rapporto tra l'arco intercettato e il raggio. Allo stesso modo si definisce l'angolo solido come la porzione di spazio delimitata da un fascio di semirette uscenti da un vertice O in comune, che individuano un cono di forma qualunque; lo si misura in steradianti dal rapporto tra l'area $S$ della calotta che il cono intercetta su una sfera con centro in O e il quadrato del raggio $r$ della sfera,
+
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+		
+		% Stili grafici
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			dimline/.style={line width=0.6pt, <->, color=gray!80!black},
+			outline/.style={draw=black!85, line width=0.9pt},
+			dashedline/.style={draw=gray!70, line width=0.8pt, dashed},
+			surfaceS1/.style={draw=teal!80!black, fill=teal!15, fill opacity=0.5, line width=0.8pt},
+			surfaceS2/.style={draw=orange!90!red, fill=orange!20, fill opacity=0.5, line width=0.9pt}
+		}
+		
+		% Griglia tecnica di sfondo
+		\draw[gridline] (-0.8,-2.6) grid (7.6,3.6);
+		
+		% Coordinate fondamentali (Proiezione assi: x inclinato, y orizzontale)
+		\coordinate (O) at (0, 0);               % Vertice O
+		\coordinate (A1) at (3.8, 0);             % Intersezione generatrice inf con S1
+		\coordinate (A2) at (6.8, 0);             % Intersezione generatrice inf con S2
+		\coordinate (B1) at (3.11, 1.82);        % Intersezione generatrice sup con S1
+		\coordinate (B2) at (5.57, 3.26);        % Intersezione generatrice sup con S2
+		
+		% Generatrici e asse del cono
+		\draw[dashedline] (O) -- (6.13, 2.95);
+		\draw[outline] (O) -- (A2);
+		\draw[outline] (O) -- (B1);
+		\draw[outline] (O) -- (B2);
+		\draw[outline] (O) -- (6.23, 0.3);
+		\draw[dashedline] (O) -- (6.5, 1.7);
+		
+		% ----------------------------------------------------
+		% CALOTTA SFERICA S1 (r1 = 3.8 cm)
+		% ----------------------------------------------------
+		\draw[surfaceS1]
+		% Generatrice inferiore -> Arco sferico anteriore (convesso)
+		(A1) arc (0:25.6:3.8cm) 
+		% Bordo trasversale di chiusura della sezione
+		-- (B1) arc (25.6:0:3.8cm)
+		-- cycle;
+		
+		% Bordo interno sferico per la percezione di profondità
+%		\draw[teal!90!black, line width=0.1pt] 
+		
+		
+		% ----------------------------------------------------
+		% CALOTTA SFERICA S2 (r2 = 6.8 cm)
+		% ----------------------------------------------------
+		\draw[surfaceS2]
+		% Generatrice inferiore -> Arco sferico anteriore
+		(A2) arc (0:25.6:6.8cm) 
+		% Profilo trasversale esterno
+		-- (B2) arc (25.6:0:6.8cm)
+		-- cycle;
+		
+		% Bordo interno sferico per la percezione di profondità
+%		\draw[orange!90!red, line width=0.9pt] 
+		
+		
+		% ----------------------------------------------------
+		% ETICHETTE E QUOTE
+		% ----------------------------------------------------
+		\node[font=\bfseries, color=teal!90!black] at (4.1, 0.8) {$S_1$};
+		\node[font=\bfseries, color=orange!90!red] at (7.0, 1.5) {$S_2$};
+		
+		% Angolo solido Omega
+		\draw[line width=0.6pt, color=purple!85!black] (1.3, 0) arc (0:25.6:1.3cm);
+		\node[font=\small\bfseries, color=purple!85!black] at (1.8, 0.3) {$\Omega$};
+		
+		% Quote r1 e r2
+		\draw[dimline] (0.1, -0.8) -- (3.8, -0.8) node[midway, fill=white, inner sep=2pt, font=\small\itshape] {$r_1$};
+		\draw[gray!50, line width=0.5pt] (0.1, -0.5) -- (0.1, -1.1);
+		\draw[gray!50, line width=0.5pt] (3.8, 0) -- (3.8, -1.1);
+		
+		\draw[dimline] (0.1, -1.8) -- (6.8, -1.8) node[midway, fill=white, inner sep=2pt, font=\small\itshape] {$r_2$};
+		\draw[gray!50, line width=0.5pt] (0.1, -1.5) -- (0.1, -2.1);
+		\draw[gray!50, line width=0.5pt] (6.8, 0) -- (6.8, -2.1);
+		
+		% Vertice O
+		\filldraw[fill=black] (O) circle (1.5pt);
+		\node[below left=1pt, font=\small\bfseries] at (O) {$O$};
+		
+		% Badge esplicativo
+		\node[badge] at (2.5, 3.2) {$\Omega = \frac{S_1}{r_1^2} = \frac{S_2}{r_2^2}$};
+		
+	\end{tikzpicture}
+	\caption{Rappresentazione geometrica dell'angolo solido $\Omega$ intercettato dalle calotte sferiche concentriche $S_1$ ed $S_2$.}
+	\label{fig:angolo_solido_sferico_corretto}
+\end{figure}
+
+\[
+\Omega=\frac{S}{r^2},
+\]
+dove $S$ è in $\mathrm{m^2}$, $r$ in m e $\Omega$ in steradianti (adimensionale). Il rapporto non dipende dal raggio: due sfere concentriche di raggi $r_1$ e $r_2$ intercettano calotte con $S_1/r_1^2=S_2/r_2^2$, perché $S$ cresce come $r^2$. Per tutto lo spazio la calotta è l'intera superficie sferica, di area $4\pi r^2$, perciò
+\[
+\Omega_{\mathrm{tot}}=\frac{4\pi r^2}{r^2}=4\pi\ \mathrm{sr}.
+\]
+Per calcolare l'angolo solido di un cono qualsiasi occorre l'elemento di superficie sulla sfera. 
+
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+		
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			axisline/.style={draw=gray!70, line width=0.9pt, ->},
+			posline/.style={draw=gray!50, line width=0.6pt, dashed},
+			surfpatch/.style={draw=orange!90!red, fill=orange!80!red, fill opacity=0.85, line width=0.8pt},
+			meridian/.style={draw=black!80, line width=0.8pt},
+			parallel/.style={draw=gray!60, line width=0.6pt, dashed}
+		}
+		
+		\draw[gridline] (-3.8,-2.8) grid (5.8,5.8);
+		
+		% Proiezione coerente con asse y orizzontale e asse z verticale
+		\begin{scope}[x={(-0.6cm,-0.5cm)}, y={(1cm,0cm)}, z={(0cm,1.2cm)}]
+			
+			\coordinate (O) at (0,0,0);
+			\def\R{4.5} 
+			
+			% 1. ASSI CARTESIANI
+			\draw[axisline] (O) -- (6.0, 0, 0) node[below left=1pt, font=\small\bfseries\itshape] {$x$};
+			\draw[axisline] (O) -- (0, 5.5, 0) node[right=2pt, font=\small\bfseries\itshape] {$y$};
+			\draw[axisline] (O) -- (0, 0, 5.2) node[above=2pt, font=\small\bfseries\itshape] {$z$};
+			
+			% 2. PROFILI ESTERNI DELL'OTTANTE
+			\draw[meridian, domain=0:90, variable=\t, samples=40] plot ({\R*sin(\t)}, 0, {\R*cos(\t)});
+			\draw[meridian, domain=0:90, variable=\t, samples=40] plot (0, {\R*sin(\t)}, {\R*cos(\t)});
+			\draw[meridian, domain=0:90, variable=\t, samples=40] plot ({\R*cos(\t)}, {\R*sin(\t)}, 0);
+			
+			% Parametri angolari
+			\def\thA{38} % Angolo polare del punto A (theta)
+			\def\thB{58} % Angolo polare del punto B (theta + dtheta)
+			\def\phA{25} % Angolo azimutale del punto A (phi)
+			\def\phB{55} % Angolo azimutale del punto D (phi + dphi)
+			
+			% 3. MERIDIANI E PARALLELI
+			\draw[posline] (O) -- ({\R*cos(\phA)}, {\R*sin(\phA)}, 0);
+			\draw[posline] (O) -- ({\R*cos(\phB)}, {\R*sin(\phB)}, 0);
+			
+			\draw[parallel, domain=0:90, variable=\t, samples=40] plot ({\R*sin(\thA)*cos(\t)}, {\R*sin(\thA)*sin(\t)}, {\R*cos(\thA)});
+			\draw[parallel, domain=0:90, variable=\t, samples=40] plot ({\R*sin(\thB)*cos(\t)}, {\R*sin(\thB)*sin(\t)}, {\R*cos(\thB)});
+			
+			% Coordinate vertici
+			\coordinate (A) at ({\R*sin(\thA)*cos(\phA)}, {\R*sin(\thA)*sin(\phA)}, {\R*cos(\thA)});
+			\coordinate (B) at ({\R*sin(\thB)*cos(\phA)}, {\R*sin(\thB)*sin(\phA)}, {\R*cos(\thB)});
+			\coordinate (C) at ({\R*sin(\thB)*cos(\phB)}, {\R*sin(\thB)*sin(\phB)}, {\R*cos(\thB)});
+			\coordinate (D) at ({\R*sin(\thA)*cos(\phB)}, {\R*sin(\thA)*sin(\phB)}, {\R*cos(\thA)});
+			\coordinate (Axy) at ({\R*sin(\thA)*cos(\phA)}, {\R*sin(\thA)*sin(\phA)}, 0);
+			
+			% Raggi vettori
+			\draw[posline] (O) -- (A);
+			\draw[posline] (O) -- (B);
+			\draw[posline] (O) -- (Axy);
+			\draw[posline] (A) -- (Axy);
+			
+			% 4. SUPERFICIE dS
+			\filldraw[surfpatch]
+			plot[domain=\thA:\thB, variable=\t, samples=15] ({\R*sin(\t)*cos(\phA)}, {\R*sin(\t)*sin(\phA)}, {\R*cos(\t)})
+			-- plot[domain=\phA:\phB, variable=\t, samples=15] ({\R*sin(\thB)*cos(\t)}, {\R*sin(\thB)*sin(\t)}, {\R*cos(\thB)})
+			-- plot[domain=0:\thB-\thA, variable=\t, samples=15] ({\R*sin(\thB-\t)*cos(\phB)}, {\R*sin(\thB-\t)*sin(\phB)}, {\R*cos(\thB-\t)})
+			-- plot[domain=0:\phB-\phA, variable=\t, samples=15] ({\R*sin(\thA)*cos(\phB-\t)}, {\R*sin(\thA)*sin(\phB-\t)}, {\R*cos(\thA)})
+			-- cycle;
+			
+			\draw[meridian, line width=0.7pt, domain=0:90, variable=\t, samples=40] plot ({\R*sin(\t)*cos(\phA)}, {\R*sin(\t)*sin(\phA)}, {\R*cos(\t)});
+			\draw[meridian, line width=0.7pt, domain=0:90, variable=\t, samples=40] plot ({\R*sin(\t)*cos(\phB)}, {\R*sin(\t)*sin(\phB)}, {\R*cos(\t)});
+			
+			\node[left=2pt, font=\scriptsize\bfseries] at (A) {$A$};
+			\node[below left=2pt, font=\scriptsize\bfseries] at (B) {$B$};
+			\node[below right=1pt, font=\scriptsize\bfseries] at (C) {$C$};
+			\node[above right=1pt, font=\scriptsize\bfseries] at (D) {$D$};
+			\filldraw[fill=black] (O) circle (1.5pt) node[below left=1pt, font=\small\bfseries] {$O$};
+			
+			% 5. QUOTE ANGOLARI CORRETTE E VINCOLATE SUI PIANI
+			
+			% Angolo theta (Dall'asse z al vettore OA, sul piano del meridiano A)
+			\draw[line width=0.6pt, color=black, domain=0:\thA, variable=\t, samples=15] 
+			plot ({1.3*sin(\t)*cos(\phA)}, {1.3*sin(\t)*sin(\phA)}, {1.3*cos(\t)});
+			\node[font=\small\sffamily] at ({1.5*sin(\thA/2)*cos(\phA)}, {1.5*sin(\thA/2)*sin(\phA)}, {1.5*cos(\thA/2)}) {$\theta$};
+			
+			% Incremento dTheta (Dal vettore OA al vettore OB, sul piano del meridiano A)
+			\draw[line width=0.8pt, color=orange!90!red, domain=\thA:\thB, variable=\t, samples=15] 
+			plot ({1.9*sin(\t)*cos(\phA)}, {1.9*sin(\t)*sin(\phA)}, {1.9*cos(\t)});
+			\node[font=\small\bfseries, color=orange!90!red] at ({2.2*sin((\thA+\thB)/2)*cos(\phA)}, {2.2*sin((\thA+\thB)/2)*sin(\phA)}, {2.2*cos((\thA+\thB)/2)}) {$\mathrm{d}\theta$};
+			
+			% Angolo phi (Dall'asse x alla proiezione OAxy, sul piano xy)
+			\draw[line width=0.6pt, color=black, domain=0:\phA, variable=\t, samples=15] 
+			plot ({1.6*cos(\t)}, {1.6*sin(\t)}, 0);
+			\node[font=\small\sffamily] at ({1.9*cos(\phA/2)}, {1.9*sin(\phA/2)}, 0) {$\varphi$};
+			
+			% Incremento dPhi (Dalla proiezione OAxy alla proiezione ODxy, sul piano xy)
+			\draw[line width=0.8pt, color=teal!80!black, domain=\phA:\phB, variable=\t, samples=15] 
+			plot ({2.5*cos(\t)}, {2.5*sin(\t)}, 0);
+			\node[font=\small\bfseries, color=teal!80!black] at ({2.8*cos((\phA+\phB)/2)}, {2.8*sin((\phA+\phB)/2)}, 0) {$\mathrm{d}\varphi$};
+			
+			% Incremento dPhi in quota (Arco sul parallelo passante per l'apice dS)
+			\draw[line width=0.8pt, color=teal!80!black, domain=\phA:\phB, variable=\t, samples=15] 
+			plot ({1.8*sin(20)*cos(\t)}, {1.8*sin(20)*sin(\t)}, {1.8*cos(20)});
+			\node[font=\small\bfseries, color=teal!80!black] at ({2.1*sin(20)*cos((\phA+\phB)/2)}, {2.1*sin(20)*sin((\phA+\phB)/2)}, {2.1*cos(20)}) {$\mathrm{d}\varphi$};
+			
+		\end{scope}
+		
+		\node[badge] at (0, 5.0) {$\mathrm{d}S = R^2 \sin\theta\,\mathrm{d}\theta\,\mathrm{d}\varphi$};
+		
+	\end{tikzpicture}
+	\caption{Elemento di superficie sferica $\mathrm{d}S$. Sono indicati esplicitamente l'angolo polare $\theta$ con il suo incremento $\mathrm{d}\theta$ lungo il meridiano, e l'angolo azimutale $\varphi$ con il suo incremento $\mathrm{d}\varphi$ lungo il parallelo.}
+	\label{fig:superficie_sferica_angoli_chiari}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\large\sffamily]
+		
+		% Stili grafici coordinati con la dispensa
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\normalsize\sffamily},
+			axisline/.style={draw=gray!70, line width=1.2pt, ->},
+			posline/.style={draw=black!85, line width=0.9pt, dashed},
+			surfpatch/.style={draw=orange!90!red, fill=orange!80!red, fill opacity=0.85, line width=1.0pt},
+			meridian/.style={draw=black!85, line width=1.0pt},
+			parallel/.style={draw=black!70, line width=0.9pt, dashed},
+			angleline/.style={draw=black!90, line width=0.8pt, ->},
+			pointer/.style={draw=black!80, line width=0.7pt, ->}
+		}
+		
+		% Proiezione coerente ingrandita
+		\begin{scope}[x={(-0.8cm,-0.5cm)}, y={(1.2cm,0cm)}, z={(0cm,1.4cm)}]
+			
+			\coordinate (O) at (0,0,0);
+			\def\R{7.0} % Raggio scalato per l'effetto zoom
+			
+			% Assi di riferimento principali (solo parziali per l'inquadratura)
+			\draw[axisline] (O) -- (0, 0, 6.0) node[above=2pt, font=\bfseries\itshape] {$z$};
+			\draw[axisline, draw=gray!40] (O) -- (4.0, 0, 0);
+			\draw[axisline, draw=gray!40] (O) -- (0, 4.0, 0);
+			
+			% Parametri angolari per la patch
+			\def\thA{38} % Angolo polare A (theta)
+			\def\thB{58} % Angolo polare B (theta + dtheta)
+			\def\phA{25} % Angolo azimutale A (phi)
+			\def\phB{55} % Angolo azimutale D (phi + dphi)
+			
+			% MERIDIANI (Tracciati parzialmente per lo zoom)
+			\draw[meridian, domain=10:85, variable=\t, samples=40] 
+			plot ({\R*sin(\t)*cos(\phA)}, {\R*sin(\t)*sin(\phA)}, {\R*cos(\t)});
+			\draw[meridian, domain=10:85, variable=\t, samples=40] 
+			plot ({\R*sin(\t)*cos(\phB)}, {\R*sin(\t)*sin(\phB)}, {\R*cos(\t)});
+			
+			% PARALLELI (Tracciati parzialmente, sbordano oltre la patch)
+			\draw[parallel, domain=10:70, variable=\t, samples=30] 
+			plot ({\R*sin(\thA)*cos(\t)}, {\R*sin(\thA)*sin(\t)}, {\R*cos(\thA)});
+			\draw[parallel, domain=10:70, variable=\t, samples=30] 
+			plot ({\R*sin(\thB)*cos(\t)}, {\R*sin(\thB)*sin(\t)}, {\R*cos(\thB)});
+			
+			% Calcolo esatto dei vertici nello spazio
+			\coordinate (A) at ({\R*sin(\thA)*cos(\phA)}, {\R*sin(\thA)*sin(\phA)}, {\R*cos(\thA)});
+			\coordinate (B) at ({\R*sin(\thB)*cos(\phA)}, {\R*sin(\thB)*sin(\phA)}, {\R*cos(\thB)});
+			\coordinate (C) at ({\R*sin(\thB)*cos(\phB)}, {\R*sin(\thB)*sin(\phB)}, {\R*cos(\thB)});
+			\coordinate (D) at ({\R*sin(\thA)*cos(\phB)}, {\R*sin(\thA)*sin(\phB)}, {\R*cos(\thA)});
+			
+			% Raggi vettori tratteggiati dall'origine
+			\draw[posline] (O) -- (A);
+			\draw[posline] (O) -- (B);
+			\draw[posline] (O) -- (D);
+			
+			% SUPERFICIE dS (Patch arancione in evidenza)
+			\filldraw[surfpatch]
+			plot[domain=\thA:\thB, variable=\t, samples=15] ({\R*sin(\t)*cos(\phA)}, {\R*sin(\t)*sin(\phA)}, {\R*cos(\t)})
+			-- plot[domain=\phA:\phB, variable=\t, samples=15] ({\R*sin(\thB)*cos(\t)}, {\R*sin(\thB)*sin(\t)}, {\R*cos(\thB)})
+			-- plot[domain=0:\thB-\thA, variable=\t, samples=15] ({\R*sin(\thB-\t)*cos(\phB)}, {\R*sin(\thB-\t)*sin(\phB)}, {\R*cos(\thB-\t)})
+			-- plot[domain=0:\phB-\phA, variable=\t, samples=15] ({\R*sin(\thA)*cos(\phB-\t)}, {\R*sin(\thA)*sin(\phB-\t)}, {\R*cos(\thA)})
+			-- cycle;
+			
+			% Etichette dei Vertici
+			\node[above left=3pt, font=\Large\bfseries] at (A) {$A$};
+			\node[below left=3pt, font=\Large\bfseries] at (B) {$B$};
+			\node[below right=3pt, font=\Large\bfseries] at (C) {$C$};
+			\node[above right=3pt, font=\Large\bfseries] at (D) {$D$};
+			
+			% Origine
+			\node[below left=2pt, font=\Large\bfseries] at (O) {$O$};
+			
+			
+			% --- INDICAZIONI ANGOLARI CON FRECCE ---
+			
+			% 1. Angolo Theta (Da asse z a raggio OA)
+			\draw[angleline, domain=0:\thA, variable=\t, samples=20] 
+			plot ({2.5*sin(\t)*cos(\phA)}, {2.5*sin(\t)*sin(\phA)}, {2.5*cos(\t)});
+			\node[font=\Large\sffamily] at ({2.8*sin(\thA/2)*cos(\phA)}, {2.8*sin(\thA/2)*sin(\phA)}, {2.8*cos(\thA/2)}) {$\theta$};
+			
+			% 2. Incremento dTheta (Da raggio OA a raggio OB)
+			\draw[angleline, domain=\thA:\thB, variable=\t, samples=15] 
+			plot ({3.8*sin(\t)*cos(\phA)}, {3.8*sin(\t)*sin(\phA)}, {3.8*cos(\t)});
+			
+			% Punto medio dell'arco dTheta per l'aggancio della freccia
+			\coordinate (dThetaMid) at ({3.8*sin((\thA+\thB)/2)*cos(\phA)}, {3.8*sin((\thA+\thB)/2)*sin(\phA)}, {3.8*cos((\thA+\thB)/2)});
+			
+			% 3. Incremento dPhi in quota
+			\draw[angleline, domain=\phA:\phB, variable=\t, samples=15] 
+			plot ({3.2*sin(15)*cos(\t)}, {3.2*sin(15)*sin(\t)}, {3.2*cos(15)});
+			
+			% Punto medio dell'arco dPhi per l'aggancio
+			\coordinate (dPhiMid) at ({3.2*sin(15)*cos((\phA+\phB)/2)}, {3.2*sin(15)*sin((\phA+\phB)/2)}, {3.2*cos(15)});
+			
+		\end{scope} % Fine scope 3D
+		
+		
+		% --- FRECCE DI RICHIAMO ED ETICHETTE ESTERNE (Coordinate assolute 2D) ---
+		
+		% Richiamo per dTheta
+		\node[font=\LARGE\bfseries, color=black] (dThetaLabel) at (-3.5, 1.2) {$\mathrm{d}\theta$};
+		\draw[pointer] (dThetaLabel.south east) .. controls (-2.0, 0.8) and (-1.8, -0.5) .. (dThetaMid);
+		
+		% Richiamo per dPhi
+		\node[font=\LARGE\bfseries, color=black] (dPhiLabel) at (-1.5, 5.0) {$\mathrm{d}\varphi$};
+		\draw[pointer] (dPhiLabel.south east) .. controls (-0.5, 4.5) and (-0.2, 3.8) .. (dPhiMid);
+		
+	\end{tikzpicture}
+	\caption{Dettaglio ingrandito dell'elemento di superficie sferica. Le proiezioni evidenziano i differenziali angolari $\mathrm{d}\theta$ lungo la latitudine e $\mathrm{d}\varphi$ lungo la longitudine.}
+	\label{fig:zoom_elemento_superficie}
+\end{figure}
+
+In coordinate sferiche, un incremento $\dd\theta$ sposta un punto lungo un meridiano di un arco $\overline{AB}=r\,\dd\theta$, mentre un incremento $\dd\varphi$ lo sposta lungo un parallelo, di raggio $r\sin\theta$, di un arco $\overline{AD}=r\sin\theta\,\dd\varphi$. L'elemento di superficie è il rettangolo di lati $\overline{AB}$ e $\overline{AD}$,
+\[
+\dd S=\overline{AB}\cdot\overline{AD}=r^2\sin\theta\,\dd\theta\,\dd\varphi ,
+\]
+e l'angolo solido elementare è $\dd\Omega=\dd S/r^2=\sin\theta\,\dd\theta\,\dd\varphi$, indipendente da $r$. Per un cono di rivoluzione intorno all'asse $z$ e di semiapertura $\alpha$, l'integrazione su $\varphi\in[0,2\pi]$ e su $\theta\in[0,\alpha]$ dà
+\[
+\Omega=\int_0^{2\pi}\dd\varphi\int_0^{\alpha}\sin\theta\,\dd\theta=2\pi\bigl[-\cos\theta\bigr]_0^{\alpha}=2\pi(1-\cos\alpha) ,
+\]
+con $\alpha$ in radianti. Il risultato è coerente: per $\alpha=\pi/2$ (semispazio) si ha $2\pi$; per $\alpha=\pi$ (tutto lo spazio) si ha $4\pi$, in accordo con la formula precedente.
+
+Per un cono molto stretto, con $\alpha\ll1\ \mathrm{rad}$, lo sviluppo $\cos\alpha\simeq1-\alpha^2/2$ riduce il risultato a
+\[
+\Omega\simeq2\pi\,\frac{\alpha^2}{2}=\pi\alpha^2 ,
+\]
+ossia all'area $\pi(r\alpha)^2$ del cerchio di raggio $r\alpha$, divisa per $r^2$: una calotta stretta è quasi piana. L'angolo solido è lo strumento naturale dei problemi con simmetria sferica, perché permette di scrivere l'elemento di superficie come $\dd S=r^2\,\dd\Omega$ ed eliminare così la dipendenza dal raggio; l'esercizio guida ne mostra l'uso nel calcolo del flusso del campo di una carica puntiforme.
+
+\titoletto{La legge di Coulomb}
+La legge di Coulomb è la prima relazione quantitativa dell'interazione elettrica e, come la gravitazione universale, si ricava da un esperimento. Una bilancia di torsione, strumento analogo al pendolo con cui Cavendish misurò l'attrazione gravitazionale tra masse, regge una piccola sfera carica all'estremità di un'asta appesa a un filo sottile; un'altra sfera carica, fissa, la respinge o l'attrae, e l'angolo di torsione del filo misura la forza. La legge vale rigorosamente per cariche puntiformi, cioè per corpi carichi le cui dimensioni sono trascurabili rispetto alla distanza che li separa; vale con buona approssimazione anche per corpi più estesi ma sufficientemente lontani, e il caso generale si riconduce ad essa con opportune somme o integrali. Si considerino una carica $q$ e una seconda carica $q_0$, poste a distanza $r$. La forza che $q$ esercita su $q_0$ è
+\[
+\vec F_{q\to q_0}=\frac{1}{4\pi\varepsilon_0}\,\frac{q\,q_0}{r^2}\,\hat u_r ,
+\]
+dove $\hat u_r$ è il versore diretto da $q$ verso $q_0$ (adimensionale), $r$ è la distanza in metri, le cariche si misurano in coulomb (C) e la forza in newton. La costante $\varepsilon_0\simeq8{,}85\times10^{-12}\un{C^2\,N^{-1}\,m^{-2}}$ è la costante dielettrica del vuoto e il fattore $k=1/(4\pi\varepsilon_0)\simeq8{,}99\times10^{9}\un{N\,m^2\,C^{-2}}$ si arrotonda a $9\times10^{9}\un{N\,m^2\,C^{-2}}$ nelle stime. La forza giace sulla retta che congiunge le cariche. Se $q$ e $q_0$ hanno lo stesso segno, il prodotto $q\,q_0$ è positivo, la forza è concorde con $\hat u_r$ ed è repulsiva; se i segni sono opposti il prodotto è negativo, la forza è discorde con $\hat u_r$ ed è attrattiva. Per il terzo principio della dinamica $q_0$ esercita su $q$ la forza opposta, $\vec F_{q_0\to q}=-\vec F_{q\to q_0}$, di pari modulo e stessa retta d'azione. La carica elementare è $e\simeq1{,}60\times10^{-19}\un{C}$: il protone ha carica $+e$, l'elettrone $-e$, e ogni carica osservabile è un multiplo intero di $e$.
+
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+		
+		\tikzset{
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			charge/.style={circle, draw=black!80, line width=0.7pt, minimum size=0.8cm, inner sep=0pt, font=\large\sffamily},
+			forceq0/.style={line width=1.5pt, ->, color=orange!90!red},
+			forceq/.style={line width=1.5pt, ->, color=teal!80!black},
+			dimline/.style={line width=0.6pt, <->, color=gray!80!black},
+			versor/.style={line width=1.1pt, ->, color=gray!80!black}
+		}
+		
+		% ---------- cariche dello stesso segno: repulsione ----------
+		\begin{scope}[shift={(0,1.9)}]
+			\node[charge, fill=orange!25] (q1) at (0,0) {$+$};
+			\node[charge, fill=orange!25] (q2) at (5.2,0) {$+$};
+			\node[below=3pt] at (q1.south) {$q>0$};
+			\node[below=3pt] at (q2.south) {$q_0>0$};
+			\draw[forceq0] (q2.east) -- ++(1.7,0) node[midway, above=1pt] {$\vec{F}_{q\to q_0}$};
+			\draw[forceq] (q1.west) -- ++(-1.7,0) node[midway, above=1pt] {$\vec{F}_{q_0\to q}$};
+			\draw[dimline] (0,0.8) -- (5.2,0.8) node[midway, fill=white, inner sep=2pt] {$r$};
+			\draw[versor] (0.7,-0.95) -- (1.9,-0.95) node[midway, below=1pt] {$\hat{u}_r$};
+			\node[badge] at (7.9,0) {repulsione};
+		\end{scope}
+		
+		% ---------- cariche di segno opposto: attrazione ----------
+		\begin{scope}[shift={(0,-1.9)}]
+			\node[charge, fill=orange!25] (p1) at (0,0) {$+$};
+			\node[charge, fill=teal!25] (p2) at (5.2,0) {$-$};
+			\node[below=3pt] at (p1.south) {$q>0$};
+			\node[below=3pt] at (p2.south) {$q_0<0$};
+			\draw[forceq0] (p2.west) -- ++(-1.7,0) node[midway, above=1pt] {$\vec{F}_{q\to q_0}$};
+			\draw[forceq] (p1.east) -- ++(1.7,0) node[midway, above=1pt] {$\vec{F}_{q_0\to q}$};
+			\draw[dimline] (0,0.8) -- (5.2,0.8) node[midway, fill=white, inner sep=2pt] {$r$};
+			\draw[versor] (0.7,-0.95) -- (1.9,-0.95) node[midway, below=1pt] {$\hat{u}_r$};
+			\node[badge] at (7.9,0) {attrazione};
+		\end{scope}
+		
+	\end{tikzpicture}
+	\caption{Forze di Coulomb tra due cariche puntiformi. Il versore $\hat{u}_r$ è diretto da $q$ verso $q_0$: la forza su $q_0$ è concorde con $\hat{u}_r$ se le cariche hanno lo stesso segno, discorde se hanno segno opposto; la forza su $q$ è l'opposta, in accordo con il terzo principio della dinamica.}
+	\label{fig:forze_coulomb}
+\end{figure}
+
+La struttura è identica a quella della legge di gravitazione universale: forza centrale, diretta lungo la congiungente, proporzionale al prodotto delle grandezze che interagiscono (cariche o masse) e all'inverso del quadrato della distanza. Anche qui la dipendenza da ricordare con precisione è quella dall'inverso del quadrato della distanza: non dalla distanza, non dal quadrato della distanza. Le differenze sono due. Le cariche hanno due segni, perciò la forza può essere repulsiva, mentre la gravitazione è soltanto attrattiva; inoltre, a parità di distanza, la forza elettrica tra due protoni supera quella gravitazionale di un fattore dell'ordine di $10^{36}$, come mostra l'esercizio guida. I corpi macroscopici contengono cariche positive e negative in numero quasi eguale e sono sostanzialmente neutri: se non lo fossero, le forze elettriche tra oggetti ordinari sarebbero enormi.
+
+Come la forza gravitazionale, la forza di Coulomb è centrale e conservativa, e la sua energia potenziale dipende da $1/r$. Il gradiente del reciproco della distanza, già calcolato, permette di verificarlo:
+\[
+U=\frac{1}{4\pi\varepsilon_0}\,\frac{q\,q_0}{r},\qquad
+-\nab U=-\frac{q\,q_0}{4\pi\varepsilon_0}\,\nab\!\left(\frac1r\right)=\frac{q\,q_0}{4\pi\varepsilon_0}\,\frac{\vec r}{r^3}=\frac{1}{4\pi\varepsilon_0}\,\frac{q\,q_0}{r^2}\,\hat u_r=\vec F_{q\to q_0} ,
+\]
+dove $U$ è in joule, con la costante additiva fissata in modo che $U\to0$ per $r\to\infty$, e $\vec r$ è il vettore posizione di $q_0$ rispetto a $q$. L'energia potenziale dipende da $r$ come $1/r$, la forza come $1/r^2$. Il rapporto tra la forza e la carica di prova, $\vec E=\vec F/q_0$, in $\mathrm{N\,C^{-1}}$, elimina $q_0$ e lascia il campo elettrico, che per una carica puntiforme vale $\vec E=q\,\hat u_r/(4\pi\varepsilon_0r^2)$: è radiale, esce dalle cariche positive ed entra in quelle negative, ed è l'analogo elettrico di $\vec g=\vec F/m$. Questi sviluppi, anticipati per mostrare la coerenza degli strumenti introdotti, saranno ripresi con ordine nei capitoli successivi.
+
+In un mezzo materiale la costante $\varepsilon_0$ si sostituisce con $\varepsilon=\varepsilon_r\varepsilon_0$, dove $\varepsilon_r\geq1$ è la costante dielettrica relativa del mezzo (adimensionale): a parità di cariche e di distanza la forza si riduce del fattore $\varepsilon_r$. L'aria ha $\varepsilon_r$ praticamente uguale a 1 e si comporta come il vuoto; l'acqua ha $\varepsilon_r\simeq80$ a temperatura ambiente. La differenza spiega un fenomeno quotidiano. Il cloruro di sodio, $\mathrm{NaCl}$, è un cristallo ionico: gli ioni $\mathrm{Na^+}$ e $\mathrm{Cl^-}$, a distanza di circa $0{,}28\un{nm}$ in una struttura cubica a facce centrate, sono tenuti insieme dall'attrazione di Coulomb (nel legame covalente, come nel diamante o nel quarzo, gli elettroni sono invece condivisi tra gli atomi). Nell'aria la forza tra i due ioni vale circa $3\times10^{-9}\un{N}$; in acqua si riduce di un fattore circa 80, a circa $4\times10^{-11}\un{N}$, e la molecola dell'acqua, che è polare, con cariche parziali positive sugli atomi di idrogeno e negativa sull'ossigeno (un dipolo elettrico, che sarà studiato più avanti), contribuisce a staccare gli ioni. Il cristallo si dissocia, cioè il sale si scioglie. Il calcolo della forza di Coulomb tra due protoni a distanza nucleare è svolto nell'esercizio guida.
+
+
+\titoletto{Interpretazione fisica e casi limite.}
+Alcuni risultati del blocco si leggono meglio nei casi estremi. Il campo di una sorgente puntiforme, gravitazionale o elettrico, decresce come $1/r^2$: per $r\to\infty$ il modulo tende a zero e le linee di campo diventano sempre più rade, mentre nei pressi della sorgente sono più fitte e il campo è più intenso. All'opposto, un campo uniforme ha stesso modulo, stessa direzione e stesso verso in ogni punto, ed è rappresentato da linee parallele ed equispaziate. Il campo gravitazionale terrestre ne è un esempio in prima approssimazione: la Terra è sferica e le linee reali convergono verso il centro, ma il suo raggio è enorme rispetto alle distanze che interessano nell'esperienza quotidiana, sicché la superficie appare piatta e il campo perpendicolare al suolo e uniforme.
+
+Il flusso di un campo uniforme attraverso una superficie piana, $\Phi=uS\cos\theta$, assume i valori estremi nei casi limite dell'orientazione. È massimo, $uS$, per $\theta=0$, quando la normale è parallela al campo e la superficie è vista di fronte; è nullo per $\theta=\pi/2$, quando il campo è parallelo alla superficie e nessuna linea la attraversa; è opposto, $-uS$, per $\theta=\pi$, con normale antiparallela al campo. Il segno dipende soltanto dalla scelta del verso di $\vec n$, che per una superficie chiusa è per convenzione uscente.
+
+Nell'angolo solido la formula $\Omega=2\pi(1-\cos\alpha)$ contiene i casi limite già incontrati: per $\alpha=\pi/2$ vale $2\pi$ (semispazio), per $\alpha=\pi$ vale $4\pi$ (tutto lo spazio), per $\alpha\to0$ si riduce a $\pi\alpha^2$ e la calotta tende a un disco piano. Considerazioni analoghe valgono per l'approssimazione $\sin\theta\simeq\theta$, accettabile per angoli espressi in radianti e inferiori a circa un radiante. Infine, tra regime stazionario e regime dipendente dal tempo cambia la natura del campo elettrico: nel primo la circuitazione di $\vec E$ è nulla e il campo è conservativo, con un potenziale; nel secondo la terza equazione di Maxwell assegna alla circuitazione un valore proporzionale alla rapidità di variazione del flusso di $\vec B$, e la conservatività viene meno.
+
+\medskip
+
+\titoletto{Speciale esami precedenti.}
+\noindent\textsc{Domande orali tipiche.} Le domande sul blocco preliminare sono poche, secche e ricorrenti. Si chiedono le proprietà delle linee di campo, e la risposta completa ne contiene quattro: sono più fitte dove il campo è più intenso (il numero di linee per unità di superficie è proporzionale al modulo); non si intersecano mai, perché in un punto comune non sarebbe definibile la tangente e dunque nemmeno il campo; in ogni punto il campo è tangente alla linea e ne segue il verso; nel campo uniforme sono rette parallele ed equispaziate, e a chi chiede come si disegna un campo uniforme non si risponde altro. Il trabocchetto più comune consiste nello scambiare la linea con il campo. La linea non è un vettore, e la freccia di orientamento va tracciata in un punto qualunque della linea, non agli estremi; il campo in un punto $P$ è invece un vettore applicato in $P$, tangente alla linea, e non il segmento che unisce la sorgente a $P$.
+
+Due domande riguardano qualunque campo: è conservativo? è solenoidale? La risposta è sempre una frase compiuta («il campo elettrico è conservativo»), seguita dalla scrittura matematica e dall'implicazione che ne discende. Per il carattere conservativo si scrive la circuitazione, con il cerchietto sul segno di integrale, il campo con la freccia, il prodotto scalare con un punto ben visibile e $\dd\vec l$ come elemento di linea, uguale a zero per ogni linea chiusa; si aggiunge che ciò equivale a rotore nullo (campo irrotazionale) e all'esistenza di un potenziale, con $\vec E=-\nab\varphi$. Per il carattere solenoidale si scrive il flusso attraverso una superficie chiusa, nullo per ogni superficie chiusa, equivalente a divergenza nulla. Il campo elettrico è conservativo e non solenoidale, il campo magnetico è solenoidale e non conservativo: uno diverge e l'altro ruota. La richiesta delle proprietà del campo elettrico è tra le più frequenti, e le due parole «conservativo» e «divergente dalle cariche» ne costituiscono il nucleo. A queste si collega la domanda sul legame tra campo e potenziale, alla quale conviene rispondere con l'affermazione che, se il campo è conservativo, esiste il potenziale, e con la relazione di gradiente scritta con il suo segno.
+
+Un tranello concettuale riguarda la differenza tra potenziale ed energia potenziale. L'energia potenziale appartiene a un corpo di prova collocato nel campo ed è in joule; il potenziale è una proprietà del campo, indipendente dal corpo di prova, e si ottiene come rapporto tra l'energia potenziale e la grandezza che subisce la forza (la carica nel caso elettrico, con l'unità volt; la massa nel caso gravitazionale), cosicché $U=q_0\,\varphi$. Allo stesso modo si passa dalla forza al campo. Un secondo tranello riguarda i teoremi. Quello della divergenza si applica a una superficie chiusa e a un campo con derivate continue in tutto il volume racchiuso, e va maneggiato con cura in prossimità di una sorgente puntiforme; quello di Stokes richiede una linea chiusa orientata e una superficie che la abbia per contorno, con la normale scelta secondo la regola della mano destra.
+
+Accanto ai temi propri compaiono domande di base, che servono a verificare il controllo degli strumenti: la definizione di radiante e il suo valore in gradi, l'area del cerchio, la superficie e il volume della sfera, la derivata di $x^2$, l'integrale di $1/x$, i valori di seno e coseno degli angoli notevoli, la differenza tra massa e peso con le relative unità, la definizione di lavoro. Su questi punti l'esitazione non è tollerata, perché una lacuna impedisce di procedere. In caso di vuoto di memoria il candidato ricostruisce il risultato dalla definizione, come il radiante dal rapporto tra arco e raggio o il seno dalla proiezione sulla circonferenza goniometrica, e questo modo di ragionare è apprezzato.
+
+\medskip
+
+\noindent\textsc{Tipologie di esercizi scritti.} Il blocco preliminare non genera problemi autonomi: fornisce strumenti che ricompaiono dentro i problemi dei capitoli successivi, ed è utile riconoscere le forme in cui si declina. Una prima forma è il calcolo di una forza di Coulomb o gravitazionale con ordini di grandezza e confronto tra le due, che richiede potenze di dieci, conversioni di unità e controllo dimensionale. Ricorrono poi i calcoli con gli operatori differenziali su funzioni assegnate, gradiente di una funzione di $r$, divergenza e rotore di un campo vettoriale, per decidere se il campo è conservativo o solenoidale e per ricavare il campo dal potenziale. Si incontrano flussi e circuitazioni valutati direttamente, quando una simmetria rende costante la funzione integranda, oppure per mezzo dei teoremi della divergenza e di Stokes, quando la forma della superficie o del percorso rende scomodo il calcolo diretto. L'angolo solido di un cono, con $\Omega=2\pi(1-\cos\alpha)$, e l'uso di $\dd S=r^2\,\dd\Omega$ completano il quadro; sul versante algebrico restano la scomposizione di un vettore con la trigonometria e i prodotti scalare e vettoriale con numeri assegnati, per verificare ortogonalità o parallelismo e calcolare l'area di un parallelogramma.
+
+\medskip
+
+\noindent\textsc{Gli errori più penalizzati.} I più gravi sono errori di notazione e di significato, assai più che di calcolo. L'omissione dell'unità di misura rende una grandezza priva di senso, e l'esempio classico è il peso espresso in chilogrammi: il chilogrammo misura la massa, mentre il peso è una forza e vale $mg$ in newton. Sui vettori l'errore tipico è la mancanza della freccia sopra il simbolo, del punto del prodotto scalare o del cerchietto nella circuitazione; seguono lo scambio tra direzione e verso e l'ipotesi che l'asse $z$ sia uscente soltanto perché $x$ e $y$ sono disegnati sulla lavagna, mentre $z$ è fissato da $\vec i_1\times\vec i_2=\vec i_3$ e va scelto altrimenti solo con dichiarazione esplicita.
+
+Le linee di campo si prestano a varie sviste: frecce disegnate a ogni estremo come se le linee fossero vettori, linee che si incrociano, campo rappresentato come segmento dalla sorgente al punto, linee del campo gravitazionale di una massa orientate verso l'esterno anziché verso la sorgente. I segni meritano una menzione a parte. Il segno meno in $\vec F=-\nab U$ e in $\vec u=-\nab\varphi$ traduce la direzione di massima diminuzione dell'energia potenziale e non va perso; il segno meno della gravitazione deriva dall'opposizione tra forza e versore uscente dalla sorgente, mentre in Coulomb il segno della forza dipende da quello del prodotto delle cariche. Quanto agli angoli, si sbaglia quando si usano i gradi dove la formula richiede radianti, quando si applica $\sin\theta\simeq\theta$ ad angoli troppo grandi e quando si ricorre alle coordinate cartesiane dove la simmetria suggerirebbe quelle sferiche.
+
+Una classe a sé raccoglie gli errori di linguaggio. Si dice flusso attraverso una superficie, mai nella superficie o sulla superficie, perché sono le linee ad attraversarla; si dice che la forza dipende dall'inverso del quadrato della distanza, non dalla distanza e non dal quadrato della distanza; si ricorda che il prodotto vettoriale non è commutativo e si annulla per vettori paralleli, mentre il prodotto scalare si annulla per vettori ortogonali. Resta infine la confusione tra aggettivi: conservativo non è solenoidale, e irrotazionale è sinonimo di conservativo in un dominio semplicemente connesso, non di solenoidale.
+
+\medskip
+
+\titoletto{Esercizio guida risolto.}
+Una carica puntiforme $q$ è collocata nell'origine, nel vuoto. Il campo elettrico che essa genera, ottenuto dal rapporto tra la forza di Coulomb e la carica di prova, è
+\[
+\vec E(\vec r)=\frac{q}{4\pi\varepsilon_0}\,\frac{\vec r}{r^3}\qquad(r\neq0).
+\]
+Si chiede di stabilire se il campo è solenoidale e conservativo nella regione $r\neq0$, di calcolare il flusso di $\vec E$ attraverso una sfera di raggio $R$ centrata nell'origine e attraverso la calotta sferica di semiapertura $\alpha$, e di ricavare il potenziale. Per $q=e$, carica del protone, si vogliono infine il flusso totale e la forza di Coulomb su un secondo protone a distanza $d=1\un{fm}$, da confrontare con la forza gravitazionale tra gli stessi protoni.
+
+Si comincia dalla divergenza. La regola $\nab\cdot(\varphi\vec u)=\varphi\,\nab\cdot\vec u+\vec u\cdot\nab\varphi$, con $\varphi=1/r^3$ e $\vec u=\vec r$, richiede $\nab\cdot\vec r=\partial_xx+\partial_yy+\partial_zz=3$ e il gradiente $\nab(1/r^3)=-3\vec r/r^5$, già calcolato. Si ha
+\[
+\nab\cdot\frac{\vec r}{r^3}=\frac1{r^3}\,\nab\cdot\vec r+\vec r\cdot\nab\!\left(\frac1{r^3}\right)=\frac3{r^3}-\frac{3\,\vec r\cdot\vec r}{r^5}=\frac3{r^3}-\frac3{r^3}=0 ,
+\]
+dove $\vec r\cdot\vec r=r^2$. Ne segue $\nab\cdot\vec E=0$ per $r\neq0$: il campo è solenoidale in ogni regione che non contiene l'origine. Per il rotore vale $\nab\times(\varphi\vec u)=\varphi\,\nab\times\vec u+\nab\varphi\times\vec u$, con gli stessi $\varphi$ e $\vec u$. Il rotore di $\vec r$ è nullo, perché ogni componente è una differenza di derivate parziali che si annulla (ad esempio $\partial_yz-\partial_zy=0$), e inoltre $\nab(1/r^3)\times\vec r=-3\,\vec r\times\vec r/r^5=0$, perché i due fattori sono vettori paralleli. Dunque $\nab\times\vec E=0$ e il campo è irrotazionale.
+
+Il potenziale si cerca come funzione scalare $\varphi(r)$ tale che $\vec E=-\nab\varphi$. Poiché $\nab(1/r)=-\vec r/r^3$, si verifica che
+\[
+\varphi(r)=\frac{q}{4\pi\varepsilon_0\,r}\qquad\Longrightarrow\qquad-\nab\varphi=-\frac{q}{4\pi\varepsilon_0}\,\nab\!\left(\frac1r\right)=\frac{q}{4\pi\varepsilon_0}\,\frac{\vec r}{r^3}=\vec E ,
+\]
+con $\varphi$ in volt (joule su coulomb), definito a meno di una costante additiva, qui fissata in modo che $\varphi\to0$ per $r\to\infty$. L'esistenza del potenziale prova che il campo è conservativo: la circuitazione è nulla lungo ogni linea chiusa che non passa per l'origine.
+
+Per il flusso attraverso la sfera di raggio $R$, la normale uscente è $\vec n=\hat u_r$, e sulla superficie il campo ha modulo costante e direzione parallela a $\vec n$:
+\[
+\Phi=\oint_S\vec E\cdot\vec n\,\dd S=\frac{q}{4\pi\varepsilon_0R^2}\oint_S\dd S=\frac{q}{4\pi\varepsilon_0R^2}\,4\pi R^2=\frac{q}{\varepsilon_0}.
+\]
+Il risultato non dipende da $R$ ed è la prima equazione di Maxwell per una carica puntiforme. Qui si colloca il passaggio critico. L'annullarsi della divergenza per $r\neq0$ sembrerebbe imporre, per il teorema della divergenza, un flusso nullo; ma il teorema richiede un campo con derivate continue in tutto il volume racchiuso, e $\vec E$ non è nemmeno definito nell'origine. L'ipotesi non è soddisfatta, e il flusso totale proviene proprio dalla singolarità, cioè dalla carica. Il teorema è invece applicabile a una superficie chiusa che non racchiude l'origine, e in tal caso il flusso è nullo.
+
+Per la calotta di semiapertura $\alpha$, con asse lungo $z$ e vertice nell'origine, conviene l'angolo solido. Sulla calotta di raggio $R$ si ha $\dd S=R^2\,\dd\Omega$, e quindi
+\[
+\dd\Phi=\vec E\cdot\vec n\,\dd S=\frac{q}{4\pi\varepsilon_0R^2}\,R^2\,\dd\Omega=\frac{q}{4\pi\varepsilon_0}\,\dd\Omega,\qquad
+\Phi_\alpha=\frac{q}{4\pi\varepsilon_0}\,2\pi(1-\cos\alpha)=\frac{q}{2\varepsilon_0}\,(1-\cos\alpha).
+\]
+Il flusso dipende solo dall'angolo solido sotteso e non dal raggio: è la conseguenza geometrica della dipendenza $1/r^2$ del campo, che compensa la crescita come $r^2$ della superficie. Per $\alpha=\pi/2$ si ha metà del flusso totale, $q/(2\varepsilon_0)$; per $\alpha=\pi$ si ritrova $q/\varepsilon_0$.
+
+Resta la parte numerica. Con $q=e\simeq1{,}60\times10^{-19}\un{C}$ e $\varepsilon_0\simeq8{,}85\times10^{-12}\un{C^2\,N^{-1}\,m^{-2}}$ il flusso totale è
+\[
+\Phi=\frac{e}{\varepsilon_0}\simeq\frac{1{,}60\times10^{-19}}{8{,}85\times10^{-12}}\un{N\,m^2\,C^{-1}}\simeq1{,}8\times10^{-8}\un{V\,m}.
+\]
+La forza su un secondo protone, posto a $d=1\un{fm}=10^{-15}\un{m}$, è repulsiva e vale
+\[
+F_e=\frac{1}{4\pi\varepsilon_0}\,\frac{e^2}{d^2}\simeq\frac{8{,}99\times10^{9}\cdot(1{,}60\times10^{-19})^2}{(10^{-15})^2}\un{N}\simeq2{,}3\times10^{2}\un{N},
+\]
+con controllo dimensionale $\mathrm{N\,m^2\,C^{-2}}\cdot\mathrm{C^2}\cdot\mathrm{m^{-2}}=\mathrm{N}$. È una forza pari a circa un terzo del peso di una persona di $65\un{kg}$ ($650\un{N}$), ma esercitata su una particella di massa $m_p\simeq1{,}67\times10^{-27}\un{kg}$, alla quale impartirebbe un'accelerazione dell'ordine di $10^{29}\un{m\,s^{-2}}$. La forza gravitazionale tra gli stessi protoni è
+\[
+F_g=G\,\frac{m_p^2}{d^2}\simeq\frac{6{,}67\times10^{-11}\cdot(1{,}67\times10^{-27})^2}{(10^{-15})^2}\un{N}\simeq1{,}9\times10^{-34}\un{N},
+\]
+e il rapporto $F_e/F_g\simeq1{,}2\times10^{36}$ non dipende da $d$, perché entrambe le forze decrescono come $1/d^2$. La repulsione elettrica tra i protoni di un nucleo è dunque enorme rispetto all'attrazione gravitazionale, e soltanto un'interazione di natura diversa, più intensa a distanze così piccole, può mantenerli uniti.
+
+I punti in cui si sbaglia più spesso sono tre. La conversione del femtometro in metri va eseguita prima di elevare al quadrato la distanza, perché un errore sulla potenza di dieci si moltiplica per due nell'esponente. Il teorema della divergenza non si applica per automatismo, ma dopo aver controllato che il campo sia regolare nel volume racchiuso. La scelta delle coordinate sferiche, infine, trasforma il flusso in un prodotto di numeri e rende immediato l'uso dell'angolo solido, mentre il calcolo in coordinate cartesiane renderebbe il medesimo integrale quasi intrattabile.
+
+\end{document}
