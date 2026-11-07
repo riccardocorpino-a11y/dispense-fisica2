@@ -1,26 +1,22 @@
-\documentclass[11pt,a4paper]{article}
-\input{preambolo}
-
-% Prefisso fisso dei riquadri di richiamo (definito nel preambolo)
-\renewcommand{\richiamoprefix}{Richiamo Matematico/Fisica 1 --- }
+\documentclass[main.tex]{subfiles}
 
 \begin{document}
 
-\begin{center}
-{\Large Fisica Generale: Elettromagnetismo}\\[6pt]
-{\large Lezioni preliminari: richiami di meccanica, geometria e trigonometria,\\ algebra e analisi vettoriale, campi, angolo solido, legge di Coulomb}\\[6pt]
-Dispensa di studio autonoma per la preparazione dell'esame
-\end{center}
-\vspace{1ex}
+% Impostazione locale dei titoli dei riquadri (vale da qui in poi)
+\renewcommand{\richiamoprefix}{}
 
-\noindent\textsc{Sintesi concettuale.} Il corso si propone di descrivere i due campi vettoriali dell'elettromagnetismo, il campo elettrico e il campo magnetico, e di condurre alle quattro equazioni di Maxwell, che devono essere sapute scrivere e interpretare dal punto di vista fisico. Le lezioni preliminari ne costruiscono il linguaggio. Il punto di partenza è la meccanica già nota: il lavoro, la forza conservativa e l'energia potenziale, il teorema dell'energia cinetica e il bilancio energetico, con la geometria e la trigonometria che servono a scomporre i vettori e a misurare gli angoli. Su questa base si innesta l'algebra vettoriale, poiché ogni fenomeno fisico è descritto da uno scalare o da un vettore, e da essa discende la nozione di campo, rappresentata dalle linee di campo e studiata con l'operatore simbolico nabla: gradiente, divergenza e rotore ne sono le tre applicazioni. Quando si passa alle grandezze integrali compaiono il flusso e la circuitazione, legati agli operatori locali dai teoremi della divergenza e di Stokes; da questi nascono i due aggettivi che accompagnano ogni campo studiato nel corso, conservativo (circuitazione nulla, rotore nullo, esistenza di un potenziale) e solenoidale (flusso nullo attraverso ogni superficie chiusa, divergenza nulla). L'angolo solido, indispensabile nei problemi a simmetria sferica, e la legge di Coulomb, prima relazione quantitativa dell'interazione elettrica, chiudono il blocco. Il quadro finale, da tenere a mente per l'orale, è il seguente: il campo elettrico (in regime stazionario) è conservativo e non solenoidale, il campo magnetico è solenoidale e non conservativo; due campi e due aggettivi forniscono quattro informazioni, e le quattro equazioni di Maxwell le contengono tutte.
+
+\section*{Fisica Generale: Elettromagnetismo --- Lezioni preliminari: richiami di meccanica, geometria e trigonometria, algebra e analisi vettoriale, campi, angolo solido, legge di Coulomb}
+
+Il corso si propone di descrivere i due campi vettoriali dell'elettromagnetismo, il campo elettrico e il campo magnetico, e di condurre alle quattro equazioni di Maxwell. Le lezioni preliminari ne costruiscono il linguaggio. Il punto di partenza è la meccanica già nota: il lavoro, la forza conservativa e l'energia potenziale, il teorema dell'energia cinetica e il bilancio energetico, con la geometria e la trigonometria che servono a scomporre i vettori e a misurare gli angoli. Su questa base si innesta l'algebra vettoriale, poiché ogni fenomeno fisico è descritto da uno scalare o da un vettore, e da essa discende la nozione di campo, rappresentata dalle linee di campo e studiata con l'operatore simbolico nabla: gradiente, divergenza e rotore ne sono le tre applicazioni. Quando si passa alle grandezze integrali compaiono il flusso e la circuitazione, legati agli operatori locali dai teoremi della divergenza e di Stokes; da questi nascono i due aggettivi che accompagnano ogni campo studiato nel corso, conservativo (circuitazione nulla, rotore nullo, esistenza di un potenziale) e solenoidale (flusso nullo attraverso ogni superficie chiusa, divergenza nulla). L'angolo solido, indispensabile nei problemi a simmetria sferica, e la legge di Coulomb, prima relazione quantitativa dell'interazione elettrica, chiudono il blocco. Il quadro finale, da tenere a mente per l'orale, è il seguente: il campo elettrico (in regime stazionario) è conservativo e non solenoidale, il campo magnetico è solenoidale e non conservativo; due campi e due aggettivi forniscono quattro informazioni, e le quattro equazioni di Maxwell le contengono tutte.
 
 \medskip
 
-\titoletto{Prerequisiti e strumenti di calcolo.}
+\section*{Prerequisiti e strumenti di calcolo}
 I riquadri che seguono raccolgono quanto di Fisica 1, di Geometria e di Analisi viene usato nel resto del testo. Chi li padroneggia può scorrerli rapidamente; chi ha dubbi sul significato di una definizione operativa vi troverà ciò che serve per proseguire senza altri libri. L'ordine è quello d'uso: prima il linguaggio dei vettori e dell'analisi, poi la geometria con la trigonometria, infine la meccanica e le scale di grandezza.
 
-\begin{richiamo}{grandezze scalari e vettoriali, unità di misura}
+\renewcommand{\richiamoprefix}{Richiamo di Matematica --- }
+\begin{riquadro}{grandezze scalari e vettoriali, unità di misura}
 Una grandezza scalare è individuata da un solo numero accompagnato da un'unità di misura: sono scalari la massa, l'energia, la temperatura, la pressione, il calore. Una grandezza vettoriale richiede in più una direzione e un verso: sono vettori la forza, la velocità, lo spostamento, l'accelerazione, la quantità di moto, il momento angolare. Un vettore ha quindi tre caratteristiche, il modulo (l'intensità del fenomeno), la direzione e il verso, cui si aggiunge il punto di applicazione. Nel linguaggio comune «direzione» e «verso» si scambiano; nell'algebra vettoriale la direzione è la retta che contiene il vettore, mentre il verso indica quale dei due sensi di percorrenza di quella retta è scelto. Il verso si disegna con una freccia, che va tracciata in un solo punto della linea e non in ogni segmento, perché una linea non è un vettore.
 
 Il modulo è privo di significato senza l'unità. Per la forza l'unità del Sistema Internazionale è il newton,
@@ -32,9 +28,12 @@ Il chilogrammo misura la massa. Il peso è una forza e si calcola con
 P=mg ,
 \]
 dove $m$ è la massa (in $\mathrm{kg}$), $g\simeq 9{,}8\un{m\,s^{-2}}$ è l'accelerazione di gravità (spesso arrotondata a $10\un{m\,s^{-2}}$ per stime rapide) e $P$ si misura in newton. Un corpo di $65\un{kg}$ pesa dunque circa $650\un{N}$. L'espressione «chilogrammo peso», che compare sulle bilance, è un'unità tecnica pari a circa $9{,}8\un{N}$. Per avere il senso dell'ordine di grandezza: $650\un{N}$ distribuiti su una mano sono una forza sensibile, mentre la stessa forza ripartita su quattro appoggi (come in un piegamento sulle braccia) cambia direzione di applicazione e intensità locale. Intensità, direzione e verso sono tre informazioni distinte.
-\end{richiamo}
 
-\begin{richiamo}{componenti, versori, derivate parziali e differenziale totale}
+In Fisica 2 ogni campo è uno scalare o un vettore, e l'unità di misura accompagna ogni risultato fino all'ultima riga.
+\end{riquadro}
+
+\renewcommand{\richiamoprefix}{Richiamo di Matematica --- }
+\begin{riquadro}{componenti, versori, derivate parziali e differenziale totale}
 Fissato un sistema di assi cartesiani $x,y,z$, i versori $\vec i,\vec j,\vec k$ sono vettori di modulo unitario orientati come gli assi; servono a identificare direzione e verso di ciascun asse. Ogni vettore si scrive come terna di scalari moltiplicati per i versori corrispondenti,
 \[
 \vec u = u_x\,\vec i + u_y\,\vec j + u_z\,\vec k ,
@@ -50,18 +49,24 @@ dove ogni addendo è la variazione di $\varphi$ dovuta alla sola variazione dell
 \frac{\partial\varphi}{\partial x}=\frac{\dd\varphi}{\dd u}\frac{\partial u}{\partial x}.
 \]
 Per le derivate seconde miste vale il teorema di Schwarz: se le derivate seconde sono continue, $\dfrac{\partial^2\varphi}{\partial x\,\partial y}=\dfrac{\partial^2\varphi}{\partial y\,\partial x}$.
-\end{richiamo}
 
-\begin{richiamo}{determinante $3\times3$}
+Servono perché gradiente, divergenza e rotore si definiscono come combinazioni di derivate parziali delle componenti.
+\end{riquadro}
+
+\renewcommand{\richiamoprefix}{Richiamo di Matematica --- }
+\begin{riquadro}{determinante $3\times3$}
 Il determinante di una matrice quadrata di ordine tre si sviluppa lungo una riga con la regola dei complementi algebrici, ossia con segni alternati più, meno, più:
 \[
 \begin{vmatrix} a_{11}&a_{12}&a_{13}\\ a_{21}&a_{22}&a_{23}\\ a_{31}&a_{32}&a_{33}\end{vmatrix}
 =a_{11}(a_{22}a_{33}-a_{23}a_{32})-a_{12}(a_{21}a_{33}-a_{23}a_{31})+a_{13}(a_{21}a_{32}-a_{22}a_{31}).
 \]
 Ciascun minore è il determinante $2\times2$ che resta dopo la cancellazione della riga e della colonna dell'elemento considerato. Il segno meno davanti al secondo termine è l'origine di un dubbio frequente quando il determinante serve a scrivere il prodotto vettoriale; lo si risolve notando che lo stesso risultato si ottiene se il termine centrale si scrive con le due colonne invertite e segno più.
-\end{richiamo}
 
-\begin{richiamo}{derivate e integrali elementari}
+Serve a scrivere il prodotto vettoriale e il rotore, che ricorrono nei campi elettrico e magnetico.
+\end{riquadro}
+
+\renewcommand{\richiamoprefix}{Richiamo di Matematica --- }
+\begin{riquadro}{derivate e integrali elementari}
 La derivata di una funzione $f(x)$ è il limite del rapporto incrementale,
 \[
 f'(x)=\frac{\dd f}{\dd x}=\lim_{h\to0}\frac{f(x+h)-f(x)}{h},
@@ -77,9 +82,12 @@ Le coppie derivata--primitiva da conoscere senza esitazione sono
 \frac{\dd}{\dd x}\,\ln|x|&=\frac1x, & \int\frac{\dd x}{x}&=\ln|x|+c ,
 \end{align*}
 dove $c$ è una costante additiva arbitraria, che scompare nell'integrale definito perché si cancella nella differenza $F(b)-F(a)$. Il caso $n=-1$ sfugge alla regola generale, che darebbe una divisione per zero, e va ricordato a parte. Due integrali ricorrenti sono $\int_{x_i}^{x_f}\dd x=x_f-x_i$ e $\int_{x_i}^{x_f}x\,\dd x=\tfrac12\left(x_f^2-x_i^2\right)$. Il differenziale di una funzione è la sua variazione al primo ordine, ad esempio $\dd(x^2)=2x\,\dd x$. Non servono tecniche avanzate, come l'integrazione per parti: servono questi risultati, che devono essere disponibili con la stessa prontezza del proprio nome.
-\end{richiamo}
 
-\begin{richiamo}{geometria elementare: circonferenza, cerchio, sfera}
+In Fisica 2 ogni grandezza integrale (lavoro, flusso, circuitazione) si riduce a integrali di questo tipo.
+\end{riquadro}
+
+\renewcommand{\richiamoprefix}{Richiamo di Matematica --- }
+\begin{riquadro}{geometria elementare: circonferenza, cerchio, sfera}
 Le formule da possedere a memoria sono la lunghezza della circonferenza di raggio $r$, l'area del cerchio, il volume e la superficie della sfera,
 \[
 C=2\pi r,\qquad A=\pi r^2,\qquad V=\frac43\,\pi r^3,\qquad S=4\pi r^2 ,
@@ -89,9 +97,12 @@ con $r$ e $C$ in metri, $A$ e $S$ in $\mathrm{m^2}$, $V$ in $\mathrm{m^3}$. L'an
 \frac{V(r+\dd r)-V(r)}{\dd r}=\frac43\,\pi\left(3r^2+3r\,\dd r+\dd r^2\right)\ \longrightarrow\ 4\pi r^2\qquad(\dd r\to0),
 \]
 cioè $S=\dd V/\dd r=4\pi r^2$. Lo stesso argomento mostra che la circonferenza è la derivata dell'area del cerchio, $\dd(\pi r^2)/\dd r=2\pi r$. Il raggio medio della Terra vale circa $6{,}4\times10^{6}\un{m}$; non conta la cifra esatta, conta l'ordine di grandezza, perché è l'enorme estensione della Terra a far apparire piatta la sua superficie e pressoché uniforme il campo gravitazionale presso il suolo.
-\end{richiamo}
 
-\begin{richiamo}{trigonometria: triangolo rettangolo, circonferenza goniometrica, teorema di Carnot}
+Nei problemi a simmetria sferica la superficie $4\pi r^2$ compare nel calcolo del flusso, e l'angolo solido ne è il rapporto con $r^2$.
+\end{riquadro}
+
+\renewcommand{\richiamoprefix}{Richiamo di Matematica --- }
+\begin{riquadro}{trigonometria: triangolo rettangolo, circonferenza goniometrica, teorema di Carnot}
 Si consideri un triangolo rettangolo di ipotenusa $c$, cateti $a$ e $b$, e angoli acuti $\alpha$ (adiacente ad $a$) e $\beta$ (adiacente a $b$). Il teorema di Pitagora afferma che
 \[
 a^2+b^2=c^2 ,
@@ -121,7 +132,9 @@ Il teorema di Carnot (o del coseno) estende Pitagora a un triangolo qualunque. S
 \overline{AB}^{\,2}=v^2\sin^2\theta+(u-v\cos\theta)^2=u^2+v^2\left(\sin^2\theta+\cos^2\theta\right)-2uv\cos\theta=u^2+v^2-2uv\cos\theta ,
 \]
 dove ogni termine è il quadrato di una lunghezza. Per $\theta=\pi/2$ il termine in coseno si annulla e si ritrova Pitagora.
-\end{richiamo}
+
+Serve a scomporre i vettori, a esprimere prodotto scalare e vettoriale con l'angolo compreso e a calcolare l'angolo solido.
+\end{riquadro}
 
 \begin{figure}[htbp]
 	\centering
@@ -167,10 +180,11 @@ dove ogni termine è il quadrato di una lunghezza. Per $\theta=\pi/2$ il termine
 		
 	\end{tikzpicture}
 	\caption{Circonferenza goniometrica: il punto $P$ ha coordinate $(\cos\alpha,\sin\alpha)$ e il triangolo rettangolo di vertici $O$, $P$ e la proiezione di $P$ sull'asse $x$ ha ipotenusa unitaria, cateto adiacente $\cos\alpha$ e cateto opposto $\sin\alpha$.}
-	\label{fig:circonferenza_goniometrica}
+	\label{fig:pre:circonferenza_goniometrica}
 \end{figure}
 
-\begin{richiamo}{radianti, angoli piccoli e sviluppo di Taylor}
+\renewcommand{\richiamoprefix}{Richiamo di Matematica --- }
+\begin{riquadro}{radianti, angoli piccoli e sviluppo di Taylor}
 Un angolo piano si misura in radianti. Il radiante è l'angolo che, su una circonferenza, intercetta un arco di lunghezza pari al raggio; più in generale l'angolo in radianti è il rapporto tra la lunghezza $s$ dell'arco e il raggio $r$,
 \[
 \theta=\frac{s}{r},
@@ -190,18 +204,25 @@ con errore che va come $h^2$; la variazione di $f$ è proporzionale all'incremen
 \sin\theta=\theta-\frac{\theta^3}{6}+\dots,\qquad \cos\theta=1-\frac{\theta^2}{2}+\dots,
 \]
 da cui, per angoli piccoli, $\sin\theta\simeq\theta$ e $\cos\theta\simeq1$. L'errore relativo dell'approssimazione del seno è circa $\theta^2/6$. Non occorre che $\theta$ tenda a zero: l'approssimazione è accettabile per angoli inferiori a $1\ \mathrm{rad}$, ossia a circa $57^\circ$, e già per $\theta=\pi/6\simeq0{,}524$ si ha $\sin\theta=0{,}5$ contro $\theta=0{,}524$, con scarto di circa il $5\%$. Sotto i $30^\circ$ i due valori sono praticamente indistinguibili.
-\end{richiamo}
 
-\begin{richiamo}{coordinate sferiche, integrali multipli}
+Gli angoli in radianti compaiono nell'angolo solido e nelle approssimazioni di piccolo angolo ricorrenti nei campi.
+\end{riquadro}
+
+\renewcommand{\richiamoprefix}{Richiamo di Matematica --- }
+\begin{riquadro}{coordinate sferiche, integrali multipli}
 Un punto dello spazio si individua con le coordinate sferiche $(r,\theta,\varphi)$: $r$ è la distanza dall'origine, $\theta$ l'angolo con l'asse $z$ (colatitudine) e $\varphi$ l'angolo che la proiezione sul piano $xy$ forma con l'asse $x$. Le coordinate cartesiane si ricavano da
 \[
 x=r\sin\theta\cos\varphi,\qquad y=r\sin\theta\sin\varphi,\qquad z=r\cos\theta ,
 \]
 con $r$ in metri e gli angoli in radianti. Un integrale doppio $\int_S f\,\dd S$ somma i contributi di tutti gli elementi di superficie $\dd S$ in cui è suddivisa $S$; un integrale triplo $\int_\tau f\,\dd\tau$ somma sui volumi elementari $\dd\tau$; un integrale di linea $\int_l f\,\dd l$ somma sugli archi elementari $\dd l$ di una curva. Se la funzione integranda dipende da una sola variabile, i tre integrali si riducono a integrali semplici. Il metodo è sempre lo stesso: un oggetto complicato (una superficie ondulata, un volume irregolare, una linea curva) si divide in parti infinitesime, ciascuna abbastanza piccola da essere trattata come semplice (una superficie piana, un cubetto, un segmento), si calcola il contributo elementare e si somma, cioè si integra.
-\end{richiamo}
+
+Servono per l'elemento di superficie sferica e per l'angolo solido, trattati più avanti.
+\end{riquadro}
 
 
-\begin{richiamo}{lavoro, energia potenziale, forza elastica e oscillatore armonico}
+% NOTA: in registrazione il lavoro della gravità in salita è calcolato come +mg(h_f-h_i), cioè il lavoro della forza esterna; qui è riportato il lavoro della gravità, negativo, e si ricava U=mgy+c.
+\renewcommand{\richiamoprefix}{Richiamo di Fisica 1 --- }
+\begin{riquadro}{lavoro, energia potenziale, forza elastica e oscillatore armonico}
 Il lavoro elementare compiuto da una forza $\vec F$ in uno spostamento infinitesimo $\dd\vec l$ del suo punto di applicazione è il prodotto scalare
 \[
 \dd L=\vec F\cdot\dd\vec l ,
@@ -221,9 +242,13 @@ dove $m$ è in kg, $g\simeq9{,}8\un{m\,s^{-2}}$ (spesso arrotondata a $10\un{m\,
 F_x=-kx ,
 \]
 dove $k$ è la costante elastica (in $\mathrm{N\,m^{-1}}$), caratteristica della molla (più è grande, più la molla è difficile da comprimere o da allungare), e il segno meno esprime il carattere di richiamo: la forza è diretta verso le $x$ negative se la molla è allungata, verso le positive se è compressa. Dal lavoro elementare $\dd L=-kx\,\dd x$ si ricava $L_{A\to B}=-\tfrac12k\,(x_B^2-x_A^2)$, cioè la forza è conservativa e la sua energia potenziale è $U=\tfrac12kx^2$. Ogni sistema in cui la forza è proporzionale allo spostamento, a meno di una costante e del segno, compie un moto armonico; questo modello, l'oscillatore armonico, descrive vibrazioni di legami chimici, oscillazioni di ponti e di edifici, e per questo riaffiora in molti esami. In presenza di attrito l'oscillazione è smorzata, e può essere anche forzata da una sollecitazione esterna.
-\end{richiamo}
 
-\begin{richiamo}{energia cinetica, bilancio energetico, attrito, calore}
+Il legame tra forza conservativa ed energia potenziale è il modello della relazione tra campo e potenziale studiata in Fisica 2.
+\end{riquadro}
+
+% NOTA: in registrazione 0 K è indicato come circa -278 °C; il valore corretto è -273,15 °C. La formula K=mv^2/2 e il teorema L=DeltaK, solo accennati alla lavagna, sono qui dimostrati per intero.
+\renewcommand{\richiamoprefix}{Richiamo di Fisica 1 --- }
+\begin{riquadro}{energia cinetica, bilancio energetico, attrito, calore}
 L'energia cinetica di un punto materiale di massa $m$ e velocità $v$ è
 \[
 K=\tfrac12\,mv^2 ,
@@ -245,22 +270,32 @@ cioè l'energia meccanica $E=K+U$ si conserva. In fisica si cerca sempre una gra
 La forza non conservativa più comune è l'attrito, che trasforma energia meccanica in energia termica. L'energia non va perduta: il bilancio complessivo vale ancora, ma il contributo dissipato è difficile da calcolare. L'attrito tra solidi è statico o dinamico. L'attrito statico agisce finché non c'è scorrimento, e il suo modulo non supera $\mu_sN$; quello dinamico agisce sulle superfici che strisciano e vale $\mu_dN$, con $N$ componente normale della reazione del vincolo e $\mu_s>\mu_d$ coefficienti adimensionali. Camminare è possibile grazie all'attrito statico tra suola e pavimento, perché il piede che spinge non scivola. Una ruota d'automobile che rotola senza strisciare è soggetta ad attrito statico, e passa a quello dinamico se si blocca. Poiché $\mu_s>\mu_d$, una ruota che rotola frena meglio di una ruota bloccata: su questo si fonda il sistema antibloccaggio (ABS). La dissipazione si manifesta come riscaldamento di freni, pneumatici, trasformatori e scudi termici di un veicolo che rientra in atmosfera.
 
 Il calore è energia che passa da un corpo a un altro per effetto di una differenza di temperatura $\Delta T$, e non della temperatura in sé: lo stesso scambio è possibile a $1000\un{K}$ come a $10\un{K}$, purché sia presente $\Delta T$ (con $0\un{K}\simeq-273{,}15^\circ\mathrm{C}$). La temperatura è definita dal principio zero della termodinamica: se un corpo $A$ è in equilibrio termico con $B$ e con $C$, allora $B$ e $C$ sono in equilibrio termico tra loro; il termometro realizza questo confronto con sistemi di riferimento noti (acqua e ghiaccio a $0^\circ\mathrm{C}$, acqua in ebollizione a $100^\circ\mathrm{C}$). Il primo principio è un bilancio energetico, $\Delta E_{\mathrm{int}}=Q-L$, dove $E_{\mathrm{int}}$ è l'energia interna, $Q$ il calore assorbito dal sistema e $L$ il lavoro da esso compiuto (convenzione adottata), in joule. Il secondo principio introduce l'entropia, che aumenta nelle trasformazioni spontanee e ne indica il verso: il ghiaccio posato sulla mano assorbe calore dalla mano, e mai il contrario.
-\end{richiamo}
 
-\begin{richiamo}{prefissi del Sistema Internazionale e ordini di grandezza}
+Il bilancio energetico e la dissipazione tornano nello studio dei circuiti e dei campi, dove l'energia si conserva solo se si contano tutte le sue forme.
+\end{riquadro}
+
+% NOTA: il diametro del capello è stimato in registrazione in centinaia di micrometri; l'ordine corretto è alcune decine di micrometri.
+\renewcommand{\richiamoprefix}{Richiamo di Fisica 1 --- }
+\begin{riquadro}{prefissi del Sistema Internazionale e ordini di grandezza}
 Per le scale piccole si usano i prefissi nano ($10^{-9}$), pico ($10^{-12}$) e femto ($10^{-15}$). Un capello ha diametro di alcune decine di micrometri, cioè dell'ordine di $10^{-4}\un{m}$; la distanza tra primi vicini nel cristallo di cloruro di sodio è circa $0{,}28\un{nm}$; le distanze tra nucleoni in un nucleo sono dell'ordine del femtometro, $10^{-15}\un{m}$. Un impulso laser di pochi nanosecondi è già molto breve, ma esistono misure con impulsi di qualche femtosecondo. Altri numeri da avere in mente: il raggio medio della Terra, circa $6{,}4\times10^{6}\un{m}$; la superficie di un'aula, circa $300\un{m^2}$; il peso di una persona di $65\un{kg}$, circa $650\un{N}$. Disporre di molti dati numerici aiuta a giudicare la plausibilità di un risultato e a riconoscere grafici o percentuali presentati con scale scelte ad arte.
-\end{richiamo}
 
-\begin{richiamo}{onde: lunghezza d'onda, onde longitudinali e trasversali}
+Le scale atomiche e nucleari sono quelle in cui agisce la forza di Coulomb, con cui si chiude il blocco.
+\end{riquadro}
+
+% NOTA: in registrazione si dice che nelle onde trasversali l'energia si propaga perpendicolarmente alla direzione di propagazione; è corretto che oscilli perpendicolarmente la grandezza (spostamento o campi), mentre l'energia fluisce lungo la propagazione.
+\renewcommand{\richiamoprefix}{Richiamo di Fisica 1 --- }
+\begin{riquadro}{onde: lunghezza d'onda, onde longitudinali e trasversali}
 Un'onda è una perturbazione che si propaga e trasporta energia, senza trasporto netto di materia. La lunghezza d'onda $\lambda$ (in metri) è la distanza tra due massimi consecutivi, la frequenza $f$ (in hertz) è il numero di oscillazioni al secondo e la velocità di propagazione è
 \[
 v=\lambda f .
 \]
 Un'onda è longitudinale se la grandezza che oscilla (lo spostamento di un elemento del mezzo, nel caso del suono, con compressioni e rarefazioni dell'aria) è parallela alla direzione di propagazione; è trasversale se oscilla perpendicolarmente a essa. Le onde del mare sono un esempio di onda trasversale: una boa sale e scende mentre l'onda avanza in orizzontale. In entrambi i casi l'energia fluisce nella direzione di propagazione. Le onde elettromagnetiche sono trasversali: i campi elettrico e magnetico oscillano perpendicolarmente alla direzione di propagazione.
-\end{richiamo}
+
+Servono per interpretare le onde elettromagnetiche che emergono dalle equazioni di Maxwell.
+\end{riquadro}
 
 
-\titoletto{Teoria, modelli e dimostrazioni.}
+\section*{Teoria, modelli e dimostrazioni}
 L'algebra dei vettori si fonda sulla scrittura per componenti. Dati $\vec u=(u_1,u_2,u_3)$ e $\vec v=(v_1,v_2,v_3)$, la somma e il prodotto per uno scalare $\alpha$ sono definiti componente per componente,
 \[
 \vec w=\vec u+\vec v\equiv\begin{pmatrix}u_1+v_1\\u_2+v_2\\u_3+v_3\end{pmatrix},\qquad
@@ -268,7 +303,6 @@ L'algebra dei vettori si fonda sulla scrittura per componenti. Dati $\vec u=(u_1
 \]
 dove $\vec w$ è il vettore risultante, con la stessa unità di misura di $\vec u$ e $\vec v$ (che devono essere omogenei), e $\alpha$ è un numero puro. Sommare vettori significa dunque sommare scalari, operazione immediata, purché le componenti siano note.
 
-\titoletto{Prodotto scalare}
 Il prodotto scalare trasforma due vettori in un numero. Si definisce come somma dei prodotti delle componenti omonime,
 \[
 \vec u\cdot\vec v=\sum_{h=1}^{3}u_hv_h=u_1v_1+u_2v_2+u_3v_3 ,
@@ -350,7 +384,7 @@ Il risultato è uno scalare, la cui unità di misura è il prodotto delle unità
 		
 	\end{tikzpicture}
 	\caption{Rappresentazione tridimensionale dei vettori $\vec{u}$ e $\vec{v}$ nel sistema cartesiano $(X_1, X_2, X_3)$, con versori $\vec{i}_1, \vec{i}_2, \vec{i}_3$, angolo interposto $\theta$ e vettore differenza $\vec{u}-\vec{v}$.}
-	\label{fig:vettori_3d_differenza}
+	\label{fig:pre:vettori_3d_differenza}
 \end{figure}
 
 Il teorema di Carnot (o del coseno), dimostrato nel riquadro di trigonometria, applicato al triangolo OAB dà
@@ -371,7 +405,6 @@ dove $u$ e $v$ sono i moduli e $\theta\in[0,\pi]$ è l'angolo compreso. Ne segue
 \]
 che vale tanto per la forma in componenti quanto per quella con il coseno. Va ricordato che questa formula non va memorizzata come nozione isolata: l'ortogonalità tra vettori ricorre di continuo, ad esempio nel flusso e nel lavoro. Inoltre il punto che indica il prodotto scalare va scritto in modo ben visibile e la freccia sopra ogni vettore non va omessa.
 
-\titoletto{Prodotto vettoriale}
 Il prodotto vettoriale associa a due vettori un terzo vettore. In componenti,
 \begin{align*}
 \vec w=\vec u\times\vec v&\equiv\begin{pmatrix}u_2v_3-u_3v_2\\u_3v_1-u_1v_3\\u_1v_2-u_2v_1\end{pmatrix}\\
@@ -417,8 +450,7 @@ dove $u,v$ sono i moduli e $\theta$ l'angolo compreso. Questo numero è l'area d
 
 Il prodotto vettoriale ricorre di continuo nello studio del campo magnetico, che si sviluppa spesso in tre dimensioni, e un errore sul verso si propaga a tutto il calcolo. Una regola affine riguarda la forza che un campo magnetico $\vec B$ esercita su un conduttore percorso da corrente $I$: la direzione si ricava con la regola della mano sinistra, ricordata con la sigla FBI (forza, campo magnetico, corrente), che verrà giustificata con la forza di Lorentz.
 
-\titoletto{Campi scalari, vettoriali e tensoriali}. 
-Una regione dello spazio è sede di un campo scalare, vettoriale o tensoriale quando in ogni suo punto è definito in modo univoco uno scalare $\varphi=\varphi(\vec r)$, un vettore $\vec u=\vec u(\vec r)$ oppure un tensore $\vec T=\vec T(\vec r)$. Il tensore generalizza il vettore a un numero maggiore di indici e compare, ad esempio, nelle scienze delle costruzioni e nella relatività. Nell'aula si possono individuare con facilità un campo vettoriale, il campo gravitazionale, e campi scalari, la pressione (rapporto tra la componente perpendicolare della forza e la superficie su cui agisce, in $\mathrm{N\,m^{-2}}=\mathrm{Pa}$, benché sia definita a partire da una forza, è uno scalare) e la temperatura (quest'ultima, definita dal principio zero della termodinamica, varia da punto a punto: vicino alla pelle è prossima a $37^\circ\mathrm{C}$ e altrove è minore). Il campo gravitazionale terrestre associa a ogni punto vicino al suolo il vettore $\vec g$, accelerazione di gravità, diretto verso il centro della Terra e di modulo circa $9{,}8\un{m\,s^{-2}}$. Il campo esiste a prescindere dalla presenza di una massa: la Terra lo genera, e solo se una massa $m$ viene collocata in quel punto compare la forza $\vec F=m\vec g$. Per questa ragione il corso non tratterà più forze ma campi, ottenuti idealmente dal rapporto tra la forza e la grandezza che la subisce. Poiché $\vec g$ ha ovunque (in prima approssimazione) lo stesso modulo, la stessa direzione e lo stesso verso, il campo gravitazionale vicino al suolo è uniforme.
+Le operazioni algebriche sui vettori trovano impiego immediato nella descrizione dei campi. Una regione dello spazio è sede di un campo scalare, vettoriale o tensoriale quando in ogni suo punto è definito in modo univoco uno scalare $\varphi=\varphi(\vec r)$, un vettore $\vec u=\vec u(\vec r)$ oppure un tensore $\vec T=\vec T(\vec r)$. Il tensore generalizza il vettore a un numero maggiore di indici e compare, ad esempio, nelle scienze delle costruzioni e nella relatività. Nell'aula si possono individuare con facilità un campo vettoriale, il campo gravitazionale, e campi scalari, la pressione (rapporto tra la componente perpendicolare della forza e la superficie su cui agisce, in $\mathrm{N\,m^{-2}}=\mathrm{Pa}$, benché sia definita a partire da una forza, è uno scalare) e la temperatura (quest'ultima, definita dal principio zero della termodinamica, varia da punto a punto: vicino alla pelle è prossima a $37^\circ\mathrm{C}$ e altrove è minore). Il campo gravitazionale terrestre associa a ogni punto vicino al suolo il vettore $\vec g$, accelerazione di gravità, diretto verso il centro della Terra e di modulo circa $9{,}8\un{m\,s^{-2}}$. Il campo esiste a prescindere dalla presenza di una massa: la Terra lo genera, e solo se una massa $m$ viene collocata in quel punto compare la forza $\vec F=m\vec g$. Per questa ragione il corso non tratterà più forze ma campi, ottenuti idealmente dal rapporto tra la forza e la grandezza che la subisce. Poiché $\vec g$ ha ovunque (in prima approssimazione) lo stesso modulo, la stessa direzione e lo stesso verso, il campo gravitazionale vicino al suolo è uniforme.
 
 L'origine fisica di $\vec g$ è la legge di gravitazione universale: due masse $M_1$ e $M_2$ a distanza $r$ si attraggono con una forza che agisce su $M_2$ data da
 \[
@@ -479,13 +511,11 @@ Il passaggio dalla forza al campo merita un chiarimento. Una massa di prova $m$ 
 		
 	\end{tikzpicture}
 	\caption{Linee di campo di un campo uniforme (a sinistra) e di un campo radiale di sorgente puntiforme $S$, come il campo gravitazionale del Sole (a destra). Le frecce di orientamento sono tracciate in un punto della linea. Il campo $\vec E$ in $P$ è un vettore applicato in $P$, tangente alla linea e concorde con essa, non il segmento che congiunge la sorgente a $P$.}
-	\label{fig:campo_uniforme_radiale}
+	\label{fig:pre:campo_uniforme_radiale}
 \end{figure}
 
 
-\titoletto{Derivata direzionale e gradiente di un campo
-	scalare}
-Sia $\varphi(x,y,z)$ un campo scalare con derivate parziali continue, $P_0=(x_0,y_0,z_0)$ un punto, e $\vec a=\alpha\vec i+\beta\vec j+\gamma\vec k$ il versore di una direzione assegnata, con $\alpha^2+\beta^2+\gamma^2=1$. I punti della retta per $P_0$ con direzione $\vec a$ sono $\vec r=\vec r_0+s\,\vec a$, con $s$ ascissa curvilinea (in m). 
+Per misurare come varia un campo scalare nello spazio si introduce la derivata direzionale. Sia $\varphi(x,y,z)$ un campo scalare con derivate parziali continue, $P_0=(x_0,y_0,z_0)$ un punto, e $\vec a=\alpha\vec i+\beta\vec j+\gamma\vec k$ il versore di una direzione assegnata, con $\alpha^2+\beta^2+\gamma^2=1$. I punti della retta per $P_0$ con direzione $\vec a$ sono $\vec r=\vec r_0+s\,\vec a$, con $s$ ascissa curvilinea (in m). 
 
 \begin{figure}[htbp]
 	\centering
@@ -534,7 +564,7 @@ Sia $\varphi(x,y,z)$ un campo scalare con derivate parziali continue, $P_0=(x_0,
 		
 	\end{tikzpicture}
 	\caption{Rappresentazione vettoriale dell'equazione parametrica della retta: la posizione del punto generico $P$ è descritta dalla relazione $\vec{r} = \vec{r}_0 + s\vec{a}$.}
-	\label{fig:equazione_vettoriale_retta}
+	\label{fig:pre:equazione_vettoriale_retta}
 \end{figure}
 
 La derivata direzionale in $P_0$ è il limite del rapporto incrementale
@@ -704,7 +734,7 @@ dove la divergenza è uno scalare e il rotore un vettore, entrambi con l'unità 
 		
 	\end{tikzpicture}
 	\caption{Rappresentazione geometrica della divergenza di un campo vettoriale: sorgente con flusso uscente ($\nabla \cdot \vec{u} > 0$) e pozzo con flusso entrante ($\nabla \cdot \vec{u} < 0$).}
-	\label{fig:divergenza_sorgente_pozzo}
+	\label{fig:pre:divergenza_sorgente_pozzo}
 \end{figure}
 
 Per il campo elettrico le sorgenti sono le cariche positive e i pozzi le cariche negative, linguaggio preso in prestito dalla fluidodinamica, dove la stessa matematica descrive il campo delle velocità di un fluido. Un campo con rotore non nullo ha invece la capacità di ruotare intorno a un punto e le sue linee si chiudono su sé stesse; così accade per il campo magnetico. 
@@ -779,7 +809,7 @@ Per il campo elettrico le sorgenti sono le cariche positive e i pozzi le cariche
 		
 	\end{tikzpicture}
 	\caption{Rappresentazione tridimensionale del vettore rotore $\nabla \times \vec{F}$ con linee di flusso circolari giacenti sul piano prospettico $xy$.}
-	\label{fig:rotore_3d_prospettiva_reale}
+	\label{fig:pre:rotore_3d_prospettiva_reale}
 \end{figure}
 
 In un fluido, una ruota a pale (come il timone di una nave) immersa nel flusso non gira se il flusso è irrotazionale, mentre gira se esistono vortici; l'ingegnere meccanico esamina la rotazionalità dei flussi attorno alle carenature perché i vortici sono spesso indesiderati.
@@ -825,9 +855,6 @@ cui si aggiungono le formule di struttura per $\nab\times(\vec u\times\vec v)$ e
 \end{align*}
 All'esame non si richiede la dimostrazione di queste identità, che sono riportate come strumento di consultazione.
 
-\titoletto{Flusso di un campo vettoriale e teorema della
-	divergenza}
-	
 Dopo gli operatori locali si passa alle grandezze integrali. Il flusso nasce dall'esigenza di contare quante linee di campo attraversano una superficie. Una superficie $S$ è uno scalare (l'aula, ad esempio, misura circa $300\un{m^2}$), ma si associa un vettore a un suo elemento infinitesimo $\dd S$: si prende il versore normale $\vec n$ e si definisce $\dd\vec S=\vec n\,\dd S$, di modulo pari all'area e direzione perpendicolare alla superficie. Un elemento infinitesimo può sempre considerarsi piano, perciò il campo $\vec u$ vi assume un solo valore e ha un solo angolo con $\vec n$. Il flusso elementare è
 \[
 \dd\Phi=\vec u\cdot\vec n\,\dd S=u\,\dd S\cos\theta ,
@@ -860,9 +887,8 @@ Per il teorema della divergenza, ciò equivale a dire che il flusso attraverso o
 \]
 Le due formulazioni dicono la stessa cosa, la prima in notazione locale e la seconda in notazione integrale. La locale è più precisa, nello stesso senso in cui la velocità istantanea è più precisa di quella media, o la derivata è più dettagliata dell'integrale: indica che cosa avviene in ogni punto. Una conseguenza visibile: se due superfici aperte $S_1$ e $S_2$ hanno lo stesso contorno $l$, e si indica con $\vec n$ la normale scelta in modo concorde con il verso di percorrenza di $l$, la superficie chiusa $S_1\cup S_2$ ha normale uscente $\vec n_1=\vec n$ su $S_1$ e $\vec n_2=-\vec n$ su $S_2$, e il flusso nullo comporta $\int_{S_1}\vec u\cdot\vec n\,\dd S=\int_{S_2}\vec u\cdot\vec n\,\dd S$. Il flusso di un campo solenoidale attraverso una superficie aperta dipende solo dal suo contorno. Il campo magnetico $\vec B$ ha flusso nullo attraverso qualsiasi superficie chiusa ed è dunque solenoidale; la seconda equazione di Maxwell esprime la non esistenza di monopoli magnetici (se si spezza un magnete ne risultano due, ciascuno con i propri poli).
 
-\titoletto{Teorema del rotazionale}
 
-Sia $l$ una curva regolare contenuta in $D$ e $\dd\vec l=\vec t\,\dd l$ un suo elemento, con $\vec t$ versore tangente. La circolazione elementare di $\vec u$ è
+Resta da introdurre l'integrale di linea di un campo, da cui nasce la circuitazione. Sia $l$ una curva regolare contenuta in $D$ e $\dd\vec l=\vec t\,\dd l$ un suo elemento, con $\vec t$ versore tangente. La circolazione elementare di $\vec u$ è
 \[
 \vec u\cdot\dd\vec l=u_x\dd x+u_y\dd y+u_z\dd z=\vec u\cdot\vec t\,\dd l ,
 \]
@@ -923,7 +949,7 @@ che per una forza è il lavoro lungo $l$.
 		
 	\end{tikzpicture}
 	\caption{Elemento infinitesimo di linea tangenziale $\mathrm{d}\vec{l} = \mathrm{d}\vec{r}$ lungo la curva orientata $l$, con i vettori di posizione $\vec{r}$ e $\vec{r}+\mathrm{d}\vec{r}$ riferiti all'origine $O$.}
-	\label{fig:elemento_linea_curva}
+	\label{fig:pre:elemento_linea_curva}
 \end{figure}
 
 
@@ -974,9 +1000,9 @@ Nello spazio privo di cariche e di correnti si ha $Q=0$ e $I=0$, le prime due eq
 \[
 c=\frac{1}{\sqrt{\mu_0\varepsilon_0}}\simeq3{,}0\times10^{8}\un{m\,s^{-1}},
 \]
-dove $\mu_0$ ed $\varepsilon_0$ descrivono le proprietà del mezzo in cui le onde viaggiano, qui il vuoto, e $c$ coincide con la velocità della luce. Le onde sono trasversali: i campi $\vec E$ e $\vec B$ oscillano perpendicolarmente alla direzione di propagazione, lungo la quale fluisce l'energia. Con il termine luce si intende l'intervallo di lunghezze d'onda cui è sensibile l'occhio umano, da circa $400\un{nm}$ (violetto, la lunghezza d'onda minima) a circa $700$--$800\un{nm}$ (rosso, la massima); il bianco non è un colore dotato di una propria lunghezza d'onda, ma la sovrapposizione dei colori dello spettro. Al di sotto di $400\un{nm}$ si trovano ultravioletto, raggi X e raggi gamma, radiazioni che nelle componenti più energetiche sono in grado di ionizzare la materia e di danneggiare le cellule viventi; al di sopra si incontrano infrarosso, microonde e onde radio, queste ultime con lunghezze d'onda fino a molti metri, impiegate nelle comunicazioni. Microonde e onde radio non sono ionizzanti.
+dove $\mu_0$ ed $\varepsilon_0$ descrivono le proprietà del mezzo in cui le onde viaggiano, qui il vuoto, e $c$ coincide con la velocità della luce. Le onde sono trasversali: i campi $\vec E$ e $\vec B$ oscillano perpendicolarmente alla direzione di propagazione, lungo la quale fluisce l'energia. % NOTA: in registrazione si attribuisce l'emissione di raggi X al decadimento dell'uranio; l'affermazione, imprecisa, è omessa. Le lunghezze d'onda sono quelle dette a lezione.
+Con il termine luce si intende l'intervallo di lunghezze d'onda cui è sensibile l'occhio umano, da circa $400\un{nm}$ (violetto, la lunghezza d'onda minima) a circa $700$--$800\un{nm}$ (rosso, la massima); il bianco non è un colore dotato di una propria lunghezza d'onda, ma la sovrapposizione dei colori dello spettro. Al di sotto di $400\un{nm}$ si trovano ultravioletto, raggi X e raggi gamma, radiazioni che nelle componenti più energetiche sono in grado di ionizzare la materia e di danneggiare le cellule viventi; al di sopra si incontrano infrarosso, microonde e onde radio, queste ultime con lunghezze d'onda fino a molti metri, impiegate nelle comunicazioni. Microonde e onde radio non sono ionizzanti.
 
-\titoletto{Angolo solido}
 La misura di un angolo piano in radianti è il rapporto tra l'arco intercettato e il raggio. Allo stesso modo si definisce l'angolo solido come la porzione di spazio delimitata da un fascio di semirette uscenti da un vertice O in comune, che individuano un cono di forma qualunque; lo si misura in steradianti dal rapporto tra l'area $S$ della calotta che il cono intercetta su una sfera con centro in O e il quadrato del raggio $r$ della sfera,
 
 \begin{figure}[htbp]
@@ -1068,7 +1094,7 @@ La misura di un angolo piano in radianti è il rapporto tra l'arco intercettato 
 		
 	\end{tikzpicture}
 	\caption{Rappresentazione geometrica dell'angolo solido $\Omega$ intercettato dalle calotte sferiche concentriche $S_1$ ed $S_2$.}
-	\label{fig:angolo_solido_sferico_corretto}
+	\label{fig:pre:angolo_solido_sferico_corretto}
 \end{figure}
 
 \[
@@ -1188,7 +1214,7 @@ Per calcolare l'angolo solido di un cono qualsiasi occorre l'elemento di superfi
 		
 	\end{tikzpicture}
 	\caption{Elemento di superficie sferica $\mathrm{d}S$. Sono indicati esplicitamente l'angolo polare $\theta$ con il suo incremento $\mathrm{d}\theta$ lungo il meridiano, e l'angolo azimutale $\varphi$ con il suo incremento $\mathrm{d}\varphi$ lungo il parallelo.}
-	\label{fig:superficie_sferica_angoli_chiari}
+	\label{fig:pre:superficie_sferica_angoli_chiari}
 \end{figure}
 
 \begin{figure}[htbp]
@@ -1302,7 +1328,7 @@ Per calcolare l'angolo solido di un cono qualsiasi occorre l'elemento di superfi
 		
 	\end{tikzpicture}
 	\caption{Dettaglio ingrandito dell'elemento di superficie sferica. Le proiezioni evidenziano i differenziali angolari $\mathrm{d}\theta$ lungo la latitudine e $\mathrm{d}\varphi$ lungo la longitudine.}
-	\label{fig:zoom_elemento_superficie}
+	\label{fig:pre:zoom_elemento_superficie}
 \end{figure}
 
 In coordinate sferiche, un incremento $\dd\theta$ sposta un punto lungo un meridiano di un arco $\overline{AB}=r\,\dd\theta$, mentre un incremento $\dd\varphi$ lo sposta lungo un parallelo, di raggio $r\sin\theta$, di un arco $\overline{AD}=r\sin\theta\,\dd\varphi$. L'elemento di superficie è il rettangolo di lati $\overline{AB}$ e $\overline{AD}$,
@@ -1321,8 +1347,8 @@ Per un cono molto stretto, con $\alpha\ll1\ \mathrm{rad}$, lo sviluppo $\cos\alp
 \]
 ossia all'area $\pi(r\alpha)^2$ del cerchio di raggio $r\alpha$, divisa per $r^2$: una calotta stretta è quasi piana. L'angolo solido è lo strumento naturale dei problemi con simmetria sferica, perché permette di scrivere l'elemento di superficie come $\dd S=r^2\,\dd\Omega$ ed eliminare così la dipendenza dal raggio; l'esercizio guida ne mostra l'uso nel calcolo del flusso del campo di una carica puntiforme.
 
-\titoletto{La legge di Coulomb}
-La legge di Coulomb è la prima relazione quantitativa dell'interazione elettrica e, come la gravitazione universale, si ricava da un esperimento. Una bilancia di torsione, strumento analogo al pendolo con cui Cavendish misurò l'attrazione gravitazionale tra masse, regge una piccola sfera carica all'estremità di un'asta appesa a un filo sottile; un'altra sfera carica, fissa, la respinge o l'attrae, e l'angolo di torsione del filo misura la forza. La legge vale rigorosamente per cariche puntiformi, cioè per corpi carichi le cui dimensioni sono trascurabili rispetto alla distanza che li separa; vale con buona approssimazione anche per corpi più estesi ma sufficientemente lontani, e il caso generale si riconduce ad essa con opportune somme o integrali. Si considerino una carica $q$ e una seconda carica $q_0$, poste a distanza $r$. La forza che $q$ esercita su $q_0$ è
+% VERIFICARE: la sezione sulla legge di Coulomb si basa sulla sola lezione del 06/10 (nessuna slide fornita); i valori numerici di eps_0, e, eps_r dell'acqua e la distanza Na-Cl non sono dettati a lezione.
+Gli strumenti introdotti trovano un primo banco di prova nella legge che regola l'interazione tra cariche. La legge di Coulomb è la prima relazione quantitativa dell'interazione elettrica e, come la gravitazione universale, si ricava da un esperimento. Una bilancia di torsione, strumento analogo al pendolo con cui Cavendish misurò l'attrazione gravitazionale tra masse, regge una piccola sfera carica all'estremità di un'asta appesa a un filo sottile; un'altra sfera carica, fissa, la respinge o l'attrae, e l'angolo di torsione del filo misura la forza. La legge vale rigorosamente per cariche puntiformi, cioè per corpi carichi le cui dimensioni sono trascurabili rispetto alla distanza che li separa; vale con buona approssimazione anche per corpi più estesi ma sufficientemente lontani, e il caso generale si riconduce ad essa con opportune somme o integrali. Si considerino una carica $q$ e una seconda carica $q_0$, poste a distanza $r$. La forza che $q$ esercita su $q_0$ è
 \[
 \vec F_{q\to q_0}=\frac{1}{4\pi\varepsilon_0}\,\frac{q\,q_0}{r^2}\,\hat u_r ,
 \]
@@ -1369,7 +1395,7 @@ dove $\hat u_r$ è il versore diretto da $q$ verso $q_0$ (adimensionale), $r$ è
 		
 	\end{tikzpicture}
 	\caption{Forze di Coulomb tra due cariche puntiformi. Il versore $\hat{u}_r$ è diretto da $q$ verso $q_0$: la forza su $q_0$ è concorde con $\hat{u}_r$ se le cariche hanno lo stesso segno, discorde se hanno segno opposto; la forza su $q$ è l'opposta, in accordo con il terzo principio della dinamica.}
-	\label{fig:forze_coulomb}
+	\label{fig:pre:forze_coulomb}
 \end{figure}
 
 La struttura è identica a quella della legge di gravitazione universale: forza centrale, diretta lungo la congiungente, proporzionale al prodotto delle grandezze che interagiscono (cariche o masse) e all'inverso del quadrato della distanza. Anche qui la dipendenza da ricordare con precisione è quella dall'inverso del quadrato della distanza: non dalla distanza, non dal quadrato della distanza. Le differenze sono due. Le cariche hanno due segni, perciò la forza può essere repulsiva, mentre la gravitazione è soltanto attrattiva; inoltre, a parità di distanza, la forza elettrica tra due protoni supera quella gravitazionale di un fattore dell'ordine di $10^{36}$, come mostra l'esercizio guida. I corpi macroscopici contengono cariche positive e negative in numero quasi eguale e sono sostanzialmente neutri: se non lo fossero, le forze elettriche tra oggetti ordinari sarebbero enormi.
@@ -1384,7 +1410,7 @@ dove $U$ è in joule, con la costante additiva fissata in modo che $U\to0$ per $
 In un mezzo materiale la costante $\varepsilon_0$ si sostituisce con $\varepsilon=\varepsilon_r\varepsilon_0$, dove $\varepsilon_r\geq1$ è la costante dielettrica relativa del mezzo (adimensionale): a parità di cariche e di distanza la forza si riduce del fattore $\varepsilon_r$. L'aria ha $\varepsilon_r$ praticamente uguale a 1 e si comporta come il vuoto; l'acqua ha $\varepsilon_r\simeq80$ a temperatura ambiente. La differenza spiega un fenomeno quotidiano. Il cloruro di sodio, $\mathrm{NaCl}$, è un cristallo ionico: gli ioni $\mathrm{Na^+}$ e $\mathrm{Cl^-}$, a distanza di circa $0{,}28\un{nm}$ in una struttura cubica a facce centrate, sono tenuti insieme dall'attrazione di Coulomb (nel legame covalente, come nel diamante o nel quarzo, gli elettroni sono invece condivisi tra gli atomi). Nell'aria la forza tra i due ioni vale circa $3\times10^{-9}\un{N}$; in acqua si riduce di un fattore circa 80, a circa $4\times10^{-11}\un{N}$, e la molecola dell'acqua, che è polare, con cariche parziali positive sugli atomi di idrogeno e negativa sull'ossigeno (un dipolo elettrico, che sarà studiato più avanti), contribuisce a staccare gli ioni. Il cristallo si dissocia, cioè il sale si scioglie. Il calcolo della forza di Coulomb tra due protoni a distanza nucleare è svolto nell'esercizio guida.
 
 
-\titoletto{Interpretazione fisica e casi limite.}
+\section*{Interpretazione fisica e casi limite}
 Alcuni risultati del blocco si leggono meglio nei casi estremi. Il campo di una sorgente puntiforme, gravitazionale o elettrico, decresce come $1/r^2$: per $r\to\infty$ il modulo tende a zero e le linee di campo diventano sempre più rade, mentre nei pressi della sorgente sono più fitte e il campo è più intenso. All'opposto, un campo uniforme ha stesso modulo, stessa direzione e stesso verso in ogni punto, ed è rappresentato da linee parallele ed equispaziate. Il campo gravitazionale terrestre ne è un esempio in prima approssimazione: la Terra è sferica e le linee reali convergono verso il centro, ma il suo raggio è enorme rispetto alle distanze che interessano nell'esperienza quotidiana, sicché la superficie appare piatta e il campo perpendicolare al suolo e uniforme.
 
 Il flusso di un campo uniforme attraverso una superficie piana, $\Phi=uS\cos\theta$, assume i valori estremi nei casi limite dell'orientazione. È massimo, $uS$, per $\theta=0$, quando la normale è parallela al campo e la superficie è vista di fronte; è nullo per $\theta=\pi/2$, quando il campo è parallelo alla superficie e nessuna linea la attraversa; è opposto, $-uS$, per $\theta=\pi$, con normale antiparallela al campo. Il segno dipende soltanto dalla scelta del verso di $\vec n$, che per una superficie chiusa è per convenzione uscente.
@@ -1393,8 +1419,9 @@ Nell'angolo solido la formula $\Omega=2\pi(1-\cos\alpha)$ contiene i casi limite
 
 \medskip
 
-\titoletto{Speciale esami precedenti.}
-\noindent\textsc{Domande orali tipiche.} Le domande sul blocco preliminare sono poche, secche e ricorrenti. Si chiedono le proprietà delle linee di campo, e la risposta completa ne contiene quattro: sono più fitte dove il campo è più intenso (il numero di linee per unità di superficie è proporzionale al modulo); non si intersecano mai, perché in un punto comune non sarebbe definibile la tangente e dunque nemmeno il campo; in ogni punto il campo è tangente alla linea e ne segue il verso; nel campo uniforme sono rette parallele ed equispaziate, e a chi chiede come si disegna un campo uniforme non si risponde altro. Il trabocchetto più comune consiste nello scambiare la linea con il campo. La linea non è un vettore, e la freccia di orientamento va tracciata in un punto qualunque della linea, non agli estremi; il campo in un punto $P$ è invece un vettore applicato in $P$, tangente alla linea, e non il segmento che unisce la sorgente a $P$.
+\section*{Speciale esame}
+\paragraph*{Domande orali tipiche}
+Le domande sul blocco preliminare sono poche, secche e ricorrenti. Si chiedono le proprietà delle linee di campo, e la risposta completa ne contiene quattro: sono più fitte dove il campo è più intenso (il numero di linee per unità di superficie è proporzionale al modulo); non si intersecano mai, perché in un punto comune non sarebbe definibile la tangente e dunque nemmeno il campo; in ogni punto il campo è tangente alla linea e ne segue il verso; nel campo uniforme sono rette parallele ed equispaziate, e a chi chiede come si disegna un campo uniforme non si risponde altro. Il trabocchetto più comune consiste nello scambiare la linea con il campo. La linea non è un vettore, e la freccia di orientamento va tracciata in un punto qualunque della linea, non agli estremi; il campo in un punto $P$ è invece un vettore applicato in $P$, tangente alla linea, e non il segmento che unisce la sorgente a $P$.
 
 Due domande riguardano qualunque campo: è conservativo? è solenoidale? La risposta è sempre una frase compiuta («il campo elettrico è conservativo»), seguita dalla scrittura matematica e dall'implicazione che ne discende. Per il carattere conservativo si scrive la circuitazione, con il cerchietto sul segno di integrale, il campo con la freccia, il prodotto scalare con un punto ben visibile e $\dd\vec l$ come elemento di linea, uguale a zero per ogni linea chiusa; si aggiunge che ciò equivale a rotore nullo (campo irrotazionale) e all'esistenza di un potenziale, con $\vec E=-\nab\varphi$. Per il carattere solenoidale si scrive il flusso attraverso una superficie chiusa, nullo per ogni superficie chiusa, equivalente a divergenza nulla. Il campo elettrico è conservativo e non solenoidale, il campo magnetico è solenoidale e non conservativo: uno diverge e l'altro ruota. La richiesta delle proprietà del campo elettrico è tra le più frequenti, e le due parole «conservativo» e «divergente dalle cariche» ne costituiscono il nucleo. A queste si collega la domanda sul legame tra campo e potenziale, alla quale conviene rispondere con l'affermazione che, se il campo è conservativo, esiste il potenziale, e con la relazione di gradiente scritta con il suo segno.
 
@@ -1404,11 +1431,14 @@ Accanto ai temi propri compaiono domande di base, che servono a verificare il co
 
 \medskip
 
-\noindent\textsc{Tipologie di esercizi scritti.} Il blocco preliminare non genera problemi autonomi: fornisce strumenti che ricompaiono dentro i problemi dei capitoli successivi, ed è utile riconoscere le forme in cui si declina. Una prima forma è il calcolo di una forza di Coulomb o gravitazionale con ordini di grandezza e confronto tra le due, che richiede potenze di dieci, conversioni di unità e controllo dimensionale. Ricorrono poi i calcoli con gli operatori differenziali su funzioni assegnate, gradiente di una funzione di $r$, divergenza e rotore di un campo vettoriale, per decidere se il campo è conservativo o solenoidale e per ricavare il campo dal potenziale. Si incontrano flussi e circuitazioni valutati direttamente, quando una simmetria rende costante la funzione integranda, oppure per mezzo dei teoremi della divergenza e di Stokes, quando la forma della superficie o del percorso rende scomodo il calcolo diretto. L'angolo solido di un cono, con $\Omega=2\pi(1-\cos\alpha)$, e l'uso di $\dd S=r^2\,\dd\Omega$ completano il quadro; sul versante algebrico restano la scomposizione di un vettore con la trigonometria e i prodotti scalare e vettoriale con numeri assegnati, per verificare ortogonalità o parallelismo e calcolare l'area di un parallelogramma.
+% VERIFICARE: le tipologie di esercizi scritti sono ricostruite dal contenuto delle lezioni e non da testi d'esame; confrontare con le prove reali.
+\paragraph*{Tipologie di esercizi scritti}
+Il blocco preliminare non genera problemi autonomi: fornisce strumenti che ricompaiono dentro i problemi dei capitoli successivi, ed è utile riconoscere le forme in cui si declina. Una prima forma è il calcolo di una forza di Coulomb o gravitazionale con ordini di grandezza e confronto tra le due, che richiede potenze di dieci, conversioni di unità e controllo dimensionale. Ricorrono poi i calcoli con gli operatori differenziali su funzioni assegnate, gradiente di una funzione di $r$, divergenza e rotore di un campo vettoriale, per decidere se il campo è conservativo o solenoidale e per ricavare il campo dal potenziale. Si incontrano flussi e circuitazioni valutati direttamente, quando una simmetria rende costante la funzione integranda, oppure per mezzo dei teoremi della divergenza e di Stokes, quando la forma della superficie o del percorso rende scomodo il calcolo diretto. L'angolo solido di un cono, con $\Omega=2\pi(1-\cos\alpha)$, e l'uso di $\dd S=r^2\,\dd\Omega$ completano il quadro; sul versante algebrico restano la scomposizione di un vettore con la trigonometria e i prodotti scalare e vettoriale con numeri assegnati, per verificare ortogonalità o parallelismo e calcolare l'area di un parallelogramma.
 
 \medskip
 
-\noindent\textsc{Gli errori più penalizzati.} I più gravi sono errori di notazione e di significato, assai più che di calcolo. L'omissione dell'unità di misura rende una grandezza priva di senso, e l'esempio classico è il peso espresso in chilogrammi: il chilogrammo misura la massa, mentre il peso è una forza e vale $mg$ in newton. Sui vettori l'errore tipico è la mancanza della freccia sopra il simbolo, del punto del prodotto scalare o del cerchietto nella circuitazione; seguono lo scambio tra direzione e verso e l'ipotesi che l'asse $z$ sia uscente soltanto perché $x$ e $y$ sono disegnati sulla lavagna, mentre $z$ è fissato da $\vec i_1\times\vec i_2=\vec i_3$ e va scelto altrimenti solo con dichiarazione esplicita.
+\paragraph*{Errori più penalizzati}
+I più gravi sono errori di notazione e di significato, assai più che di calcolo. L'omissione dell'unità di misura rende una grandezza priva di senso, e l'esempio classico è il peso espresso in chilogrammi: il chilogrammo misura la massa, mentre il peso è una forza e vale $mg$ in newton. Sui vettori l'errore tipico è la mancanza della freccia sopra il simbolo, del punto del prodotto scalare o del cerchietto nella circuitazione; seguono lo scambio tra direzione e verso e l'ipotesi che l'asse $z$ sia uscente soltanto perché $x$ e $y$ sono disegnati sulla lavagna, mentre $z$ è fissato da $\vec i_1\times\vec i_2=\vec i_3$ e va scelto altrimenti solo con dichiarazione esplicita.
 
 Le linee di campo si prestano a varie sviste: frecce disegnate a ogni estremo come se le linee fossero vettori, linee che si incrociano, campo rappresentato come segmento dalla sorgente al punto, linee del campo gravitazionale di una massa orientate verso l'esterno anziché verso la sorgente. I segni meritano una menzione a parte. Il segno meno in $\vec F=-\nab U$ e in $\vec u=-\nab\varphi$ traduce la direzione di massima diminuzione dell'energia potenziale e non va perso; il segno meno della gravitazione deriva dall'opposizione tra forza e versore uscente dalla sorgente, mentre in Coulomb il segno della forza dipende da quello del prodotto delle cariche. Quanto agli angoli, si sbaglia quando si usano i gradi dove la formula richiede radianti, quando si applica $\sin\theta\simeq\theta$ ad angoli troppo grandi e quando si ricorre alle coordinate cartesiane dove la simmetria suggerirebbe quelle sferiche.
 
@@ -1416,7 +1446,7 @@ Una classe a sé raccoglie gli errori di linguaggio. Si dice flusso attraverso u
 
 \medskip
 
-\titoletto{Esercizio guida risolto.}
+\section*{Esercizio guida risolto}
 Una carica puntiforme $q$ è collocata nell'origine, nel vuoto. Il campo elettrico che essa genera, ottenuto dal rapporto tra la forza di Coulomb e la carica di prova, è
 \[
 \vec E(\vec r)=\frac{q}{4\pi\varepsilon_0}\,\frac{\vec r}{r^3}\qquad(r\neq0).

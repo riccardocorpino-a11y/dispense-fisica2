@@ -1,0 +1,868 @@
+\documentclass[main.tex]{subfiles}
+
+\begin{document}
+
+% Impostazione locale dei titoli dei riquadri (vale da qui in poi)
+\renewcommand{\richiamoprefix}{}
+
+	
+	\section*{Il potenziale elettrostatico nel vuoto}
+	
+	Il punto di partenza è una domanda sul campo di una carica puntiforme ferma: il lavoro che esso compie lungo una linea chiusa è nullo oppure no? La risposta, ottenuta con un integrale di linea, è che la circuitazione di $\vec E$ si annulla per qualunque percorso chiuso, e il campo elettrostatico risulta perciò conservativo. Da questa sola proprietà discendono l'esistenza di un'energia potenziale per una carica di prova immersa nel campo e, dopo la divisione per la carica di prova, quella del potenziale, una funzione scalare che al pari del campo caratterizza lo spazio attorno alla sorgente e si misura in volt. Il legame tra le due grandezze si condensa nella relazione locale $\vec E\cdot\dd\vec l=-\dd V$, dalla quale si leggono le componenti del campo come derivate del potenziale cambiate di segno, la direzione di massima diminuzione di $V$ e l'ortogonalità tra campo e superfici equipotenziali; l'elettronvolt ne è un sottoprodotto pratico, utile per l'energia dei fotoni e per la classificazione elettrica dei materiali. Sul piano operativo il vantaggio è netto. Per una distribuzione di cariche il potenziale si ottiene come somma di numeri anziché di vettori, e il campo segue per derivazione: dipolo e quadrupolo ne sono il banco di prova, con potenziali che a grande distanza decrescono come $1/r^2$ e $1/r^3$. Il piano indefinito e il doppio strato chiudono il quadro, perché mostrano che la convenzione $V(\infty)=0$ non sempre si può adottare e che un campo nullo non implica affatto un potenziale nullo.
+	
+	\section*{Prerequisiti e strumenti di calcolo}
+	
+	I riquadri di questa sezione raccolgono gli strumenti di Fisica 1 e di Analisi su cui poggia tutto il capitolo. Altri due richiami, più specifici, compaiono più avanti nel punto in cui servono: le coordinate polari nel piano, per il potenziale di un piano carico, e il flusso di un campo vettoriale, per il teorema di Gauss.
+	
+	\begin{riquadro}{Richiamo di Fisica 1: lavoro, forze conservative, energia potenziale}
+		Una forza $\vec F$ il cui punto di applicazione subisce lo spostamento infinitesimo $\dd\vec l$ compie il lavoro elementare $\dd L=\vec F\cdot\dd\vec l$. Lungo una linea $\gamma$ che va da $A$ a $B$ il lavoro è l'integrale di linea
+		\[
+		L_{A\to B}=\int_{\gamma}\vec F\cdot\dd\vec l ,
+		\]
+		con $\vec F$ in newton, $\dd\vec l$ in metri e $L$ in joule. In pratica si scompone lo spostamento nelle sue componenti, $\vec F\cdot\dd\vec l=F_x\,\dd x+F_y\,\dd y+F_z\,\dd z$, e si integra lungo la linea assegnata.
+		
+		Una forza si dice conservativa quando il lavoro lungo ogni linea chiusa è nullo. La condizione equivale all'indipendenza del lavoro dal cammino: se $\gamma_1$ e $\gamma_2$ uniscono $A$ a $B$, il percorso che segue $\gamma_1$ e torna indietro lungo $\gamma_2$ è chiuso, quindi $L_{\gamma_1}-L_{\gamma_2}=0$. Esiste allora una funzione $W$ delle sole coordinate, l'energia potenziale, tale che
+		\[
+		L_{A\to B}=-(W_B-W_A)=-\Delta W .
+		\]
+		Poiché nella relazione compare solo una differenza, $W$ è definita a meno di una costante additiva. Il teorema dell'energia cinetica (o delle forze vive) afferma d'altra parte che $L_{A\to B}=\Delta K$, con $K=\tfrac12mv^2$; ne discende $\Delta K+\Delta W=0$, ossia la conservazione dell'energia meccanica $K+W$ nei sistemi isolati soggetti solo a forze conservative. Gli esempi noti sono $W=mgh$ per il peso vicino alla superficie terrestre e $W=\tfrac12kx^2$ per la forza elastica.
+		
+		L'interpretazione fisica è semplice: l'energia potenziale misura la capacità di un corpo di compiere lavoro in virtù della sua posizione. In Fisica 2 lo schema si applica senza modifiche alla forza di Coulomb, e sarà il campo elettrostatico, cioè la forza per unità di carica, a ereditarne le proprietà.
+	\end{riquadro}
+	
+	\begin{riquadro}{Richiamo di Matematica: prodotto scalare, integrale di linea, circuitazione}
+		Il prodotto scalare di due vettori vale
+		\[
+		\vec A\cdot\vec B=A_xB_x+A_yB_y+A_zB_z=AB\cos\theta ,
+		\]
+		dove $\theta$ è l'angolo compreso. A parità di moduli è massimo per $\theta=0$ (vettori paralleli e concordi), nullo per $\theta=\pi/2$ (vettori ortogonali), minimo e negativo per $\theta=\pi$.
+		
+		L'integrale di linea di un campo vettoriale $\vec A$ lungo una curva $\gamma$ si scrive $\int_\gamma\vec A\cdot\dd\vec l$, con $\dd\vec l=(\dd x,\dd y,\dd z)$ elemento orientato della curva. Si calcola con una parametrizzazione della curva oppure, nei casi favorevoli, con la riduzione dell'integrando a una sola variabile, come accadrà con la distanza $r$ da una carica. Quando la curva è chiusa l'integrale si indica con $\oint_\gamma\vec A\cdot\dd\vec l$ e si chiama circuitazione: il nome ricorda che un circuito è appunto un cammino chiuso.
+		
+		Geometricamente, $\vec A\cdot\dd\vec l$ raccoglie solo la componente del campo lungo il cammino. Se $\vec A$ è una forza, l'integrale è il lavoro; se è il campo elettrico, è il lavoro per unità di carica. La circuitazione nulla per ogni linea chiusa è la definizione stessa di campo conservativo, ed è su di essa che si apre il capitolo.
+	\end{riquadro}
+	
+	\begin{riquadro}{Richiamo di Matematica: differenziale totale e gradiente}
+		Per una funzione scalare $f(x,y,z)$ il differenziale totale è
+		\[
+		\dd f=\frac{\partial f}{\partial x}\dd x+\frac{\partial f}{\partial y}\dd y+\frac{\partial f}{\partial z}\dd z=\nab f\cdot\dd\vec l ,
+		\qquad
+		\nab f=\frac{\partial f}{\partial x}\,\hat\imath+\frac{\partial f}{\partial y}\,\hat\jmath+\frac{\partial f}{\partial z}\,\hat k .
+		\]
+		Il vettore $\nab f$, gradiente di $f$ (scritto anche $\grad f$), ha come unità quella di $f$ divisa per un metro. L'operatore $\nab=\hat\imath\,\partial_x+\hat\jmath\,\partial_y+\hat k\,\partial_z$ è un operatore vettoriale differenziale: applicato a uno scalare, restituisce un vettore.
+		
+		In coordinate sferiche $(r,\theta,\varphi)$, con $r$ distanza dall'origine, $\theta$ angolo polare e $\varphi$ azimut, l'elemento di linea è $\dd\vec l=\dd r\,\ur+r\,\dd\theta\,\hat u_\theta+r\sin\theta\,\dd\varphi\,\hat u_\varphi$, e il gradiente diventa
+		\[
+		\nab f=\frac{\partial f}{\partial r}\,\ur+\frac1r\frac{\partial f}{\partial\theta}\,\hat u_\theta+\frac{1}{r\sin\theta}\frac{\partial f}{\partial\varphi}\,\hat u_\varphi .
+		\]
+		Una funzione che dipende dalla sola $r$ ha perciò gradiente radiale, $\nab g(r)=g'(r)\,\ur$.
+		
+		Il significato geometrico discende da $\dd f=|\nab f|\,\dd l\cos\alpha$. A parità di lunghezza dello spostamento, $\dd f$ è massimo quando $\dd\vec l$ è parallelo a $\nab f$; è nullo quando $\dd\vec l$ giace su una superficie $f=\text{costante}$, sicché il gradiente è ortogonale alle superfici di livello. Su una carta topografica le curve di livello sono linee di quota costante e il gradiente della quota indica, punto per punto, la direzione di salita più ripida.
+		
+		Alcune identità tornano utili più volte. Detto $\vec r=(x,y,z)$ il vettore posizione e $r=|\vec r|$, dalla relazione $r^2=\vec r\cdot\vec r$ si ricava per differenziazione $2r\,\dd r=2\vec r\cdot\dd\vec r$, cioè
+		\[
+		\vec r\cdot\dd\vec r=r\,\dd r .
+		\]
+		Da $\partial r/\partial x=x/r$ e dalle analoghe segue $\nab r=\vec r/r=\ur$; di conseguenza $\nab(1/r)=-\vec r/r^3$ e $\nab(r^{-3})=-3\,\vec r/r^5$. Per un vettore costante $\vec p$ si ha $\nab(\vec p\cdot\vec r)=\vec p$, perché la derivata di $p_xx+p_yy+p_zz$ rispetto a $x$ è $p_x$, e così via. Vale infine la regola del prodotto $\nab(fg)=f\,\nab g+g\,\nab f$. Il gradiente serve in questo capitolo perché il campo elettrostatico si rivelerà essere il gradiente del potenziale cambiato di segno.
+	\end{riquadro}
+	
+	\begin{riquadro}{Richiamo di Matematica: sviluppo di Taylor al primo ordine}
+		Una funzione derivabile $f$ vicino a un punto $x_0$ si approssima con la retta tangente,
+		\[
+		f(x_0+h)=f(x_0)+f'(x_0)\,h+O(h^2),
+		\]
+		dove $O(h^2)$ indica i termini trascurati, di ordine $h^2$. Per $f(x)=(1+x)^n$ e $x_0=0$ si ha $f(0)=1$ e $f'(0)=n$, da cui
+		\[
+		(1+x)^n\simeq1+nx\qquad(|x|\ll1).
+		\]
+		I casi usati nel capitolo sono $(1+x)^{-1/2}\simeq1-\tfrac{x}{2}$ e $(1-x)^{-1}\simeq1+x$. Geometricamente lo sviluppo sostituisce una curva con la sua tangente in un intorno piccolo del punto. In Fisica 2 serve per i campi a grande distanza: la quantità piccola è il rapporto tra la dimensione della sorgente e la distanza del punto di osservazione, e si trattengono soltanto i primi termini non nulli in quel rapporto.
+	\end{riquadro}
+	
+	\section*{Teoria, modelli e dimostrazioni}
+	
+	Dei due aggettivi con cui si caratterizza un campo vettoriale, conservativo e solenoidale, il capitolo si occupa del primo. Si consideri una carica puntiforme $q$ ferma nel vuoto e un punto $P$ individuato dal vettore $\vec r$ che parte dalla carica. Il campo in $P$ è
+	\[
+	\vec E=\kc\,\frac{q}{r^2}\,\ur=\kc\,\frac{q\,\vec r}{r^3},
+	\]
+	con $q$ in coulomb, $r$ in metri, $\epz\simeq8{,}854\times10^{-12}\un{F/m}$ permittività dielettrica del vuoto ed $E$ in newton su coulomb. La seconda scrittura coincide con la prima poiché il versore radiale è $\ur=\vec r/r$. Il campo ha la direzione della congiungente carica--punto, verso uscente per $q>0$ ed entrante per $q<0$ (figura~\ref{fig:pot:campo_carica_puntiforme_infografica}), e lo si rappresenta con le linee di campo: curve immaginarie tangenti ovunque a $\vec E$ e orientate come esso, più fitte dove il campo è intenso, mai intersecanti, perché in un punto d'intersezione il campo avrebbe due direzioni. Per la carica puntiforme sono semirette radiali. Si ricordi infine che il campo è la forza per unità di carica positiva di prova, $\vec E=\vec F/q'$: ogni proprietà del campo vale anche per la forza di Coulomb, e viceversa.
+	
+	\begin{figure}[htbp]
+		\centering
+		\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+			\tikzset{
+				gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+				badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+				fieldarrow/.style={line width=1.3pt, ->},
+				posline/.style={draw=gray!50, line width=0.7pt, dashed},
+				unitarrow/.style={line width=1.0pt, ->, color=black!85}
+			}
+			\draw[gridline] (-1.8,-2.2) grid (6.8,4.6);
+			% Caso 1: carica positiva
+			\coordinate (A1) at (0, 2.2);
+			\coordinate (B1) at (4.0, 3.7);
+			\foreach \r in {0.25, 0.45, 0.65} {
+				\draw[orange!50!red, line width=0.4pt, dashed] (A1) circle (\r);
+			}
+			\draw[posline] (A1) -- (B1) node[midway, below right=1pt, font=\small, color=gray!80!black] {$r$};
+			\draw[unitarrow] ($(A1)!0cm!(B1)$) -- ($(A1)!1cm!(B1)$) node[midway, below right=-1pt, font=\small] {$\vec{u}$};
+			\filldraw[fill=black!70, draw=black] (B1) circle (1.5pt) node[above left=2pt, font=\small] {$P$};
+			\draw[fieldarrow, color=orange!90!red] (B1) -- ($(B1)!-1.6cm!(A1)$) node[above right=-1pt] {$\vec{E}$};
+			\filldraw[fill=orange!80!red, draw=black!80, line width=0.6pt] (A1) circle (3.5pt);
+			\node[above left=3pt, font=\small] at (A1) {$q$};
+			\node[badge] at (5.8, 2.2) {$q > 0$};
+			% Caso 2: carica negativa
+			\coordinate (A2) at (0, -1.0);
+			\coordinate (B2) at (4.0, 0.5);
+			\foreach \r in {0.25, 0.45, 0.65} {
+				\draw[teal!50, line width=0.4pt, densely dotted] (A2) circle (\r);
+			}
+			\draw[posline] (A2) -- (B2) node[midway, below right=1pt, font=\small, color=gray!80!black] {$r$};
+			\draw[unitarrow] ($(A2)!0cm!(B2)$) -- ($(A2)!1cm!(B2)$) node[midway, below right=-1pt, font=\small] {$\vec{u}$};
+			\filldraw[fill=black!70, draw=black] (B2) circle (1.5pt) node[above left=2pt, font=\small] {$P'$};
+			\draw[fieldarrow, color=teal!80!black] (B2) -- ($(B2)!1.6cm!(A2)$) node[below right=-1pt] {$\vec{E}$};
+			\filldraw[fill=teal!70!black, draw=black!80, line width=0.6pt] (A2) circle (3.5pt);
+			\node[above left=3pt, font=\small] at (A2) {$q_1$};
+			\node[badge] at (5.8, -1.0) {$q_1 < 0$};
+		\end{tikzpicture}
+		\caption{Orientazione del campo elettrostatico $\vec{E}$ nel punto di misura per una carica sorgente positiva $q$ e una carica negativa $q_1$.}
+		\label{fig:pot:campo_carica_puntiforme_infografica}
+	\end{figure}
+	
+	Per stabilire se il campo sia conservativo si calcola $\vec E\cdot\dd\vec l$ lungo uno spostamento qualunque (richiamo sul prodotto scalare e sulla circuitazione). Nel caso di uno spostamento infinitesimo il vettore $\dd\vec l$ lungo la linea coincide con la variazione $\dd\vec r$ del vettore posizione (figura~\ref{fig:pot:spostamento_infinitesimo}); l'identità $\vec r\cdot\dd\vec r=r\,\dd r$ dà allora
+	\[
+	\vec E\cdot\dd\vec l=\kc\,\frac{q\,\vec r\cdot\dd\vec r}{r^3}=\kc\,\frac{q\,r\,\dd r}{r^3}=\kc\,\frac{q}{r^2}\,\dd r .
+	\]
+	In ogni punto del percorso conta soltanto la variazione della distanza dalla carica, non la forma della traiettoria.
+	
+	\begin{figure}[htbp]
+		\centering
+		\begin{tikzpicture}[>=Stealth, font=\large\sffamily]
+			\tikzset{
+				curve/.style={draw=gray!70, line width=1.5pt},
+				vector/.style={draw=black!85, line width=1.1pt, ->},
+				drvector/.style={draw=teal!90!black, line width=1.2pt, ->},
+				dlvector/.style={draw=orange!90!red, line width=1.2pt, ->}
+			}
+			\coordinate (O) at (7, 0);
+			\draw[curve] (0, 1.5) .. controls (2, 4.5) and (5, 6.0) .. (8, 6.5)
+			coordinate[pos=0.25] (P)
+			coordinate[pos=0.55] (Pprime);
+			\draw[vector] (O) -- (P) node[midway, below left] {$\vec{r}$};
+			\draw[vector] (O) -- (Pprime) node[midway, above right] {$\vec{r}+d\vec{r}$};
+			\draw[drvector] (P) -- (Pprime) node[midway, below right=1pt] {$d\vec{r}$};
+			\draw[dlvector] ($(P) + (-0.1, 0.3)$) -- ($(Pprime) + (-0.1, 0.3)$) node[midway, above left=1pt] {$d\vec{l}$};
+			\node[left=6pt, font=\Large] at (P) {$P$};
+			\node[below right=2pt, font=\Large] at (O) {$O$};
+		\end{tikzpicture}
+		\caption{Rappresentazione vettoriale dello spostamento infinitesimo $d\vec{r}$ rispetto all'elemento di traiettoria $d\vec{l}$ lungo una curva. Nel limite infinitesimo i due vettori coincidono; la figura li mostra distinti solo per leggibilità.}
+		\label{fig:pot:spostamento_infinitesimo}
+	\end{figure}
+	
+	Si scelga una linea chiusa qualsiasi e due suoi punti $P_1$ e $P_2$, a distanze $r_1$ e $r_2$ dalla carica, che la dividono nel tratto $l_1$ da $P_1$ a $P_2$ e nel tratto $l_2$ da $P_2$ a $P_1$ (figura~\ref{fig:pot:integrale_linea_percorsi}). Una primitiva di $1/r^2$ è $-1/r$, e pertanto
+	\[
+	\oint\vec E\cdot\dd\vec l=\kc\,q\int_{r_1}^{r_2}\frac{\dd r}{r^2}+\kc\,q\int_{r_2}^{r_1}\frac{\dd r}{r^2}
+	=\kc\,q\Big[\Big(\frac1{r_1}-\frac1{r_2}\Big)+\Big(\frac1{r_2}-\frac1{r_1}\Big)\Big]=0 .
+	\]
+	
+	\begin{figure}[htbp]
+		\centering
+		\begin{tikzpicture}[>=Stealth, font=\large\sffamily]
+			\tikzset{
+				gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+				curve1/.style={draw=teal!90!black, line width=1.5pt},
+				curve2/.style={draw=orange!90!red, line width=1.5pt},
+				vector/.style={draw=black!85, line width=1.1pt, ->},
+				dlvector/.style={draw=purple!85!black, line width=1.2pt, ->}
+			}
+			\draw[gridline] (-1,-1) grid (8,7);
+			\coordinate (O) at (0, 0);
+			\coordinate (q) at (0.3, 0.6);
+			\coordinate (P1) at (7, 0.5);
+			\coordinate (P2) at (1, 6);
+			\draw[curve1] (P1) .. controls (7.5, 3.5) and (4.5, 6.5) .. (P2)
+			coordinate[pos=0.4] (P)
+			coordinate[pos=0.55] (Pprime);
+			\draw[curve2] (P1) .. controls (3.5, -0.5) and (-0.5, 3.5) .. (P2);
+			\draw[vector] (q) -- (P) node[midway, below right=1pt] {$\vec{r}$};
+			\draw[vector] (q) -- (Pprime) node[midway, above left=1pt] {$\vec{r}+d\vec{r}$};
+			\draw[dlvector] (P) -- (Pprime) node[midway, above right=1pt] {$d\vec{l}$};
+			\filldraw[fill=black] (q) circle (1.5pt);
+			\node[left=3pt, font=\Large] at (q) {$q$};
+			\node[left=-12 pt, font=\Large] at (O) {$O$};
+			\filldraw[fill=black] (P1) circle (1.5pt);
+			\node[below right=2pt, font=\Large] at (P1) {$P_1$};
+			\filldraw[fill=black] (P2) circle (1.5pt);
+			\node[above left=2pt, font=\Large] at (P2) {$P_2$};
+			\node[right=4pt, font=\Large, color=teal!90!black] at (6.5, 3.8) {$l_1$};
+			\node[left=4pt, font=\Large, color=orange!90!red] at (1.5, 2.5) {$l_2$};
+			\node[below right=2pt, font=\Large] at (P) {$P$};
+		\end{tikzpicture}
+		\caption{Spostamento infinitesimo $d\vec{l}$ lungo il percorso curvilineo $l_1$ tra i punti $P_1$ e $P_2$ nel campo generato dalla carica $q$; il tratto $l_2$ chiude il circuito.}
+		\label{fig:pot:integrale_linea_percorsi}
+	\end{figure}
+	
+	Nel risultato compaiono solo i raggi degli estremi, e la linea scelta non vi gioca alcun ruolo. Ne segue che il campo di una carica puntiforme è conservativo. Per una distribuzione qualunque di cariche ferme il campo è la somma dei campi delle singole cariche; la circuitazione, lineare nel campo, è dunque una somma di circuitazioni nulle, e la proprietà si estende a ogni sistema di cariche in quiete. A rigore il campo andrebbe chiamato elettrostatico, proprio perché la dimostrazione riguarda cariche ferme. L'affermazione \enquote{il campo elettrostatico è conservativo} si traduce in una sola formula,
+	\begin{equation}\label{eq:pot:circuitazione}
+		\oint\vec E\cdot\dd\vec l=0 ,
+	\end{equation}
+	valida per qualunque linea chiusa e non per una soltanto; il punto tra $\vec E$ e $\dd\vec l$ indica un prodotto scalare e non va mai omesso. Il primo membro ha le dimensioni di un campo per una lunghezza, cioè di un'energia per unità di carica. Tutto quanto segue discende da questa relazione.
+	
+	Il passo successivo è l'energia. Vale qui il principio di conservazione dell'energia, che governa tutti i fenomeni noti, fisici, chimici o biologici, ed è implicito in ogni legge fisica: un'applicazione corretta di una legge non può condurre a risultati in contrasto con esso. Una carica di prova $q'$ posta nel campo di $q$ subisce la forza $\vec F=q'\vec E$, che è la forza di Coulomb. Si badi che $q'$ non è la sorgente del campo, ma la carica su cui il campo agisce. Il lavoro delle forze del campo da $P_1$ a $P_2$ vale
+	\[
+	L_{1\to2}=\int_{P_1}^{P_2} q'\vec E\cdot\dd\vec l=\frac{qq'}{4\pi\epz}\int_{r_1}^{r_2}\frac{\dd r}{r^2}=\frac{qq'}{4\pi\epz}\Big(\frac1{r_1}-\frac1{r_2}\Big),
+	\]
+	con le cariche in coulomb, le distanze in metri e il lavoro in joule. L'integrale stesso dichiara che la forza è conservativa: la linea percorsa è sparita, restano gli estremi. Chiamata $W_1$ la quantità che contiene $r_1$ e $W_2$ quella che contiene $r_2$, il risultato assume la forma $L=-(W_2-W_1)=-\Delta W$, già incontrata in Fisica 1.
+	
+	Si supponga ora che lo spostamento di $q'$ avvenga così lentamente che una forza esterna $\vec F_{\rm ext}=-q'\vec E$ equilibri, istante per istante, la forza elettrostatica: la risultante è nulla e l'energia cinetica resta trascurabile. Il lavoro della forza esterna è l'opposto del precedente,
+	\[
+	L_{\rm ext}=-L_{1\to2}=\frac{qq'}{4\pi\epz}\Big(\frac1{r_2}-\frac1{r_1}\Big).
+	\]
+	Dove è finito questo lavoro? L'energia non si distrugge, quindi deve ritrovarsi nella carica spostata, che nella nuova posizione possiede un'energia diversa: $W_2-W_1=L_{\rm ext}$. Per l'energia potenziale di $q'$ a distanza $r$ da $q$ si ottiene allora
+	\[
+	W(r)=\frac{qq'}{4\pi\epz\,r}+c ,
+	\]
+	con $c$ costante additiva. Il calcolo non permette di escluderla, perché compare identica in $W_1$ e in $W_2$ e la differenza la elimina. Per assegnarle un valore si fissa un punto di riferimento $P_0$ e si definisce l'energia potenziale di $q'$ in $P$ come la variazione di energia potenziale nel passaggio da $P_0$ a $P$.
+	
+	La scelta più comoda si legge dalla formula. Al crescere di $r$ il primo termine diminuisce, e per $r\to\infty$ tende a zero; con la convenzione $W(\infty)=0$ si ottiene $0=0+c$, quindi $c=0$, e
+	\[
+	W(r)=\frac{1}{4\pi\epz}\,\frac{qq'}{r}.
+	\]
+	Qui $q$ è la carica sorgente, $q'$ la carica di prova, $r$ la loro distanza in metri, e $W$ si misura in joule. Si tratta di uno scalare che decresce come $1/r$, non come $1/r^2$; la scrittura $W(\vec r)$, che a volte compare, indica soltanto la dipendenza dalla posizione. Il significato fisico si ricava dall'integrale che ha condotto al risultato, senza bisogno di memorizzare alcuna definizione. Chi compie lavoro è una forza, e qui la forza è quella del campo: $W(r)$ è il lavoro che le forze del campo compiono per portare $q'$ dalla posizione a distanza $r$ fino all'infinito. Con il segno opposto, è il lavoro che una forza esterna deve compiere contro le forze del campo per portare $q'$ dall'infinito in quella posizione. Le due letture sono equivalenti, e ne basta una.
+	
+	Come il campo si ottiene dalla forza con l'eliminazione della carica di prova, così il potenziale si ottiene dall'energia potenziale con la stessa operazione. Si definisce
+	\begin{equation}\label{eq:pot:Vpuntiforme}
+		V(P)=\frac{W(P)}{q'}=\kc\,\frac{q}{r},
+	\end{equation}
+	dove $q$ è la carica sorgente in coulomb e $r$ la distanza di $P$ dalla sorgente in metri. Il potenziale è l'energia potenziale dell'unità positiva di carica posta in $P$, ossia il lavoro che le forze del campo compiono per trasportare l'unità positiva di carica da $P$ all'infinito. In forma integrale si scrive
+	\[
+	V(P)=\int_P^{\infty}\vec E\cdot\dd\vec l ,
+	\]
+	e lungo un cammino radiale il calcolo si esegue subito:
+	\[
+	\int_r^\infty\kc\,\frac{q}{r'^2}\,\dd r'=\kc\,q\Big[-\frac1{r'}\Big]_r^\infty=\kc\,q\Big(0+\frac1r\Big)=\kc\,\frac{q}{r}.
+	\]
+	Per la \eqref{eq:pot:circuitazione} lo stesso valore si ottiene lungo qualunque altro cammino. La forma integrale è quella da ricordare, perché contiene già la scelta del riferimento: l'estremo superiore all'infinito traduce la convenzione $V(\infty)=0$, senza la quale il potenziale resterebbe definito a meno di una costante.
+	
+	Il confronto con il campo chiarisce la diversa natura delle due grandezze. Da un lato $\kc\,q\,\ur/r^2$ è un vettore che decresce con l'inverso del quadrato della distanza; dall'altro $\kc\,q/r$ è uno scalare che decresce con l'inverso della distanza. Entrambi sono proprietà dello spazio attorno alla sorgente: a ogni punto si associano univocamente un vettore, il campo, e un numero, il potenziale, indipendenti dalla presenza di una carica di prova. Gli scalari si sommano e si sottraggono con molta più facilità dei vettori, e su questo si fonda l'utilità pratica del potenziale.
+	
+	L'analogia gravitazionale aiuta a separare i concetti. A una massa $m$ posta all'altezza $h$ sopra il livello di riferimento si associa l'energia potenziale $mgh$, posseduta dalla massa. Allo stesso punto dello spazio si può però associare la grandezza $gh$, energia per unità di massa, che esiste anche quando nessuna massa vi è collocata; una massa portata in quel punto \enquote{vede} quel potenziale e acquisisce l'energia $m\cdot gh$. Lo schema elettrico è identico,
+	\[
+	\text{forza}\;\vec F\;\longleftrightarrow\;\text{campo}\;\vec E=\frac{\vec F}{q'},\qquad
+	\text{energia potenziale}\;W\;\longleftrightarrow\;\text{potenziale}\;V=\frac{W}{q'},
+	\]
+	e la relazione inversa $W=q'V$, energia uguale a carica per potenziale, è quella che si usa di continuo negli esercizi.
+	
+	Dimensionalmente il potenziale è un'energia divisa per una carica, cioè joule su coulomb; l'unità prende il nome di volt, $1\un{V}=1\un{J/C}$. Come l'energia potenziale, il potenziale è fissato a meno di una costante, e fisicamente si misurano solo le differenze, dette differenze di potenziale (d.d.p.) o tensioni. Le prese domestiche ne offrono l'esempio più comune: tra i due fori è presente una tensione alternata a $50\un{Hz}$ di valore efficace $230\un{V}$, con correnti che negli impianti domestici arrivano tipicamente fino a $16\un{A}$.
+	% NOTA: a lezione sono citati sia 220 V sia 230 V; il valore nominale attuale della rete italiana è 230 V.
+	
+	Una carica libera in un campo elettrico accelera: se positiva, nel verso delle linee di campo; se negativa, in verso opposto. Dal teorema dell'energia cinetica e dalla relazione $L_{1\to2}=-\Delta W=-q'(V_2-V_1)$ si ha
+	\[
+	\Delta K=q'\,(V_1-V_2),
+	\]
+	cioè l'energia cinetica acquistata è il prodotto della carica per la differenza di potenziale attraversata; con $q'$ in coulomb e i potenziali in volt, $\Delta K$ è in joule. Un elettrone, di carica $-e=-1{,}602\times10^{-19}\un{C}$, che attraversa una differenza di potenziale di $1\un{V}$ verso potenziali crescenti ($V_1-V_2=-1\un{V}$) acquista l'energia cinetica $\Delta K=(-e)(-1\un{V})=e\cdot1\un{V}$. Tale quantità definisce l'elettronvolt,
+	\[
+	1\un{eV}=1{,}602\times10^{-19}\un{J},
+	\]
+	unità di energia di uso corrente nella fisica atomica, nella chimica e nella scienza dei materiali.
+	
+	L'elettronvolt rende immediato il calcolo dell'energia di un fotone. Dalla relazione di Planck $E=h\nu=hc/\lambda$, con $hc\simeq1240\un{eV\,nm}$, si ricava la formula pratica
+	\[
+	E\,[\mathrm{eV}]\simeq\frac{1240}{\lambda\,[\mathrm{nm}]}.
+	\]
+	% NOTA: nella trascrizione la costante compare come "1, 2, 3, 4"; il valore corretto è hc = 1240 eV nm.
+	Lo spettro elettromagnetico ordina le onde secondo la lunghezza d'onda. L'occhio umano è sensibile all'esiguo intervallo che va da circa $400\un{nm}$ (blu-violetto) a circa $700\un{nm}$ (rosso), con la massima sensibilità nel verde, attorno a $550\un{nm}$; non sorprende, dato che lo spettro solare, di corpo nero a circa $5800\un{K}$, ha il picco nella stessa regione.
+	% NOTA: a lezione si cita 532 nm come lunghezza d'onda di massima sensibilità; 532 nm è la riga di molti laser verdi, mentre il massimo della sensibilità fotopica dell'occhio è a circa 555 nm.
+	Un fotone di $400\un{nm}$ porta circa $3{,}1\un{eV}$, uno di $800\un{nm}$, appena oltre il rosso, circa $1{,}55\un{eV}$: a lunghezza d'onda minore corrisponde energia maggiore, e infatti le stelle più calde appaiono blu. Oltre il rosso si incontrano infrarosso, microonde e onde radio delle telecomunicazioni; al di sotto del violetto l'ultravioletto, già ionizzante, poi i raggi X e i raggi gamma.
+	
+	Un esempio osservabile riguarda le linee ad altissima tensione vicino al mare. Nell'aria umida e ricca di salsedine l'intenso campo attorno ai conduttori produce scariche che eccitano gli atomi di sodio, i quali emettono la riga gialla del doppietto del sodio, a circa $589\un{nm}$, cioè fotoni da $1240/589\simeq2{,}1\un{eV}$.
+	% NOTA: a lezione si parla di dissociazione di NaCl e di una riga a circa 580 nm; l'emissione gialla è dovuta all'eccitazione degli atomi di sodio nella scarica e il doppietto è a 589,0 e 589,6 nm.
+	
+	La stessa unità serve a classificare i materiali dal punto di vista elettrico, distinti in conduttori e isolanti (o dielettrici). Gli elettroni che partecipano ai legami di un solido occupano un insieme di livelli energetici detto banda di valenza. Sopra l'ultimo livello di tale banda si apre un intervallo di energie proibite, il gap $E_g$, oltre il quale inizia la banda di conduzione. Un elettrone in banda di conduzione non è legato a un atomo e può muoversi nel materiale sotto l'azione di un campo; nella banda di valenza lascia una lacuna, che si comporta a sua volta come una carica positiva mobile. Per promuovere un elettrone attraverso il gap serve un'energia almeno pari a $E_g$, fornita per esempio da un fotone con $h\nu\ge E_g$. Ne segue un criterio di trasparenza. Un vetro è trasparente perché nessun fotone visibile ha energia sufficiente a superare il gap: occorre $E_g>3{,}1\un{eV}$, l'energia del fotone blu, e allora a maggior ragione passano tutti gli altri colori. La silice pura, $\mathrm{SiO_2}$, cristallina nel quarzo e amorfa nel vetro di silice, ha un gap di circa $8$--$9\un{eV}$ ed è trasparente anche a buona parte dell'ultravioletto, fino a circa $1240/8\simeq155\un{nm}$; i vetri comuni, che contengono silicati e altri ossidi, assorbono invece già nel vicino ultravioletto. Materiali di questo tipo sono isolanti sia dal punto di vista ottico sia da quello elettrico, e in parte anche termico.
+	% NOTA: nella trascrizione "CO2" va letto SiO2 e "energia di un elettrone nel blu" va letto energia di un fotone nel blu.
+	
+	Nei metalli la situazione è diversa: il primo livello della banda di conduzione si trova al di sotto dell'ultimo livello della banda di valenza, e una parte degli elettroni è libera di muoversi anche senza eccitazione. Sottoposto a una differenza di potenziale, cioè a un campo elettrico, un metallo è percorso da una corrente; è questa la distinzione tra conduttori e isolanti. Una terza categoria, decisiva per la tecnologia, è quella dei semiconduttori, con un gap piccolo (circa $1{,}1\un{eV}$ nel silicio), sufficiente perché a temperatura ambiente una frazione di elettroni raggiunga la banda di conduzione; non sono trasparenti al visibile. Il drogaggio, cioè l'introduzione controllata di impurezze, crea livelli vuoti vicino alla banda di valenza oppure livelli pieni vicino alla banda di conduzione, e regola così il numero di portatori. Silicio semiconduttore e silice isolante, ricavati entrambi dalle sabbie silicee, sono la base dei circuiti integrati.
+	% NOTA: a lezione il silicio è indicato come l'elemento più diffuso nella crosta terrestre; è il secondo, dopo l'ossigeno.
+	
+	Si torna ora al legame tra campo e potenziale. Dalla definizione integrale, per due punti qualsiasi, si ha
+	\[
+	V(P_2)-V(P_1)=-\int_{P_1}^{P_2}\vec E\cdot\dd\vec l ,
+	\]
+	e per due punti infinitamente vicini la relazione assume la forma locale
+	\begin{equation}\label{eq:pot:locale}
+		\vec E\cdot\dd\vec l=-\dd V .
+	\end{equation}
+	È questa la risposta da dare quando si chiede quale sia il rapporto tra campo e potenziale, perché da essa discende tutto il resto. Il primo membro, prodotto di un campo in $\mathrm{V/m}$ per uno spostamento in metri, si misura in volt come il secondo. Su un percorso chiuso la somma dei $\dd V$ si annulla, poiché $V$ dipende solo dalla posizione e il punto finale coincide con quello iniziale: la \eqref{eq:pot:locale} contiene quindi la \eqref{eq:pot:circuitazione}, di cui è la forma differenziale.
+	
+	Il confronto con il differenziale totale $\dd V=\nab V\cdot\dd\vec l$ (richiamo sul gradiente), valido per ogni $\dd\vec l$, impone
+	\begin{equation}\label{eq:pot:gradiente}
+		\vec E=-\nab V ,\qquad
+		E_x=-\frac{\partial V}{\partial x},\quad E_y=-\frac{\partial V}{\partial y},\quad E_z=-\frac{\partial V}{\partial z}.
+	\end{equation}
+	La componente $E_x$ si ottiene con la scelta $\dd\vec l=\dd x\,\hat\imath$: allora $\vec E\cdot\dd\vec l=E_x\,\dd x$ e $\dd V=(\partial V/\partial x)\,\dd x$, e il confronto dà $E_x=-\partial V/\partial x$; lo stesso vale per $y$ e $z$. Il vettore $\vec E=E_x\hat\imath+E_y\hat\jmath+E_z\hat k$ si ricostruisce dunque con la derivazione di una funzione scalare e un cambio di segno. Non occorre padroneggiare l'operatore $\nab$ per servirsene: basta sapere che la derivata del potenziale lungo una direzione, cambiata di segno, dà la componente del campo lungo quella direzione. Il campo si misura allora in volt a metro, $1\un{V/m}=1\un{N/C}$, l'unità adottata anche dalle normative, per esempio per i limiti di esposizione ai campi delle linee ad alta tensione.
+	
+	Un esempio mostra il metodo all'opera. Sia
+	\[
+	V(x,y,z)=\alpha x^2+\beta\,e^{\kappa y}+\gamma\cos(\delta z),
+	\]
+	con $\alpha$ in $\mathrm{V/m^2}$, $\beta$ e $\gamma$ in volt, $\kappa$ e $\delta$ in $\mathrm{m^{-1}}$, cosicché gli argomenti dell'esponenziale e del coseno sono numeri puri.
+	% NOTA: a lezione il potenziale è scritto come alfa x^2 + beta e^y + gamma cos z; le costanti kappa e delta sono aggiunte per la coerenza dimensionale.
+	Le derivate parziali sono $\partial V/\partial x=2\alpha x$, $\partial V/\partial y=\beta\kappa\,e^{\kappa y}$ e $\partial V/\partial z=-\gamma\delta\sin(\delta z)$, quindi
+	\[
+	\vec E=-2\alpha x\,\hat\imath-\beta\kappa\,e^{\kappa y}\,\hat\jmath+\gamma\delta\sin(\delta z)\,\hat k .
+	\]
+	Il segno positivo della terza componente nasce dal prodotto di due segni meno, quello della derivata del coseno e quello della \eqref{eq:pot:gradiente}. Derivare uno scalare è quasi sempre più rapido che costruire il campo con somme vettoriali; noto il potenziale in ogni punto, il campo è noto in ogni punto.
+	
+	Quando il campo è radiale conviene scriverlo come $\vec E=E_r\,\ur$ anziché per componenti cartesiane. Per la carica puntiforme $V$ dipende solo da $r$, quindi $\nab V=V'(r)\,\ur$ e
+	\[
+	E_r=-\frac{\dd V}{\dd r}=-\kc\,q\Big(-\frac1{r^2}\Big)=\kc\,\frac{q}{r^2},
+	\]
+	che riproduce il campo di partenza e conferma la coerenza dello schema.
+	
+	Dalla \eqref{eq:pot:locale} si ricavano anche due proprietà geometriche. Detto $\theta$ l'angolo tra $\vec E$ e $\dd\vec l$, si ha $\dd V=-E\,\dd l\cos\theta$. A parità di lunghezza dello spostamento, il prodotto scalare è massimo per $\theta=0$, cioè per uno spostamento parallelo e concorde al campo; a causa del segno meno, in quella direzione la variazione di $V$ è la massima diminuzione possibile. Il campo, con il suo verso, indica dunque la direzione di massima diminuzione del potenziale, e il suo modulo misura la rapidità di tale diminuzione. Lungo altre direzioni il potenziale cala meno, o addirittura cresce. Per una carica positiva il potenziale diminuisce lungo qualunque spostamento che allontani dalla carica, ma, a parità di spostamento, cala più che altrove lungo la semiretta radiale, che è appunto la linea di campo.
+	
+	Per $\theta=\pi/2$ risulta invece $\dd V=0$. Gli spostamenti ortogonali al campo non modificano il potenziale, e i punti raggiungibili in questo modo formano una superficie a potenziale costante, detta equipotenziale. Il campo è perpendicolare in ogni punto alle superfici equipotenziali; viceversa, una superficie a cui il campo sia ovunque perpendicolare è equipotenziale, qualunque ne sia la forma. Per la carica puntiforme le equipotenziali sono sfere centrate sulla carica, poiché tutti i punti di una tale sfera distano $r$ dal centro, e le linee di campo radiali le attraversano ad angolo retto (figura~\ref{fig:pot:equipotenziali_carica}). Il paragone con le curve di livello di una carta topografica è diretto, con una differenza: il gradiente della quota indica la massima salita, il campo elettrico la massima discesa del potenziale.
+	
+	\begin{figure}[htbp]
+		\centering
+		\begin{tikzpicture}[>=Stealth, font=\large\sffamily]
+			\tikzset{
+				equipot/.style={draw=orange!90!red, line width=1.0pt, dashed},
+				fieldline/.style={draw=teal!90!black, line width=1.1pt, postaction={decorate},
+					decoration={markings, mark=at position 0.75 with {\arrow{Stealth[length=2.6mm]}}}}
+			}
+			\foreach \a in {0,30,...,330} {
+				\draw[fieldline] (\a:0.25) -- (\a:3.0);
+			}
+			\foreach \r in {1.0, 1.7, 2.5} {
+				\draw[equipot] (0,0) circle (\r);
+			}
+			\filldraw[fill=orange!80!red, draw=black!80, line width=0.6pt] (0,0) circle (3.5pt);
+			\node[above right=2pt, font=\large] at (0,0) {$q>0$};
+			\node[font=\normalsize, color=orange!90!red, fill=white, inner sep=1pt] at (-40:2.5) {$V_3$};
+			\node[font=\normalsize, color=orange!90!red, fill=white, inner sep=1pt] at (-40:1.7) {$V_2$};
+			\node[font=\normalsize, color=orange!90!red, fill=white, inner sep=1pt] at (-40:1.0) {$V_1$};
+		\end{tikzpicture}
+		\caption{Linee di campo (radiali, continue) e superfici equipotenziali (sfere, tratteggiate) di una carica puntiforme positiva, con $V_1>V_2>V_3$. In ogni punto le linee di campo attraversano le equipotenziali ad angolo retto.}
+		\label{fig:pot:equipotenziali_carica}
+	\end{figure}
+	
+	Il caso del campo uniforme fornisce la formula più usata nelle applicazioni. Sia $\vec E=E\,\hat\imath$ costante e siano $x_1<x_2$ due posizioni lungo l'asse. Il potenziale diminuisce nel verso del campo, quindi è minore in $x_2$, e l'integrazione dà
+	\begin{equation}\label{eq:pot:uniforme}
+		V_2-V_1=-\int_{x_1}^{x_2}E\,\dd x=-E\,(x_2-x_1),\qquad\text{cioè}\qquad -\Delta V=E\,\Delta x .
+	\end{equation}
+	La differenza di potenziale è il prodotto del campo per lo spostamento lungo il campo, ed è da qui che si giustifica l'unità volt a metro: un campo di $1\un{V/m}$ produce una caduta di un volt per ogni metro percorso nel suo verso. Sulla lettura delle unità serve attenzione. In italiano \enquote{a metro} significa diviso per il metro, mentre \enquote{per metro} indica un prodotto, $\mathrm{V\,m}$, che è l'unità del flusso del campo elettrico; l'inglese \enquote{volt per meter} corrisponde invece al nostro volt a metro.
+	
+	Il vantaggio dello scalare si manifesta pienamente con più cariche. Per cariche puntiformi $q_1,\dots,q_N$ poste in $P_1,\dots,P_N$, a distanze $r_1,\dots,r_N$ dal punto $P$ (figura~\ref{fig:pot:distribuzione_cariche_discrete}), la sovrapposizione delle \eqref{eq:pot:Vpuntiforme} dà
+	\[
+	V(P)=\kc\sum_{i=1}^{N}\frac{q_i}{r_i},
+	\]
+	con ciascun $q_i$ preso con il proprio segno, in coulomb, e $r_i$ in metri. In un calcolo vettoriale il segno di una carica si tiene in conto con il disegno del vettore nel verso giusto; in uno scalare il segno va scritto, perché uno scalare negativo vale meno. Non servono componenti, angoli o regole di composizione: si calcola il potenziale di ciascuna carica, si ripete per tutte le $N$ cariche e si sommano $N$ numeri. Nella figura i segmenti che vanno da ogni carica a $P$ sono i vettori $\vec r_i$ e non vettori campo; in $P$ non compare alcuna freccia, perché un numero non ha una rappresentazione geometrica di quel tipo.
+	
+	\begin{figure}[htbp]
+		\centering
+		\begin{tikzpicture}[>=Stealth, font=\large\sffamily]
+			\tikzset{
+				vector/.style={draw=black!85, line width=1.1pt, ->},
+				charge/.style={fill=teal!90!black, draw=black, line width=0.5pt},
+				point/.style={fill=orange!90!red, draw=black, line width=0.5pt}
+			}
+			\coordinate (O) at (0, 0);
+			\coordinate (P1) at (3.5, -1.0);
+			\coordinate (P2) at (1.5, 3.5);
+			\coordinate (PN) at (-2.5, 2.0);
+			\coordinate (P) at (5.0, 1.5);
+			\draw[vector] (P1) -- (P) node[midway, below=2pt] {$\vec{r}_1$};
+			\draw[vector] (P2) -- (P) node[midway, right=2pt] {$\vec{r}_2$};
+			\draw[vector] (PN) -- (P) node[midway, below left=2pt] {$\vec{r}_N$};
+			\filldraw[charge] (P1) circle (2.5pt);
+			\node[right=4pt, font=\Large] at (P1) {$P_1$};
+			\node[below=4pt, font=\Large, color=teal!90!black] at (P1) {$q_1$};
+			\filldraw[charge] (P2) circle (2.5pt);
+			\node[right=4pt, font=\Large] at (P2) {$P_2$};
+			\node[above=4pt, font=\Large, color=teal!90!black] at (P2) {$q_2$};
+			\filldraw[charge] (PN) circle (2.5pt);
+			\node[above left=4pt, font=\Large] at (PN) {$P_N$};
+			\node[below left=4pt, font=\Large, color=teal!90!black] at (PN) {$q_N$};
+			\filldraw[point] (P) circle (2.5pt);
+			\node[right=4pt, font=\Large] at (P) {$P$};
+		\end{tikzpicture}
+		\caption{Sistema discreto di cariche puntiformi $q_1, q_2, \dots, q_N$ poste nei punti $P_1, P_2, \dots, P_N$. I vettori $\vec{r}_1, \vec{r}_2, \dots, \vec{r}_N$ individuano la posizione del punto $P$ rispetto alle cariche: non sono vettori campo, e in $P$ non compare alcuna freccia perché il potenziale è uno scalare.}
+		\label{fig:pot:distribuzione_cariche_discrete}
+	\end{figure}
+	
+	Per una distribuzione continua si torna a ciò che è noto, la carica puntiforme. Il corpo si suddivide in elementi infinitesimi, ciascuno con una carica $\dd q$ assimilabile a una carica puntiforme; una carica infinitesima genera un campo infinitesimo e un potenziale infinitesimo
+	\[
+	\dd V=\kc\,\frac{\dd q}{r},
+	\]
+	con $r$ distanza dell'elemento da $P$. Su una linea si pone $\dd q=\lambda\,\dd l$, su una superficie $\dd q=\sigma\,\dd S$, in un volume $\dd q=\rho\,\dd\tau$, dove $\lambda$, $\sigma$, $\rho$ sono le densità lineare, superficiale e volumica di carica, rispettivamente in $\mathrm{C/m}$, $\mathrm{C/m^2}$, $\mathrm{C/m^3}$, costanti o variabili da punto a punto. La somma sugli elementi diventa un integrale esteso alla distribuzione,
+	\begin{equation}\label{eq:pot:Vcontinua}
+		V(P)=\kc\int\frac{\dd q}{r},
+	\end{equation}
+	dopo il quale il campo segue dalla \eqref{eq:pot:gradiente}. Si tratta della strategia generale della fisica, e in fondo anche dell'ingegneria: un problema complesso si riduce a molti problemi elementari, ciascuno risolto con una legge verificata sperimentalmente in condizioni semplici, e i risultati si ricompongono.
+	
+	Il primo banco di prova è il dipolo elettrico, formato da una carica $-q$ e da una carica $+q$ di uguale modulo poste a distanza $l$. Si chiama momento di dipolo il vettore $\vec p$ diretto dalla carica negativa alla positiva, di modulo $p=ql$, misurato in $\mathrm{C\,m}$.
+	
+	\begin{figure}[htbp]
+		\centering
+		\begin{tikzpicture}[>=Stealth, font=\large\sffamily]
+			\tikzset{
+				vector/.style={draw=black!85, line width=1.1pt, ->},
+				pvector/.style={draw=purple!85!black, line width=1.4pt, ->},
+				negcharge/.style={fill=teal!90!black, draw=black, line width=0.5pt},
+				poscharge/.style={fill=orange!90!red, draw=black, line width=0.5pt},
+				point/.style={fill=black, draw=black, line width=0.5pt},
+				axisline/.style={draw=gray!50, line width=0.8pt, dashed}
+			}
+			\coordinate (A) at (-2.5, 0);
+			\coordinate (O) at (0, 0);
+			\coordinate (B) at (2.5, 0);
+			\coordinate (P) at (6.0, 3.5);
+			\draw[axisline] (-3.5, 0) -- (3.5, 0);
+			\draw[pvector] (-1.5, -0.6) -- (1.5, -0.6) node[midway, below=2pt] {$\vec{p}$};
+			\draw[vector] (A) -- (P) node[midway, above left=2pt] {$\vec{r}_-$};
+			\draw[vector] (O) -- (P) node[midway, above left=-3pt] {$\vec{r}$};
+			\draw[vector] (B) -- (P) node[midway, below right=2pt] {$\vec{r}_+$};
+			\filldraw[negcharge] (A) circle (2.5pt);
+			\node[above=4pt, font=\Large] at (A) {$A$};
+			\node[below=4pt, font=\Large, color=teal!90!black] at (A) {$-q$};
+			\filldraw[point] (O) circle (1.5pt);
+			\node[above left=2pt, font=\Large] at (O) {$O$};
+			\filldraw[poscharge] (B) circle (2.5pt);
+			\node[above=4pt, font=\Large] at (B) {$B$};
+			\node[below=4pt, font=\Large, color=orange!90!red] at (B) {$+q$};
+			\filldraw[point] (P) circle (2.5pt);
+			\node[right=4pt, font=\Large] at (P) {$P$};
+		\end{tikzpicture}
+		\caption{Dipolo elettrico. Il momento di dipolo $\vec{p}$ è orientato dalla carica negativa $-q$ (in $A$) alla carica positiva $+q$ (in $B$). I vettori $\vec{r}_-$, $\vec{r}$ e $\vec{r}_+$ collegano rispettivamente le cariche e il centro $O$ al punto $P$.}
+		\label{fig:pot:vettori_dipolo_orizzontale_infografico}
+	\end{figure}
+	
+	Poiché il sistema è formato da due cariche puntiformi, il potenziale in $P$ è la somma dei due contributi:
+	\[
+	V=\kc\Big(\frac{q}{r_+}-\frac{q}{r_-}\Big)=\frac{q}{4\pi\epz}\Big(\frac1{r_+}-\frac1{r_-}\Big),
+	\]
+	dove $r_+$ e $r_-$ sono le distanze di $P$ dalla carica positiva e dalla negativa (figura~\ref{fig:pot:vettori_dipolo_orizzontale_infografico}).
+	
+	\begin{riquadro}{Richiamo di Matematica: teorema del coseno}
+		In un triangolo di lati $a$, $b$, $c$, detto $\gamma$ l'angolo compreso tra $a$ e $b$, vale $c^2=a^2+b^2-2ab\cos\gamma$. Per $\gamma=\pi/2$ il termine con il coseno si annulla e si ritrova il teorema di Pitagora. In forma vettoriale la relazione è $|\vec a-\vec b|^2=a^2+b^2-2\,\vec a\cdot\vec b$. Serve qui per esprimere le distanze di $P$ dalle due cariche del dipolo in funzione della distanza $r$ dal centro e dell'angolo $\theta$ tra $\vec r$ e $\vec p$.
+	\end{riquadro}
+	
+	Detto $\vec r$ il vettore dal centro $O$ del dipolo a $P$ e $\theta$ l'angolo tra $\vec r$ e $\vec p$, ciascuna carica dista $l/2$ dal centro; la carica positiva si trova in $+\tfrac{l}{2}\hat p$, la negativa in $-\tfrac{l}{2}\hat p$, e il teorema del coseno fornisce
+	\[
+	r_\pm^2=r^2+\frac{l^2}{4}\mp r\,l\cos\theta .
+	\]
+	L'espressione esatta è scomoda, e interessa il comportamento a grande distanza, $r\gg l$. Si scrive $r_\pm=r\,(1+x_\pm)^{1/2}$, con
+	\[
+	x_\pm=\mp\frac{l}{r}\cos\theta+\frac{l^2}{4r^2},
+	\]
+	quantità piccola rispetto a uno. Lo sviluppo al primo ordine $(1+x)^{-1/2}\simeq1-x/2$ (richiamo sullo sviluppo di Taylor) dà
+	\[
+	\frac1{r_\pm}=\frac1r\,(1+x_\pm)^{-1/2}\simeq\frac1r\Big(1\pm\frac{l}{2r}\cos\theta-\frac{l^2}{8r^2}\Big)\simeq\frac1r\Big(1\pm\frac{l}{2r}\cos\theta\Big),
+	\]
+	dove nell'ultimo passaggio si è trascurato il termine in $(l/r)^2$. La differenza vale
+	\[
+	\frac1{r_+}-\frac1{r_-}\simeq\frac1r\cdot\frac{l}{r}\cos\theta=\frac{l\cos\theta}{r^2},
+	\]
+	e di conseguenza
+	\begin{equation}\label{eq:pot:Vdipolo}
+		V=\frac{1}{4\pi\epz}\,\frac{ql\cos\theta}{r^2}=\frac{1}{4\pi\epz}\,\frac{p\cos\theta}{r^2}=\frac{1}{4\pi\epz}\,\frac{\vec p\cdot\vec r}{r^3}.
+	\end{equation}
+	Nell'ultima forma si è usato $p\cos\theta=\vec p\cdot\vec r/r$. Con $p$ in $\mathrm{C\,m}$ e $r$ in metri, $V$ risulta in volt e decresce come $1/r^2$, una potenza in più rispetto alla carica singola: a grande distanza le due cariche, vicine e opposte, si compensano quasi del tutto, e sopravvive solo l'effetto della loro piccola separazione.
+	
+	Il campo si ricava come gradiente cambiato di segno. La regola del prodotto, insieme alle identità $\nab(\vec p\cdot\vec r)=\vec p$ e $\nab(r^{-3})=-3\vec r/r^5$, dà
+	\[
+	\nab\Big[(\vec p\cdot\vec r)\,r^{-3}\Big]=r^{-3}\,\nab(\vec p\cdot\vec r)+(\vec p\cdot\vec r)\,\nab(r^{-3})=\frac{\vec p}{r^3}-\frac{3(\vec p\cdot\vec r)\,\vec r}{r^5},
+	\]
+	da cui
+	\begin{equation}\label{eq:pot:Edipolo}
+		\vec E=-\nab V=\kc\Big[\frac{3(\vec p\cdot\vec r)\,\vec r}{r^5}-\frac{\vec p}{r^3}\Big].
+	\end{equation}
+	Il primo termine ha la direzione di $\vec r$, il secondo quella di $-\vec p$; ne risulta un campo, in $\mathrm{V/m}$, che decresce come $1/r^3$. L'espressione vale in ogni punto a grande distanza e non va imparata a memoria: si ricostruisce in poche righe dal potenziale, che a sua volta è la somma di due numeri. Note le caratteristiche del dipolo ($q$ e $l$, quindi $\vec p$) e le coordinate di $P$ rispetto al centro, il prodotto scalare $\vec p\cdot\vec r$ è immediato e il campo è determinato ovunque.
+	
+	Nelle due posizioni principali di Gauss l'espressione si semplifica. Nella prima, con $\vec r$ parallelo e concorde a $\vec p$, vale $\vec p\cdot\vec r=pr$ e $(\vec p\cdot\vec r)\,\vec r=pr\,\vec r=r^2\vec p$, per cui
+	\[
+	\vec E_{\parallel}=\kc\,\frac{2\vec p}{r^3}.
+	\]
+	Quanto alla seconda, con $\vec r$ perpendicolare a $\vec p$, il prodotto scalare è nullo e
+	\[
+	\vec E_{\perp}=-\kc\,\frac{\vec p}{r^3}.
+	\]
+	Agli stessi risultati si arriva, con meno passaggi, attraverso la derivata rispetto a $r$ del potenziale lungo le due rette, cambiata di segno: sull'asse $V=\kc\,p/r^2$ e $E_r=-\dd V/\dd r=\kc\,2p/r^3$. Sul piano perpendicolare a $\vec p$ passante per il centro vale $\cos\theta=0$, quindi $V=0$: quel piano è equipotenziale e il campo, parallelo a $-\vec p$, gli è normale, come la \eqref{eq:pot:locale} richiede.
+	
+	Il quadrupolo lineare porta il ragionamento un passo oltre. È formato da due cariche $+q$ poste a distanza $l$ da una parte e dall'altra del centro lungo un asse e da una carica $-2q$ nel centro, per una dimensione totale $2l$. La figura~\ref{fig:pot:quadrupolo_lineare_proporzionato} lo presenta come l'accostamento di due dipoli rovesciati, $+q,-q$ e $-q,+q$: due cariche puntiformi $-q$ nello stesso punto equivalgono a un'unica carica $-2q$. Il momento di quadrupolo si definisce come
+	\[
+	Q=2ql^2,
+	\]
+	misurato in $\mathrm{C\,m^2}$.
+	
+	\begin{figure}[htbp]
+		\centering
+		\begin{tikzpicture}[>=Stealth, font=\large\sffamily]
+			\tikzset{
+				poscharge/.style={circle, draw=orange!90!red, fill=orange!10, line width=0.9pt, minimum size=0.5cm, inner sep=0pt, font=\normalsize\color{orange!90!red}},
+				negcharge/.style={circle, draw=teal!90!black, fill=teal!10, line width=0.9pt, minimum size=0.5cm, inner sep=0pt, font=\normalsize\color{teal!90!black}},
+				baseline/.style={draw=black!70, line width=0.9pt},
+				projline/.style={draw=black!50, line width=0.7pt, dashed},
+				dimline/.style={draw=black!70, line width=0.9pt, <->}
+			}
+			\coordinate (B)  at (0, 0);
+			\coordinate (M1) at (3.0, 0);
+			\coordinate (M2) at (3.5, 0);
+			\coordinate (A)  at (6.5, 0);
+			\draw[baseline] (B) -- (A);
+			\node[poscharge] (qB)  at (B)  {$+$};
+			\node[negcharge] (qM1) at (M1) {$-$};
+			\node[negcharge] (qM2) at (M2) {$-$};
+			\node[poscharge] (qA)  at (A)  {$+$};
+			\node[above=0.35cm] at (B)  {$+q$};
+			\node[above=0.35cm] at (M1) {$-q$};
+			\node[above=0.35cm] at (M2) {$-q$};
+			\node[above=0.35cm] at (A)  {$+q$};
+			\node[left=0.35cm, font=\large] at (B) {$B$};
+			\node[right=0.35cm, font=\large] at (A) {$A$};
+			\draw[projline] (B)  -- ++(0, -1.2);
+			\draw[projline] (M1) -- ++(0, -1.2);
+			\draw[projline] (M2) -- ++(0, -1.2);
+			\draw[projline] (A)  -- ++(0, -1.2);
+			\draw[dimline] (0, -1.0) -- (3.0, -1.0) node[midway, fill=white, inner sep=2pt, font=\large] {$l$};
+			\draw[dimline] (3.5, -1.0) -- (6.5, -1.0) node[midway, fill=white, inner sep=2pt, font=\large] {$l$};
+		\end{tikzpicture}
+		\caption{Quadrupolo elettrico lineare visto come due dipoli adiacenti e opposti. Le due cariche $-q$ centrali, disegnate separate per chiarezza, coincidono in una carica $-2q$; la distanza tra ciascuna carica esterna e il centro è $l$.}
+		\label{fig:pot:quadrupolo_lineare_proporzionato}
+	\end{figure}
+	
+	Si consideri dapprima un punto $P$ sulla perpendicolare all'asse passante per il centro, a distanza $r$ da esso, in una posizione analoga alla seconda posizione principale di Gauss del dipolo (figura~\ref{fig:pot:quadrupolo_asse_simmetria}). Per il teorema di Pitagora, nel triangolo rettangolo di cateti $r$ e $l$, ciascuna carica positiva dista $r'=\sqrt{r^2+l^2}$ da $P$.
+	
+	\begin{figure}[htbp]
+		\centering
+		\begin{tikzpicture}[>=Stealth, font=\large\sffamily]
+			\tikzset{
+				poscharge/.style={circle, draw=orange!90!red, fill=orange!10, line width=0.9pt, minimum size=0.5cm, inner sep=0pt, font=\normalsize\color{orange!90!red}},
+				negcharge/.style={circle, draw=teal!90!black, fill=teal!10, line width=0.9pt, minimum size=0.5cm, inner sep=0pt, font=\normalsize\color{teal!90!black}},
+				baseline/.style={draw=black!70, line width=0.9pt},
+				vector/.style={draw=black!85, line width=1.1pt, ->},
+				dashedvector/.style={draw=black!70, line width=0.9pt, dashed, ->}
+			}
+			\coordinate (B) at (-3.5, 0);
+			\coordinate (A) at (3.5, 0);
+			\coordinate (O) at (0, 0);
+			\coordinate (O1) at (-0.25, 0);
+			\coordinate (O2) at (0.25, 0);
+			\coordinate (P) at (0, 5.5);
+			\draw[baseline] (B) -- (A);
+			\draw[vector] (O) -- (P) node[midway, left=4pt] {$\vec{r}$};
+			\draw[dashedvector] (B) -- (P) node[midway, above left=4pt] {$\vec{r}^{\prime}$};
+			\draw[dashedvector] (A) -- (P) node[midway, above right=4pt] {$\vec{r}^{\prime}$};
+			\node[poscharge] (qB) at (B) {$+$};
+			\node[negcharge] (qO1) at (O1) {$-$};
+			\node[negcharge] (qO2) at (O2) {$-$};
+			\node[poscharge] (qA) at (A) {$+$};
+			\node[above=2pt, font=\Large] at (P) {$P$};
+			\node[below=6pt, font=\Large] at (O) {$O$};
+			\node[left=4pt, font=\Large] at (qB.west) {$B$};
+			\node[above right=1pt, font=\large] at (qB.north east) {$+q$};
+			\node[right=4pt, font=\Large] at (qA.east) {$A$};
+			\node[above left=1pt, font=\large] at (qA.north west) {$+q$};
+			\node[above right=4pt, font=\large] at (qO2.north east) {$-2q$};
+		\end{tikzpicture}
+		\caption{Quadrupolo elettrico lineare e punto di osservazione $P$ sull'asse mediano. Il vettore $\vec{r}$ indica la posizione rispetto al centro $O$, i vettori $\vec{r}^{\prime}$ la posizione rispetto alle cariche esterne in $A$ e $B$.}
+		\label{fig:pot:quadrupolo_asse_simmetria}
+	\end{figure}
+	
+	Il potenziale è la somma dei contributi scalari:
+	\[
+	V_\perp=\kc\Big(\frac{q}{r'}+\frac{q}{r'}-\frac{2q}{r}\Big)=\kc\Big(\frac{2q}{r'}-\frac{2q}{r}\Big),
+	\]
+	dove il segno meno del secondo termine è quello della carica centrale e va conservato. Messo in evidenza $r$, si scrive $r'=r\,(1+l^2/r^2)^{1/2}$; per $r\gg l$ lo sviluppo $(1+x)^{-1/2}\simeq1-x/2$ con $x=l^2/r^2$ dà $1/r'\simeq(1/r)(1-l^2/2r^2)$, trascurato il termine in $(l/r)^4$. Si ottiene
+	\begin{equation}\label{eq:pot:Vquadperp}
+		V_\perp\simeq\kc\,\frac{2q}{r}\Big(1-\frac{l^2}{2r^2}-1\Big)=-\kc\,\frac{ql^2}{r^3}=-\frac{1}{4\pi\epz}\,\frac{Q}{2r^3}=-\frac{Q}{8\pi\epz\,r^3},
+	\end{equation}
+	con $Q$ in $\mathrm{C\,m^2}$, $r$ in metri e $V_\perp$ in volt. La dipendenza è ora da $1/r^3$. Il motivo è quello del dipolo, spinto un grado più in là: carica totale e momento di dipolo del sistema sono entrambi nulli, e a grande distanza, dove la struttura del quadrupolo si comprime in un punto, i primi due contributi dello sviluppo scompaiono.
+	
+	Lungo la retta considerata il campo è diretto come la retta stessa, perché la configurazione è simmetrica rispetto al piano che contiene la retta ed è perpendicolare all'asse del quadrupolo, e ogni componente trasversale si annulla. Basta allora derivare rispetto a $r$ la \eqref{eq:pot:Vquadperp}, in cui l'unica dipendenza è nel fattore $r^{-3}$:
+	\[
+	E_r=-\frac{\dd V_\perp}{\dd r}=-\frac{Q}{8\pi\epz}\cdot\frac{3}{r^4}=-\frac{3Q}{8\pi\epz\,r^4},\qquad
+	\vec E_\perp=-\frac{3Q}{8\pi\epz}\,\frac{\ur}{r^4}=-\frac{3Q}{8\pi\epz}\,\frac{\vec r}{r^5}.
+	\]
+	Il segno meno era atteso: le cariche negative sono nel complesso più vicine a $P$ delle positive, e il campo punta verso il centro. Quanto alla distanza, il campo decresce come $1/r^4$; la scrittura con $\vec r/r^5$ non deve trarre in inganno, perché $\vec r/r^5=\ur/r^4$.
+	
+	Sull'asse del quadrupolo, a distanza $r>l$ dal centro e dal lato della carica in $A$ (figura~\ref{fig:pot:quadrupolo_asse_orizzontale}), il calcolo è altrettanto diretto.
+	% NOTA: il caso del punto sull'asse è presente nelle slide ma nella registrazione è solo accennato ("in quella posizione lì si comporta in quel modo lì"); i passaggi sono qui ricostruiti per intero.
+	
+	\begin{figure}[htbp]
+		\centering
+		\begin{tikzpicture}[>=Stealth, font=\large\sffamily]
+			\tikzset{
+				poscharge/.style={circle, draw=orange!90!red, fill=orange!10, line width=0.9pt, minimum size=0.5cm, inner sep=0pt, font=\normalsize\color{orange!90!red}},
+				negcharge/.style={circle, draw=teal!90!black, fill=teal!10, line width=0.9pt, minimum size=0.5cm, inner sep=0pt, font=\normalsize\color{teal!90!black}},
+				baseline/.style={draw=black!70, line width=0.9pt},
+				extensionline/.style={draw=black!70, line width=0.9pt, dashed},
+				projline/.style={draw=black!50, line width=0.7pt, dashed},
+				dimline/.style={draw=black!80, line width=0.9pt, <->}
+			}
+			\coordinate (B)  at (-3.0, 0);
+			\coordinate (O1) at (-0.25, 0);
+			\coordinate (O2) at (0.25, 0);
+			\coordinate (A)  at (3.0, 0);
+			\coordinate (P)  at (6.5, 0);
+			\draw[baseline] (B) -- (A);
+			\draw[extensionline] (A) -- (P);
+			\node[poscharge] (qB)  at (B)  {$+$};
+			\node[negcharge] (qO1) at (O1) {$-$};
+			\node[negcharge] (qO2) at (O2) {$-$};
+			\node[poscharge] (qA)  at (A)  {$+$};
+			\node[below=0.35cm, font=\large] at (B)  {$+q$};
+			\node[below=0.35cm, font=\large] at (0, 0) {$-2q$};
+			\node[below=0.35cm, font=\large] at (A)  {$+q$};
+			\node[below=0.35cm, font=\Large] at (P) {$P$};
+			\draw[projline] (0, 0) -- (0, 1.3);
+			\draw[projline] (P) -- (6.5, 1.3);
+			\draw[dimline] (0, 1.3) -- (6.5, 1.3) node[midway, fill=white, inner sep=3pt, font=\large] {$r$};
+			\node[above left=1pt, font=\Large] at (0, 1.3) {$O$};
+		\end{tikzpicture}
+		\caption{Quadrupolo elettrico lineare con il punto di osservazione $P$ sull'asse del sistema, a distanza $r$ dal centro $O$.}
+		\label{fig:pot:quadrupolo_asse_orizzontale}
+	\end{figure}
+	
+	Le distanze dalle tre cariche sono $r-l$, $r+l$ e $r$, e il potenziale vale
+	\begin{align*}
+		V_\parallel&=\kc\Big(\frac{q}{r-l}+\frac{q}{r+l}-\frac{2q}{r}\Big)
+		=\kc\Big(\frac{2qr}{r^2-l^2}-\frac{2q}{r}\Big)\\
+		&=\kc\,\frac{2q}{r}\Big[\Big(1-\frac{l^2}{r^2}\Big)^{-1}-1\Big]
+		\simeq\kc\,\frac{2q}{r}\cdot\frac{l^2}{r^2}=\frac{1}{4\pi\epz}\,\frac{Q}{r^3}.
+	\end{align*}
+	Nel primo passaggio si sono sommate le due frazioni, $\frac{1}{r-l}+\frac{1}{r+l}=\frac{2r}{r^2-l^2}$; nel secondo si è raccolto $2q/r$, con $\frac{r^2}{r^2-l^2}=(1-l^2/r^2)^{-1}$; nel terzo si è usato $(1-x)^{-1}\simeq1+x$, trascurato il termine in $(l/r)^4$. Il campo, ancora radiale per simmetria, è
+	\[
+	\vec E_\parallel=-\nab V_\parallel=-\frac{Q}{4\pi\epz}\,\nab\Big(\frac1{r^3}\Big)=\frac{3Q}{4\pi\epz}\,\frac{\vec r}{r^5}=\frac{3Q}{4\pi\epz}\,\frac{\ur}{r^4},
+	\]
+	diretto in verso uscente: lungo l'asse la carica positiva in $A$ è la più vicina a $P$ e prevale. In entrambe le posizioni il potenziale decresce come $1/r^3$ e il campo come $1/r^4$.
+	
+	Il quadrupolo ha un peso modesto nelle applicazioni che uno studente di ingegneria incontrerà, anche se dispositivi quadrupolari esistono e si usano. Altro è il suo valore didattico: mostra che, con il solo potenziale della carica puntiforme e una derivata, si ottiene il campo di un oggetto per cui la via diretta richiederebbe somme vettoriali assai più laboriose. All'esame non si chiede di ricordarne i risultati, ma di saper impostare il calcolo.
+	
+	Non tutto, però, fila liscio. La convenzione $V(\infty)=0$ è una scelta, comoda per le cariche puntiformi e per ogni distribuzione limitata; nelle distribuzioni indefinite il calcolo diretto del potenziale con quel riferimento conduce a un integrale divergente, e occorre scegliere come punto di potenziale nullo, al posto dell'infinito, un altro punto $P_0$ opportuno. Si consideri un piano indefinito con densità superficiale uniforme $\sigma>0$ e si ponga l'asse $z$ perpendicolare al piano, con l'origine su di esso.
+	
+	\begin{figure}[htbp]
+		\centering
+		\begin{tikzpicture}[>=Stealth, font=\large\sffamily]
+			\tikzset{
+				planestyle/.style={draw=teal!80!black, fill=teal!10, fill opacity=0.35, line width=1.0pt},
+				annulusstyle/.style={draw=orange!90!red, fill=orange!25, fill opacity=0.6, even odd rule, line width=0.9pt},
+				axisline/.style={draw=black!85, line width=1.0pt, ->},
+				vector/.style={draw=purple!85!black, line width=1.3pt, ->},
+				dashedline/.style={draw=black!70, line width=0.8pt, dashed},
+				point/.style={fill=black, draw=black, line width=0.5pt}
+			}
+			\coordinate (PL_BL) at (-1.5, -2.5);
+			\coordinate (PL_BR) at (1.1, -1.8);
+			\coordinate (PL_TR) at (1.1, 3.2);
+			\coordinate (PL_TL) at (-1.5, 2.5);
+			\draw[planestyle] (PL_BL) -- (PL_BR) -- (PL_TR) -- (PL_TL) -- cycle;
+			\node[font=\Large, color=teal!90!black] at (0.7, 2.7) {$\sigma$};
+			\coordinate (O) at (0, 0);
+			\coordinate (P) at (4.0, 0);
+			\coordinate (Zend) at (5.0, 0);
+			\coordinate (test) at (0.0, 1.1);
+			\draw[axisline] (O) -- (Zend) node[below=2pt, font=\Large] {$z$};
+			\fill[annulusstyle]
+			plot[domain=0:360, variable=\t, samples=60] ({-0.65*1.5*cos(\t)}, {1.5*sin(\t) - 0.3*1.5*cos(\t)})
+			-- plot[domain=360:0, variable=\t, samples=60] ({-0.65*1.1*cos(\t)}, {1.1*sin(\t) - 0.3*1.1*cos(\t)})
+			-- cycle;
+			\draw[orange!90!red, line width=0.8pt, dashed, domain=0:360, variable=\t, samples=60]
+			plot ({-0.65*1.1*cos(\t)}, {1.1*sin(\t) - 0.3*1.1*cos(\t)});
+			\draw[orange!90!red, line width=0.9pt, dashed, domain=0:360, variable=\t, samples=60]
+			plot ({-0.65*1.5*cos(\t)}, {1.5*sin(\t) - 0.3*1.5*cos(\t)});
+			\coordinate (Pprime) at (0, 1.1);
+			\draw[dashedline] (O) -- (Pprime);
+			\node[above=6pt, font=\Large] at (Pprime) {$P'$};
+			\node[left=-14pt, font=\large, color=orange!90!red] at (0, 0.55) {$\rho$};
+			\draw[] (P) -- (test) node[midway, above=3pt, font=\large, color=purple!85!black] {$r$};
+			\node[below left=2pt, font=\Large] at (O) {$O$};
+			\filldraw[point] (P) circle (2.0pt);
+			\node[above right=1pt, font=\Large] at (P) {$P$};
+		\end{tikzpicture}
+		\caption{Calcolo del potenziale nel punto $P$ dell'asse $z$ generato dalla corona circolare di raggio $\rho$ e spessore $\dd\rho$ appartenente al piano carico con densità $\sigma$. Ogni punto della corona, come $P'$, dista $r=\sqrt{\rho^2+z^2}$ da $P$.}
+		\label{fig:pot:disco_carico_piano_sigma_3d}
+	\end{figure}
+	
+	\begin{riquadro}{Richiamo di Matematica: flusso di un campo vettoriale e teorema di Gauss}
+		Il flusso di un campo $\vec A$ attraverso una superficie $S$ è l'integrale $\Phi=\int_S\vec A\cdot\hat n\,\dd S$, dove $\hat n$ è il versore normale all'elemento $\dd S$; per una superficie chiusa si scrive $\oint_S$ e si sceglie $\hat n$ uscente. Il prodotto $\vec A\cdot\hat n\,\dd S$ conta solo la componente normale del campo: una superficie tangente al campo non contribuisce, una superficie ortogonale a un campo uniforme di modulo $A$ e di area $S$ dà $AS$. Per il campo elettrostatico vale il teorema di Gauss, $\oint_S\vec E\cdot\hat n\,\dd S=Q_{\rm int}/\epz$, con $Q_{\rm int}$ carica racchiusa; il flusso si misura in volt per metro, $\mathrm{V\,m}$. Il teorema è sempre vero, ma consente di calcolare il campo solo quando la simmetria della distribuzione permette di portare $E$ fuori dall'integrale, come accade per il piano indefinito.
+	\end{riquadro}
+	
+	Il campo del piano si ottiene dal teorema di Gauss con un cilindro di area di base $S$ a cavallo del piano, con le basi parallele a esso. Per simmetria il campo è perpendicolare al piano, uguale in modulo alla stessa distanza dai due lati e diretto in allontanamento per $\sigma>0$; sulla superficie laterale è tangente e non dà flusso, mentre ciascuna base contribuisce $ES$. Il flusso totale è $2ES$, la carica racchiusa $\sigma S$, e il teorema dà $2ES=\sigma S/\epz$, cioè
+	\[
+	E=\frac{\sigma}{2\epz},\qquad E_z=\operatorname{sgn}(z)\,\frac{\sigma}{2\epz},
+	\]
+	con $\sigma$ in $\mathrm{C/m^2}$ ed $E$ in $\mathrm{V/m}$. Si tratta di un campo uniforme, indipendente dalla distanza dal piano, le cui linee sono rette parallele ed equispaziate perpendicolari al piano.
+	
+	\begin{riquadro}{Richiamo di Matematica: coordinate polari nel piano ed elemento di superficie}
+		Un punto del piano si individua con la distanza $\rho$ da un'origine e con l'angolo $\varphi$ rispetto a un asse, legati alle coordinate cartesiane da $x=\rho\cos\varphi$, $y=\rho\sin\varphi$. L'elemento di area è $\dd S=\rho\,\dd\rho\,\dd\varphi$: il rettangolino curvilineo ha un lato radiale $\dd\rho$ e un lato ad arco $\rho\,\dd\varphi$. Quando l'integrando dipende solo da $\rho$ l'integrazione in $\varphi$ dà $2\pi$, e l'elemento diventa la corona circolare tra $\rho$ e $\rho+\dd\rho$, di circonferenza $2\pi\rho$ e larghezza $\dd\rho$, con $\dd S=2\pi\rho\,\dd\rho$. Serve qui perché tutti i punti di una tale corona hanno la stessa distanza da un punto dell'asse del piano carico.
+	\end{riquadro}
+	
+	Il calcolo diretto del potenziale mostra la difficoltà. La corona circolare del piano compresa tra i raggi $\rho$ e $\rho+\dd\rho$, centrata nel piede $O$ della perpendicolare condotta da $P=(0,0,z)$, ha area $2\pi\rho\,\dd\rho$ e porta la carica $\dd q=\sigma\,2\pi\rho\,\dd\rho$; tutti i suoi punti distano $\sqrt{\rho^2+z^2}$ da $P$. Sommati con la \eqref{eq:pot:Vcontinua} i contributi fino a un raggio $R$, si ottiene
+	\[
+	V_R(z)=\kc\int_0^{R}\frac{\sigma\,2\pi\rho\,\dd\rho}{\sqrt{\rho^2+z^2}}=\frac{\sigma}{2\epz}\Big[\sqrt{\rho^2+z^2}\Big]_0^R=\frac{\sigma}{2\epz}\Big(\sqrt{R^2+z^2}-|z|\Big).
+	\]
+	La primitiva si trova con la sostituzione $u=\rho^2+z^2$, $\dd u=2\rho\,\dd\rho$, che trasforma l'integrando in $\tfrac12u^{-1/2}\,\dd u$, di primitiva $u^{1/2}$; gli estremi diventano $u=z^2$ e $u=R^2+z^2$. Per $R\to\infty$ si ha $\sqrt{R^2+z^2}\simeq R$, e l'espressione contiene il termine $\sigma R/(2\epz)$, che diverge: l'applicazione della definizione con $V(\infty)=0$ fallisce. Il termine divergente, d'altra parte, non dipende da $z$. È una costante additiva infinita, e l'unico contributo che dipende dalla posizione è $-\sigma|z|/(2\epz)$; nel campo, che si ottiene per derivazione, quel termine non lascia traccia.
+	
+	Conviene allora ripartire dal campo e fissare il riferimento sul piano stesso. Per $z>0$, dalla \eqref{eq:pot:locale} con $\dd\vec l=\dd z\,\hat k$,
+	\[
+	V(z)=-\int\frac{\sigma}{2\epz}\,\dd z=-\frac{\sigma}{2\epz}\,z+c ,
+	\]
+	con $c$ costante di integrazione. Si impone $V(0)=0$, cioè potenziale nullo sulla distribuzione: per $z=0$ il primo termine si annulla, e quindi $c=0$. Per $z<0$, dove $E_z=-\sigma/(2\epz)$, lo stesso calcolo dà $V(z)=+\sigma z/(2\epz)$. I due casi si riuniscono nella scrittura
+	\begin{equation}\label{eq:pot:Vpiano}
+		V(z)=-\frac{\sigma\,|z|}{2\epz}.
+	\end{equation}
+	Con $\sigma$ in $\mathrm{C/m^2}$, $\epz$ in $\mathrm{F/m}$ e $|z|$ in metri, il rapporto si misura in $\mathrm{C/F}$, cioè in volt. Il punto di potenziale nullo non è più all'infinito ma sul piano. Sul grafico (figura~\ref{fig:pot:campo_potenziale_piano_carico}) $V$ si presenta come due semirette che si incontrano nell'origine: il valore massimo, zero, si trova sul piano, e il potenziale scende linearmente verso $-\infty$ da entrambi i lati.
+	
+	\begin{figure}[htbp]
+		\centering
+		\begin{tikzpicture}[>=Stealth, font=\large\sffamily]
+			\tikzset{
+				axisline/.style={draw=black!85, line width=0.9pt, ->},
+				fieldline/.style={draw=teal!90!black, line width=1.8pt},
+				potline/.style={draw=orange!90!red, line width=1.8pt}
+			}
+			\begin{scope}[yshift=4.5cm]
+				\draw[axisline] (-3.0, 0) -- (3.5, 0) node[below=2pt, font=\Large] {$z$};
+				\draw[axisline] (0, -2.2) -- (0, 2.5) node[right=2pt, font=\Large] {$E_z$};
+				\node[below right=2pt, font=\Large] at (0,0) {$O$};
+				\draw[fieldline] (-2.6, -1.2) -- (0, -1.2);
+				\draw[fieldline] (0, 1.2) -- (2.6, 1.2);
+				\node[left=6pt, font=\Large] at (0, 1.2) {$\frac{\sigma}{2\varepsilon_0}$};
+				\node[right=6pt, font=\Large] at (0, -1.2) {$-\frac{\sigma}{2\varepsilon_0}$};
+				\node[below=8pt, font=\Large] at (1.3, 1.2) {$\sigma > 0$};
+			\end{scope}
+			\begin{scope}[yshift=0cm]
+				\draw[axisline] (-3.0, 0) -- (3.5, 0) node[below=2pt, font=\Large] {$z$};
+				\draw[axisline] (0, -2.2) -- (0, 1.8) node[right=2pt, font=\Large] {$V$};
+				\node[above left=2pt, font=\Large] at (0,0) {$O$};
+				\draw[potline] (-2.6, -1.3) -- (0, 0) -- (2.6, -1.3);
+				\node[below=8pt, font=\Large] at (1.3, -0.6) {$\sigma > 0$};
+			\end{scope}
+		\end{tikzpicture}
+		\caption{Andamento della componente $E_z$ del campo e del potenziale $V$ in funzione di $z$ per un piano indefinito con densità superficiale di carica positiva ($\sigma > 0$), con riferimento $V(0)=0$.}
+		\label{fig:pot:campo_potenziale_piano_carico}
+	\end{figure}
+	
+	Il risultato è coerente con la \eqref{eq:pot:locale}, e la verifica è istruttiva. Le linee di campo sono rette parallele ed equispaziate; il vettore campo in un punto è un segmento orientato su una di esse. Si tratta di oggetti distinti: la linea di campo è una costruzione immaginaria, il vettore $\vec E$ è la grandezza fisica. Uno spostamento $\Delta\vec l$ nel verso del campo allontana dal piano di tutta la sua lunghezza, e il potenziale diminuisce al massimo; uno spostamento obliquo della stessa lunghezza allontana di meno, e il potenziale diminuisce meno; uno spostamento parallelo al piano lascia invariata la distanza, e il potenziale non cambia. I piani $z=\text{costante}$ sono quindi le superfici equipotenziali, e il campo li attraversa ad angolo retto.
+	
+	Si sovrappongano ora due piani paralleli indefiniti, con densità $+\sigma$ in $z=-a$ e $-\sigma$ in $z=+a$, a distanza $2a$. La configurazione si chiama doppio strato ed è il modello ideale del condensatore piano, il dispositivo con cui l'elettronica accumula energia elettrica, per esempio quella prodotta da un pannello fotovoltaico in un momento in cui non può essere utilizzata. Molti condensatori elettrolitici impiegano il tantalio, estratto dal coltan (columbite-tantalite), materia prima critica le cui miniere si concentrano in regioni africane segnate da conflitti armati.
+	
+	Per il principio di sovrapposizione il campo è la somma dei campi dei due piani. All'esterno, $|z|>a$, i due contributi hanno uguale modulo $\sigma/(2\epz)$ e versi opposti, e il campo è nullo. All'interno, $|z|<a$, sono concordi, entrambi diretti dal piano positivo al negativo, e
+	\[
+	\vec E=\frac{\sigma}{\epz}\,\hat k ,\qquad |z|<a .
+	\]
+	Il campo interno è uniforme, con linee parallele ed equispaziate dirette da $+\sigma$ a $-\sigma$, e modulo $\sigma/\epz$ in $\mathrm{V/m}$, doppio di quello di un singolo piano. Anche il potenziale si ottiene per sovrapposizione, come somma di due espressioni del tipo \eqref{eq:pot:Vpiano}, ciascuna nulla sul proprio piano:
+	\[
+	V(z)=-\frac{\sigma\,|z+a|}{2\epz}+\frac{\sigma\,|z-a|}{2\epz}.
+	\]
+	La scelta dei riferimenti produce al più una costante additiva, irrilevante per il campo e per le differenze di potenziale; quella fatta ha il pregio di dare $V(0)=0$ nel piano mediano. Resta da esplicitare i moduli nelle tre regioni. Per $z<-a$ si ha $|z+a|=-(z+a)$ e $|z-a|=a-z$, quindi $V=\sigma(z+a+a-z)/(2\epz)=\sigma a/\epz$. All'interno, cioè per $-a<z<a$, risulta $|z+a|=z+a$ e $|z-a|=a-z$, da cui $V=\sigma(-z-a+a-z)/(2\epz)=-\sigma z/\epz$. Oltre il piano negativo, per $z>a$, vale infine $|z+a|=z+a$ e $|z-a|=z-a$, e $V=\sigma(-z-a+z-a)/(2\epz)=-\sigma a/\epz$. Complessivamente
+	\[
+	V(z)=\begin{cases}
+		\dfrac{\sigma a}{\epz}, & z<-a,\\[2mm]
+		-\dfrac{\sigma z}{\epz}, & -a<z<a,\\[2mm]
+		-\dfrac{\sigma a}{\epz}, & z>a.
+	\end{cases}
+	\]
+	
+	\begin{figure}[htbp]
+		\centering
+		\begin{tikzpicture}[>=Stealth, font=\large\sffamily]
+			\tikzset{
+				axisline/.style={draw=black!85, line width=0.9pt, ->},
+				fieldline/.style={draw=teal!90!black, line width=1.8pt},
+				potline/.style={draw=orange!90!red, line width=1.8pt},
+				plateline/.style={draw=gray!60, line width=0.7pt, dashed}
+			}
+			\begin{scope}[yshift=4.6cm]
+				\draw[plateline] (-1.2,-0.4) -- (-1.2,2.3);
+				\draw[plateline] (1.2,-0.4) -- (1.2,2.3);
+				\draw[axisline] (-3.4, 0) -- (3.6, 0) node[below=2pt, font=\Large] {$z$};
+				\draw[axisline] (0, -0.6) -- (0, 3.0) node[left=2pt, font=\Large] {$E_z$};
+				\draw[fieldline] (-3.0, 0) -- (-1.2, 0);
+				\draw[fieldline] (-1.2, 1.6) -- (1.2, 1.6);
+				\draw[fieldline] (1.2, 0) -- (3.0, 0);
+				\node[above=1pt, font=\Large] at (0.7, 1.6) {$\frac{\sigma}{\varepsilon_0}$};
+				\node[below=3pt, font=\normalsize] at (-1.2,-0.4) {$-a$};
+				\node[below=3pt, font=\normalsize] at (1.2,-0.4) {$a$};
+				\node[above=2pt, font=\normalsize, color=orange!90!red] at (-1.2,2.3) {$+\sigma$};
+				\node[above=2pt, font=\normalsize, color=teal!90!black] at (1.2,2.3) {$-\sigma$};
+			\end{scope}
+			\begin{scope}[yshift=0cm]
+				\draw[plateline] (-1.2,-2.0) -- (-1.2,2.0);
+				\draw[plateline] (1.2,-2.0) -- (1.2,2.0);
+				\draw[axisline] (-3.4, 0) -- (3.6, 0) node[below=2pt, font=\Large] {$z$};
+				\draw[axisline] (0, -2.2) -- (0, 2.2) node[right=2pt, font=\Large] {$V$};
+				\draw[potline] (-3.0, 1.3) -- (-1.2, 1.3) -- (1.2, -1.3) -- (3.0, -1.3);
+				\node[above=2pt, font=\Large] at (-2.2, 1.3) {$\frac{\sigma a}{\varepsilon_0}$};
+				\node[below=2pt, font=\Large] at (2.2, -1.3) {$-\frac{\sigma a}{\varepsilon_0}$};
+			\end{scope}
+		\end{tikzpicture}
+		\caption{Doppio strato con $+\sigma$ in $z=-a$ e $-\sigma$ in $z=a$: componente $E_z$ del campo (in alto) e potenziale $V$ (in basso). Fuori dagli strati il campo è nullo e il potenziale costante ma diverso da zero; tra gli strati il campo è uniforme e il potenziale decresce linearmente.}
+		\label{fig:pot:doppio_strato}
+	\end{figure}
+	
+	All'esterno il campo è nullo, ma il potenziale non lo è: vale una costante diversa da zero da ciascun lato (figura~\ref{fig:pot:doppio_strato}). Un campo nullo implica un potenziale costante, non un potenziale nullo. Il campo è la derivata del potenziale cambiata di segno, e la derivata di una costante si annulla qualunque sia il valore della costante. All'interno il potenziale decresce linearmente da $\sigma a/\epz$, sul piano positivo, a $-\sigma a/\epz$, sul piano negativo, in accordo con il verso del campo, che va dal più al meno. La differenza di potenziale tra i piani,
+	\[
+	\Delta V=V(-a)-V(a)=\frac{2\sigma a}{\epz}=E\cdot2a ,
+	\]
+	è il prodotto del campo per la distanza, come prevede la \eqref{eq:pot:uniforme}. Raggiunto il valore estremo su ciascun piano, il potenziale prosegue costante, e dove è costante il campo è necessariamente nullo.
+	
+	\section*{Interpretazione fisica e casi limite}
+	
+	Il confronto tra le distribuzioni esaminate rivela una regola di decrescenza. Per $r\to\infty$ potenziale e campo di una carica puntiforme tendono a zero come $1/r$ e $1/r^2$, quelli del dipolo come $1/r^2$ e $1/r^3$, quelli del quadrupolo come $1/r^3$ e $1/r^4$. Ogni volta che si annullano prima la carica totale e poi il momento di dipolo, le cariche opposte si compensano di un grado in più e la decrescenza guadagna una potenza; in tutti i casi il campo va come il potenziale diviso per un'ulteriore potenza di $r$, perché nasce da una derivata. Le formule di dipolo e quadrupolo valgono soltanto nell'approssimazione $r\gg l$, e l'errore commesso è dell'ordine del primo termine trascurato, $(l/r)^2$ relativamente al termine trattenuto; a distanze confrontabili con le dimensioni della sorgente occorre il calcolo esatto, che si ottiene dalla somma senza approssimazioni dei potenziali delle singole cariche.
+	
+	Nelle distribuzioni indefinite la sorgente non si riduce mai a un punto, per quanto ci si allontani. Il campo del piano resta costante e il potenziale, riferito al piano stesso, tende a $-\infty$ per $|z|\to\infty$: la costante additiva va fissata a distanza finita, in genere sulla distribuzione. Resta inteso che il piano indefinito è un modello, e lo è anche il doppio strato, utile per descrivere un condensatore reale quando la distanza tra le armature è piccola rispetto alle loro dimensioni. In quel caso la compensazione tra i due piani all'esterno è perfetta, il campo vi è nullo e il potenziale assume due valori costanti diversi.
+	
+	\section*{Speciale esame}
+	
+	\paragraph*{Domande orali tipiche}
+	L'orale parte sempre dal campo elettrico, con domande via via più articolate, e il docente lo dichiara esplicitamente. Conta il ragionamento più della memoria: chi ha studiato e non ricorda un passaggio può consultare il libro per qualche minuto e poi rispondere, mentre un errore concettuale pesa ben più di una formula dimenticata. La domanda più semplice, \enquote{mi parli del campo elettrico di una carica puntiforme}, si presta a costruire una risposta completa, con soggetto, verbo e complemento. Data una carica $q$ e un punto $P$ a distanza $r$, il campo è un vettore diretto lungo la congiungente, uscente per $q>0$ ed entrante per $q<0$, di modulo $q/(4\pi\epz r^2)$ nel vuoto; lo si rappresenta con linee di campo radiali, più fitte dove il campo è intenso, mai intersecanti, tangenti al campo in ogni punto. Si prosegue con la conservatività, con la \eqref{eq:pot:circuitazione} scritta subito per qualunque percorso chiuso, e con il potenziale $V=q/(4\pi\epz r)$, scalare che decresce come $1/r$, definito come lavoro delle forze del campo per portare l'unità positiva di carica dal punto all'infinito. A chiudere, la relazione \eqref{eq:pot:locale}, con le componenti del campo come derivate cambiate di segno, la massima diminuzione del potenziale nel verso del campo e l'ortogonalità alle superfici equipotenziali. La versione più impegnativa riguarda un corpo esteso con densità di carica anche variabile: si divide il corpo in elementi $\dd\tau$ con carica $\dd q=\rho\,\dd\tau$, si scrivono $\dd V$ e $\dd\vec E$ come per una carica puntiforme e si integra.
+	
+	Una domanda che ricorre in modo quasi sistematico è \enquote{qual è il rapporto tra campo e potenziale?}, e la risposta suggerita a lezione è proprio $\vec E\cdot\dd\vec l=-\dd V$, da cui si ricava tutto il resto. Accanto a essa compaiono alcuni tranelli. Energia potenziale e potenziale non coincidono: la prima dipende dalla carica di prova, il secondo no, e $W=q'V$. Un campo nullo non implica un potenziale nullo, come mostra l'esterno del doppio strato. Per il piano indefinito il potenziale non si può annullare all'infinito, perché l'integrale diverge. Le linee di campo di un piano o di un condensatore vanno descritte come parallele ed equispaziate, e la linea di campo non va confusa con il vettore campo. Si chiede spesso perché il potenziale renda più semplice il calcolo del campo: la risposta è che si sommano numeri invece di vettori. Il quadrupolo, se compare, serve solo a verificare che si sappia impostare il calcolo.
+	
+	\paragraph*{Tipologie di esercizi scritti}
+	Gli esercizi sull'argomento si presentano in poche forme ricorrenti. La più comune assegna un sistema di cariche puntiformi, con valori e posizioni, e chiede il potenziale in uno o più punti e da esso il lavoro per spostare una carica tra due punti, $L_{\rm ext}=q'(V_B-V_A)$. Un'altra fornisce un potenziale $V(x,y,z)$ in forma analitica e chiede il campo, eventualmente in un punto assegnato, oppure le superfici equipotenziali. Seguono il dipolo e il quadrupolo nelle posizioni principali, con il controllo dell'approssimazione $r\gg l$ e talvolta il confronto con il calcolo esatto; il moto di un elettrone o di un protone accelerato da una differenza di potenziale, con energie in elettronvolt e velocità finali dal teorema dell'energia cinetica; i piani carichi e il condensatore piano, con i grafici di $E_z(z)$ e $V(z)$ e la scelta del riferimento; l'energia di fotoni di lunghezza d'onda data e il confronto con il gap di un materiale.
+	
+	\paragraph*{Errori più penalizzati}
+	Gli errori più gravi sono quasi sempre di segno. Si dimentica il meno in $\vec E=-\nab V$ o in $\dd V=-\vec E\cdot\dd\vec l$, oppure il segno delle cariche negative nella somma $V=\kc\sum q_i/r_i$, che è algebrica: nel potenziale il segno va scritto, non disegnato. Nella derivata del coseno, $\frac{\dd}{\dd z}\cos z=-\sin z$, il segno si combina con quello della definizione e cambia il verso della componente. Una seconda categoria riguarda le condizioni al contorno: si impone $V(\infty)=0$ a distribuzioni indefinite, dove l'integrale diverge, oppure si attribuisce significato fisico al valore assoluto del potenziale, che è definito a meno di una costante. Il passaggio da $\vec r/r^5$ a $\ur/r^4$ genera spesso dipendenze sbagliate dalla distanza, e le formule approssimate di dipolo e quadrupolo vengono applicate a distanze confrontabili con le dimensioni della sorgente. Per il piano, la superficie gaussiana corretta è un cilindro a cavallo del piano con le basi parallele a esso; una superficie che non rispetta la simmetria rende il teorema vero ma inutilizzabile. Sul piano grafico si disegnano le linee di campo come se fossero equipotenziali, si omette l'ortogonalità tra le due famiglie, si scambiano i vettori $\vec r_i$ per vettori campo, si confonde la linea di campo con il vettore campo, errore che il docente definisce \enquote{un tasto molto velenoso}. Quanto alle unità, il campo si misura in volt a metro, $\mathrm{V/m}$, mentre il volt per metro, $\mathrm{V\,m}$, è l'unità del flusso: scambiarli rivela una lettura meccanica delle formule.
+	
+	\section*{Esercizio guida risolto}
+	
+	Un dipolo è formato da due cariche $\pm q$, con $q=2{,}0\un{nC}$, poste a distanza $l=1{,}0\un{cm}$. Si chiede di determinare il potenziale e il campo nel punto $P_1$, sull'asse del dipolo dal lato della carica positiva, e nel punto $P_2$, sull'asse perpendicolare passante per il centro, entrambi a $r=0{,}50\un{m}$ dal centro; di controllare l'approssimazione in $P_1$ con il calcolo esatto; di calcolare il lavoro che una forza esterna deve compiere per portare un elettrone da $P_1$ all'infinito e da $P_2$ all'infinito.
+	
+	Prima di ogni calcolo si sceglie il modello. Il rapporto $l/r=0{,}02$ è piccolo, quindi l'approssimazione di dipolo è lecita e l'errore atteso è dell'ordine di $(l/2r)^2=10^{-4}$ in termini relativi. Come sistema di riferimento conviene quello con l'origine nel centro del dipolo e l'asse polare lungo $\vec p$, perché in esso il potenziale \eqref{eq:pot:Vdipolo} dipende solo da $r$ e da $\theta$, e i due punti richiesti corrispondono a $\theta=0$ e $\theta=\pi/2$. Per il momento di dipolo si ha
+	\[
+	p=ql=(2{,}0\times10^{-9}\un{C})(1{,}0\times10^{-2}\un{m})=2{,}0\times10^{-11}\un{C\,m},
+	\]
+	e con $1/(4\pi\epz)=8{,}99\times10^{9}\un{N\,m^2/C^2}$ si ha $p/(4\pi\epz)=0{,}180\un{V\,m^2}$. Dimensionalmente il conto torna: $\mathrm{N\,m^2/C^2}\cdot\mathrm{C\,m}=\mathrm{N\,m^3/C}=\mathrm{J\,m^2/C}=\mathrm{V\,m^2}$, e diviso per $r^2$ dà volt.
+	
+	In $P_1$ si ha $\theta=0$, quindi $\cos\theta=1$, e la \eqref{eq:pot:Vdipolo} fornisce
+	\[
+	V_1=\kc\,\frac{p}{r^2}=\frac{0{,}180\un{V\,m^2}}{0{,}25\un{m^2}}\simeq0{,}72\un{V}.
+	\]
+	Il campo è la derivata del potenziale lungo l'asse, dove $V(r)=\kc\,p/r^2$, cambiata di segno:
+	\[
+	E_1=-\frac{\dd V}{\dd r}=\kc\,\frac{2p}{r^3}=\frac{2\cdot0{,}180\un{V\,m^2}}{0{,}125\un{m^3}}\simeq2{,}88\un{V/m},
+	\]
+	diretto come $\vec p$. Questo valore coincide con la prima posizione principale di Gauss ricavata dalla \eqref{eq:pot:Edipolo}, e la doppia via costituisce un primo controllo.
+	
+	In $P_2$ si ha $\theta=\pi/2$, dunque $V_2=0$: il piano perpendicolare al dipolo nel suo centro è equipotenziale. Qui la derivata lungo $r$ del potenziale non serve, perché $V$ è nullo su tutto il piano e il campo gli è normale; dalla \eqref{eq:pot:Edipolo} con $\vec p\cdot\vec r=0$ si ottiene
+	\[
+	E_2=\kc\,\frac{p}{r^3}=\frac{0{,}180\un{V\,m^2}}{0{,}125\un{m^3}}\simeq1{,}44\un{V/m},
+	\]
+	con verso opposto a $\vec p$. Alla stessa distanza il campo in $P_1$ è doppio di quello in $P_2$, un rapporto da ricordare. Si noti il passaggio critico: un potenziale nullo in $P_2$ non comporta un campo nullo, perché il campo dipende da come $V$ varia nell'intorno e non dal suo valore nel punto.
+	
+	Il controllo esatto in $P_1$ usa le distanze $r_+=r-l/2=0{,}495\un{m}$ e $r_-=r+l/2=0{,}505\un{m}$. Con $q/(4\pi\epz)=17{,}98\un{V\,m}$ si ha
+	\[
+	V_1^{\rm esatto}=17{,}98\un{V\,m}\Big(\frac1{0{,}495\un{m}}-\frac1{0{,}505\un{m}}\Big)=17{,}98\cdot0{,}04000\un{V}\simeq0{,}7193\un{V},
+	\]
+	che differisce dal valore approssimato $0{,}7192\un{V}$ per circa un decimillesimo in termini relativi, esattamente l'ordine di grandezza $(l/2r)^2=10^{-4}$ del termine trascurato nello sviluppo. Il segno è quello atteso: la carica positiva è più vicina a $P_1$, quindi $V_1>0$ e il campo è concorde con $\vec p$.
+	
+	Resta il lavoro. Per portare un elettrone da $P_1$ all'infinito con velocità trascurabile occorre un lavoro esterno pari alla variazione della sua energia potenziale, con $W=q'V$ e $q'=-e$:
+	\[
+	L_{\rm ext}=W(\infty)-W(P_1)=0-(-e)V_1=eV_1\simeq0{,}72\un{eV}\simeq1{,}15\times10^{-19}\un{J}.
+	\]
+	L'energia potenziale dell'elettrone in $P_1$, $-eV_1$, è negativa perché il potenziale è positivo e la carica negativa: l'elettrone è attratto dalla regione del dipolo e va trascinato via, quindi il lavoro esterno è positivo. In $P_2$, dove $V_2=0$, l'allontanamento lungo il piano equipotenziale fino all'infinito non richiede lavoro. L'ordine di grandezza è ragionevole: una frazione di elettronvolt per un potenziale inferiore al volt. L'errore più frequente in questo punto è dimenticare il segno della carica dell'elettrone, con il risultato di un lavoro esterno negativo privo di senso fisico.
+	
+\end{document}

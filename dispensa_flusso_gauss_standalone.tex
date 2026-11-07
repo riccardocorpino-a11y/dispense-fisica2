@@ -1,0 +1,1100 @@
+\documentclass[11pt,a4paper]{article}
+\input{preambolo}
+
+\begin{document}
+
+\section*{Flusso del campo elettrostatico e teorema di Gauss}
+
+Il punto di partenza è un bilancio: tutto ciò che si conosce del campo elettrostatico discende dal campo della carica puntiforme, ricavato dalla legge sperimentale di Coulomb, e dalla sua prima proprietà integrale, la circuitazione nulla, che rende il campo conservativo e consente di definire il potenziale. La circuitazione nulla è però una relazione muta, con uno zero al secondo membro, e non aiuta a calcolare il campo; per questo si introduce una seconda grandezza integrale, il flusso del campo attraverso una superficie, una grandezza scalare che misura quante linee di campo attraversano la superficie stessa. Lo strumento geometrico che rende il flusso della carica puntiforme semplice da calcolare è l'angolo solido: il flusso attraverso una superficie dipende soltanto dall'angolo solido sotto cui la carica la vede, e da qui si arriva al teorema di Gauss, secondo il quale il flusso uscente da una qualunque superficie chiusa è uguale alla somma algebrica delle cariche interne divisa per $\epz$, con un contributo dimezzato per le cariche che giacciono sulla superficie. Il teorema, riscritto in forma locale con il teorema della divergenza, diventa la prima equazione di Maxwell, $\nab\cdot\Ev=\rho/\epz$, che insieme a $\nab\times\Ev=\vec{0}$ esaurisce le proprietà del campo elettrostatico e ne esprime il contenuto fisico: le cariche elettriche generano campi elettrici. Quando la distribuzione di carica possiede una simmetria elevata, il teorema diventa il metodo più rapido per calcolare il campo, e se ne ricavano il campo del filo rettilineo indefinito, del piano indefinito, del guscio sferico e della sfera uniformemente carica, insieme a una serie di applicazioni: il moto armonico di una carica in un tunnel scavato in una sfera carica, il campo e il potenziale di gusci concentrici, il campo di una sfera con una cavità eccentrica ottenuto per sovrapposizione. Il percorso si chiude con i conduttori in equilibrio elettrostatico, per i quali il teorema di Gauss mostra che la carica in eccesso si dispone sulla superficie esterna, e con il teorema di Coulomb e la pressione elettrostatica che ne seguono.
+
+\section*{Prerequisiti e strumenti di calcolo}
+
+Gli strumenti matematici che servono in questa dispensa sono pochi ma vanno padroneggiati con sicurezza: il concetto di superficie orientata, l'angolo solido, gli elementi di superficie e di volume nelle coordinate dotate di simmetria, gli operatori differenziali rotore e divergenza con i teoremi integrali che li accompagnano. Si raccolgono qui i richiami relativi; quello sull'oscillatore armonico e quello sulla lettura dei grafici compaiono più avanti, nel punto in cui vengono usati.
+
+\begin{riquadro}[label=ric:gauss:superfici]{Richiamo di Matematica: superficie orientata e flusso di un campo vettoriale}
+Una superficie regolare $S$ si dice orientata quando in ogni suo punto si è scelto, con continuità, uno dei due versori normali $\uv_n$ possibili. Un elemento infinitesimo di superficie, di area $\dd S$, è con ottima approssimazione piano, e su di esso il versore normale è univocamente definito a meno del verso; al numero $\dd S$ si associa allora il vettore $\dd\vec{S}=\uv_n\,\dd S$, detto vettore areolare, che ha modulo uguale all'area, direzione perpendicolare all'elemento e verso dato dall'orientazione scelta. Il flusso di un campo vettoriale $\vec{A}$ attraverso $S$ è lo scalare
+\[
+\Phi_S(\vec{A})=\int_S \vec{A}\cdot\uv_n\,\dd S=\int_S A\cos\theta\,\dd S ,
+\]
+dove $\theta$ è l'angolo tra $\vec{A}$ e $\uv_n$ nel punto considerato. In pratica si suddivide la superficie in elementi, su ciascuno si calcola la componente normale $A_n=A\cos\theta$ del campo, la si moltiplica per l'area dell'elemento e si somma, cioè si integra. Se il campo è uniforme e la superficie è piana, l'integrale si riduce a $\Phi=AS\cos\theta$; se poi in ogni punto della superficie il campo è perpendicolare a essa e ha lo stesso modulo, si ha semplicemente $\Phi=AS$. Il verso della normale va fissato con una convenzione, perché invertire $\uv_n$ cambia il segno del flusso. Per una superficie aperta delimitata da una curva $\gamma$ si usa la regola della mano destra: si sceglie un verso di percorrenza di $\gamma$ e la normale è diretta in modo che un osservatore disposto lungo $\uv_n$, dai piedi alla testa, veda la curva percorsa in senso antiorario. Nel caso di una superficie chiusa, che delimita un volume, la normale si prende sempre uscente. Geometricamente il flusso conta, con segno, quante linee di campo attraversano la superficie: è nullo se il campo è ovunque radente, cioè tangente alla superficie, ed è massimo in modulo se il campo la attraversa perpendicolarmente. In questa dispensa il campo vettoriale è il campo elettrostatico $\Ev$, e tutto il teorema di Gauss è un'affermazione sul suo flusso attraverso superfici chiuse.
+\end{riquadro}
+
+\begin{riquadro}[label=ric:gauss:angolosolido]{Richiamo di Matematica: angolo solido}
+L'angolo solido generalizza allo spazio la nozione di angolo piano. Come l'angolo piano in radianti è il rapporto tra l'arco di circonferenza sotteso e il raggio, così l'angolo solido sotto cui un punto $O$ vede un elemento di superficie $\dd S'$ disposto perpendicolarmente alla congiungente, a distanza $r$, è
+\[
+\dd\Omega=\frac{\dd S'}{r^2},
+\]
+e si misura in steradianti (sr), unità adimensionale. Se l'elemento $\dd S$ non è perpendicolare alla congiungente ma la sua normale $\uv_n$ forma un angolo $\theta$ con il versore $\ur$ che va da $O$ all'elemento, conta soltanto la sua proiezione sul piano perpendicolare a $\ur$, cioè $\dd S'=\dd S\cos\theta$, e quindi
+\[
+\dd\Omega=\frac{\dd S\cos\theta}{r^2}=\frac{\ur\cdot\uv_n\,\dd S}{r^2}.
+\]
+Così definito, $\dd\Omega$ ha un segno: è positivo se la normale punta da parte opposta rispetto a $O$, negativo se punta verso $O$. L'angolo solido di una superficie finita si ottiene per integrazione, $\Omega=\int_S\dd\Omega$, e dipende soltanto dal cono di semirette che, uscite da $O$, si appoggiano al contorno della superficie: due superfici diverse delimitate dallo stesso contorno, se orientate in modo concorde, sono viste da $O$ sotto lo stesso angolo solido. L'angolo solido totale si calcola sulla sfera di raggio $r$ centrata in $O$, per la quale $\cos\theta=1$ ovunque:
+\[
+\Omega_{\mathrm{tot}}=\frac{1}{r^2}\oint_{\mathrm{sfera}}\dd S=\frac{4\pi r^2}{r^2}=4\pi\un{sr}.
+\]
+Lo stesso valore vale per qualunque superficie chiusa che racchiuda $O$, perché ogni semiretta uscente da $O$ la attraversa, e ciò che conta è solo l'insieme delle direzioni, non la forma della superficie. Se invece $O$ giace su una superficie chiusa regolare, nelle vicinanze di $O$ la superficie coincide con il proprio piano tangente, che lascia da una parte metà delle direzioni: l'angolo solido vale allora $2\pi$ sr. L'angolo solido è lo strumento che rende quasi immediato il calcolo del flusso del campo di una carica puntiforme, perché il fattore $\cos\theta/r^2$ che vi compare è esattamente $\dd\Omega/\dd S$.
+\end{riquadro}
+
+\begin{riquadro}[label=ric:gauss:coordinate]{Richiamo di Matematica: coordinate cilindriche e sferiche, elementi di superficie e di volume}
+Nelle coordinate cilindriche $(r,\varphi,z)$ un punto è individuato dalla distanza $r$ dall'asse $z$, dall'angolo azimutale $\varphi$ e dalla quota $z$, con $x=r\cos\varphi$, $y=r\sin\varphi$. L'elemento di linea ha componenti $\dd r$, $r\,\dd\varphi$, $\dd z$, e da queste si ricavano l'elemento di area sulla superficie laterale di un cilindro di raggio $a$, $\dd S=a\,\dd\varphi\,\dd z$, e l'elemento di volume $\dd V=r\,\dd r\,\dd\varphi\,\dd z$. L'area laterale di un cilindro di raggio $a$ e altezza $h$ è dunque
+\[
+S_{\mathrm{lat}}=\int_0^{h}\!\!\int_0^{2\pi} a\,\dd\varphi\,\dd z=2\pi a h .
+\]
+Nelle coordinate sferiche $(r,\theta,\varphi)$ il punto è individuato dalla distanza $r$ dall'origine, dall'angolo polare $\theta\in[0,\pi]$ e dall'angolo azimutale $\varphi\in[0,2\pi)$, con $x=r\sin\theta\cos\varphi$, $y=r\sin\theta\sin\varphi$, $z=r\cos\theta$. Gli spostamenti elementari sono $\dd r$, $r\,\dd\theta$ e $r\sin\theta\,\dd\varphi$; ne segue che l'elemento di area su una sfera di raggio $r$ è $\dd S=r^2\sin\theta\,\dd\theta\,\dd\varphi$ e l'elemento di volume è $\dd V=r^2\sin\theta\,\dd r\,\dd\theta\,\dd\varphi$. L'area della sfera vale
+\[
+S=r^2\int_0^{2\pi}\!\dd\varphi\int_0^{\pi}\sin\theta\,\dd\theta=r^2\cdot 2\pi\cdot\bigl[-\cos\theta\bigr]_0^{\pi}=4\pi r^2 ,
+\]
+mentre il volume della sfera di raggio $R$ si ottiene con un'ulteriore integrazione in $r$:
+\[
+V=\int_0^{R}r^2\,\dd r\int_0^{\pi}\sin\theta\,\dd\theta\int_0^{2\pi}\dd\varphi=\frac{R^3}{3}\cdot 2\cdot 2\pi=\frac{4}{3}\pi R^3 .
+\]
+Le stesse formule servono a calcolare la carica di una distribuzione continua. Se la densità volumica è $\rho=\dd q/\dd V$, misurata in $\mathrm{C/m^3}$, la carica contenuta in un volume $V$ è $q=\int_V\rho\,\dd V$; per una densità uniforme $\rho$ esce dall'integrale e $q=\rho V$. Analogamente, per una densità superficiale $\sigma=\dd q/\dd S$ ($\mathrm{C/m^2}$) e per una densità lineare $\lambda=\dd q/\dd l$ ($\mathrm{C/m}$), uniformi, si ha $q=\sigma S$ e $q=\lambda l$. La scelta delle coordinate non è un dettaglio tecnico: le superfici chiuse che si useranno con il teorema di Gauss sono sfere e cilindri proprio perché su di esse, in presenza di simmetria sferica o cilindrica, il campo ha modulo costante e direzione nota, e le aree in gioco sono quelle appena calcolate.
+\end{riquadro}
+
+\begin{riquadro}[label=ric:gauss:stokesdiv]{Richiamo di Matematica: rotore, divergenza, teorema di Stokes e teorema della divergenza}
+L'operatore nabla, in coordinate cartesiane, è il vettore simbolico $\nab=\uv_x\,\partial/\partial x+\uv_y\,\partial/\partial y+\uv_z\,\partial/\partial z$. Applicato a uno scalare $V$ fornisce il gradiente $\nab V$; moltiplicato vettorialmente per un campo $\vec{A}$ fornisce il rotore
+\[
+\nab\times\vec{A}=\Bigl(\frac{\partial A_z}{\partial y}-\frac{\partial A_y}{\partial z}\Bigr)\uv_x+\Bigl(\frac{\partial A_x}{\partial z}-\frac{\partial A_z}{\partial x}\Bigr)\uv_y+\Bigl(\frac{\partial A_y}{\partial x}-\frac{\partial A_x}{\partial y}\Bigr)\uv_z ,
+\]
+e moltiplicato scalarmente fornisce la divergenza, che è uno scalare:
+\[
+\nab\cdot\vec{A}=\frac{\partial A_x}{\partial x}+\frac{\partial A_y}{\partial y}+\frac{\partial A_z}{\partial z}.
+\]
+Il significato geometrico di questi operatori si coglie attraverso i due teoremi integrali che li legano alla circuitazione e al flusso. Il teorema di Stokes afferma che la circuitazione di $\vec{A}$ lungo una curva chiusa $\gamma$ è uguale al flusso del rotore attraverso una qualunque superficie $S$ che abbia $\gamma$ per contorno, orientata con la regola della mano destra:
+\[
+\oint_\gamma\vec{A}\cdot\dd\vec{l}=\int_S(\nab\times\vec{A})\cdot\uv_n\,\dd S .
+\]
+La superficie è arbitraria: se $\gamma$ è una circonferenza, va bene il cerchio piano come va bene una calotta che vi si appoggia. Il teorema della divergenza, o di Ostrogradskij--Gauss, afferma che il flusso di $\vec{A}$ uscente da una superficie chiusa $S$ è uguale all'integrale della divergenza esteso al volume $V$ racchiuso:
+\[
+\oint_S\vec{A}\cdot\uv_n\,\dd S=\int_V\nab\cdot\vec{A}\,\dd V .
+\]
+Il rotore misura dunque la circuitazione per unità di area attorno a un punto, cioè la tendenza del campo a far ruotare una piccola ruota a palette, e la divergenza misura il flusso uscente per unità di volume da un intorno del punto, cioè la presenza in quel punto di sorgenti, dove il campo nasce, o di pozzi, dove il campo termina; il linguaggio è lo stesso della fluidodinamica. Un campo a rotore nullo si dice irrotazionale; un campo a divergenza nulla ovunque, il cui flusso attraverso qualunque superficie chiusa è quindi nullo, si dice solenoidale. Nello studio del campo elettrostatico i due teoremi permettono di passare dalla forma integrale delle sue proprietà, che riguarda curve e superfici finite, alla forma locale, che riguarda i singoli punti dello spazio.
+\end{riquadro}
+
+\section*{Teoria, modelli e dimostrazioni}
+
+Conviene riprendere il filo di quanto già noto, perché il teorema di Gauss si inserisce in un quadro preciso. L'unico dato sperimentale su cui poggia l'elettrostatica è la legge di Coulomb, dalla quale si ricava il campo generato da una carica puntiforme $q$ posta nell'origine, in un punto $P$ individuato dal vettore $\vec{r}$:
+\begin{equation}
+\Ev(\vec{r})=\frac{1}{4\pi\epz}\,\frac{q}{r^2}\,\ur=\frac{1}{4\pi\epz}\,\frac{q\,\vec{r}}{r^3}.
+\label{eq:gauss:puntiforme}
+\end{equation}
+Qui $q$ è la carica sorgente in coulomb (C), $r$ la distanza in metri, $\ur=\vec{r}/r$ il versore che va dalla carica al punto, $\epz\simeq 8{,}85\times10^{-12}\un{C^2/(N\,m^2)}$ la costante dielettrica del vuoto; il campo si misura in $\mathrm{N/C}$, cioè in $\mathrm{V/m}$, e la costante $k=1/(4\pi\epz)\simeq 8{,}99\times10^{9}\un{N\,m^2/C^2}$ verrà spesso abbreviata con $k$. Il campo~\eqref{eq:gauss:puntiforme} dipende soltanto dalla posizione, ma in tre dimensioni; a differenza delle forze posizionali unidimensionali, come la forza elastica, che sono sempre conservative, per un campo radiale nello spazio la conservatività va dimostrata, e la dimostrazione porta al risultato
+\[
+\oint_\gamma\Ev\cdot\dd\vec{l}=0\qquad\text{per ogni curva chiusa }\gamma ,
+\]
+che garantisce l'esistenza del potenziale, legato al campo dalla relazione $\Ev=-\nab V$; per la carica puntiforme $V(r)=q/(4\pi\epz r)$, in volt ($\mathrm{V}=\mathrm{J/C}$), con lo zero all'infinito. Per il teorema di Stokes (Richiamo~\ref{ric:gauss:stokesdiv}) la circuitazione è uguale al flusso del rotore attraverso una qualunque superficie appoggiata alla curva; poiché la circuitazione è nulla per ogni curva, anche quel flusso lo è per ogni superficie, e ciò è possibile solo se l'integrando si annulla in ogni punto:
+\[
+\nab\times\Ev=0.
+\]
+Il campo elettrostatico è dunque irrotazionale. Lo si può visualizzare con una piccola ruota a palette immersa in un campo radiale: le linee di campo spingono le palette da parti opposte con effetti che si compensano, e la ruota non gira. La stessa conclusione discende anche da $\Ev=-\nab V$, perché il rotore di un gradiente, $\nab\times\nab V$, ha la struttura di un prodotto vettoriale fra due vettori paralleli ed è identicamente nullo. 
+
+Con il campo e il potenziale della carica puntiforme si risolve ogni problema di elettrostatica nel vuoto: per una distribuzione discreta si sommano vettorialmente i campi, o algebricamente i potenziali, delle singole cariche, grazie al principio di sovrapposizione; per una distribuzione continua si suddivide la carica in elementi $\dd q=\lambda\,\dd l$, $\sigma\,\dd S$ o $\rho\,\dd V$, ciascuno trattabile come puntiforme, e si integra. Le strade per arrivare al campo sono quindi due: il calcolo vettoriale diretto, oppure il calcolo dello scalare $V$ seguito dalle derivate $E_x=-\partial V/\partial x$, $E_y=-\partial V/\partial y$, $E_z=-\partial V/\partial z$ o, per campi radiali, $E_r=-\dd V/\dd r$. La relazione di circuitazione, però, è una formula muta: dice che il campo è conservativo, ma con uno zero al secondo membro non offre nulla da sfruttare nel calcolo. Le relazioni più utili sono quelle con un secondo membro diverso da zero, che lega la grandezza integrale a qualcosa di fisico. Una relazione di questo tipo si ottiene dallo studio della seconda proprietà integrale di un campo vettoriale, il flusso attraverso una superficie chiusa.
+
+Il flusso del campo elettrico attraverso una superficie si può immaginare come proporzionale al numero di linee di campo che la attraversano. Si tratta di una rappresentazione efficace, perché le linee sono più fitte dove il campo è più intenso: a parità di superficie, un campo più intenso dà un flusso maggiore, e a parità di campo una superficie più ampia è attraversata da più linee. Per un campo uniforme e una superficie piana di area $S$, la cui normale forma un angolo $\theta$ con il campo, il flusso vale
+\[
+\Phi=E\,S\cos\theta=\Ev\cdot\uv_n\,S=\Ev\cdot\vec{S},
+\]
+dove compare il vettore areolare $\vec{S}=S\,\uv_n$ introdotto nel Richiamo~\ref{ric:gauss:superfici}. Il fattore $\cos\theta$ tiene conto dell'orientazione: se il campo è radente alla superficie, cioè $\Ev\perp\uv_n$, nessuna linea la attraversa e il flusso è nullo. La superficie in sé è una grandezza scalare, un numero accompagnato da un'unità di misura, come i $400\un{cm^2}$ di una mattonella di $20\un{cm}$ di lato; diventa un vettore solo per l'artificio di associarle la normale, e anche il flusso, benché contenga il vettore $\Ev$, è uno scalare. In generale il campo non è uniforme e la superficie non è piana, e la definizione corretta parte dal flusso elementare attraverso un elemento $\dd S$, che in quanto infinitesimo è piano e su cui il campo è uniforme:
+\begin{equation}
+\dd\Phi=\Ev\cdot\uv_n\,\dd S ,\qquad \Phi_S(\Ev)=\int_S\Ev\cdot\uv_n\,\dd S .
+\label{eq:gauss:flusso}
+\end{equation}
+Il flusso si misura in $\mathrm{V\,m}$, equivalente a $\mathrm{N\,m^2/C}$. Va sempre ricordato che il flusso è calcolato attraverso la superficie, non sulla superficie né dentro di essa: l'immagine giusta è quella di linee che, come frecce, la bucano. Il segno del flusso dipende dall'orientazione della normale, e per questo occorre una convenzione: per le superfici aperte si usa la regola della mano destra rispetto al verso di percorrenza del contorno (figura~\ref{fig:gauss:superficie}), mentre per le superfici chiuse, le uniche che interessano il teorema di Gauss, la normale si prende sempre uscente. In questo secondo caso non vi è possibilità di errore, e il flusso attraverso una superficie chiusa si indica con $\oint_S\Ev\cdot\uv_n\,\dd S$, dove il cerchio sul simbolo di integrale ricorda che la superficie è chiusa, cioè delimita un volume senza aperture, come una sfera, un cubo o un cilindro con le sue basi.
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			fieldarrow/.style={line width=1.3pt, ->, color=orange!90!red},
+			unitarrow/.style={line width=1.0pt, ->, color=black!85},
+			contour/.style={draw=teal!70!black, line width=1.3pt}
+		}
+		\draw[gridline] (-0.6,-0.4) grid (11.2,4.8);
+		% calotta appoggiata alla curva gamma
+		\fill[teal!8] (0.4,1.2) .. controls (0.5,4.2) and (4.5,4.2) .. (4.6,1.2)
+			arc[start angle=0, end angle=-180, x radius=2.1, y radius=0.55];
+		\draw[gray!70!black, line width=1pt] (0.4,1.2) .. controls (0.5,4.2) and (4.5,4.2) .. (4.6,1.2);
+		\draw[contour, dashed, line width=0.9pt] (4.6,1.2) arc[start angle=0, end angle=180, x radius=2.1, y radius=0.55];
+		\draw[contour, postaction={decorate}, decoration={markings, mark=at position 0.55 with {\arrow{Stealth[length=7pt]}}}]
+			(0.4,1.2) arc[start angle=180, end angle=360, x radius=2.1, y radius=0.55];
+		\node[teal!70!black] at (2.5,0.3) {$\gamma$};
+		\node[gray!70!black] at (1.0,3.2) {$S$};
+		% normale nel punto piu' alto
+		\draw[unitarrow] (2.5,3.45) -- (2.5,4.45) node[right] {$\uv_n$};
+		% elemento dS con normale e campo
+		\coordinate (P) at (3.92,2.89);
+		\draw[orange!80!red, line width=3pt] (3.70,3.10) -- (4.13,2.68);
+		\node[below left=1pt] at (3.85,2.75) {$\dd S$};
+		\draw[unitarrow] (P) -- ++(46.2:1.15) node[above] {$\uv_n$};
+		\draw[fieldarrow] (P) -- ++(11.2:1.5) node[right] {$\Ev$};
+		\draw[gray!70!black, line width=0.6pt] (P) ++(11.2:0.6) arc[start angle=11.2, end angle=46.2, radius=0.6];
+		\node at ($(P)+(28.7:0.85)$) {$\theta$};
+		\filldraw[fill=black] (P) circle (1.3pt);
+		% formule
+		\node[badge] at (8.9,3.7) {$\dd\Phi=\Ev\cdot\uv_n\,\dd S=E\cos\theta\,\dd S$};
+		\node[badge] at (8.9,2.5) {$\Phi_S=\displaystyle\int_S\Ev\cdot\uv_n\,\dd S$};
+		\node[badge, align=center] at (8.9,1.0) {verso di $\uv_n$: regola della\\ mano destra sul contorno $\gamma$};
+	\end{tikzpicture}
+	\caption{Superficie aperta $S$ delimitata dalla curva $\gamma$: il versore normale $\uv_n$ è orientato in modo che, visto dalla sua punta, il contorno sia percorso in senso antiorario. Sull'elemento $\dd S$ il flusso elementare dipende dall'angolo $\theta$ tra $\Ev$ e $\uv_n$.}
+	\label{fig:gauss:superficie}
+\end{figure}
+
+A questo punto si può calcolare il flusso del campo di una carica puntiforme $q$, posta nel punto $O$, attraverso un elemento $\dd S$ situato a distanza $r$, la cui normale $\uv_n$ forma un angolo $\theta$ con la congiungente $\vec{r}$. La sostituzione dell'espressione~\eqref{eq:gauss:puntiforme} nella definizione~\eqref{eq:gauss:flusso} fornisce
+\[
+\dd\Phi=\frac{q}{4\pi\epz}\,\frac{\vec{r}\cdot\uv_n}{r^3}\,\dd S=\frac{q}{4\pi\epz}\,\frac{r\cos\theta}{r^3}\,\dd S=\frac{q}{4\pi\epz}\,\frac{\cos\theta\,\dd S}{r^2},
+\]
+perché il prodotto scalare $\vec{r}\cdot\uv_n$ vale $r\cos\theta$ e una potenza di $r$ si semplifica con il denominatore. La quantità $\dd S\cos\theta$ è la proiezione di $\dd S$ sul piano perpendicolare a $\vec{r}$ (figura~\ref{fig:gauss:cono}), e il suo rapporto con $r^2$ è, per definizione, l'angolo solido $\dd\Omega$ sotto cui la carica vede l'elemento (Richiamo~\ref{ric:gauss:angolosolido}). Si ottiene quindi la relazione notevole
+\begin{equation}
+\dd\Phi=\frac{q}{4\pi\epz}\,\dd\Omega .
+\label{eq:gauss:dphi}
+\end{equation}
+Per una superficie finita si integra, e poiché $q/(4\pi\epz)$ è costante si ricava
+\[
+\Phi_S(\Ev)=\frac{q}{4\pi\epz}\int_S\dd\Omega=\frac{q}{4\pi\epz}\,\Omega ,
+\]
+dove $\Omega$ è l'angolo solido sotto cui la carica vede l'intera superficie. Il risultato è sorprendente: il flusso non dipende dalla forma della superficie, né dalla sua distanza, ma soltanto da come la carica la vede. Due superfici di forma diversa, anche molto irregolare, che la carica vede sotto lo stesso angolo solido sono attraversate dallo stesso flusso, il che è coerente con l'immagine delle linee di campo: le linee emesse dalla carica entro un certo cono attraversano tutte le superfici che chiudono quel cono, qualunque ne sia la forma.
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			fieldarrow/.style={line width=1.3pt, ->, color=orange!90!red},
+			unitarrow/.style={line width=1.0pt, ->, color=black!85},
+			posline/.style={draw=gray!50, line width=0.7pt, dashed}
+		}
+		\draw[gridline] (-0.8,-1.8) grid (11.4,1.8);
+		\coordinate (O) at (0,0);
+		\coordinate (P) at (5,0);
+		% cono di semirette
+		\fill[orange!6] (O) -- (5,1.0) -- (5,-1.0) -- cycle;
+		\draw[gray!70!black, line width=0.8pt] (O) -- (5,1.0);
+		\draw[gray!70!black, line width=0.8pt] (O) -- (5,-1.0);
+		\draw[posline] (O) -- (7.2,0);
+		\node[above, color=gray!80!black] at (2.6,0.05) {$r$};
+		% elemento proiettato dS' (perpendicolare a r) ed elemento dS inclinato
+		\draw[gray!70!black, dashed, line width=0.8pt] (P) ellipse (0.25 and 1.0);
+		\filldraw[fill=teal!12, draw=teal!70!black, line width=1.1pt, rotate around={-20:(P)}, fill opacity=0.8] (P) ellipse (0.3 and 1.07);
+		\node[above left=-1pt, color=gray!70!black] at (4.85,1.0) {$\dd S'$};
+		\node[above right=-1pt, color=teal!70!black] at (5.35,1.0) {$\dd S$};
+		% vettori in P
+		\draw[fieldarrow] (P) -- (7.0,0) node[below] {$\Ev$};
+		\draw[unitarrow] (P) -- ++(20:1.8) node[above right=-2pt] {$\uv_n$};
+		\draw[gray!70!black, line width=0.6pt] (P) ++(0:1.1) arc[start angle=0, end angle=20, radius=1.1];
+		\node at ($(P)+(10:1.35)$) {$\theta$};
+		\filldraw[fill=black] (P) circle (1.3pt) node[below left=1pt] {$P$};
+		% carica sorgente
+		\foreach \r in {0.25, 0.45} {\draw[orange!50!red, line width=0.4pt, dashed] (O) circle (\r);}
+		\filldraw[fill=orange!80!red, draw=black!80, line width=0.6pt] (O) circle (3.5pt);
+		\node[below left=3pt] at (O) {$q$};
+		% formule
+		\node[badge] at (9.6,0.75) {$\dd\Omega=\dfrac{\dd S'}{r^2}=\dfrac{\dd S\cos\theta}{r^2}$};
+		\node[badge] at (9.6,-0.85) {$\dd\Phi=\dfrac{q}{4\pi\epz}\,\dd\Omega$};
+	\end{tikzpicture}
+	\caption{Flusso del campo di una carica puntiforme $q$ attraverso un elemento $\dd S$ la cui normale forma l'angolo $\theta$ con la congiungente. La proiezione $\dd S'=\dd S\cos\theta$ sul piano perpendicolare a $\vec{r}$ definisce l'angolo solido $\dd\Omega$ sotto cui la carica vede l'elemento.}
+	\label{fig:gauss:cono}
+\end{figure}
+
+Si considera ora una superficie chiusa $S$, con la normale uscente, e si distinguono tre casi a seconda della posizione della carica. Se la carica è interna alla superficie (figura~\ref{fig:gauss:internasup}, a sinistra), ogni semiretta uscente da $O$ attraversa $S$, e l'angolo solido sotto cui la carica vede tutta la superficie è l'angolo solido totale, $4\pi$ sr, qualunque sia la forma di $S$; dalla~\eqref{eq:gauss:dphi} si ha allora
+\[
+\oint_S\Ev\cdot\uv_n\,\dd S=\frac{q}{4\pi\epz}\cdot4\pi=\frac{q}{\epz}.
+\]
+Se la carica è esterna, la superficie chiusa si può dividere in due parti $S_1$ e $S_2$ (figura~\ref{fig:gauss:esterna}) che si appoggiano allo stesso contorno, cioè alla curva lungo cui il cono di semirette uscenti da $O$ tange la superficie. La carica vede $S_1$ e $S_2$ sotto lo stesso angolo solido in valore assoluto, perché esse sono delimitate dallo stesso contorno, ma con la normale uscente una delle due ha $\uv_n$ diretto in verso opposto a $O$ e l'altra verso $O$: i due angoli solidi hanno segni opposti, e così i due flussi, che si annullano a vicenda. Ne segue che
+\[
+\oint_S\Ev\cdot\uv_n\,\dd S=\frac{q}{4\pi\epz}\bigl(\Omega_1+\Omega_2\bigr)=\frac{q}{4\pi\epz}\bigl(\Omega-\Omega\bigr)=0 .
+\]
+In termini di linee di campo, ogni linea che entra nel volume racchiuso ne deve anche uscire, e contribuisce al flusso una volta con segno negativo e una volta con segno positivo. Il terzo caso, che molti testi omettono, è quello in cui la carica si trova proprio sulla superficie (figura~\ref{fig:gauss:internasup}, a destra), in un punto in cui questa è regolare. Nelle immediate vicinanze di $O$ la superficie coincide con il suo piano tangente, e la carica vede la superficie chiusa sotto metà dell'angolo solido totale, $2\pi$ sr, come un osservatore appoggiato sulla superficie di una sfera ne vede soltanto metà; il flusso è allora $q/(2\epz)$.
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			unitarrow/.style={line width=1.0pt, ->, color=black!85},
+			posline/.style={draw=gray!50, line width=0.7pt, dashed}
+		}
+		\draw[gridline] (-0.8,-0.6) grid (11.0,4.6);
+		\coordinate (O) at (0,0);
+		\coordinate (C) at (4.2,2.6);
+		\coordinate (T1) at (3.156,3.533);
+		\coordinate (T2) at (4.569,1.250);
+		% cono tangente alla superficie chiusa
+		\fill[orange!6] (O) -- (T1) -- (T2) -- cycle;
+		\draw[posline] (O) -- (T1);
+		\draw[posline] (O) -- (T2);
+		\fill[violet!5] (C) circle (1.4);
+		% S2 (vicina alla carica) e S1 (lontana)
+		\draw[teal!70!black, line width=1.4pt] (T1) arc[start angle=138.23, end angle=285.29, radius=1.4];
+		\draw[violet!70!black, line width=1.4pt] (T2) arc[start angle=285.29, end angle=498.23, radius=1.4];
+		% contorno comune
+		\draw[gray!60, dashed, line width=0.7pt] (T1) to[bend left=22] (T2);
+		\draw[gray!70!black, line width=0.7pt] (T1) to[bend right=22] (T2);
+		\node[teal!70!black] at (2.25,3.0) {$S_2$};
+		\node[violet!70!black] at (6.0,2.6) {$S_1$};
+		% normali uscenti
+		\draw[unitarrow] (5.412,3.300) -- (6.19,3.75) node[above right=-2pt] {$\uv_{n1}$};
+		\draw[unitarrow] (3.010,1.863) -- (2.245,1.389) node[below left=-2pt] {$\uv_{n2}$};
+		% angolo solido
+		\draw[gray!70!black, line width=0.6pt] (O) ++(15.3:0.8) arc[start angle=15.3, end angle=48.2, radius=0.8];
+		\node at (31.8:1.12) {$\Omega$};
+		% carica esterna
+		\foreach \r in {0.25, 0.45} {\draw[orange!50!red, line width=0.4pt, dashed] (O) circle (\r);}
+		\filldraw[fill=orange!80!red, draw=black!80, line width=0.6pt] (O) circle (3.5pt);
+		\node[below left=3pt] at (O) {$q_e$};
+		% formule
+		\node[badge] at (9.0,3.4) {$\Phi_1=-\dfrac{q_e}{4\pi\epz}\,\Omega=-\Phi_2$};
+		\node[badge] at (9.0,1.9) {$\Phi_e=\Phi_1+\Phi_2=0$};
+	\end{tikzpicture}
+	\caption{Carica $q_e$ esterna a una superficie chiusa. Il cono delle semirette tangenti divide la superficie in $S_1$ e $S_2$, viste sotto lo stesso angolo solido $\Omega$; con le normali uscenti i due flussi hanno segno opposto e la loro somma è nulla.}
+	\label{fig:gauss:esterna}
+\end{figure}
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			ray/.style={line width=0.9pt, ->, color=orange!90!red},
+			surf/.style={draw=violet!70!black, line width=1.2pt, fill=violet!5}
+		}
+		\draw[gridline] (-3.0,-2.9) grid (11.0,3.0);
+		% (a) carica interna
+		\begin{scope}
+			\node[font=\small\sffamily] at (0,2.75) {carica interna};
+			\draw[surf] plot[smooth cycle, tension=0.8] coordinates {(-1.8,0.2) (-1.2,1.4) (0.3,1.7) (1.8,1.1) (2.0,-0.4) (0.8,-1.5) (-1.0,-1.3)};
+			\foreach \a in {0,45,...,315} {\draw[ray] (0.1,0.1) -- ++(\a:2.45);}
+			\foreach \r in {0.25, 0.45} {\draw[orange!50!red, line width=0.4pt, dashed] (0.1,0.1) circle (\r);}
+			\filldraw[fill=orange!80!red, draw=black!80, line width=0.6pt] (0.1,0.1) circle (3.5pt);
+			\node[below right=4pt] at (0.1,0.1) {$q_i$};
+			\node[violet!70!black] at (-1.75,1.5) {$S$};
+			\node[badge] at (0,-2.4) {$\Omega=4\pi \;\Rightarrow\; \Phi_i=\dfrac{q_i}{\epz}$};
+		\end{scope}
+		% (b) carica sulla superficie
+		\begin{scope}[shift={(7.4,0)}]
+			\node[font=\small\sffamily] at (0,2.75) {carica sulla superficie};
+			\draw[surf] (0,0) ellipse (1.9 and 1.4);
+			\draw[gray!60, dashed, line width=0.7pt] (-1.9,1.9) -- (-1.9,-1.9) node[below, font=\scriptsize\sffamily, gray!70!black] {piano tangente};
+			\foreach \a in {-75,-45,...,75} {\draw[ray] (-1.9,0) -- ++(\a:2.6);}
+			\foreach \a in {105,135,...,255} {\draw[gray!45, line width=0.7pt, ->] (-1.9,0) -- ++(\a:0.8);}
+			\filldraw[fill=orange!80!red, draw=black!80, line width=0.6pt] (-1.9,0) circle (3.5pt);
+			\node[below left=3pt] at (-1.9,0) {$q_s$};
+			\node[violet!70!black] at (1.6,1.35) {$S$};
+			\node[badge] at (1.0,-2.4) {$\Omega=2\pi \;\Rightarrow\; \Phi_s=\dfrac{q_s}{2\epz}$};
+		\end{scope}
+	\end{tikzpicture}
+	\caption{A sinistra: una carica interna vede la superficie chiusa sotto l'angolo solido totale $4\pi$, e tutte le sue linee di campo la attraversano. A destra: una carica posta su un punto regolare della superficie ne vede soltanto metà, perché il piano tangente separa le direzioni che entrano nel volume da quelle che ne restano fuori.}
+	\label{fig:gauss:internasup}
+\end{figure}
+% NOTA: a lezione il docente presenta il caso delle cariche sulla superficie come facoltativo ("dimenticatevelo"); lo si riporta perché compare nell'enunciato delle slide.
+Per una distribuzione qualunque di cariche il principio di sovrapposizione consente di sommare i tre risultati, perché il campo totale è la somma dei campi delle singole cariche e il flusso, che è un integrale, è lineare nel campo. Si arriva così all'enunciato del teorema di Gauss: il flusso del campo elettrico uscente da una qualunque superficie chiusa è uguale alla somma algebrica delle cariche contenute all'interno della superficie divisa per $\epz$, più la somma algebrica delle cariche distribuite sulla superficie divisa per $2\epz$, mentre le cariche esterne non danno contributo. In formula,
+\begin{equation}
+\Phi_S(\Ev)=\oint_S\Ev\cdot\uv_n\,\dd S=\frac{1}{\epz}\sum_i q_i^{\mathrm{int}}+\frac{1}{2\epz}\sum_j q_j^{\mathrm{sup}} .
+\label{eq:gauss:gaussgen}
+\end{equation}
+Nella pratica si scelgono superfici chiuse che non passano per cariche puntiformi, e l'enunciato che va ricordato è quello ridotto,
+\begin{equation}
+\oint_S\Ev\cdot\uv_n\,\dd S=\frac{Q_{\mathrm{int}}}{\epz},
+\label{eq:gauss:gauss}
+\end{equation}
+dove $Q_{\mathrm{int}}$, in coulomb, è la somma algebrica, cioè con il proprio segno, delle cariche interne, e il primo membro è un flusso in $\mathrm{V\,m}$. Il campo che compare nell'integrale è il campo totale, generato da tutte le cariche, interne ed esterne; sono solo i contributi delle cariche esterne al flusso totale a essere nulli. Per fissare le idee si considerino tre cariche $q_1$, $q_2$, $q_3$ e tre superfici chiuse (figura~\ref{fig:gauss:trecariche}): una che le racchiude tutte, una che racchiude $q_1$ e $q_3$ ma non $q_2$, una che racchiude $q_2$ e $q_3$ ma non $q_1$. I tre flussi valgono rispettivamente $(q_1+q_2+q_3)/\epz$, $(q_1+q_3)/\epz$ e $(q_2+q_3)/\epz$, e il risultato non richiede alcun integrale: basta sapere quanta carica sta dentro ciascuna superficie. Se la somma algebrica delle cariche interne è nulla, per esempio con una carica $+q$ e una $-q$ entrambe interne, il flusso è nullo pur in presenza di cariche. Le linee di campo nascono dalle cariche positive, che sono sorgenti, e terminano su quelle negative, che sono pozzi; il flusso uscente da una superficie chiusa conta il bilancio netto delle sorgenti racchiuse.
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily}
+		}
+		\draw[gridline] (-1.6,-2.0) grid (11.2,2.0);
+		% superfici chiuse
+		\draw[violet!70!black, line width=1.1pt, dashed] (1.8,0) ellipse (3.1 and 1.7);
+		\draw[teal!70!black, line width=1.1pt, dashed] (0.9,0) ellipse (1.5 and 0.8);
+		\draw[orange!80!black, line width=1.1pt, dashed] (2.7,0) ellipse (1.5 and 1.15);
+		\node[violet!70!black] at (-0.9,1.45) {$S_a$};
+		\node[teal!70!black] at (-0.2,-0.95) {$S_b$};
+		\node[orange!80!black] at (3.9,1.25) {$S_c$};
+		% cariche
+		\foreach \p/\c in {{(0,0)}/orange, {(1.8,0.25)}/orange, {(3.6,0)}/teal} {
+			\foreach \r in {0.22, 0.38} {\draw[\c!50, line width=0.4pt, dashed] \p circle (\r);}
+		}
+		\filldraw[fill=orange!80!red, draw=black!80, line width=0.6pt] (0,0) circle (3.5pt) node[below=4pt] {$q_1$};
+		\filldraw[fill=orange!80!red, draw=black!80, line width=0.6pt] (1.8,0.25) circle (3.5pt) node[below=4pt] {$q_3$};
+		\filldraw[fill=teal!70!black, draw=black!80, line width=0.6pt] (3.6,0) circle (3.5pt) node[below=4pt] {$q_2$};
+		% flussi
+		\node[badge, text=violet!70!black] at (8.6,1.2) {$\Phi_{S_a}=(q_1+q_2+q_3)/\epz$};
+		\node[badge, text=teal!70!black] at (8.6,0) {$\Phi_{S_b}=(q_1+q_3)/\epz$};
+		\node[badge, text=orange!80!black] at (8.6,-1.2) {$\Phi_{S_c}=(q_2+q_3)/\epz$};
+	\end{tikzpicture}
+	\caption{Tre cariche e tre superfici chiuse: il flusso uscente da ciascuna superficie dipende solo dalla somma algebrica delle cariche che essa racchiude, mentre le cariche esterne non contribuiscono.}
+	\label{fig:gauss:trecariche}
+\end{figure}
+
+L'equazione~\eqref{eq:gauss:gauss} è la prima equazione di Maxwell, e a differenza di quella sulla circuitazione resterà valida senza modifiche anche per i campi variabili nel tempo. Il suo secondo membro non è zero: esiste almeno una circostanza, la presenza di una carica netta all'interno della superficie, in cui il flusso attraverso una superficie chiusa è diverso da zero, e quindi il campo elettrostatico non è solenoidale. Dal punto di vista fisico, il contenuto dell'equazione si riassume in una frase: le cariche elettriche generano campi elettrici. Esiste anche una forma locale, che si ricava con il teorema della divergenza (Richiamo~\ref{ric:gauss:stokesdiv}). Se la carica è distribuita con densità volumica $\rho$, la carica interna a $S$ è $Q_{\mathrm{int}}=\int_V\rho\,\dd V$, dove $V$ è il volume racchiuso, e il flusso a primo membro della~\eqref{eq:gauss:gauss} si può riscrivere come integrale di volume della divergenza:
+\[
+\int_V\nab\cdot\Ev\,\dd V=\frac{1}{\epz}\int_V\rho\,\dd V
+\qquad\Longrightarrow\qquad
+\int_V\Bigl(\nab\cdot\Ev-\frac{\rho}{\epz}\Bigr)\dd V=0 .
+\]
+L'uguaglianza vale per qualunque volume $V$, anche piccolo a piacere attorno a un punto qualsiasi, e un integrale che si annulla su ogni volume impone che l'integrando sia nullo in ogni punto. Si ottiene così
+\begin{equation}
+\nab\cdot\Ev=\frac{\rho}{\epz},
+\label{eq:gauss:locale}
+\end{equation}
+dove $\nab\cdot\Ev$ si misura in $\mathrm{V/m^2}$ e $\rho$ in $\mathrm{C/m^3}$. La densità di carica è la grandezza che descrive localmente la carica, come la densità di massa descrive come la massa di un corpo si ripartisce nel suo volume, ed è naturale che compaia nella forma locale. Le due proprietà del campo elettrostatico si scrivono allora in forma integrale e in forma locale come
+\[
+\oint_\gamma\Ev\cdot\dd\vec{l}=0,\quad \oint_S\Ev\cdot\uv_n\,\dd S=\frac{Q_{\mathrm{int}}}{\epz};
+\qquad\qquad
+\nab\times\Ev=\vec{0},\quad \nab\cdot\Ev=\frac{\rho}{\epz}.
+\]
+Queste sono le equazioni di Maxwell per il campo elettrostatico, e da esse discende tutto quanto si sa del campo: la prima coppia dice che il campo è conservativo e irrotazionale, e dunque esprimibile come $\Ev=-\nab V$; la seconda dice che il campo non è solenoidale ma divergente, perché nei punti in cui c'è carica, cioè dove ci sono sorgenti o pozzi, la sua divergenza è diversa da zero. Più avanti nel corso si scoprirà che le cariche non sono l'unica sorgente di campo elettrico, ma l'equazione~\eqref{eq:gauss:locale} rimarrà vera.
+
+Il teorema di Gauss è sempre vero, ma diventa uno strumento di calcolo solo quando la distribuzione di carica possiede una simmetria elevata. D'altra parte il flusso è un integrale, e dalla sola conoscenza del suo valore non si può in generale risalire al campo punto per punto; l'integrale si scioglie solo se esiste una superficie chiusa su cui il campo, in ogni punto, è perpendicolare alla superficie e ha modulo costante. In tal caso $\Ev\cdot\uv_n=E$ ovunque, il modulo esce dall'integrale e il flusso si riduce al prodotto campo per superficie, $\Phi=E\,S$; uguagliato a $Q_{\mathrm{int}}/\epz$, fornisce direttamente $E=Q_{\mathrm{int}}/(\epz S)$. Il metodo funziona altrettanto bene se la superficie si spezza in parti su cui il campo è perpendicolare e costante e in parti su cui è radente, perché queste ultime contribuiscono al flusso con zero. Nei testi una superficie di questo tipo prende spesso il nome di superficie gaussiana, ma la denominazione è impropria nel secondo caso: una superficie gaussiana in senso stretto è quella su cui il campo è perpendicolare e costante in ogni punto, come la sfera concentrica a una distribuzione sferica, mentre il cilindro usato per il filo indefinito, sulle cui basi il campo è radente, è soltanto una superficie molto simmetrica rispetto al problema, comoda perché attraverso le basi il flusso è nullo. In pratica le superfici chiuse che servono sono sfere e cilindri, orientati in modo opportuno, e la parte creativa del metodo è il ragionamento iniziale: si individua la simmetria della distribuzione, se ne deduce la direzione del campo e la sua dipendenza dalle coordinate, e si sceglie la superficie che rispecchia quella simmetria. Il ragionamento sulla direzione del campo usa la definizione di campo e il principio di sovrapposizione, ma una volta stabilita la simmetria i calcoli sono elementari. Accade qualcosa di simile in meccanica, quando dopo aver studiato le equazioni del moto si scopre la conservazione dell'energia e la si preferisce a ogni altro metodo, perché permette di collegare direttamente lo stato iniziale a quello finale. Se invece la simmetria manca, il teorema resta vero ma non consente di ricavare il campo, e si torna alla definizione di campo o, meglio ancora, al calcolo del potenziale seguito dalla derivazione lungo la direzione desiderata.
+
+La prima applicazione riguarda una distribuzione rettilinea indefinita, un filo infinito con densità lineare di carica $\lambda>0$ uniforme. Il campo di questa distribuzione è già stato ricavato con la definizione, con la suddivisione del filo in elementi e la somma dei contributi; quel calcolo resta utile perché mostra la simmetria. Per ogni elemento $\dd l$ del filo ne esiste uno simmetrico rispetto al piede della perpendicolare condotta dal punto $P$ al filo, e le componenti dei due campi parallele al filo si elidono, mentre quelle perpendicolari si sommano: il campo in $P$ è quindi perpendicolare al filo e giace nel piano che contiene $P$ e il filo. Il filo, inoltre, è indistinguibile da sé stesso dopo una rotazione qualsiasi attorno al proprio asse o una traslazione lungo di esso, e dunque il modulo del campo può dipendere soltanto dalla distanza $r$ dal filo. Il campo ha simmetria cilindrica: in coordinate cilindriche con asse $z$ lungo il filo, $\Ev=E(r)\,\ur$, con $\ur$ versore radiale perpendicolare all'asse. La superficie chiusa adatta è allora un cilindro coassiale al filo, di raggio $a$ pari alla distanza di $P$ dal filo e di altezza $h$ arbitraria (figura~\ref{fig:gauss:filo}), una superficie immaginaria che esiste solo come strumento di calcolo. Il flusso attraverso le due basi è nullo, perché le loro normali sono parallele al filo mentre il campo è perpendicolare al filo, quindi radente alle basi. Sulla superficie laterale, invece, il campo è parallelo alla normale uscente $\uv_n=\ur$, e dunque $\Ev\cdot\uv_n=E(a)$, costante perché tutti i punti della superficie laterale distano $a$ dal filo. Ne segue che
+\[
+\oint_S\Ev\cdot\uv_n\,\dd S=\int_{\mathrm{lat}}E(a)\,\dd S=E(a)\int_{\mathrm{lat}}\dd S=E(a)\cdot2\pi a h ,
+\]
+dove l'area laterale $2\pi a h$ è quella calcolata nel Richiamo~\ref{ric:gauss:coordinate}. La carica interna al cilindro è quella del tratto di filo di lunghezza $h$ che vi è racchiuso, $Q_{\mathrm{int}}=\lambda h$, e il teorema di Gauss impone $E(a)\cdot2\pi a h=\lambda h/\epz$. Si ricava allora, scritto per un punto generico a distanza $r$,
+\begin{equation}
+\Ev(r)=\frac{\lambda}{2\pi\epz\,r}\,\ur .
+\label{eq:gauss:filo}
+\end{equation}
+La densità $\lambda$ si misura in $\mathrm{C/m}$, $r$ in metri, e il rapporto $\lambda/(\epz r)$ ha infatti le dimensioni di $\mathrm{C}/(\mathrm{C^2\,N^{-1}m^{-2}}\cdot\mathrm{m^2})=\mathrm{N/C}$. Il campo decresce come $1/r$, più lentamente di quello della carica puntiforme, ed è indipendente da $h$, come deve essere, visto che l'altezza del cilindro è una scelta arbitraria. Di per sé il calcolo richiede poche righe; la sostanza sta nel ragionamento di simmetria che lo precede.
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			fieldarrow/.style={line width=1.3pt, ->, color=orange!90!red},
+			unitarrow/.style={line width=1.0pt, ->, color=black!85},
+			gauss/.style={draw=violet!70!black, line width=0.9pt, dashed},
+			posline/.style={draw=gray!50, line width=0.7pt, dashed}
+		}
+		\draw[gridline] (-3.4,-1.2) grid (10.4,5.0);
+		% superficie laterale del cilindro gaussiano
+		\fill[violet!5] (-1.6,0) -- (-1.6,3.6) arc[start angle=180, end angle=360, x radius=1.6, y radius=0.4] -- (1.6,0) arc[start angle=0, end angle=-180, x radius=1.6, y radius=0.4] -- cycle;
+		\draw[gauss] (0,0) ellipse (1.6 and 0.4);
+		\draw[gauss] (0,3.6) ellipse (1.6 and 0.4);
+		\draw[gauss] (-1.6,0) -- (-1.6,3.6);
+		\draw[gauss] (1.6,0) -- (1.6,3.6);
+		% filo carico
+		\draw[orange!80!red, line width=2pt] (0,-1.0) -- (0,4.6);
+		\foreach \y in {-0.6,0.2,...,4.4} {\node[orange!80!red, font=\scriptsize] at (0.22,\y) {$+$};}
+		\node[above, orange!80!red] at (0,4.6) {$\lambda$};
+		% raggio e altezza
+		\draw[posline] (0,1.8) -- (1.6,1.8) node[midway, above, color=gray!80!black] {$a$};
+		\draw[<->, gray!70!black, line width=0.7pt] (3.4,0) -- (3.4,3.6) node[midway, right] {$h$};
+		\draw[gray!50, line width=0.4pt] (1.6,0) -- (3.55,0);
+		\draw[gray!50, line width=0.4pt] (1.6,3.6) -- (3.55,3.6);
+		% campo sulla superficie laterale
+		\filldraw[fill=black] (1.6,1.8) circle (1.5pt) node[above right=1pt] {$P$};
+		\draw[fieldarrow] (1.6,1.8) -- (2.9,1.8) node[below] {$\Ev$};
+		\draw[fieldarrow] (-1.6,1.8) -- (-2.9,1.8) node[below] {$\Ev$};
+		\draw[fieldarrow] (1.6,0.9) -- (2.6,0.9);
+		\draw[fieldarrow] (-1.6,0.9) -- (-2.6,0.9);
+		% campo radente sulla base superiore
+		\draw[unitarrow] (-0.8,3.6) -- (-0.8,4.5) node[left] {$\uv_n$};
+		\draw[fieldarrow, line width=1.0pt] (-0.8,3.6) -- (-1.6,3.6);
+		\node[violet!70!black] at (-2.1,3.2) {$S$};
+		% formule
+		\node[badge] at (7.4,3.6) {$\Phi_{\mathrm{basi}}=0$ (campo radente)};
+		\node[badge] at (7.4,2.5) {$\Phi=2\pi a h\,E$};
+		\node[badge] at (7.4,1.4) {$Q_{\mathrm{int}}=\lambda h$};
+		\node[badge] at (7.4,0.2) {$E=\dfrac{\lambda}{2\pi\epz\,a}$};
+	\end{tikzpicture}
+	\caption{Filo rettilineo indefinito con densità $\lambda$ e superficie chiusa cilindrica coassiale di raggio $a$ e altezza $h$. Sulla superficie laterale il campo è radiale, parallelo a $\uv_n$ e costante; sulle basi è radente e non dà flusso.}
+	\label{fig:gauss:filo}
+\end{figure}
+
+Una distribuzione piana indefinita, cioè un piano infinito con densità superficiale di carica $\sigma>0$ uniforme, si tratta in modo analogo ma con una simmetria diversa. Per ogni elemento $\dd S$ del piano ne esiste uno simmetrico rispetto al piede della perpendicolare condotta da $P$ al piano, e le componenti dei due campi parallele al piano si elidono: il campo è perpendicolare al piano. Il piano è invariante per traslazioni parallele a sé stesso, quindi il modulo del campo può dipendere solo dalla distanza $d$ dal piano; il piano è anche simmetrico per riflessione rispetto a sé stesso, quindi a distanze uguali, da parti opposte, il campo ha lo stesso modulo e verso opposto, uscente dal piano su entrambi i lati se $\sigma>0$. Le linee di campo sono rette parallele, perpendicolari al piano, e la simmetria non è né sferica né cilindrica. La superficie chiusa conveniente è ancora un cilindro, ma disposto in modo diverso dal caso precedente: il suo asse è perpendicolare al piano, le sue basi, di area $\Delta S$, sono parallele al piano e giacciono da parti opposte, e il cilindro buca il piano lungo una sezione di area $\Delta S$ (figura~\ref{fig:gauss:piano}). Sulla superficie laterale il campo è radente, perché è perpendicolare al piano e quindi parallelo alle generatrici del cilindro, e il flusso laterale è nullo. Su ciascuna base il campo è parallelo alla normale uscente e costante, e il flusso vale $E\,\Delta S$ per ciascuna delle due basi. Il teorema di Gauss, con la carica interna $Q_{\mathrm{int}}=\sigma\,\Delta S$ racchiusa nella porzione di piano intercettata dal cilindro, fornisce
+\[
+2E\,\Delta S=\frac{\sigma\,\Delta S}{\epz}
+\qquad\Longrightarrow\qquad
+E=\frac{\sigma}{2\epz}.
+\]
+Il campo, in $\mathrm{N/C}$ con $\sigma$ in $\mathrm{C/m^2}$, non dipende dalla distanza dal piano: è uniforme in ciascuno dei due semispazi, diretto come $+\uv_n$ da una parte e come $-\uv_n$ dall'altra.
+% NOTA: a lezione si scelgono basi equidistanti dal piano; l'argomento con basi a distanze diverse, che dimostra l'indipendenza dalla distanza senza assumerla, è un'aggiunta.
+L'indipendenza dalla distanza si può dimostrare anche senza presupporla: con un cilindro le cui basi distano $d_1$ e $d_2$ dal piano, il teorema di Gauss dà $E(d_1)\,\Delta S+E(d_2)\,\Delta S=\sigma\,\Delta S/\epz$, e poiché la somma $E(d_1)+E(d_2)$ deve valere $\sigma/\epz$ per ogni scelta di $d_1$ e $d_2$, con $E(d_1)=E(d_2)$ quando $d_1=d_2$, il modulo non può che essere lo stesso a ogni distanza.
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			fieldarrow/.style={line width=1.3pt, ->, color=orange!90!red},
+			lightfield/.style={line width=0.8pt, ->, color=orange!45},
+			unitarrow/.style={line width=1.0pt, ->, color=black!85},
+			gauss/.style={draw=violet!70!black, line width=0.9pt, dashed}
+		}
+		\draw[gridline] (-4.0,-2.4) grid (10.6,2.4);
+		% linee di campo uniformi ai due lati
+		\foreach \y in {-1.8,-1.2,1.2,1.8} {
+			\draw[lightfield] (0.15,\y) -- (3.6,\y);
+			\draw[lightfield] (-0.15,\y) -- (-3.6,\y);
+		}
+		% piano carico (visto di taglio)
+		\draw[orange!80!red, line width=2pt] (0,-2.2) -- (0,2.2);
+		\foreach \y in {-2.0,-1.5,...,2.0} {\node[orange!80!red, font=\scriptsize] at (-0.22,\y) {$+$};}
+		\node[above, orange!80!red] at (0,2.2) {$\sigma$};
+		% cilindro gaussiano
+		\fill[violet!5] (-2,-0.7) rectangle (2,0.7);
+		\draw[gauss] (-2,-0.7) -- (2,-0.7);
+		\draw[gauss] (-2,0.7) -- (2,0.7);
+		\draw[gauss] (2,0) ellipse (0.22 and 0.7);
+		\draw[gauss] (-2,0) ellipse (0.22 and 0.7);
+		\draw[gauss] (0,0) ellipse (0.22 and 0.7);
+		\node[above right=-1pt, violet!70!black] at (0.1,0.7) {$\Delta S$};
+		% campo e normali sulle basi
+		\draw[fieldarrow] (2.22,0) -- (3.5,0) node[below] {$\Ev$};
+		\draw[fieldarrow] (-2.22,0) -- (-3.5,0) node[below] {$\Ev$};
+		\draw[unitarrow] (2.2,0.45) -- (3.0,0.45) node[above] {$\uv_n$};
+		\draw[unitarrow] (-2.2,0.45) -- (-3.0,0.45) node[above] {$\uv_n$};
+		\filldraw[fill=black] (2,0) circle (1.4pt) node[below left=1pt] {$P$};
+		\filldraw[fill=black] (-2,0) circle (1.4pt) node[below right=1pt] {$Q$};
+		\node[below, violet!70!black] at (2,-0.75) {$\Delta S$};
+		\node[below, violet!70!black] at (-2,-0.75) {$\Delta S$};
+		% formule
+		\node[badge] at (7.6,1.2) {$2E\,\Delta S=\dfrac{\sigma\,\Delta S}{\epz}$};
+		\node[badge] at (7.6,-0.4) {$E=\dfrac{\sigma}{2\epz}$};
+		\node[badge, font=\scriptsize\sffamily] at (7.6,-1.6) {flusso laterale nullo};
+	\end{tikzpicture}
+	\caption{Piano indefinito con densità $\sigma>0$ visto di taglio. Il cilindro gaussiano ha le basi parallele al piano e da parti opposte: il campo, perpendicolare al piano e uscente su entrambi i lati, attraversa solo le basi ed è radente alla superficie laterale.}
+	\label{fig:gauss:piano}
+\end{figure}
+
+Si passa ora alle distribuzioni con simmetria sferica, a partire dallo strato sferico, o guscio sferico, di raggio $R$ uniformemente carico con densità superficiale $\sigma>0$ e carica totale $Q=4\pi R^2\sigma$. Conviene distinguere il raggio $R$ del guscio, che è un dato del problema, dalla distanza $r$ del punto $P$ dal centro, che è la variabile. Il campo di questa distribuzione si può ottenere con la definizione, attraverso la suddivisione del guscio in anelli e l'integrazione dei loro contributi, ma il calcolo è laborioso. Con il teorema di Gauss il ragionamento è assai più rapido. La carica è distribuita uniformemente su una sfera, quindi la distribuzione è invariante per qualunque rotazione attorno al centro: il campo non può avere componenti che individuino una direzione privilegiata diversa da quella radiale, ed è dunque radiale, $\Ev=E(r)\,\ur$, con un modulo che dipende solo da $r$. All'esterno le linee di campo si dispongono come i raggi del sole nei disegni dei bambini. Se la carica non fosse uniforme, per esempio più addensata da una parte, le linee sarebbero più fitte da quella parte e questa conclusione non sarebbe più lecita. Per un punto esterno, $r\ge R$, si sceglie come superficie chiusa una sfera immaginaria concentrica al guscio, di raggio $r$ (figura~\ref{fig:gauss:guscio}, a sinistra); su di essa il campo è in ogni punto perpendicolare e di modulo costante, e questa volta si tratta di una superficie gaussiana in senso stretto. Il flusso uscente vale
+\[
+\oint_S\Ev\cdot\uv_n\,\dd S=\oint_S E(r)\,\dd S=E(r)\oint_S\dd S=E(r)\cdot4\pi r^2 ,
+\]
+e la carica interna è tutta la carica del guscio, $Q$, perché il teorema di Gauss non distingue tra carica puntiforme e carica distribuita ma conta solo quanta carica è racchiusa. Dall'uguaglianza dei due membri si ricava
+\begin{equation}
+\Ev(r)=\frac{1}{4\pi\epz}\,\frac{Q}{r^2}\,\ur\qquad(r>R).
+\label{eq:gauss:gusciofuori}
+\end{equation}
+Per i punti esterni, anche vicinissimi alla superficie, il guscio si comporta come se tutta la sua carica fosse concentrata nel centro. Nei punti interni, $r<R$, la simmetria è la stessa, e anche dentro il guscio il campo, se esiste, è radiale e dipende solo da $r$. La sfera concentrica di raggio $r<R$ (figura~\ref{fig:gauss:guscio}, a destra) non racchiude alcuna carica, perché la carica sta tutta sul guscio; il teorema di Gauss dà allora
+\[
+E(r)\cdot4\pi r^2=0 .
+\]
+La superficie $4\pi r^2$ è diversa da zero, perché la si è scelta, e il flusso non può annullarsi per effetto dell'orientazione, perché il campo radiale è parallelo alla normale: l'unica possibilità è che sia nullo il campo,
+\begin{equation}
+\Ev(r)=\vec{0}\qquad(r<R).
+\label{eq:gauss:gusciodentro}
+\end{equation}
+Il risultato si ottiene senza alcun integrale, senza ricorrere alla geometria e neppure al potenziale, ma solo con il teorema di Gauss. Ne segue che il modulo del campo è nullo fino a $R$ e assume il valore $Q/(4\pi\epz R^2)=\sigma/\epz$ appena fuori dalla superficie: nell'attraversare lo strato carico il campo subisce una discontinuità pari a $\sigma/\epz$.
+% VERIFICARE: a lezione si dice che il campo "si comporta da carica puntiforme fino a R compreso" e, più avanti, che la discontinuità ha intensità pari alla metà del valore esterno. In accordo con l'enunciato generale del teorema (cariche sulla superficie contate con 1/(2 epsilon_0)), il salto vale sigma/epsilon_0, cioè l'intero valore esterno, mentre il campo nei punti della superficie stessa vale la media sigma/(2 epsilon_0).
+Nei punti che giacciono esattamente sullo strato il campo assume il valore medio tra quello interno e quello esterno, $\sigma/(2\epz)$, in accordo con il termine $q/(2\epz)$ del teorema per le cariche poste sulla superficie. Da questo caso particolare discende un fatto di portata generale, che verrà dimostrato per i conduttori: se tutta la carica di un corpo si trova sulla sua superficie esterna, il campo all'interno è nullo, anche quando il corpo non è cavo ma pieno.
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			fieldarrow/.style={line width=1.3pt, ->, color=orange!90!red},
+			gauss/.style={draw=violet!70!black, line width=0.9pt, dashed},
+			posline/.style={draw=gray!50, line width=0.7pt, dashed},
+			shell/.style={draw=orange!80!red, line width=1.8pt}
+		}
+		\draw[gridline] (-3.4,-3.6) grid (10.4,3.2);
+		% (a) punti esterni
+		\begin{scope}
+			\node at (0,2.9) {punti esterni, $r\ge R$};
+			\fill[violet!5] (0,0) circle (2.3);
+			\draw[gauss] (0,0) circle (2.3);
+			\fill[white] (0,0) circle (1.4);
+			\draw[shell] (0,0) circle (1.4);
+			\foreach \a in {15,45,...,345} {\node[orange!80!red, font=\scriptsize] at (\a:1.15) {$+$};}
+			\draw[gray!70!black, line width=0.8pt] (0,0) -- (120:1.4) node[midway, left] {$R$};
+			\draw[posline] (0,0) -- (2.3,0) node[pos=0.8, below, color=gray!80!black] {$r$};
+			\foreach \a in {45,135,225,315} {\draw[fieldarrow] (\a:2.3) -- (\a:3.1);}
+			\filldraw[fill=black] (2.3,0) circle (1.5pt) node[above right] {$P_e$};
+			\node[violet!70!black] at (-2.6,0.35) {$S$};
+			\node[badge] at (0,-3.15) {$E\,4\pi r^2=\dfrac{Q}{\epz}$};
+		\end{scope}
+		% (b) punti interni
+		\begin{scope}[shift={(7.0,0)}]
+			\node at (0,2.9) {punti interni, $r<R$};
+			\fill[violet!5] (0,0) circle (1.1);
+			\draw[gauss] (0,0) circle (1.1);
+			\draw[shell] (0,0) circle (2.0);
+			\foreach \a in {15,45,...,345} {\node[orange!80!red, font=\scriptsize] at (\a:2.25) {$+$};}
+			\draw[posline] (0,0) -- (1.1,0) node[midway, below, color=gray!80!black] {$r$};
+			\filldraw[fill=black] (1.1,0) circle (1.5pt) node[right] {$P_i$};
+			\node[violet!70!black] at (0,1.35) {$S$};
+			\node at (0,0.35) {$\Ev=\vec{0}$};
+			\node[badge] at (0,-3.15) {$E\,4\pi r^2=0$};
+		\end{scope}
+	\end{tikzpicture}
+	\caption{Strato sferico di raggio $R$ uniformemente carico. A sinistra la sfera gaussiana di raggio $r\ge R$ racchiude tutta la carica $Q$ e il campo è quello di una carica puntiforme posta nel centro; a destra la sfera di raggio $r<R$ non racchiude carica e il campo è nullo.}
+	\label{fig:gauss:guscio}
+\end{figure}
+
+Il caso successivo è quello di una sfera piena di raggio $R$ con carica totale $Q$ distribuita uniformemente nel volume, con densità volumica $\rho>0$ costante. Poiché $\rho=\dd q/\dd V$, si ha $\dd q=\rho\,\dd V$, e l'integrazione su tutta la sfera, con $\rho$ costante che esce dall'integrale e il volume ricavato nel Richiamo~\ref{ric:gauss:coordinate}, dà
+\[
+Q=\int_{\mathrm{sfera}}\rho\,\dd V=\rho\int_{\mathrm{sfera}}\dd V=\frac{4}{3}\pi R^3\rho .
+\]
+La distribuzione ha ancora simmetria sferica e il campo è radiale, sia fuori sia dentro la sfera. Per un punto esterno, $r\ge R$, la sfera gaussiana di raggio $r$ racchiude tutta la carica $Q$, e il conto è identico a quello del guscio: il campo è ancora dato dalla~\eqref{eq:gauss:gusciofuori}, e anche la sfera piena si comporta all'esterno come una carica puntiforme posta nel centro. All'interno, per $r<R$, la sfera gaussiana di raggio $r$, indicata con $S'$ nella figura~\ref{fig:gauss:sferapiena}, racchiude soltanto una parte della carica, $Q'<Q$, quella contenuta nel volume di raggio $r$:
+\[
+Q'=\rho\,\frac{4}{3}\pi r^3=Q\,\frac{r^3}{R^3}.
+\]
+% NOTA: in una fase del calcolo alla lavagna compare "4/3 pi greco r quadro"; il volume corretto della sfera di raggio r è (4/3) pi r^3.
+Il flusso attraverso la sfera gaussiana vale ancora $E(r)\cdot4\pi r^2$, e il teorema di Gauss dà
+\[
+E(r)\cdot4\pi r^2=\frac{Q'}{\epz}=\frac{4\pi r^3\rho}{3\epz} .
+\]
+Si semplificano il fattore $4\pi$ e due potenze di $r$, e si ottiene
+\begin{equation}
+\Ev(r)=\frac{\rho}{3\epz}\,r\,\ur=\frac{\rho}{3\epz}\,\vec{r}=\frac{1}{4\pi\epz}\,\frac{Q}{R^3}\,\vec{r}\qquad(r\le R),
+\label{eq:gauss:sferapiena}
+\end{equation}
+dove l'ultima forma segue dalla sostituzione $\rho=3Q/(4\pi R^3)$. Il rapporto $\rho r/\epz$ ha le dimensioni di $(\mathrm{C/m^3})\cdot\mathrm{m}/(\mathrm{C^2\,N^{-1}m^{-2}})=\mathrm{N/C}$, come deve. La forma vettoriale $\Ev=\rho\,\vec{r}/(3\epz)$, con $\vec{r}$ vettore posizione rispetto al centro, tornerà utile tra poco. All'interno della sfera il campo cresce linearmente con la distanza dal centro, è nullo nel centro e raggiunge sulla superficie il valore $Q/(4\pi\epz R^2)$, lo stesso che si ottiene dalla~\eqref{eq:gauss:gusciofuori} per $r=R$: per una distribuzione volumica il campo è continuo, e la discontinuità del guscio è assente.
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			gauss/.style={draw=violet!70!black, line width=0.9pt, dashed},
+			posline/.style={draw=gray!50, line width=0.7pt, dashed}
+		}
+		\draw[gridline] (-3.0,-3.0) grid (11.0,3.0);
+		% sfera piena uniformemente carica
+		\filldraw[fill=orange!14, draw=orange!80!red, line width=1.4pt] (0,0) circle (1.8);
+		\draw[gauss] (0,0) circle (1.0);
+		\draw[gauss] (0,0) circle (2.6);
+		\draw[gray!70!black, line width=0.9pt] (0,0) -- (-1.8,0) node[midway, below] {$R$};
+		\draw[posline] (0,0) -- (40:1.0) node[midway, above left=-2pt, color=gray!80!black] {$r$};
+		\filldraw[fill=black] (40:1.0) circle (1.5pt) node[above right=-1pt] {$P_i$};
+		\draw[posline] (0,0) -- (2.6,0);
+		\filldraw[fill=black] (2.6,0) circle (1.5pt) node[right] {$P_e$};
+		\filldraw[fill=black] (0,0) circle (1.3pt) node[below=1pt] {$O$};
+		\node[violet!70!black] at (-0.55,0.55) {$S'$};
+		\node[violet!70!black] at (1.95,1.95) {$S$};
+		\node[orange!80!red] at (-1.0,-1.25) {$\rho$};
+		% formule
+		\node[badge, align=center] at (7.4,1.5) {interno, superficie $S'$\\[2pt] $E\,4\pi r^2=\dfrac{q(r)}{\epz},\quad q(r)=Q\,\dfrac{r^3}{R^3}$};
+		\node[badge, align=center] at (7.4,-1.4) {esterno, superficie $S$\\[2pt] $E\,4\pi r^2=\dfrac{Q}{\epz}$};
+	\end{tikzpicture}
+	\caption{Sfera di raggio $R$ con densità volumica uniforme $\rho$. La sfera gaussiana $S'$, interna, racchiude solo la frazione $r^3/R^3$ della carica; la sfera $S$, esterna, la racchiude tutta.}
+	\label{fig:gauss:sferapiena}
+\end{figure}
+
+\begin{riquadro}[label=ric:gauss:grafici]{Richiamo di Matematica: lettura dei grafici, rette e andamenti in potenza}
+Una relazione del tipo $y=ax+b$, con $a$ e $b$ costanti, è rappresentata nel piano cartesiano da una retta di coefficiente angolare $a$ e intercetta $b$; se $b=0$ la retta passa per l'origine. Una retta è individuata univocamente da due suoi punti, e per tracciarla basta calcolarne due: per esempio il valore in $x=0$ e quello in un punto di fine intervallo. Una relazione $y=ax^2$ è invece una parabola, mentre una relazione $y=a/x^n$ con $n>0$ descrive un ramo che decresce verso zero per $x\to\infty$ e diverge per $x\to0$, tanto più rapidamente quanto più grande è $n$. Per riconoscere l'andamento di una formula fisica occorre individuare quale grandezza svolge il ruolo della variabile indipendente $x$, quale quello della dipendente $y$, e raccogliere tutto il resto in una costante: nell'espressione $E=\rho r/(3\epz)$ la variabile è $r$, l'intensità del campo è $y$ e il fattore $\rho/(3\epz)$ è il coefficiente angolare, per cui il grafico di $E$ in funzione di $r$ è una retta per l'origine. Nei problemi di elettrostatica a simmetria sferica il campo e il potenziale cambiano espressione da una regione all'altra, e il grafico si costruisce regione per regione: si calcolano i valori agli estremi di ciascun intervallo e si raccordano i tratti; per stabilire la forma è lecito porre uguali a 1 le costanti che moltiplicano tutte le espressioni, perché il grafico che si ottiene è proporzionale a quello reale.
+\end{riquadro}
+
+Con questo strumento il confronto tra guscio e sfera piena diventa visivo, come mostra la figura~\ref{fig:gauss:grafico}. Sull'asse delle ascisse si riporta $r$ e si segna il raggio $R$, sull'asse delle ordinate l'intensità $E$ e il valore $E(R)=kQ/R^2$. Per $r>R$ le due curve coincidono e decrescono come $1/r^2$. Nella regione interna quella del guscio è nulla, con un salto in $r=R$, mentre quella della sfera piena è il segmento di retta che congiunge l'origine, dove il campo è nullo, con il punto $(R,\,kQ/R^2)$, cioè il tratto lineare previsto dalla~\eqref{eq:gauss:sferapiena}.
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			axis/.style={line width=0.9pt, ->, color=black!85},
+			sphere/.style={draw=orange!90!red, line width=1.6pt},
+			shellc/.style={draw=teal!80!black, line width=1.6pt}
+		}
+		\draw[gridline] (-1.0,-0.8) grid (11.0,3.6);
+		% assi (unita': R = 1.7 cm, kQ/R^2 = 2.6 cm)
+		\draw[axis] (0,0) -- (7.6,0) node[below] {$r$};
+		\draw[axis] (0,0) -- (0,3.3) node[left] {$E$};
+		\draw[gray!55, dashed, line width=0.6pt] (1.7,0) -- (1.7,2.6) -- (0,2.6);
+		\node[below] at (1.7,0) {$R$};
+		\node[below left] at (0,0) {$O$};
+		\node[left] at (0,2.6) {$\dfrac{1}{4\pi\epz}\dfrac{Q}{R^2}$};
+		% sfera piena: tratto lineare e poi 1/r^2
+		\draw[sphere] (0,0) -- (1.7,2.6) -- plot[domain=1:4.4, samples=60] ({1.7*\x},{2.6/(\x*\x)});
+		% guscio: nullo all'interno, salto in R, poi coincide con la sfera
+		\draw[shellc] (0,0.05) -- (1.7,0.05);
+		\draw[teal!80!black, line width=1.0pt, dashed] (1.7,2.6) -- plot[domain=1:4.4, samples=60] ({1.7*\x},{2.6/(\x*\x)});
+		\filldraw[fill=white, draw=teal!80!black, line width=0.8pt] (1.7,0.05) circle (2pt);
+		\filldraw[fill=teal!80!black, draw=teal!80!black] (1.7,1.3) circle (2pt) node[below right=1pt, teal!80!black] {$\dfrac{\sigma}{2\epz}$};
+		\node[orange!90!red] at (4.2,1.4) {$\dfrac{1}{4\pi\epz}\dfrac{Q}{r^2}$};
+		\node[orange!90!red] at (0.35,2.0) {$\dfrac{\rho}{3\epz}\,r$};
+		% legenda
+		\node[badge, text=orange!90!red] at (9.2,2.8) {sfera piena};
+		\node[badge, text=teal!80!black] at (9.2,1.9) {guscio sferico};
+	\end{tikzpicture}
+	\caption{Modulo del campo in funzione della distanza dal centro per la sfera uniformemente carica in volume e per il guscio sferico, a parità di carica totale $Q$ e di raggio $R$. All'esterno le due curve coincidono; all'interno la sfera piena ha un andamento lineare, il guscio un campo nullo con un salto pari a $\sigma/\epz$ in $r=R$.}
+	\label{fig:gauss:grafico}
+\end{figure}
+
+\begin{riquadro}[label=ric:gauss:oscillatore]{Richiamo di Fisica 1: forza elastica e oscillatore armonico}
+Una forza di richiamo elastica è una forza unidimensionale proporzionale allo spostamento da una posizione di equilibrio e diretta in verso opposto, $F=-Kx$, con $K>0$ costante elastica misurata in $\mathrm{N/m}$; è la legge di Hooke della molla. Il segno meno è ciò che conta: per $x>0$ la forza è negativa e per $x<0$ è positiva, quindi riporta sempre il corpo verso l'equilibrio. La seconda legge della dinamica per una massa $m$ diventa $m\ddot{x}=-Kx$, cioè
+\[
+\ddot{x}+\omega^2x=0,\qquad \omega=\sqrt{\frac{K}{m}},
+\]
+la cui soluzione generale è $x(t)=A\cos(\omega t+\phi)$, con ampiezza $A$ e fase $\phi$ fissate dalle condizioni iniziali; la pulsazione $\omega$ si misura in $\mathrm{rad/s}$ e il periodo è $T=2\pi/\omega=2\pi\sqrt{m/K}$, indipendente dall'ampiezza. La forza elastica è conservativa, con energia potenziale $U=\tfrac12Kx^2$; in assenza di dissipazione l'energia meccanica $\tfrac12m\dot{x}^2+\tfrac12Kx^2$ si conserva, e un corpo lasciato fermo in $x=A$ oscilla tra $-A$ e $+A$. Qualunque forza che, a meno del segno, sia proporzionale alla distanza da un punto produce dunque un moto armonico, ed è questo che accade a una carica all'interno di una sfera uniformemente carica, dove il campo cresce linearmente con la distanza dal centro.
+\end{riquadro}
+
+L'andamento lineare del campo all'interno della sfera piena ha una conseguenza curiosa. Si immagini di praticare nella sfera uniformemente carica, con $\rho>0$, un tunnel rettilineo sottilissimo lungo un diametro, che si prende come asse $y$ con origine nel centro (figura~\ref{fig:gauss:tunnel}), abbastanza sottile da non modificare in modo apprezzabile la distribuzione di carica; si ponga poi all'imbocco del tunnel una particella di massa $m$ e carica negativa $-q'$, con $q'>0$, e la si lasci libera, ferma. In un punto del tunnel di coordinata $y$, con $|y|\le R$, il campo è dato dalla~\eqref{eq:gauss:sferapiena}, $E_y=\rho y/(3\epz)$, e la forza sulla particella vale
+\[
+F_y=-q'E_y=-\frac{q'\rho}{3\epz}\,y=-K\,y ,\qquad K=\frac{q'\rho}{3\epz}.
+\]
+La costante $K$ si misura in $\mathrm{C}\cdot(\mathrm{C/m^3})/(\mathrm{C^2\,N^{-1}m^{-2}})=\mathrm{N/m}$, come una costante elastica. È una forza di richiamo elastica (Richiamo~\ref{ric:gauss:oscillatore}), e in assenza di dissipazione la particella compie un moto armonico attorno al centro con pulsazione
+\[
+\omega=\sqrt{\frac{K}{m}}=\sqrt{\frac{q'\rho}{3\epz m}} .
+\]
+Partita da ferma in $y=R$, la particella attraversa il centro con velocità massima, raggiunge l'imbocco opposto in $y=-R$, dove si ferma, e torna indietro; continua così a oscillare indefinitamente tra i due estremi del tunnel.
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			fieldarrow/.style={line width=1.3pt, ->, color=orange!90!red},
+			forcearrow/.style={line width=1.3pt, ->, color=teal!80!black}
+		}
+		\draw[gridline] (-3.0,-3.0) grid (11.0,3.2);
+		% sfera carica con tunnel diametrale
+		\filldraw[fill=orange!14, draw=orange!80!red, line width=1.4pt] (0,0) circle (2.0);
+		\filldraw[fill=white, draw=gray!60, line width=0.5pt] (-0.13,-2.0) rectangle (0.13,2.0);
+		\draw[->, gray!70!black, line width=0.7pt] (0,-2.6) -- (0,2.9) node[left] {$y$};
+		\node[orange!80!red] at (-1.1,-1.0) {$\rho>0$};
+		\foreach \y/\t in {2.0/{+R}, -2.0/{-R}} {\draw[gray!70!black] (-0.25,\y) -- (0.25,\y); \node[right=4pt] at (0.25,\y) {$\t$};}
+		\filldraw[fill=black] (0,0) circle (1.3pt);
+		\node[left=3pt] at (0,0) {$O$};
+		% carica di prova negativa
+		\foreach \r in {0.22, 0.36} {\draw[teal!50, line width=0.4pt, densely dotted] (0,1.2) circle (\r);}
+		\draw[forcearrow] (0,1.2) -- (0,0.35);
+		\node[left=3pt, teal!80!black] at (0,0.75) {$\Fv$};
+		\draw[fieldarrow] (0.55,1.2) -- (0.55,1.95) node[right] {$\Ev$};
+		\filldraw[fill=teal!70!black, draw=black!80, line width=0.6pt] (0,1.2) circle (3.2pt);
+		\node[left=4pt] at (0,1.25) {$-q'$};
+		% formule
+		\node[badge] at (7.3,1.8) {$E_y=\dfrac{\rho}{3\epz}\,y$};
+		\node[badge] at (7.3,0.4) {$F_y=-\dfrac{q'\rho}{3\epz}\,y=-K\,y$};
+		\node[badge] at (7.3,-1.1) {$\omega=\sqrt{\dfrac{q'\rho}{3\epz m}}$};
+	\end{tikzpicture}
+	\caption{Carica negativa $-q'$ in un tunnel diametrale sottile scavato in una sfera uniformemente carica. Il campo interno cresce linearmente con $y$ e la forza, sempre diretta verso il centro, è di tipo elastico: la carica oscilla di moto armonico tra $+R$ e $-R$.}
+	\label{fig:gauss:tunnel}
+\end{figure}
+% NOTA: a lezione si dice che la carica "uscirà un pochettino" dal tunnel; se è lasciata ferma all'imbocco, la conservazione dell'energia la riporta esattamente all'imbocco opposto con velocità nulla, senza uscire.
+Il segno della carica è decisivo: una carica positiva verrebbe espulsa, a meno che non sia negativa la sfera, perché la forza di richiamo richiede che la carica e la sfera abbiano segni opposti. La stessa fisica vale per la gravità. Se la Terra fosse una sfera di massa distribuita uniformemente e si scavasse un tunnel dal polo nord al polo sud, il teorema di Gauss per il campo gravitazionale darebbe all'interno $g(r)=g_0\,r/R_T$, con $g_0\simeq9{,}81\un{m/s^2}$ sulla superficie e $R_T\simeq6{,}37\times10^6\un{m}$, e un corpo lasciato cadere nel tunnel oscillerebbe di moto armonico con $\omega=\sqrt{g_0/R_T}$ e periodo
+% NOTA: il valore numerico del periodo per la Terra non è calcolato a lezione; è aggiunto per completezza.
+\[
+T=2\pi\sqrt{\frac{R_T}{g_0}}=2\pi\sqrt{\frac{6{,}37\times10^6\un{m}}{9{,}81\un{m/s^2}}}\simeq5{,}06\times10^3\un{s}\simeq84\un{min}.
+\]
+
+Il teorema di Gauss si presta bene anche a distribuzioni composte da più gusci concentrici, un classico degli esercizi d'esame. Si considerino due gusci sferici sottili concentrici: il primo di raggio $R$ e carica totale $Q>0$, il secondo di raggio $2R$ e carica totale $2Q$, entrambe distribuite uniformemente (figura~\ref{fig:gauss:gusci}, in alto). La distribuzione complessiva ha simmetria sferica, il campo è radiale in tutto lo spazio, e in ciascuna regione basta applicare il teorema di Gauss a una sfera concentrica di raggio $r$ e contare la carica racchiusa. Per $r>2R$ la sfera racchiude entrambi i gusci, $Q_{\mathrm{int}}=Q+2Q=3Q$, e il campo è quello di una carica puntiforme $3Q$ posta nel centro; il numero dei gusci è irrilevante, perché all'esterno di un sistema di gusci concentrici la carica interna è sempre la somma algebrica di tutte le loro cariche. Nella regione intermedia, $R<r<2R$, la sfera gaussiana racchiude solo il guscio interno, $Q_{\mathrm{int}}=Q$: il guscio esterno non contribuisce, perché il punto si trova al suo interno, dove il campo che esso genera è nullo per la~\eqref{eq:gauss:gusciodentro}. Per $r<R$, infine, la carica interna è nulla e il campo pure. Per le tre regioni, in termini della componente radiale, con $k=1/(4\pi\epz)$,
+\[
+E(r)=0\ \ (r<R),\quad E(r)=\frac{kQ}{r^2}\ \ (R<r<2R),\quad E(r)=\frac{3kQ}{r^2}\ \ (r>2R).
+\]
+Se le cariche fossero state $-Q$ sul guscio di raggio $R$ e $+Q$ su quello di raggio $2R$, all'esterno la carica racchiusa sarebbe $-Q+Q=0$ e il campo sarebbe nullo in ogni punto esterno, indipendentemente dal fatto che il guscio esterno abbia un'area quattro volte maggiore e dalla distanza tra i due.
+
+Noto il campo, si ricava il potenziale dalla sua definizione, con lo zero all'infinito,
+\[
+V(r)=\int_r^{\infty}\Ev\cdot\dd\vec{l} ,
+\]
+calcolata lungo una linea di campo radiale, sulla quale $\Ev\cdot\dd\vec{l}=E(r')\,\dd r'$, con $r'$ variabile di integrazione. Poiché il campo cambia espressione da una regione all'altra, l'integrale va spezzato negli intervalli in cui l'espressione è unica. Per $r\ge2R$ si ha un solo tratto, e la primitiva di $1/r'^2$ è $-1/r'$:
+\[
+V(r)=\int_r^{\infty}\frac{3kQ}{r'^2}\,\dd r'=3kQ\Bigl[-\frac{1}{r'}\Bigr]_r^{\infty}=\frac{3kQ}{r}\qquad(r\ge2R).
+\]
+Per $R\le r\le2R$ l'integrale si spezza in due, da $r$ a $2R$ con il campo della regione intermedia e da $2R$ all'infinito con il campo esterno; il secondo tratto è appena stato calcolato e vale $3kQ/(2R)$, e il primo è
+\[
+\int_r^{2R}\frac{kQ}{r'^2}\,\dd r'=kQ\Bigl[-\frac{1}{r'}\Bigr]_r^{2R}=-\frac{kQ}{2R}+\frac{kQ}{r} .
+\]
+La somma dei due tratti dà
+\[
+V(r)=\frac{kQ}{r}-\frac{kQ}{2R}+\frac{3kQ}{2R}=\frac{kQ}{r}+\frac{k\,2Q}{2R}\qquad(R\le r\le2R).
+\]
+Per $r\le R$ gli intervalli sono tre: da $r$ a $R$, dove il campo è nullo e il contributo è zero; da $R$ a $2R$, dove l'integrale precedente con $r=R$ vale $kQ/R-kQ/(2R)$; da $2R$ all'infinito, che vale $3kQ/(2R)$. Ne segue
+\[
+V(r)=0+\frac{kQ}{R}-\frac{kQ}{2R}+\frac{3kQ}{2R}=\frac{kQ}{R}+\frac{k\,2Q}{2R}=\frac{2kQ}{R}\qquad(r\le R).
+\]
+Il potenziale all'interno del guscio più piccolo non è nullo, come si sarebbe tentati di concludere dal fatto che lì il campo è nullo, ma costante: un campo nullo significa che il potenziale non varia, perché il campo è la derivata spaziale del potenziale cambiata di segno, non che il potenziale si annulla. Le espressioni trovate si leggono in modo semplice se si lasciano nella forma non semplificata. Il potenziale di un guscio di raggio $R_i$ e carica $Q_i$ vale $kQ_i/r$ nei punti esterni, come per una carica puntiforme, e il valore costante $kQ_i/R_i$ in tutti i punti interni; il potenziale di un sistema di gusci è la somma dei potenziali dei singoli gusci, ciascuno valutato con l'una o con l'altra espressione a seconda che il punto sia esterno o interno a quel guscio. Il termine $k\,2Q/(2R)$ è proprio il contributo costante del guscio esterno nei punti che esso racchiude.
+
+I grafici, riportati in basso nella figura~\ref{fig:gauss:gusci}, si costruiscono con le indicazioni del Richiamo~\ref{ric:gauss:grafici}, con $kQ/R^2=1$ per il campo e $kQ/R=1$ per il potenziale. Il campo è nullo fino a $R$, salta al valore $1$ in $r=R$, decresce come $1/r^2$ fino al valore $1/4$ in $r=2R^-$, dove salta a $3/4$ per effetto del guscio esterno, e poi decresce di nuovo come $1/r^2$. Il potenziale, invece, è continuo: vale $3R/r$ per $r\ge2R$, cioè $3/2$ in $r=2R$; nella regione intermedia vale $R/r+1$, che in $r=2R$ dà ancora $3/2$ e in $r=R$ vale $2$, con un andamento curvo e non rettilineo, perché vi compare il termine $1/r$; all'interno resta costante al valore $2$. Si osserva che il potenziale non presenta discontinuità nell'attraversamento dei gusci, mentre il campo sì, e il salto del campo su ciascun guscio è pari a $\sigma_i/\epz$: sul guscio esterno, per esempio, $\sigma_2=2Q/(4\pi(2R)^2)$ e $\sigma_2/\epz=2Q/(16\pi\epz R^2)=\tfrac12\,kQ/R^2$, esattamente la differenza $3/4-1/4$ letta sul grafico. Un esercizio di questo tipo non ha un interesse applicativo diretto, ma allena a usare il teorema di Gauss, a gestire la definizione di potenziale quando il campo cambia da una regione all'altra e a tradurre formule in grafici, che sono un modo di rappresentare il fenomeno da saper padroneggiare.
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			axis/.style={line width=0.9pt, ->, color=black!85},
+			curve/.style={draw=orange!90!red, line width=1.6pt},
+			jump/.style={draw=gray!60, line width=0.7pt, dashed},
+			shell/.style={draw=orange!80!red, line width=1.6pt},
+			posline/.style={draw=gray!50, line width=0.7pt, dashed}
+		}
+		% geometria
+		\begin{scope}[shift={(7.2,3.6)}]
+			\draw[gridline] (-3.4,-2.8) grid (3.6,2.8);
+			\fill[violet!4] (0,0) circle (2.2);
+			\draw[shell] (0,0) circle (1.1);
+			\draw[shell] (0,0) circle (2.2);
+			\draw[gray!70!black, line width=0.8pt] (0,0) -- (135:1.1) node[midway, below left=-2pt] {$R$};
+			\draw[gray!70!black, line width=0.8pt] (0,0) -- (210:2.2) node[pos=0.75, below=1pt] {$2R$};
+			\node[orange!80!red] at (45:0.8) {$Q$};
+			\node[orange!80!red] at (45:1.9) {$2Q$};
+			\filldraw[fill=black] (0.55,-0.25) circle (1.3pt) node[below=1pt, font=\scriptsize] {I};
+			\filldraw[fill=black] (1.6,-0.35) circle (1.3pt) node[below=1pt, font=\scriptsize] {II};
+			\filldraw[fill=black] (2.9,-0.4) circle (1.3pt) node[below=1pt, font=\scriptsize] {III};
+		\end{scope}
+		% grafico del campo (R = 1.4 cm, kQ/R^2 = 2.2 cm)
+		\begin{scope}[shift={(0,-2.8)}]
+			\draw[gridline] (-1.1,-0.6) grid (6.4,2.8);
+			\draw[axis] (0,0) -- (6.3,0) node[below] {$r$};
+			\draw[axis] (0,0) -- (0,2.7) node[above] {$E\,/\,(kQ/R^2)$};
+			\draw[curve] (0,0.03) -- (1.4,0.03);
+			\draw[jump] (1.4,0) -- (1.4,2.2);
+			\draw[curve] plot[domain=1:2, samples=40] ({1.4*\x},{2.2/(\x*\x)});
+			\draw[jump] (2.8,0) -- (2.8,1.65);
+			\draw[curve] plot[domain=2:4.3, samples=40] ({1.4*\x},{6.6/(\x*\x)});
+			\foreach \y/\t in {2.2/1, 1.65/{3/4}, 0.55/{1/4}} {\draw[gray!55, dotted] (0,\y) -- (2.8,\y); \node[left] at (0,\y) {$\t$};}
+			\node[below] at (1.4,0) {$R$};
+			\node[below] at (2.8,0) {$2R$};
+		\end{scope}
+		% grafico del potenziale (R = 1.4 cm, kQ/R = 1.3 cm)
+		\begin{scope}[shift={(8.0,-2.8)}]
+			\draw[gridline] (-1.1,-0.6) grid (6.4,3.2);
+			\draw[axis] (0,0) -- (6.3,0) node[below] {$r$};
+			\draw[axis] (0,0) -- (0,3.1) node[above] {$V\,/\,(kQ/R)$};
+			\draw[curve, draw=teal!80!black] (0,2.6) -- (1.4,2.6) -- plot[domain=1:2, samples=40] ({1.4*\x},{1.3*(1/\x+1)}) -- plot[domain=2:4.3, samples=40] ({1.4*\x},{3.9/\x});
+			\foreach \y/\t in {2.6/2, 1.95/{3/2}} {\draw[gray!55, dotted] (0,\y) -- (2.8,\y); \node[left] at (0,\y) {$\t$};}
+			\draw[jump] (1.4,0) -- (1.4,2.6);
+			\draw[jump] (2.8,0) -- (2.8,1.95);
+			\node[below] at (1.4,0) {$R$};
+			\node[below] at (2.8,0) {$2R$};
+		\end{scope}
+	\end{tikzpicture}
+	\caption{Due gusci concentrici di raggi $R$ e $2R$ con cariche $Q$ e $2Q$. In basso a sinistra il campo, nullo nella regione I, pari a $kQ/r^2$ nella regione II e a $3kQ/r^2$ nella regione III, con un salto su ciascun guscio; in basso a destra il potenziale, costante all'interno e continuo ovunque.}
+	\label{fig:gauss:gusci}
+\end{figure}
+
+Un ragionamento più sottile è richiesto quando la simmetria viene rotta. Si consideri una sfera di raggio $R$ e centro $O$, uniformemente carica con densità volumica $\rho$, nella quale è scavata una cavità sferica vuota di raggio $a$ e centro $O'$, non coincidente con $O$; si vuole il campo in un punto $P$, individuato dai vettori $\vec{r}_1=\overrightarrow{OP}$ e $\vec{r}_2=\overrightarrow{O'P}$. La cavità rompe la simmetria sferica e il teorema di Gauss, applicato direttamente, non aiuta. Il problema si semplifica con il principio di sovrapposizione: la sfera con la cavità equivale alla sovrapposizione di una sfera piena di raggio $R$, con densità $\rho$ anche nella regione della cavità, e di una piccola sfera di raggio $a$, centrata in $O'$, con densità $-\rho$, che riporta a zero la carica nella cavità (figura~\ref{fig:gauss:cavita}). Ciascuna delle due distribuzioni ha simmetria sferica, e il suo campo si ricava con il teorema di Gauss, come si è appena fatto. Per un punto $P$ interno alla sfera grande ma esterno alla cavità, la sfera piena contribuisce con il campo interno~\eqref{eq:gauss:sferapiena} e la piccola sfera di carica $-\rho\,\tfrac43\pi a^3$ con il campo esterno, da carica puntiforme posta in $O'$:
+\[
+\Ev(P)=\frac{\rho}{3\epz}\,\vec{r}_1-\frac{\rho\,a^3}{3\epz}\,\frac{\vec{r}_2}{r_2^3} .
+\]
+Il primo termine è il campo della sfera piena come se la cavità fosse riempita, il secondo è il campo che la carica mancante produrrebbe se ci fosse, cambiato di segno; il campo cercato è la loro somma vettoriale. Per un punto esterno alla sfera grande il primo termine si sostituisce con il campo esterno $\rho R^3\vec{r}_1/(3\epz r_1^3)$.
+% NOTA: il caso del punto interno alla cavità non è trattato a lezione; lo si aggiunge come conseguenza diretta della stessa sovrapposizione.
+Il caso più notevole è quello di un punto interno alla cavità, nel quale entrambe le sfere contribuiscono con il proprio campo interno:
+\[
+\Ev(P)=\frac{\rho}{3\epz}\,\vec{r}_1-\frac{\rho}{3\epz}\,\vec{r}_2=\frac{\rho}{3\epz}\bigl(\vec{r}_1-\vec{r}_2\bigr)=\frac{\rho}{3\epz}\,\overrightarrow{OO'} ,
+\]
+perché $\vec{r}_1=\overrightarrow{OO'}+\vec{r}_2$. Nella cavità il campo è uniforme, parallelo alla congiungente dei centri e di modulo $\rho\,d/(3\epz)$, con $d$ distanza tra i centri. La strategia generale è quella di semplificare il problema finché la simmetria ricompare, e di applicare allora il teorema di Gauss ai pezzi e il principio di sovrapposizione al tutto.
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily, scale=0.8]
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			vec/.style={line width=1.0pt, ->, color=black!85},
+			vecb/.style={line width=1.0pt, ->, color=gray!60!black},
+			vecd/.style={line width=1.0pt, ->, color=violet!70!black}
+		}
+		\draw[gridline] (-2.2,-2.8) grid (14.0,2.2);
+		% sfera con cavita'
+		\begin{scope}
+			\filldraw[fill=orange!14, draw=orange!80!red, line width=1.3pt] (0,0) circle (1.8);
+			\filldraw[fill=white, draw=gray!70!black, line width=0.8pt, dashed] (0.7,0.5) circle (0.6);
+			\draw[vecd] (0,0) -- (0.7,0.5) node[pos=0.45, above left=-1pt, font=\scriptsize] {$\vec{d}$};
+			\draw[vec] (0,0) -- (0.6,-1.0) node[midway, left=1pt] {$\vec{r}_1$};
+			\draw[vecb] (0.7,0.5) -- (0.6,-1.0) node[pos=0.4, right=1pt] {$\vec{r}_2$};
+			\filldraw[fill=black] (0,0) circle (1.2pt) node[left=1pt] {$O$};
+			\filldraw[fill=black] (0.7,0.5) circle (1.2pt) node[above=1pt] {$O'$};
+			\filldraw[fill=black] (0.6,-1.0) circle (1.5pt) node[below=1pt] {$P$};
+			\node[badge] at (0,-2.35) {cavità vuota};
+		\end{scope}
+		\node[font=\huge] at (2.6,0) {$=$};
+		% sfera piena
+		\begin{scope}[shift={(5.0,0)}]
+			\filldraw[fill=orange!14, draw=orange!80!red, line width=1.3pt] (0,0) circle (1.8);
+			\draw[vec] (0,0) -- (0.6,-1.0) node[midway, left=1pt] {$\vec{r}_1$};
+			\filldraw[fill=black] (0,0) circle (1.2pt) node[left=1pt] {$O$};
+			\filldraw[fill=black] (0.6,-1.0) circle (1.5pt) node[below=1pt] {$P$};
+			\node[orange!80!red] at (-0.8,0.8) {$+\rho$};
+			\node[badge] at (0,-2.35) {$\dfrac{\rho}{3\epz}\,\vec{r}_1$};
+		\end{scope}
+		\node[font=\huge] at (7.6,0) {$+$};
+		% piccola sfera con densita' opposta
+		\begin{scope}[shift={(10.0,0)}]
+			\draw[gray!40, dashed, line width=0.6pt] (0,0) circle (1.8);
+			\filldraw[fill=teal!20, draw=teal!80!black, line width=1.3pt] (0.7,0.5) circle (0.6);
+			\draw[vecb] (0.7,0.5) -- (0.6,-1.0) node[pos=0.4, right=1pt] {$\vec{r}_2$};
+			\filldraw[fill=black] (0.7,0.5) circle (1.2pt) node[above=1pt] {$O'$};
+			\filldraw[fill=black] (0.6,-1.0) circle (1.5pt) node[below=1pt] {$P$};
+			\node[teal!80!black] at (1.55,1.1) {$-\rho$};
+			\node[badge] at (0,-2.35) {$-\dfrac{\rho a^3}{3\epz}\,\dfrac{\vec{r}_2}{r_2^3}$};
+		\end{scope}
+	\end{tikzpicture}
+	\caption{Sfera con cavità eccentrica ottenuta per sovrapposizione: la sfera piena di densità $\rho$ più una piccola sfera di raggio $a$ e densità $-\rho$ centrata in $O'$. Ciascuna delle due distribuzioni ha simmetria sferica e il suo campo si ricava con il teorema di Gauss; nella figura sono indicati i contributi in un punto $P$ esterno alla cavità.}
+	\label{fig:gauss:cavita}
+\end{figure}
+
+L'ultima applicazione riguarda i conduttori. Un conduttore, sostanzialmente un metallo, contiene cariche libere di muoversi al suo interno. Di norma è neutro, ma vi si può immettere una carica in eccesso; le cariche in eccesso si muovono finché raggiungono una configurazione in cui restano ferme, che è uno stato di energia minima, come per una pallina che rotola fino al fondo di un avvallamento. Si dice allora che il conduttore è in equilibrio elettrostatico. In questa condizione il campo all'interno del conduttore deve essere nullo,
+\[
+\Ev=\vec{0}\qquad\text{in ogni punto interno al conduttore},
+\]
+perché un campo diverso da zero metterebbe in moto le cariche libere, contro l'ipotesi di equilibrio. Dove si trova, allora, la carica in eccesso? Si consideri una superficie chiusa immaginaria interamente contenuta nel materiale del conduttore, come la superficie $S'$ della figura~\ref{fig:gauss:conduttore}. In ogni suo punto il campo è nullo, quindi il flusso è nullo, e per il teorema di Gauss è nulla la carica che essa racchiude. Il ragionamento vale per qualunque superficie chiusa interna, piccola o grande, posta ovunque nel conduttore, e quindi anche per superfici sempre più vicine alla superficie esterna del corpo, fino a coincidere con essa in prima approssimazione. In nessun punto interno si trova carica netta, e l'unica possibilità è che la carica in eccesso si disponga sulla superficie esterna del conduttore. Il campo nullo implica inoltre che il potenziale sia uniforme: tra due punti qualsiasi del conduttore $\dd V=-\Ev\cdot\dd\vec{l}=0$, quindi tutto il conduttore, superficie compresa, è equipotenziale.
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			gauss/.style={draw=violet!70!black, line width=0.9pt, dashed}
+		}
+		\draw[gridline] (-3.0,-2.8) grid (11.0,2.8);
+		% conduttore
+		\filldraw[fill=gray!14, draw=black!70, line width=1.3pt] plot[smooth cycle, tension=0.75] coordinates {(-2.2,0.3) (-1.4,2.0) (0.6,2.2) (2.2,1.2) (2.3,-0.8) (1.0,-2.1) (-1.3,-1.9)};
+		\draw[gauss, scale=0.86] plot[smooth cycle, tension=0.75] coordinates {(-2.2,0.3) (-1.4,2.0) (0.6,2.2) (2.2,1.2) (2.3,-0.8) (1.0,-2.1) (-1.3,-1.9)};
+		\foreach \x/\y in {-2.2/0.3, -1.4/2.0, 0.6/2.2, 2.2/1.2, 2.3/-0.8, 1.0/-2.1, -1.3/-1.9} {
+			\node[orange!80!red, font=\scriptsize] at (1.09*\x,1.09*\y) {$+$};
+		}
+		\node at (0,0.1) {$\Ev=\vec{0}$};
+		\node[violet!70!black] at (1.25,0.55) {$S'$};
+		\node at (2.75,1.45) {$S$};
+		% formule
+		\node[badge] at (7.4,1.0) {$\displaystyle\oint_{S'}\Ev\cdot\uv_n\,\dd S'=0$};
+		\node[badge] at (7.4,-0.6) {$Q_{\mathrm{int}}=0$};
+		\node[badge, font=\scriptsize\sffamily, align=center] at (7.4,-1.9) {la carica in eccesso\\ si dispone sulla superficie $S$};
+	\end{tikzpicture}
+	\caption{Conduttore in equilibrio elettrostatico. Il campo è nullo in ogni punto interno, quindi il flusso attraverso qualunque superficie chiusa $S'$ contenuta nel materiale è nullo e non vi è carica netta all'interno: la carica in eccesso si trova sulla superficie esterna $S$.}
+	\label{fig:gauss:conduttore}
+\end{figure}
+% VERIFICARE: il seguito di questo paragrafo (teorema di Coulomb e pressione elettrostatica) è presente nelle slide sul flusso ma non è svolto nelle registrazioni allegate; è stato ricostruito a partire dagli enunciati delle slide.
+Dal fatto che la superficie del conduttore è equipotenziale segue che il campo, sulla superficie e nei punti esterni immediatamente vicini, è perpendicolare alla superficie stessa, perché il campo è sempre perpendicolare alle superfici equipotenziali: uno spostamento $\dd\vec{l}$ lungo una superficie equipotenziale ha $\dd V=0$, cioè $\Ev\cdot\dd\vec{l}=0$. Fisicamente, una componente tangente alla superficie sposterebbe le cariche lungo di essa, e l'equilibrio non sarebbe raggiunto. Il modulo del campo appena fuori dal conduttore si ricava con il teorema di Gauss applicato a un cilindretto con l'asse perpendicolare alla superficie (figura~\ref{fig:gauss:coulomb}), una base di area $\Delta S$ appena all'esterno e l'altra appena all'interno del conduttore, e altezza trascurabile. Il flusso attraverso la base interna è nullo perché lì il campo è nullo; quello attraverso la superficie laterale è trascurabile, perché la sua area tende a zero con l'altezza e, nel tratto esterno, il campo è comunque perpendicolare alla superficie del conduttore e quindi radente alla parete laterale; attraverso la base esterna il flusso è $E\,\Delta S$. La carica racchiusa è $\sigma\,\Delta S$, dove $\sigma$ è la densità superficiale locale, e il teorema di Gauss dà
+\begin{equation}
+\Ev=\frac{\sigma}{\epz}\,\uv_n ,
+\label{eq:gauss:coulomb}
+\end{equation}
+con $\uv_n$ normale uscente dal conduttore. Questo è il teorema di Coulomb: nei punti esterni prossimi alla superficie di un conduttore in equilibrio il campo è perpendicolare alla superficie e ha modulo $\sigma/\epz$, in $\mathrm{N/C}$ con $\sigma$ in $\mathrm{C/m^2}$; è uscente dove $\sigma>0$ ed entrante dove $\sigma<0$. Il valore è doppio rispetto a quello del piano indefinito, $\sigma/(2\epz)$, perché nel conduttore tutte le linee di campo escono da un solo lato, mentre il piano isolato le emette in parti uguali da entrambe le facce.
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			fieldarrow/.style={line width=1.3pt, ->, color=orange!90!red},
+			unitarrow/.style={line width=1.0pt, ->, color=black!85},
+			gauss/.style={draw=violet!70!black, line width=0.9pt, dashed}
+		}
+		\draw[gridline] (-3.2,-2.4) grid (11.0,2.4);
+		% porzione del conduttore
+		\fill[gray!14] (-3.0,-2.2) -- (-3.0,2.2) -- (0.2,2.2) .. controls (-0.2,0.8) and (0.2,-0.8) .. (-0.1,-2.2) -- cycle;
+		\draw[black!70, line width=1.3pt] (0.2,2.2) .. controls (-0.2,0.8) and (0.2,-0.8) .. (-0.1,-2.2);
+		\foreach \y in {-1.8,-1.2,...,1.9} {\node[orange!80!red, font=\scriptsize] at (0.28,\y) {$+$};}
+		\node at (-1.9,1.5) {conduttore};
+		\node at (-1.9,-1.1) {$\Ev=\vec{0}$};
+		% cilindretto a cavallo della superficie
+		\fill[violet!6] (-0.8,-0.45) rectangle (0.8,0.45);
+		\draw[gauss] (-0.8,-0.45) rectangle (0.8,0.45);
+		\node[below, violet!70!black] at (-0.8,-0.45) {$\Delta S''$};
+		\node[below, violet!70!black] at (0.8,-0.45) {$\Delta S'$};
+		\node[above right=-1pt] at (0.0,0.45) {$\Delta S$};
+		% campo esterno perpendicolare
+		\filldraw[fill=black] (0.8,0) circle (1.5pt) node[above right=-1pt] {$P$};
+		\draw[fieldarrow] (0.8,0) -- (2.4,0) node[right] {$\Ev=\dfrac{\sigma}{\epz}\,\uv_n$};
+		\draw[unitarrow] (0.8,-1.2) -- (1.7,-1.2) node[right] {$\uv_n$};
+		% formule
+		\node[badge] at (8.4,1.6) {$E\,\Delta S=\dfrac{\sigma\,\Delta S}{\epz}$};
+		\node[badge] at (8.4,0.0) {$\Ev_{\mathrm{sup}}=\dfrac{\sigma}{2\epz}\,\uv_n$};
+		\node[badge, font=\scriptsize\sffamily] at (8.4,-1.3) {campo nei punti della superficie};
+	\end{tikzpicture}
+	\caption{Teorema di Coulomb. Il cilindretto ha una base appena fuori e una appena dentro il conduttore e altezza trascurabile: solo la base esterna dà flusso, e il campo esterno vale $\sigma/\epz$ ed è perpendicolare alla superficie. Nei punti della superficie stessa il campo vale la metà.}
+	\label{fig:gauss:coulomb}
+\end{figure}
+
+Resta da stabilire quanto vale il campo nei punti che giacciono proprio sulla superficie del conduttore. Si isola attorno a un punto $P$ della superficie un elementino $\dd S$ (figura~\ref{fig:gauss:pressione}), abbastanza piccolo da essere piano e da portare una densità uniforme $\sigma$, e si scrive il campo come somma di due parti: il campo $\Ev_{\dd S}$ generato dalle cariche dell'elementino e il campo $\Ev'$ generato da tutte le altre cariche. Il campo $\Ev'$ è prodotto da cariche lontane da $P$ rispetto alle dimensioni in gioco, e nell'intorno di $P$ è continuo, cioè ha lo stesso valore appena dentro, appena fuori e sulla superficie. Il campo dell'elementino, invece, in punti molto vicini a esso rispetto alle sue dimensioni coincide con quello di un piano indefinito, $\pm\sigma/(2\epz)\,\uv_n$ da una parte e dall'altra, mentre nei punti dell'elementino stesso è nullo, perché per simmetria i contributi delle cariche che circondano $P$ sono tutti paralleli all'elementino e si elidono a coppie. Appena all'interno il campo totale deve annullarsi, quindi
+\[
+\Ev'-\frac{\sigma}{2\epz}\,\uv_n=\vec{0}
+\qquad\Longrightarrow\qquad
+\Ev'=\frac{\sigma}{2\epz}\,\uv_n ,
+\]
+e appena all'esterno si ritrova, come deve essere, $\Ev'+\sigma/(2\epz)\,\uv_n=\sigma/\epz\,\uv_n$. Nei punti della superficie il campo totale si riduce a $\Ev'$, poiché il contributo dell'elementino è nullo, e vale quindi $\sigma/(2\epz)\,\uv_n$, metà del valore esterno, in accordo con il termine $q/(2\epz)$ della~\eqref{eq:gauss:gaussgen} per le cariche sulla superficie. Questo è anche il campo che agisce sulle cariche dell'elementino, perché una carica non esercita forza su sé stessa. La forza sull'elementino è allora
+\[
+\dd\Fv=\sigma\,\dd S\,\Ev'=\frac{\sigma^2}{2\epz}\,\dd S\,\uv_n ,
+\]
+e la forza per unità di superficie definisce la pressione elettrostatica
+\begin{equation}
+p=\frac{\dd F}{\dd S}=\frac{\sigma^2}{2\epz}=\frac{1}{2}\,\epz E^2 ,
+\label{eq:gauss:pressione}
+\end{equation}
+dove $E=\sigma/\epz$ è il campo appena fuori dal conduttore. La pressione si misura in $\mathrm{N/m^2}$, cioè in pascal, e dipende da $\sigma^2$: è sempre diretta verso l'esterno del conduttore, qualunque sia il segno della carica, e tende a dilatare la superficie, perché le cariche dello stesso segno disposte su di essa si respingono a vicenda.
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			restarrow/.style={line width=1.3pt, ->, color=violet!70!black},
+			elemarrow/.style={line width=1.3pt, ->, color=orange!90!red},
+			surface/.style={draw=black!70, line width=1.1pt}
+		}
+		\draw[gridline] (-2.4,-3.0) grid (12.4,2.4);
+		% (a) elemento dS
+		\begin{scope}
+			\node at (0,2.05) {elemento $\dd S$};
+			\fill[gray!14] (-2.2,-1.7) -- (-2.2,1.7) -- (-0.3,1.7) .. controls (0.3,0.5) and (0.3,-0.5) .. (-0.3,-1.7) -- cycle;
+			\draw[surface] (-0.3,1.7) .. controls (0.3,0.5) and (0.3,-0.5) .. (-0.3,-1.7);
+			\draw[orange!80!red, line width=3pt] (0.13,-0.4) -- (0.13,0.4);
+			\node[right=2pt] at (0.13,0.55) {$\dd S$};
+			\node at (0.9,0) {$A$};
+			\node at (-0.7,0) {$B$};
+		\end{scope}
+		% (b) campo delle altre cariche
+		\begin{scope}[shift={(5.0,0)}]
+			\node at (0,2.05) {altre cariche};
+			\fill[gray!14] (-2.2,-1.7) -- (-2.2,1.7) -- (-0.3,1.7) .. controls (0.3,0.5) and (0.3,-0.5) .. (-0.3,-1.7) -- cycle;
+			\draw[surface] (-0.3,1.7) .. controls (0.3,0.5) and (0.3,-0.5) .. (-0.3,-1.7);
+			\draw[restarrow] (-1.3,0) -- (-0.3,0) node[midway, above] {$\Ev'$};
+			\draw[restarrow] (0.5,0) -- (1.5,0) node[midway, above] {$\Ev'$};
+			\node at (0.9,-0.4) {$A$};
+			\node at (-0.8,-0.4) {$B$};
+		\end{scope}
+		% (c) campo delle cariche di dS
+		\begin{scope}[shift={(10.0,0)}]
+			\node at (0,2.05) {cariche di $\dd S$};
+			\fill[gray!14] (-2.2,-1.7) -- (-2.2,1.7) -- (-0.3,1.7) .. controls (0.3,0.5) and (0.3,-0.5) .. (-0.3,-1.7) -- cycle;
+			\draw[surface] (-0.3,1.7) .. controls (0.3,0.5) and (0.3,-0.5) .. (-0.3,-1.7);
+			\draw[orange!80!red, line width=3pt] (0.13,-0.4) -- (0.13,0.4);
+			\draw[elemarrow] (0.4,0) -- (1.4,0) node[midway, above] {$\Ev_{\dd S}$};
+			\draw[elemarrow] (-0.15,0) -- (-1.15,0) node[midway, above] {$-\Ev_{\dd S}$};
+			\node at (0.9,-0.4) {$A$};
+			\node at (-0.65,-0.4) {$B$};
+		\end{scope}
+		% formule
+		\node[badge] at (5.0,-2.45) {$A:\ \Ev'+\Ev_{\dd S}=\dfrac{\sigma}{\epz}\uv_n \qquad B:\ \Ev'-\Ev_{\dd S}=\vec{0} \qquad \Ev'=\Ev_{\dd S}=\dfrac{\sigma}{2\epz}\uv_n$};
+	\end{tikzpicture}
+	\caption{Pressione elettrostatica. Il campo nel punto esterno $A$ e nel punto interno $B$, prossimi all'elemento $\dd S$, si scompone nel campo $\Ev'$ delle cariche lontane, continuo attraverso la superficie, e nel campo $\pm\Ev_{\dd S}$ delle cariche dell'elemento, che cambia verso da una parte all'altra. Sulle cariche di $\dd S$ agisce solo $\Ev'=\sigma/(2\epz)\,\uv_n$.}
+	\label{fig:gauss:pressione}
+\end{figure}
+
+\section*{Interpretazione fisica e casi limite}
+
+I risultati ottenuti si prestano a un confronto che chiarisce il ruolo della geometria. Il campo della carica puntiforme decresce come $1/r^2$, quello del filo indefinito come $1/r$, quello del piano indefinito non decresce affatto: a ogni dimensione in più della distribuzione corrisponde una potenza in meno della distanza. Il motivo si legge nel teorema di Gauss, perché il flusso, fissato dalla carica racchiusa, si ripartisce su una superficie la cui parte utile cresce come $r^2$ per la sfera, come $r$ per la superficie laterale del cilindro e non cresce affatto per le basi del cilindro usato con il piano. Naturalmente fili e piani indefiniti sono idealizzazioni: le stesse espressioni descrivono bene un filo o una lastra finiti nei punti la cui distanza dalla distribuzione è piccola rispetto alle sue dimensioni e lontani dai bordi.
+
+Per $r\to\infty$, o più in generale per ogni punto esterno, il guscio e la sfera piena uniformemente carichi, così come qualunque sistema di gusci concentrici, sono indistinguibili da una carica puntiforme uguale alla carica totale posta nel centro. All'esterno, quindi, il campo non contiene alcuna informazione sul modo in cui la carica è distribuita nella sfera, purché la distribuzione abbia simmetria sferica. Al contrario, il comportamento all'interno distingue nettamente le due distribuzioni: per $r\to0$ il campo della sfera piena tende a zero linearmente, e nel centro è nullo per simmetria, mentre quello del guscio è identicamente nullo in tutta la regione interna.
+
+Le distribuzioni superficiali producono discontinuità del campo, quelle volumiche no. Nell'attraversamento di uno strato di densità $\sigma$ la componente normale del campo salta di $\sigma/\epz$, come si vede nel guscio sferico, nel piano indefinito, in ciascun guscio del sistema concentrico e sulla superficie del conduttore, dove si passa da zero all'interno a $\sigma/\epz$ all'esterno; nei punti dello strato il campo vale la media dei due valori. Il potenziale invece è sempre continuo, perché è l'integrale del campo, e un integrando con un salto finito produce una funzione continua con un punto angoloso. Il caso dei due gusci con cariche $-Q$ e $+Q$ mostra infine un limite interessante: all'esterno il campo è nullo, e il sistema è schermato verso l'esterno, mentre nell'intercapedine il campo è quello del guscio interno.
+
+\section*{Speciale esame}
+
+\paragraph*{Domande orali tipiche}
+La domanda più frequente sull'argomento è la definizione di flusso, e la risposta parte dal flusso elementare $\dd\Phi=\Ev\cdot\uv_n\,\dd S$, integrato poi sulla superficie. Come punto di partenza mnemonico funziona l'idea che il flusso sia campo per superficie, da precisare subito con il coseno, cioè con il prodotto scalare, e con il passaggio agli elementi infinitesimi quando la superficie non è piana o il campo non è uniforme. Il docente chiede spesso se la superficie sia un vettore o uno scalare: è uno scalare, che diventa un vettore solo per l'artificio della normale; analogamente il flusso è uno scalare, anche se contiene un vettore. Il significato fisico della legge di Gauss va dato in una frase, le cariche elettriche generano campi elettrici, senza ripetere a parole ciò che la formula già dice. Le equazioni di Maxwell per il campo elettrostatico sono due, la circuitazione nulla e la legge di Gauss: la forma integrale va saputa senza esitazioni, quella locale è un arricchimento apprezzato. Va saputo distinguere il caso in cui il teorema di Gauss è vero ma non serve, cioè in assenza di simmetria, da quello in cui è lo strumento più efficace, e saper argomentare la scelta tra le tre strade possibili per il campo: definizione, potenziale con derivazione, teorema di Gauss. Le dimostrazioni attese sono quelle del campo del filo, del piano, del guscio all'esterno e all'interno e della sfera piena all'esterno e all'interno, ognuna con la discussione della simmetria e della superficie scelta; la sola formula finale vale una frazione della risposta, la gran parte sta nel come ci si arriva. Il campo della carica puntiforme va saputo scrivere sempre, perché da esso discende tutto il resto. All'orale può comparire anche un problema di ragionamento come quello della sfera con la cavità eccentrica, svolto a lezione: si apprezza chi semplifica il problema, ripristina la simmetria e ricorre alla sovrapposizione.
+
+\paragraph*{Tipologie di esercizi scritti}
+L'esame è orale, ma l'argomento si presta a esercizi tipici che possono essere proposti anche alla lavagna. Il più classico è quello dei gusci sferici concentrici: sono dati due o tre gusci con raggi e cariche assegnati, a volte una sfera piena al centro, e si chiedono il campo e il potenziale in tutti i punti dello spazio, insieme ai grafici di entrambi in funzione della distanza dal centro. Lo svolgimento richiede il teorema di Gauss regione per regione, la definizione di potenziale con l'integrale spezzato dove il campo cambia espressione, e la traduzione delle formule in grafici. Altre varianti chiedono il campo di cilindri carichi in volume o di gusci cilindrici coassiali, il campo di due piani paralleli con densità uguali o opposte, il moto di una carica in una sfera uniformemente carica, il campo in una cavità per sovrapposizione, la densità di carica o la pressione elettrostatica sulla superficie di un conduttore noto il campo esterno.
+
+\paragraph*{Errori più penalizzati}
+L'errore più insidioso, secondo il docente quello che fa cadere più candidati, è affermare che il potenziale all'interno di un guscio è nullo perché lì il campo è nullo: il potenziale è costante, e il suo valore si trova con la definizione, cioè con un integrale dall'infinito spezzato nelle varie regioni. Un secondo errore frequente è usare per la carica racchiusa la carica totale anche quando la superficie gaussiana ne contiene solo una parte, come all'interno della sfera piena, oppure sbagliare il volume, con $r^2$ al posto di $r^3$. Si confondono spesso il raggio $R$ della distribuzione, che è un dato, e la distanza $r$ del punto, che è la variabile. Nel cilindro per il piano indefinito si dimentica di contare entrambe le basi, che dà un campo doppio, mentre nel cilindro per il filo si attribuisce un flusso alle basi, dove il campo è radente. Si attribuisce una simmetria radiale a distribuzioni che non sono uniformi, o si applica il teorema di Gauss a situazioni senza simmetria con la pretesa di ricavarne il campo. Sul segno, la normale alle superfici chiuse va sempre presa uscente, e nel moto armonico nel tunnel la forza di richiamo esiste solo se la carica di prova e la sfera hanno segni opposti. Infine, all'esame si perdono punti su cose elementari come l'area della sfera, $4\pi r^2$, il suo volume, $\tfrac43\pi r^3$, o l'area laterale del cilindro, $2\pi a h$, che vanno sapute senza esitazioni, e sulla lettura dei grafici, per esempio quando non si riconosce nell'espressione $E=\rho r/(3\epz)$ una retta passante per l'origine.
+
+\section*{Esercizio guida risolto}
+
+Una sfera di raggio $R_1=5{,}0\un{cm}$ porta una carica $Q_1=+2{,}0\un{nC}$ distribuita uniformemente nel suo volume. Essa è circondata da un guscio sferico sottile concentrico, di raggio $R_2=10\un{cm}$, sul quale è distribuita uniformemente la carica $Q_2=-3{,}0\un{nC}$. Si chiede di determinare il campo elettrico $\Ev(r)$ e il potenziale $V(r)$, con lo zero all'infinito, in tutti i punti dello spazio; di calcolarne i valori numerici a $r=3{,}0\un{cm}$, $r=8{,}0\un{cm}$ e $r=20\un{cm}$ e il potenziale nel centro; di verificare che il salto del campo attraverso il guscio è pari a $\sigma_2/\epz$; di trovare la distanza dal centro alla quale il potenziale si annulla. Si usi $k=1/(4\pi\epz)=8{,}99\times10^9\un{N\,m^2/C^2}$.
+
+La distribuzione è costituita da una sfera piena uniforme e da un guscio uniforme concentrici, e quindi ha simmetria sferica: qualunque rotazione attorno al centro la lascia invariata. Ne segue che il campo è radiale, $\Ev=E(r)\,\ur$, dove $E(r)$ indica la componente radiale con il suo segno, positiva se il campo è uscente e negativa se è entrante. La superficie chiusa adatta è la sfera concentrica di raggio $r$, sulla quale il campo è perpendicolare e costante e il flusso vale $E(r)\cdot4\pi r^2$. Conviene calcolare subito le densità di carica, che serviranno per i controlli:
+\begin{align*}
+\rho_1&=\frac{Q_1}{\tfrac43\pi R_1^3}=\frac{2{,}0\times10^{-9}\un{C}}{\tfrac43\pi\,(5{,}0\times10^{-2}\un{m})^3}=3{,}82\times10^{-6}\un{C/m^3},\\
+\sigma_2&=\frac{Q_2}{4\pi R_2^2}=\frac{-3{,}0\times10^{-9}\un{C}}{4\pi\,(0{,}10\un{m})^2}=-2{,}39\times10^{-8}\un{C/m^2}.
+\end{align*}
+Le regioni da distinguere sono tre, separate dai raggi $R_1$ e $R_2$ in corrispondenza dei quali cambia la carica racchiusa. All'interno della sfera, $r\le R_1$, la superficie gaussiana racchiude la frazione $Q_1r^3/R_1^3$ della carica della sfera, mentre il guscio è esterno e non contribuisce; il teorema di Gauss dà $E\cdot4\pi r^2=Q_1r^3/(\epz R_1^3)$, cioè
+\[
+E(r)=\frac{kQ_1}{R_1^3}\,r\qquad(r\le R_1).
+\]
+Nell'intercapedine, $R_1\le r<R_2$, la carica racchiusa è tutta $Q_1$, e il guscio, che racchiude il punto, non dà campo:
+\[
+E(r)=\frac{kQ_1}{r^2}\qquad(R_1\le r<R_2).
+\]
+All'esterno, $r>R_2$, la carica racchiusa è $Q_1+Q_2=-1{,}0\un{nC}$, negativa:
+\[
+E(r)=\frac{k(Q_1+Q_2)}{r^2}\qquad(r>R_2).
+\]
+Il segno merita attenzione. Fuori dal guscio la componente radiale è negativa e il campo punta verso il centro: la carica negativa del guscio prevale su quella positiva della sfera, e chi scrivesse soltanto moduli perderebbe questa informazione. I valori numerici, con $kQ_1=17{,}98\un{N\,m^2/C}$ e $k(Q_1+Q_2)=-8{,}99\un{N\,m^2/C}$, sono
+\begin{align*}
+E(3{,}0\un{cm})&=\frac{17{,}98\cdot0{,}030}{(0{,}050)^3}\un{N/C}=4{,}31\times10^3\un{N/C},\\
+E(8{,}0\un{cm})&=\frac{17{,}98}{(0{,}080)^2}\un{N/C}=2{,}81\times10^3\un{N/C},
+\end{align*}
+e all'esterno $E(20\un{cm})=-8{,}99/(0{,}20)^2\un{N/C}=-2{,}25\times10^2\un{N/C}$. Come controllo di continuità, sulla superficie della sfera le espressioni della prima e della seconda regione danno entrambe $kQ_1/R_1^2=7{,}19\times10^3\un{N/C}$, come ci si aspetta per una distribuzione volumica. Sul guscio, invece, il campo passa da $kQ_1/R_2^2=1{,}80\times10^3\un{N/C}$ appena dentro a $k(Q_1+Q_2)/R_2^2=-8{,}99\times10^2\un{N/C}$ appena fuori, con un salto
+\begin{align*}
+\Delta E&=\bigl(-8{,}99\times10^2-1{,}80\times10^3\bigr)\un{N/C}=-2{,}70\times10^3\un{N/C},\\
+\frac{\sigma_2}{\epz}&=\frac{-2{,}39\times10^{-8}}{8{,}85\times10^{-12}}\un{N/C}=-2{,}70\times10^3\un{N/C},
+\end{align*}
+in perfetto accordo con quanto previsto per uno strato superficiale di carica.
+
+Si passa al potenziale, che si calcola con la definizione $V(r)=\int_r^\infty E(r')\,\dd r'$ lungo una retta radiale, con l'integrale spezzato nelle regioni attraversate. All'esterno l'integrale è unico e dà il potenziale di una carica puntiforme:
+\[
+V(r)=\int_r^\infty\frac{k(Q_1+Q_2)}{r'^2}\,\dd r'=\frac{k(Q_1+Q_2)}{r}\qquad(r\ge R_2).
+\]
+Nell'intercapedine si integra da $r$ a $R_2$ con il campo della sfera e si aggiunge il valore già trovato in $R_2$:
+\begin{align*}
+V(r)&=\int_r^{R_2}\frac{kQ_1}{r'^2}\,\dd r'+\frac{k(Q_1+Q_2)}{R_2}=\frac{kQ_1}{r}-\frac{kQ_1}{R_2}+\frac{kQ_1}{R_2}+\frac{kQ_2}{R_2}\\
+&=\frac{kQ_1}{r}+\frac{kQ_2}{R_2}\qquad(R_1\le r\le R_2).
+\end{align*}
+Il risultato ha la struttura attesa: la sfera, vista dall'esterno, contribuisce come una carica puntiforme, e il guscio, che racchiude il punto, contribuisce con la costante $kQ_2/R_2$. All'interno della sfera si integra il campo lineare da $r$ a $R_1$ e si aggiunge il valore in $R_1$:
+\[
+V(r)=\int_r^{R_1}\frac{kQ_1}{R_1^3}\,r'\,\dd r'+\frac{kQ_1}{R_1}+\frac{kQ_2}{R_2}=\frac{kQ_1}{2R_1^3}\bigl(R_1^2-r^2\bigr)+\frac{kQ_1}{R_1}+\frac{kQ_2}{R_2},
+\]
+che, raccolto il termine della sfera, diventa
+\[
+V(r)=\frac{kQ_1}{2R_1^3}\bigl(3R_1^2-r^2\bigr)+\frac{kQ_2}{R_2}\qquad(r\le R_1).
+\]
+Nel centro, $r=0$, si ha $V(0)=3kQ_1/(2R_1)+kQ_2/R_2$. Con $kQ_2/R_2=-26{,}97/0{,}10\un{V}=-269{,}7\un{V}$ si ottengono i valori
+\begin{align*}
+V(20\un{cm})&=\frac{-8{,}99}{0{,}20}\un{V}=-45\un{V},\\
+V(8{,}0\un{cm})&=\Bigl(\frac{17{,}98}{0{,}080}-269{,}7\Bigr)\un{V}=-45\un{V},
+\end{align*}
+e per i punti interni alla sfera
+\begin{align*}
+V(3{,}0\un{cm})&=\Bigl(\frac{17{,}98}{2\cdot0{,}050}\cdot\frac{3\cdot(0{,}050)^2-(0{,}030)^2}{(0{,}050)^2}-269{,}7\Bigr)\un{V}\\
+&=(474{,}7-269{,}7)\un{V}=205\un{V},\\
+V(0)&=(539{,}4-269{,}7)\un{V}=270\un{V}.
+\end{align*}
+Che $V(8\un{cm})$ e $V(20\un{cm})$ coincidano è una coincidenza numerica dei dati scelti e non ha un significato particolare. I valori ai bordi delle regioni confermano la continuità del potenziale, ben visibile nella figura~\ref{fig:gauss:esercizio}: in $R_2$ le due espressioni danno entrambe $-89{,}9\un{V}$, in $R_1$ entrambe $+89{,}9\un{V}$. Il punto in cui il potenziale si annulla si trova nell'intercapedine, dove $V$ passa da valori positivi in $R_1$ a valori negativi in $R_2$; si impone allora
+\[
+\frac{kQ_1}{r_0}+\frac{kQ_2}{R_2}=0
+\qquad\Longrightarrow\qquad
+r_0=-\frac{Q_1}{Q_2}\,R_2=\frac{2{,}0}{3{,}0}\cdot10\un{cm}=6{,}7\un{cm},
+\]
+compreso, come deve essere, tra $R_1$ e $R_2$. In quel punto il campo vale $kQ_1/r_0^2\simeq4{,}0\times10^3\un{N/C}$, diverso da zero: un potenziale nullo non implica un campo nullo, esattamente come un campo nullo non implica un potenziale nullo.
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			axis/.style={line width=0.9pt, ->, color=black!85},
+			ecurve/.style={draw=orange!90!red, line width=1.6pt},
+			vcurve/.style={draw=teal!80!black, line width=1.6pt},
+			jump/.style={draw=gray!60, line width=0.7pt, dashed}
+		}
+		% campo E(r): x = 0.5 cm per cm, y = 0.45 cm per 10^3 N/C
+		\begin{scope}
+			\draw[gridline] (-1.6,-1.0) grid (12.4,4.0);
+			\draw[axis] (0,0) -- (11.6,0) node[below] {$r\ (\mathrm{cm})$};
+			\draw[axis] (0,-0.8) -- (0,3.8) node[above] {$E\ (10^3\un{N/C})$};
+			\draw[ecurve] (0,0) -- (2.5,3.2355) -- plot[domain=5:10, samples=40] ({0.5*\x},{80.91/(\x*\x)});
+			\draw[jump] (5,0.809) -- (5,-0.4046);
+			\draw[ecurve] plot[domain=10:22, samples=40] ({0.5*\x},{-40.455/(\x*\x)});
+			\draw[jump] (2.5,0) -- (2.5,3.2355);
+			\foreach \x in {5,10,15,20} {\draw (0.5*\x,0.08) -- (0.5*\x,-0.08) node[below=1pt, font=\scriptsize] {\x};}
+			\node[left, font=\scriptsize] at (0,3.2355) {$7{,}19$};
+			\draw[gray!55, dotted] (0,3.2355) -- (2.5,3.2355);
+			\node[right, font=\scriptsize] at (5.05,0.85) {$1{,}80$};
+			\node[right, font=\scriptsize] at (5.05,-0.55) {$-0{,}90$};
+			\node[badge, font=\scriptsize\sffamily] at (8.8,2.6) {salto in $R_2$: $\sigma_2/\epz=-2{,}70\times10^3\un{N/C}$};
+		\end{scope}
+		% potenziale V(r): x = 0.5 cm per cm, y = 0.0125 cm per V
+		\begin{scope}[shift={(0,-6.2)}]
+			\draw[gridline] (-1.6,-1.6) grid (12.4,4.2);
+			\draw[axis] (0,0) -- (11.6,0) node[below] {$r\ (\mathrm{cm})$};
+			\draw[axis] (0,-1.4) -- (0,3.9) node[above] {$V\ (\mathrm{V})$};
+			\draw[vcurve] plot[domain=0:5, samples=40] ({0.5*\x},{0.0125*(269.7-7.192*\x*\x)})
+				-- plot[domain=5:10, samples=40] ({0.5*\x},{0.0125*(1798/\x-269.7)})
+				-- plot[domain=10:22, samples=40] ({0.5*\x},{0.0125*(-899/\x)});
+			\foreach \x in {5,10,15,20} {\draw (0.5*\x,0.08) -- (0.5*\x,-0.08) node[below=1pt, font=\scriptsize] {\x};}
+			\foreach \y/\t in {3.371/270, 1.124/{89{,}9}, -1.124/{-89{,}9}} {\draw[gray!55, dotted] (0,\y) -- (5,\y); \node[left, font=\scriptsize] at (0,\y) {$\t$};}
+			\filldraw[fill=white, draw=black] (3.333,0) circle (1.8pt);
+			\node[above right=-1pt, font=\scriptsize] at (3.333,0) {$r_0=6{,}7$};
+			\draw[jump] (2.5,0) -- (2.5,1.124);
+			\draw[jump] (5,0) -- (5,-1.124);
+		\end{scope}
+	\end{tikzpicture}
+	\caption{Esercizio guida: andamento della componente radiale del campo (in alto) e del potenziale (in basso) per la sfera di raggio $R_1=5\un{cm}$ con $Q_1=+2\un{nC}$ e il guscio di raggio $R_2=10\un{cm}$ con $Q_2=-3\un{nC}$. Il campo è continuo in $R_1$ e salta in $R_2$; il potenziale è continuo ovunque e si annulla in $r_0$.}
+	\label{fig:gauss:esercizio}
+\end{figure}
+
+Restano i controlli. Dal punto di vista dimensionale, $kQ/r$ ha le dimensioni di $(\mathrm{N\,m^2/C^2})\cdot\mathrm{C}/\mathrm{m}=\mathrm{N\,m/C}=\mathrm{J/C}=\mathrm{V}$, e $kQr/R^3$ quelle di $\mathrm{N/C}$, come richiesto. Nei casi limite, per $Q_2\to0$ si ritrova il campo della sola sfera piena, per $r\to\infty$ il potenziale tende a zero come $1/r$, e nel centro il campo si annulla, come impone la simmetria. Gli ordini di grandezza sono plausibili: cariche di qualche nanocoulomb a distanze di centimetri producono campi di migliaia di volt al metro e potenziali di centinaia di volt. Il controllo più efficace resta la verifica del salto del campo sul guscio, che lega in modo indipendente il risultato del teorema di Gauss alla densità superficiale. Il passaggio in cui è più facile sbagliare è il potenziale all'interno della sfera: chi dimenticasse il contributo costante del guscio, o assegnasse al potenziale lo zero sulla superficie della sfera anziché all'infinito, otterrebbe valori traslati di una costante, con un errore che i grafici non mostrerebbero ma i numeri sì.
+
+\end{document}

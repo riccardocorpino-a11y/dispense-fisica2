@@ -1,0 +1,1848 @@
+\documentclass[main.tex]{subfiles}
+
+\begin{document}
+
+% Impostazione locale dei titoli dei riquadri (vale da qui in poi)
+\renewcommand{\richiamoprefix}{Richiamo Matematico/Fisica 1 --- }
+
+
+\begin{center}
+{\Large Fisica Generale: Elettromagnetismo}\\[6pt]
+{\large Il campo elettrostatico nel vuoto:\\ dalla legge di Coulomb alle distribuzioni continue di carica}\\[6pt]
+Dispensa di studio autonoma per la preparazione dell'esame
+\end{center}
+\vspace{1ex}
+
+\noindent\textsc{Sintesi concettuale.} Il capitolo prende avvio dalla legge di Coulomb, che descrive la forza tra due cariche puntiformi ferme come un'azione diretta a distanza, e approda alla nozione di campo elettrostatico, che sposta l'attenzione dalla coppia di corpi alla regione di spazio che circonda la sorgente. Le stime numeriche iniziali mostrano quanto la forza elettrica sia intensa rispetto alla gravità e perché la materia ordinaria, globalmente neutra, non la manifesti in modo vistoso. La definizione operativa del campo, forza sulla carica di prova positiva divisa per la carica stessa, separa ciò che dipende dalle sorgenti da ciò che dipende dal corpo che subisce la forza; la velocità finita di propagazione dei segnali impone poi di considerare il campo come una grandezza fisica reale e non come un artificio di calcolo. Il principio di sovrapposizione consente di costruire il campo di qualunque insieme di cariche, con somme vettoriali per i sistemi discreti e con integrali di linea, di superficie e di volume per le distribuzioni continue. Seguono i casi canonici, il dipolo, il filo indefinito, l'anello, il disco, il piano indefinito, il doppio strato e lo strato sferico, scelti perché in ciascuno la simmetria riduce il calcolo vettoriale a un solo integrale scalare. Due regolarità attraversano tutti gli esempi e vanno tenute a mente per l'orale: a distanza grande rispetto alle dimensioni della sorgente il campo coincide con quello di una carica puntiforme, e il campo subisce un salto pari a $\sigma/\epz$ ogni volta che si attraversa una superficie carica con densità $\sigma$. L'unica formula che va davvero ricordata è quella della carica puntiforme; tutte le altre si ricostruiscono con il ragionamento.
+
+\medskip
+
+\titoletto{Prerequisiti e strumenti di calcolo.}
+I riquadri che seguono raccolgono quanto di Fisica 1, di Geometria e di Analisi viene usato nel capitolo. Chi li padroneggia può scorrerli rapidamente; l'ordine è quello d'uso: prima la dinamica e l'energia, poi i vettori e la trigonometria, infine le aree elementari, gli integrali e gli sviluppi in serie.
+
+\begin{richiamo}{forze, equilibrio, moto uniformemente accelerato}
+Una forza è una grandezza vettoriale, misurata in newton, e la sua azione su un punto materiale di massa $m$ è regolata dalla seconda legge della dinamica,
+\[
+\Fv_{\mathrm{tot}}=m\vec a ,
+\]
+dove $\Fv_{\mathrm{tot}}$ è la somma vettoriale di tutte le forze applicate (in N), $m$ la massa (in kg) e $\vec a$ l'accelerazione (in $\mathrm{m\,s^{-2}}$). Il terzo principio afferma che, se un corpo A esercita su un corpo B la forza $\Fv_{AB}$, il corpo B esercita su A la forza
+\[
+\Fv_{BA}=-\Fv_{AB},
+\]
+di pari modulo, verso opposto e con la stessa retta d'azione. Se $\Fv_{\mathrm{tot}}=\vec 0$ l'accelerazione è nulla e il punto resta in quiete oppure procede di moto rettilineo uniforme: le due situazioni sono la stessa cosa dal punto di vista dinamico, perché in entrambe la velocità è costante. Non esistono situazioni fisiche prive di forze; esistono situazioni in cui la loro somma è nulla. Se invece $\Fv_{\mathrm{tot}}$ è costante e non nulla, anche l'accelerazione è costante, e lungo una retta il moto è uniformemente accelerato,
+\[
+x(t)=x_0+v_0t+\tfrac12\,a\,t^2 ,
+\]
+con $x$ in m, $t$ in s, $v_0$ in $\mathrm{m\,s^{-1}}$. Forza costante significa accelerazione costante; forza variabile significa accelerazione variabile.
+\end{richiamo}
+
+\begin{richiamo}{forza elastica, oscillatore armonico, conservazione dell'energia}
+La forza elastica di una molla ideale, con l'origine dell'asse nella posizione di equilibrio, è
+\[
+F_x=-kx ,
+\]
+dove $k$ è la costante elastica (in $\mathrm{N\,m^{-1}}$) e il segno meno indica che la forza è sempre diretta verso $x=0$. La seconda legge della dinamica dà l'equazione
+\[
+\ddot x=-\frac{k}{m}\,x ,
+\]
+le cui soluzioni sono oscillazioni armoniche $x(t)=x_0\cos(\omega t+\phi)$ di pulsazione e periodo
+\[
+\omega=\sqrt{\frac{k}{m}},\qquad T=\frac{2\pi}{\omega},
+\]
+con $\omega$ in $\mathrm{rad\,s^{-1}}$ e $T$ in s. La regola da applicare in ogni capitolo del corso è questa: ogni volta che una forza risulta proporzionale allo spostamento e opposta a esso, cioè del tipo $F=-(\mathrm{costante})\cdot x$, anche con il segno meno nascosto in una costante negativa, il moto è armonico, qualunque sia l'origine fisica della forza. Non è vero il contrario: un moto oscillatorio non è necessariamente armonico.
+
+Una forza che dipende solo dalla posizione lungo una retta è conservativa e ammette un'energia potenziale $U(x)$, in joule; l'energia meccanica
+\[
+E_m=\tfrac12\,mv^2+U
+\]
+si conserva. Durante il moto l'energia potenziale si trasforma in cinetica e viceversa: il punto accelera dove $U$ diminuisce, ha velocità massima dove $U$ è minima e si ferma, per poi invertire il moto, dove l'energia cinetica è stata interamente riconvertita. In assenza di attrito il punto di inversione si trova alla stessa distanza dal centro del moto da cui il corpo era partito. L'attrito è sempre presente nei fenomeni di interesse ingegneristico; quando lo si trascura, lo si dichiara esplicitamente.
+\end{richiamo}
+
+\begin{richiamo}{vettori, somma, scomposizione, angoli notevoli}
+Un vettore $\vec r$ ha modulo $r=|\vec r|$ e versore
+\[
+\uv=\frac{\vec r}{r},
+\]
+di modulo unitario e adimensionale. La somma di vettori si esegue con la regola del parallelogramma o, equivalentemente, con la regola punta--coda: si riportano i vettori uno di seguito all'altro, la coda di ciascuno sulla punta del precedente, e la risultante congiunge la prima coda all'ultima punta. Se la catena si chiude in un poligono, la risultante è nulla. Operativamente si scompone ogni vettore lungo gli assi scelti, $u_x=u\cos\alpha$, $u_y=u\sin\alpha$, con $\alpha$ angolo formato con l'asse $x$, e si sommano le componenti omonime. Vettori di ugual modulo ma di direzioni diverse non hanno per risultante la somma dei moduli.
+
+Gli angoli si esprimono in radianti; i valori da conoscere senza esitazione sono
+\[
+\sin\tfrac{\pi}{6}=\cos\tfrac{\pi}{3}=\tfrac12,\qquad
+\cos\tfrac{\pi}{6}=\sin\tfrac{\pi}{3}=\tfrac{\sqrt3}{2},\qquad
+\cos\tfrac{2\pi}{3}=-\tfrac12,
+\]
+dove $\pi/6=30^\circ$, $\pi/3=60^\circ$ e $2\pi/3=120^\circ$. Un angolo di $120^\circ$ si scompone utilmente come $\pi/2+\pi/6$.
+
+Per un triangolo qualunque di lati $a$, $b$, $c$ vale il teorema di Carnot (o del coseno)
+\[
+c^2=a^2+b^2-2ab\cos\gamma ,
+\]
+dove $\gamma$ è l'angolo opposto al lato $c$; per $\gamma=\pi/2$ si ritrova il teorema di Pitagora, che vale soltanto per il triangolo rettangolo.
+\end{richiamo}
+
+\begin{richiamo}{elementi di linea e di superficie, integrali ricorrenti}
+Le lunghezze e le aree da avere a memoria sono: circonferenza di raggio $R$, $2\pi R$; corona circolare di raggio $s$ e spessore infinitesimo $\dd s$,
+\[
+\dd S=2\pi s\,\dd s ,
+\]
+area che si ottiene come prodotto della circonferenza per lo spessore, perché la corona, se è sottile, si può «srotolare» in un rettangolo; superficie sferica di raggio $R$, $4\pi R^2$; fascia sferica compresa tra le colatitudini $\theta$ e $\theta+\dd\theta$,
+\[
+\dd S=2\pi R\sin\theta\cdot R\,\dd\theta=2\pi R^2\sin\theta\,\dd\theta ,
+\]
+prodotto della lunghezza del parallelo, di raggio $R\sin\theta$, per la larghezza $R\,\dd\theta$ della fascia lungo il meridiano. Tutte le grandezze sono in metri e in metri quadrati.
+
+Un integrale definito è il limite di una somma di contributi infinitesimi, $\int_a^b f(x)\,\dd x=F(b)-F(a)$ con $F'=f$. Quando si integra conviene chiedersi subito quale sia la variabile di integrazione: le altre lettere che compaiono nell'integrando, come la coordinata del punto in cui si calcola il campo o il raggio della distribuzione, sono costanti e si portano fuori dal segno di integrale. Le primitive che ricorrono nel capitolo sono
+\[
+\int\cos\theta\,\dd\theta=\sin\theta,\qquad
+\int\frac{s\,\dd s}{(z^2+s^2)^{3/2}}=-\frac{1}{\sqrt{z^2+s^2}},\qquad
+\int\left(1+\frac{c}{x^2}\right)\dd x=x-\frac{c}{x},
+\]
+con $z$ e $c$ costanti; la seconda si verifica con la derivata del secondo membro. Quando una grandezza vettoriale si somma su una distribuzione continua, l'integrale si scrive per componenti, e la simmetria permette spesso di dimostrare in anticipo che alcune componenti si annullano a coppie.
+\end{richiamo}
+
+\begin{richiamo}{sviluppi in serie per distanze grandi e angoli piccoli}
+Per $|\epsilon|\ll1$ lo sviluppo binomiale al primo ordine è
+\[
+(1+\epsilon)^{\alpha}\simeq1+\alpha\epsilon ,
+\]
+con $\alpha$ reale qualunque, da cui ad esempio
+\[
+(1\pm\epsilon)^{-2}\simeq1\mp2\epsilon,\qquad(1+\epsilon)^{-1/2}\simeq1-\frac{\epsilon}{2},\qquad (1+\epsilon)^{-3/2}\simeq1-\frac{3\epsilon}{2}.
+\]
+Per angoli piccoli, in radianti, $\sin\theta\simeq\theta$ e $\cos\theta\simeq1-\theta^2/2$. Questi sviluppi sono lo strumento principale per ricavare il comportamento di un campo a grande distanza dalla sorgente, dove il rapporto tra la dimensione della sorgente e la distanza fa da piccolo parametro $\epsilon$.
+\end{richiamo}
+
+\titoletto{Teoria, modelli e dimostrazioni.}
+
+\titoletto{La legge di Coulomb e il suo accertamento sperimentale}
+La forza elettrica tra corpi carichi fermi è la prima interazione di cui si conosca una forma quantitativa esatta, e il suo accertamento è sperimentale. Lo strumento è la bilancia di torsione, concettualmente affine a quella con cui Cavendish misurò l'attrazione gravitazionale tra masse: due sfere cariche, abbastanza piccole e lontane da poter essere schematizzate come punti, producono una torsione del filo di sospensione proporzionale alla forza, e la ripetizione della misura con distanze e cariche diverse mostra che il modulo della forza è proporzionale al prodotto delle cariche e inversamente proporzionale al quadrato della distanza. La legge nasce dunque per cariche puntiformi; per i corpi estesi si procede alla suddivisione in elementi abbastanza piccoli da poter essere trattati come puntiformi, ed è questo il ruolo delle distribuzioni continue studiate più avanti.
+
+\titoletto{Forma vettoriale della forza di Coulomb}
+A quasi ogni domanda d'esame corrisponde un disegno della situazione fisica, che conviene tracciare subito. Si colloca una carica $q$ in un punto $P$ e una seconda carica $q'$ in un punto $P'$; il vettore $\vec r$ va da $P$ a $P'$, ha modulo $r$ e individua il versore $\uv_r=\vec r/r$. La forza che $q$ esercita su $q'$ è
+\[
+\Fv=\frac{1}{4\pi\epz}\,\frac{q\,q'}{r^2}\,\uv_r ,
+\qquad
+\epz=8{,}8542\times10^{-12}\un{C^2\,N^{-1}\,m^{-2}} ,
+\]
+dove $q$ e $q'$ sono i valori algebrici delle cariche in coulomb, $r$ la distanza in metri e $\epz$ la costante dielettrica del vuoto, grandezza che caratterizza il mezzo e non le cariche. Il fattore $k=1/(4\pi\epz)\simeq8{,}99\times10^{9}\un{N\,m^2\,C^{-2}}$ si arrotonda a $9\times10^9\un{N\,m^2\,C^{-2}}$ nelle stime, e la verifica dimensionale è immediata: $\mathrm{N\,m^2\,C^{-2}}\cdot\mathrm{C^2}\cdot\mathrm{m^{-2}}=\mathrm{N}$. La forza ha la direzione della congiungente. Se le cariche hanno lo stesso segno il prodotto $qq'$ è positivo, la forza su $q'$ è concorde con $\uv_r$ e quindi repulsiva; se hanno segno opposto il prodotto è negativo e la forza è attrattiva. Per non complicarsi i calcoli conviene ragionare sempre con cariche positive e cambiare il segno soltanto quando il testo lo richiede. La forza $\Fv'$ che $q'$ esercita su $q$ è uguale e opposta, sulla stessa retta, come richiede il terzo principio. In aria la costante dielettrica differisce da $\epz$ in misura trascurabile, e la formula del vuoto vale per le applicazioni ordinarie.
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[>=Stealth, font=\small]
+
+    % Stili personalizzati per elementi grafici
+    \tikzset{
+      gridline/.style={draw=gray!25, line width=0.3pt, dashed},
+      badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+      forcearrow/.style={line width=1.3pt, ->},
+      posarrow/.style={line width=0.8pt, ->, color=black!80}
+    }
+
+    % ==========================================
+    % CASO 1: Repulsivo (q q' > 0)
+    % ==========================================
+    \begin{scope}[shift={(0,0)}]
+      \draw[gridline] (-2.0,-1.1) grid (7.8,1.1);
+      \foreach \r in {0.25, 0.45, 0.65} {
+        \draw[gray!45, line width=0.4pt, dashed] (0,0) circle (\r);
+        \draw[gray!45, line width=0.4pt, dashed] (4.2,0) circle (\r);
+      }
+      \draw[posarrow] (0,0) -- (4.2,0) node[midway, below=3pt] {$\vec{r}$};
+      \draw[forcearrow, color=orange!90!red] (0,0) -- (-1.4,0) node[above=2pt] {$\vec{F}'$};
+      \draw[dashed, color=orange!90!red, line width=0.8pt] (-1.4,0) -- (-1.8,0);
+      \draw[forcearrow, color=orange!90!red] (4.2,0) -- (5.6,0) node[above=2pt] {$\vec{F}$};
+      \draw[dashed, color=orange!90!red, line width=0.8pt] (5.6,0) -- (6.0,0);
+      \filldraw[fill=orange!80!red, draw=black!80, line width=0.6pt] (0,0) circle (3.2pt);
+      \filldraw[fill=purple!70!blue, draw=black!80, line width=0.6pt] (4.2,0) circle (3.2pt);
+      \node[above=4pt, font=\small\bfseries] at (0,0) {$P$};
+      \node[below=4pt] at (0,0) {$q$};
+      \node[above=4pt, font=\small\bfseries] at (4.2,0) {$P'$};
+      \node[below=4pt] at (4.2,0) {$q'$};
+      \node[badge] at (6.8,0) {$q\,q' > 0$};
+    \end{scope}
+
+    % ==========================================
+    % CASO 2: Attrattivo (q q' < 0)
+    % ==========================================
+    \begin{scope}[shift={(0,-2.5)}]
+      \draw[gridline] (-2.0,-1.1) grid (7.8,1.1);
+      \foreach \r in {0.25, 0.45, 0.65} {
+        \draw[teal!40, line width=0.4pt, densely dotted] (0,0) circle (\r);
+        \draw[teal!40, line width=0.4pt, densely dotted] (4.2,0) circle (\r);
+      }
+      \draw[posarrow] (0,0) -- (4.2,0) node[midway, below=3pt] {$\vec{r}$};
+      \draw[forcearrow, color=teal!80!black] (0,0.3) -- (1.4,0.3) node[midway, above=1pt] {$\vec{F}'$};
+      \draw[dotted, color=teal!60, line width=0.6pt] (0,0) -- (0,0.3);
+      \draw[forcearrow, color=teal!80!black] (4.2,0.3) -- (2.8,0.3) node[midway, above=1pt] {$\vec{F}$};
+      \draw[dotted, color=teal!60, line width=0.6pt] (4.2,0) -- (4.2,0.3);
+      \filldraw[fill=cyan!80!black, draw=black!80, line width=0.6pt] (0,0) circle (3.2pt);
+      \filldraw[fill=blue!80!black, draw=black!80, line width=0.6pt] (4.2,0) circle (3.2pt);
+      \node[above=4pt, font=\small\bfseries] at (0,0) {$P$};
+      \node[below=4pt] at (0,0) {$q$};
+      \node[above=4pt, font=\small\bfseries] at (4.2,0) {$P'$};
+      \node[below=4pt] at (4.2,0) {$q'$};
+      \node[badge] at (6.8,0) {$q\,q' < 0$};
+    \end{scope}
+
+  \end{tikzpicture}
+  \caption{Interazione elettrostatica tra due cariche puntiformi $q$ e $q'$ nei casi repulsivo ($q\,q' > 0$) e attrattivo ($q\,q' < 0$). $\vec F$ è la forza su $q'$, $\vec F'=-\vec F$ quella su $q$.}
+  \label{fig:campo:legge_coulomb_infografica}
+\end{figure}
+
+\titoletto{Unità di misura della carica}
+L'unità di carica è il coulomb, simbolo $\mathrm{C}$, pari alla carica trasportata in un secondo da una corrente di un ampere: $1\un{C}=1\un{A\,s}$. L'unità di base del Sistema Internazionale è l'ampere, mentre il coulomb è un'unità derivata. Il rapporto viene spesso rovesciato, perché viene spontaneo pensare all'ampere come a un coulomb al secondo; la relazione numerica è la stessa, ma è il coulomb a essere definito a partire dall'ampere. Quanto alla carica dell'elettrone, il suo valore assoluto, uguale a quello del protone, è $e=1{,}602\times10^{-19}\un{C}$, e va ricordato perché compare in quasi ogni stima.
+
+Alcuni numeri della tecnologia quotidiana fanno parte del bagaglio richiesto all'esame. Un caricabatterie da telefono eroga una corrente di uno o due ampere, tanto maggiore quanto più è elevata la potenza del caricatore; le prese domestiche sopportano tipicamente $10$ o $16\un{A}$; la rete elettrica italiana fornisce una tensione alternata di valore nominale $230\un{V}$ (in lezione è citato il valore storico di $220\un{V}$) alla frequenza di $50\un{Hz}$.
+
+\titoletto{Ordini di grandezza: la forza di Coulomb tra due protoni}
+Le stime numeriche, con le potenze di dieci e il controllo dimensionale, sono una competenza richiesta in sede d'esame: aggettivi come «poco», «molto», «grandissimo» non hanno valore se non sono accompagnati da un numero. In un nucleo due protoni distano dell'ordine di un femtometro, $1\un{fm}=10^{-15}\un{m}$. La repulsione elettrica vale
+\[
+F_e=\frac{1}{4\pi\epz}\frac{e^2}{r^2}\simeq 8{,}99\times10^{9}\cdot\frac{(1{,}602\times10^{-19})^2}{(10^{-15})^2}\un{N}\simeq 2{,}3\times10^{2}\un{N}.
+\]
+Il calcolo si imposta con le potenze di dieci prima che con le mantisse: $10^{9}\cdot10^{-38}/10^{-30}=10^{1}$, e $9\cdot2{,}56\simeq23$, da cui $2{,}3\times10^{2}\un{N}$; la stima grossolana con $9\simeq10$ e $1{,}6^2\simeq3$ dà $3\times10^{2}\un{N}$, ordine di grandezza corretto. Occorre convertire la distanza in metri prima di elevarla al quadrato, perché un errore sulla potenza di dieci raddoppia nell'esponente. Una forza di $230\un{N}$ equivale al peso di una massa di circa $23\un{kg}$, ricavata dal rapporto con $g\simeq9{,}8\un{m\,s^{-2}}$: è come se ai due protoni fosse appeso, tramite una carrucola, un corpo di oltre venti chilogrammi che cerca di separarli, e questo su particelle di massa $m_p\simeq1{,}67\times10^{-27}\un{kg}$.
+
+L'attrazione gravitazionale tra gli stessi protoni, con la costante di gravitazione universale $G=6{,}674\times10^{-11}\un{N\,m^2\,kg^{-2}}$ e la massa del protone $m_p=1{,}673\times10^{-27}\un{kg}$, risulta
+\[
+F_g=G\,\frac{m_p^2}{r^2}\simeq 6{,}674\times10^{-11}\cdot\frac{(1{,}673\times10^{-27})^2}{(10^{-15})^2}\un{N}\simeq 1{,}9\times10^{-34}\un{N},
+\]
+e il rapporto $F_e/F_g\simeq1{,}2\times10^{36}$ non dipende dalla distanza, perché entrambe le forze decrescono come $1/r^2$. Dentro il nucleo la gravità non conta nulla. La conclusione logica, se esistessero soltanto queste due forze, sarebbe che i nuclei con più di un protone non possono esistere, perché i protoni si respingerebbero immediatamente. L'elettrone non risolve il paradosso: si trova a una distanza dal nucleo dell'ordine di $10^4$--$10^5$ volte le dimensioni nucleari (se il nucleo avesse il raggio di un millimetro, l'elettrone più vicino sarebbe a qualche chilometro), e comunque non potrebbe trattenere entrambi i protoni. Poiché la materia esiste, nel nucleo agiscono altre due interazioni della natura, la nucleare forte e la nucleare debole. I neutroni, privi di carica e quindi indifferenti alla repulsione di Coulomb, partecipano all'interazione forte e fanno da «collante». L'equilibrio è però delicato. Lungo la tavola periodica, al crescere del numero atomico, servono sempre più neutroni, e gli elementi più pesanti risultano instabili e decadono. L'uranio, attraverso una lunga catena di decadimenti, termina nel piombo, che è stabile; lungo la catena si forma il radon, gas radioattivo che si accumula in cantine e locali interrati, ed è per questo che prima di costruire si valuta la concentrazione di radon nel terreno.
+
+\titoletto{Ordini di grandezza: la gravità tra corpi ordinari e celesti}
+Con la stessa procedura si apprezza il peso della gravità per corpi ordinari. Due persone di massa $70\un{kg}$ poste a $1\un{m}$ di distanza si attraggono con
+\[
+F=G\,\frac{m^2}{r^2}=6{,}674\times10^{-11}\cdot\frac{70\cdot70}{1^2}\un{N}\simeq 3{,}3\times10^{-7}\un{N},
+\]
+forza pari al peso di una massa di circa $3{,}3\times10^{-8}\un{kg}$, cioè $33\un{\mu g}$: qualche centesimo di milligrammo. La gravitazione diventa rilevante solo con masse planetarie o stellari: la Terra esercita su una persona di $70\un{kg}$ una forza di circa $7\times10^{2}\un{N}$, il peso. Per contro, due cariche di $1\un{C}$ poste a $1\un{m}$ si respingono (o si attraggono) con circa $9\times10^{9}\un{N}$, il peso di quasi un milione di tonnellate. Che i corpi macroscopici siano globalmente neutri è dunque una fortuna: se non lo fossero, le forze elettriche tra oggetti ordinari sarebbero enormi.
+
+\titoletto{Ordini di grandezza: il legame ionico e il sale nell'acqua}
+Un'applicazione quotidiana si trova nel comportamento del sale da cucina in acqua. Il cloruro di sodio è un solido ionico, con ioni $\mathrm{Na}^+$ e $\mathrm{Cl}^-$ disposti in un reticolo cubico a facce centrate e separati da circa $0{,}28\un{nm}$. La forza di attrazione tra una coppia di ioni, nel vuoto, vale
+\[
+F=\frac{1}{4\pi\epz}\frac{e^2}{r^2}\simeq 8{,}99\times10^{9}\cdot\frac{(1{,}602\times10^{-19})^2}{(0{,}28\times10^{-9})^2}\un{N}\simeq 2{,}9\times10^{-9}\un{N},
+\]
+valore minuscolo in assoluto ma enorme alla scala del singolo ione. In acqua la costante $\epz$ va sostituita con $\epz\varepsilon_r$, dove $\varepsilon_r\simeq80$ è la costante dielettrica relativa dell'acqua, e la forza scende a circa $3{,}7\times10^{-11}\un{N}$. Il fenomeno ha anche una ragione geometrica. La molecola $\mathrm{H_2O}$ non è lineare: i due legami O--H formano tra loro un angolo di circa $104{,}5^\circ$, e il baricentro delle cariche positive, spostato verso gli idrogeni, non coincide con quello delle cariche negative, spostato verso l'ossigeno. Ne risulta una molecola polare, che si comporta come un dipolo elettrico; i dipoli dell'acqua si orientano attorno agli ioni e ne schermano l'attrazione, finché il legame si rompe e il sale si scioglie. Il legame ionico si distingue così dal legame covalente, in cui gli elettroni sono messi in comune tra gli atomi: nel diamante, dove ogni atomo di carbonio occupa il centro di un tetraedro formato da altri quattro, o nel quarzo e nei vetri silicatici, la rottura è molto più difficile, ed è questa l'origine della durezza del diamante e delle proprietà isolanti del vetro.
+
+\titoletto{Principio di sovrapposizione delle forze}
+Dato un insieme di cariche puntiformi fisse $q_1,\dots,q_n$ e una carica $q_0$, la forza risultante su $q_0$ è la somma vettoriale delle forze esercitate da ciascuna carica, come se le altre non ci fossero:
+\[
+\Fv=\sum_i \Fv_i=\sum_i \frac{1}{4\pi\epz}\frac{q_i\,q_0}{r_i^2}\,\uv_i=q_0\,\sum_i \frac{1}{4\pi\epz}\frac{q_i}{r_i^2}\,\uv_i ,
+\]
+dove $r_i$ è la distanza di $q_0$ da $q_i$ (in m) e $\uv_i$ il versore diretto da $q_i$ verso $q_0$. Il risultato è una forza proporzionale a $q_0$: il fattore $q_0$ si porta fuori dalla somma, e ciò che resta dipende soltanto dalle sorgenti. È questa l'origine del concetto di campo. Il principio di sovrapposizione richiede di saper eseguire la somma vettoriale, con il parallelogramma o con la regola punta--coda; non è un'aggiunta della teoria, ma un fatto sperimentale.
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+
+    % Stili grafici
+    \tikzset{
+      gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+      badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+      forcearrow/.style={line width=1.3pt, ->},
+      posline/.style={draw=gray!50, line width=0.7pt, dashed},
+      unitarrow/.style={line width=1.0pt, ->, color=black!85}
+    }
+
+    \draw[gridline] (-4.6,-2.4) grid (4.6,4.6);
+
+    \coordinate (q0) at (0,0);
+    \coordinate (q1) at (3.4, 1.2);
+    \coordinate (q2) at (0.0, 3.8);
+    \coordinate (qi) at (-2.6, 3.2);
+    \coordinate (qn) at (-3.6, 0.8);
+
+    \foreach \r in {0.25, 0.45, 0.65} {
+      \draw[orange!50!red, line width=0.4pt, dashed] (q0) circle (\r);
+      \draw[orange!50!red, line width=0.4pt, dashed] (q1) circle (\r);
+      \draw[orange!50!red, line width=0.4pt, dashed] (q2) circle (\r);
+      \draw[orange!50!red, line width=0.4pt, dashed] (qi) circle (\r);
+      \draw[teal!50, line width=0.4pt, densely dotted] (qn) circle (\r);
+    }
+
+    \draw[posline] (q1) -- (q0);
+    \draw[posline] (q2) -- (q0);
+    \draw[posline] (qi) -- (q0);
+    \draw[posline] (qn) -- (q0);
+
+    \node[below right=1pt, font=\small\itshape, color=gray!80!black] at ($(q1)!0.55!(q0)$) {$r_1$};
+    \node[right=3pt, font=\small\itshape, color=gray!80!black] at ($(q2)!0.55!(q0)$) {$r_2$};
+    \node[above right=1pt, font=\small\itshape, color=gray!80!black] at ($(qi)!0.55!(q0)$) {$r_i$};
+    \node[below=2pt, font=\small\itshape, color=gray!80!black] at ($(qn)!0.55!(q0)$) {$r_n$};
+
+    \draw[unitarrow] ($(q1)!0cm!(q0)$) -- ($(q1)!1cm!(q0)$) node[midway, below=0 pt, font=\bfseries\small] {$\vec{u}_1$};
+    \draw[unitarrow] ($(q2)!0cm!(q0)$) -- ($(q2)!1cm!(q0)$) node[midway, right=3pt, font=\bfseries\small] {$\vec{u}_2$};
+    \draw[unitarrow] ($(qi)!0cm!(q0)$) -- ($(qi)!1cm!(q0)$) node[midway, above right=-1pt, font=\bfseries\small] {$\vec{u}_i$};
+    \draw[unitarrow] ($(qn)!0cm!(q0)$) -- ($(qn)!1cm!(q0)$) node[midway, above=1pt, font=\bfseries\small] {$\vec{u}_n$};
+
+    \draw[forcearrow, color=orange!90!red] (q0) -- ($(q0)!-2.0cm!(q1)$) node[below left=-1pt, font=\bfseries] {$\vec{F}_1$};
+    \draw[forcearrow, color=orange!90!red] (q0) -- ($(q0)!-2.0cm!(q2)$) node[below=2pt, font=\bfseries] {$\vec{F}_2$};
+    \draw[forcearrow, color=orange!90!red] (q0) -- ($(q0)!-2.0cm!(qi)$) node[below right=-1pt, font=\bfseries] {$\vec{F}_i$};
+    \draw[forcearrow, color=teal!80!black] (q0) -- ($(q0)!2.0cm!(qn)$) node[above left=-1pt, font=\bfseries] {$\vec{F}_n$};
+
+    \filldraw[fill=orange!80!red, draw=black!80, line width=0.6pt] (q1) circle (3.5pt);
+    \node[above right=3pt, font=\small\bfseries] at (q1) {$q_1$};
+    \filldraw[fill=orange!80!red, draw=black!80, line width=0.6pt] (q2) circle (3.5pt);
+    \node[right=4pt, font=\small\bfseries] at (q2) {$q_2$};
+    \filldraw[fill=orange!80!red, draw=black!80, line width=0.6pt] (qi) circle (3.5pt);
+    \node[above left=3pt, font=\small\bfseries] at (qi) {$q_i$};
+    \filldraw[fill=teal!70!black, draw=black!80, line width=0.6pt] (qn) circle (3.5pt);
+    \node[below left=3pt, font=\small\bfseries] at (qn) {$q_n$};
+    \filldraw[fill=purple!70!blue, draw=black!80, line width=0.6pt] (q0) circle (4.0pt);
+    \node[below right=3pt, font=\small\bfseries] at (q0) {$q_0$};
+
+    \node[badge] at (0, 5.2) {$\vec{F}_{\mathrm{tot}} = \sum_{k} \vec{F}_k$};
+
+  \end{tikzpicture}
+  \caption{Principio di sovrapposizione per le forze elettrostatiche agenti sulla carica $q_0$: le cariche $q_1,q_2,q_i$ hanno il segno di $q_0$ e la respingono, la carica $q_n$ ha segno opposto e la attrae.}
+  \label{fig:campo:sovrapposizione_infografica}
+\end{figure}
+
+Un esempio chiarisce il metodo. Quattro cariche positive uguali $q$ occupano i vertici di un quadrato di lato $d$, e una quinta carica positiva è posta nel centro. Ciascuna delle prime quattro dista dal centro mezza diagonale, $d\sqrt2/2$, per cui le quattro forze repulsive hanno lo stesso modulo; quelle dovute a vertici opposti sono uguali e contrarie, e la risultante è nulla. Con la regola punta--coda i quattro vettori formano un quadrato chiuso. La carica centrale, soggetta a $\Fv_{\mathrm{tot}}=\vec0$, resta in quiete se vi è posta ferma. Lo stesso problema si risolve più ordinatamente con il campo, come si vedrà tra poco.
+
+\titoletto{Definizione del campo elettrostatico}
+Il campo elettrostatico $\Ev$ generato in un punto da un sistema di cariche ferme è la forza elettrica risultante $\Fv$ che agisce su una carica di prova $q_0$ positiva posta in quel punto, divisa per la carica $q_0$ stessa:
+\[
+\Ev=\lim_{q_0\to 0}\frac{\Fv}{q_0} .
+\]
+Il campo è un vettore, misurato in $\mathrm{N\,C^{-1}}$ (unità equivalente al $\mathrm{V\,m^{-1}}$, che verrà introdotto con il potenziale), e rappresenta la forza che agisce sull'unità di carica positiva posta nel punto. Più in generale una regione dello spazio è sede di un campo elettrico quando un corpo carico in quiete, dovunque sia posto nella regione, è soggetto a una forza. La carica di prova si sceglie positiva per convenzione, ed è per questo che campo e forza su una carica positiva hanno sempre lo stesso verso. Il limite $q_0\to0$ ha un significato fisico preciso: la carica sonda genera a sua volta un campo, e se fosse confrontabile con le sorgenti ne altererebbe la disposizione o si sovrapporrebbe al campo da misurare. Una misura non deve perturbare il fenomeno che si misura; è un principio della fisica classica, che soltanto in meccanica quantistica, con il principio di indeterminazione di Heisenberg, cessa di poter essere soddisfatto.
+
+All'esame, alla richiesta della definizione di campo, non si parte dalla forza di Coulomb: si dà direttamente la definizione, $\Ev=\Fv/q_0$ con $q_0$ positiva, oppure la frase equivalente «il campo è la forza che agisce sull'unità di carica positiva». La distinzione terminologica va conosciuta: si parla di campo elettrostatico quando le sorgenti sono cariche ferme, mentre «campo elettrico» è il termine generale, che comprende anche i campi prodotti da cariche in moto o indotti da campi magnetici variabili. Nel linguaggio corrente i due termini si usano spesso come sinonimi.
+
+\titoletto{Portata e limiti del concetto di campo}
+Due osservazioni accompagnano la definizione. Anzitutto la definizione è svincolata dalle sorgenti del campo, e si applica senza modifiche anche a campi che non sono creati da cariche in quiete. In secondo luogo, il campo è una realtà oggettiva. Dal punto di vista operativo esiste in quanto misurabile, e una forza si manifesta soltanto quando è presente un corpo sonda, ma il campo ha un'esistenza indipendente dalla presenza di quest'ultimo: intorno a una carica c'è un campo fino a distanza infinita, anche se, come mostra la formula, oltre una certa distanza la sua influenza diventa trascurabile.
+
+Il limite $q_0\to0$ incontra un ostacolo nella natura discreta della carica, che non può essere inferiore al quanto elementare $e$. Nei sistemi microscopici, costituiti da poche cariche elementari, il passaggio al limite perde significato operativo; la definizione mediante carica sonda mantiene piena validità nei contesti macroscopici, dove la carica totale risulta dall'aggregazione di un numero estremamente elevato di cariche elementari.
+
+Nota l'intensità del campo in un punto, la forza su una carica puntiforme $q$ posta in quel punto, positiva o negativa, è
+\[
+\Fv=q\,\Ev ,
+\]
+nell'ipotesi che $q$ non alteri la distribuzione delle sorgenti. Per $q>0$ la forza ha il verso del campo, per $q<0$ il verso opposto.
+
+\titoletto{Azione a distanza e campo come mediatore dell'interazione}
+La legge di Coulomb descrive l'interazione come azione diretta e istantanea tra corpi carichi,
+\[
+\text{corpo carico} \longrightarrow \text{forza su un altro corpo carico},
+\]
+mentre il concetto di campo scinde il fenomeno in due stadi,
+\[
+\text{sorgente} \longrightarrow \text{campo} \longrightarrow \text{forza sul corpo carico}.
+\]
+La bipartizione offre due prospettive complementari. Un campo di cui si conoscono le sorgenti si determina a partire da queste, senza alcun riferimento a una carica sonda; e se si conosce il campo in tutti i punti di una regione, pur senza conoscerne le sorgenti, si è in grado di prevedere che cosa accade a una carica posta in un punto qualunque di quella regione. Nel regime stazionario le due descrizioni conducono a risultati identici, e il campo potrebbe sembrare un artificio matematico.
+
+\titoletto{Realtà fisica del campo e velocità finita dei segnali}
+La ragione profonda per introdurre il campo si legge nella formula stessa della forza di Coulomb. Se $q$ resta ferma e $q'$ viene spostata, cambia $r$ e dunque la forza; se fosse $q$ a spostarsi, la formula prevederebbe che la forza su $q'$ cambi istantaneamente. L'avverbio «istantaneamente» è vietato in fisica, perché implicherebbe un segnale propagato a velocità infinita, mentre nessun segnale può propagarsi più velocemente della luce nel vuoto, $c\simeq3\times10^{8}\un{m\,s^{-1}}$ (trecentomila chilometri al secondo). Si immagina allora che la sorgente emetta nello spazio un segnale che si propaga con velocità $c$: è il campo. Se la sorgente si sposta o viene accelerata, una carica posta a distanza $d$ si accorge della variazione soltanto dopo il tempo
+\[
+\tau=\frac{d}{c},
+\]
+con $d$ in m e $\tau$ in s. È ciò che accade tra due antenne: l'accelerazione degli elettroni nell'antenna trasmittente agisce sugli elettroni dell'antenna ricevente con questo ritardo. Il campo è dunque un'entità fisica reale, dotata di energia e di quantità di moto, capace di trasportare le perturbazioni nello spazio a velocità finita. La stessa considerazione vale per la gravitazione: anche le variazioni del campo gravitazionale si propagano con velocità $c$, e la relatività generale di Einstein sostituisce l'idea di forza a distanza con quella di una deformazione dello spaziotempo prodotta dalle masse; in prima approssimazione si continua a usare la forza di gravità.
+
+\titoletto{Campo di una carica puntiforme}
+La domanda «descrivere il campo generato da una carica puntiforme» è tra le più probabili all'orale, e la risposta comincia con un disegno fatto con calma e con precisione. Si colloca in un punto la sorgente, una carica $q$ che conviene prendere positiva; si sceglie un punto $P$ qualunque dello spazio, si traccia la distanza $r$ e si definisce il versore $\uv_r$, diretto dalla carica verso $P$. Il campo in $P$ è il vettore
+\[
+\Ev(P)=\frac{1}{4\pi\epz}\,\frac{q}{r^2}\,\uv_r ,
+\]
+dove $q$ è la carica sorgente in coulomb, $r$ la distanza in metri, $\uv_r$ il versore adimensionale ed $\Ev$ si misura in $\mathrm{N\,C^{-1}}$. Rispetto alla forza di Coulomb compare una sola carica, perché il campo è la forza sull'unità di carica positiva: è come se l'altra valesse uno. Il campo ha punto di applicazione in $P$, la direzione della congiungente, verso uscente se $q>0$ ed entrante se $q<0$; non c'è segno meno nella formula vettoriale perché, per $q>0$, $\Ev$ e $\uv_r$ sono concordi. Non va confuso con il segmento che va dalla carica a $P$ e non è «sparso» nello spazio: è un vettore applicato in $P$, con un modulo
+\[
+E=\frac{|q|}{4\pi\epz\,r^2}.
+\]
+In questa formula tutto è costante tranne la distanza: $1/(4\pi\epz)$ è una costante che indica che ci si trova nel vuoto, $q$ è la sorgente, che non varia nel tempo. Tutti i punti alla stessa distanza dalla carica, cioè una superficie sferica centrata nella sorgente (una circonferenza nel disegno piano), hanno campo di ugual modulo. Se la distanza raddoppia il campo diventa quattro volte più piccolo, se si dimezza diventa quattro volte più grande: la dipendenza è dall'inverso del quadrato della distanza. Le formule vanno guardate e capite, non soltanto ricordate. Quella della carica puntiforme è, di fatto, l'unica formula del capitolo da sapere a memoria: tutte le altre ne discendono.
+
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+
+		% Stili grafici personalizzati
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			fieldarrow/.style={line width=1.3pt, ->},
+			posline/.style={draw=gray!50, line width=0.7pt, dashed},
+			unitarrow/.style={line width=1.0pt, ->, color=black!85}
+		}
+
+		\draw[gridline] (-1.8,-2.2) grid (6.8,4.6);
+
+		% CASO 1: Carica positiva (q > 0) - Campo uscente
+		\coordinate (A1) at (0, 2.2);
+		\coordinate (B1) at (4.0, 3.7);
+		\foreach \r in {0.25, 0.45, 0.65} {
+			\draw[orange!50!red, line width=0.4pt, dashed] (A1) circle (\r);
+		}
+		\draw[posline] (A1) -- (B1) node[midway, below right=1pt, font=\small\itshape, color=gray!80!black] {$r$};
+		\draw[unitarrow] ($(A1)!0cm!(B1)$) -- ($(A1)!1cm!(B1)$) node[midway, below right=-1pt, font=\bfseries\small] {$\vec{u}$};
+		\filldraw[fill=black!70, draw=black] (B1) circle (1.5pt) node[above left=2pt, font=\small\itshape] {$P$};
+		\draw[fieldarrow, color=orange!90!red] (B1) -- ($(B1)!-1.6cm!(A1)$) node[above right=-1pt, font=\bfseries] {$\vec{E}$};
+		\filldraw[fill=orange!80!red, draw=black!80, line width=0.6pt] (A1) circle (3.5pt);
+		\node[above left=3pt, font=\small\bfseries] at (A1) {$q$};
+		\node[badge] at (5.8, 2.2) {$q > 0$};
+
+		% CASO 2: Carica negativa (q1 < 0) - Campo entrante
+		\coordinate (A2) at (0, -1.0);
+		\coordinate (B2) at (4.0, 0.5);
+		\foreach \r in {0.25, 0.45, 0.65} {
+			\draw[teal!50, line width=0.4pt, densely dotted] (A2) circle (\r);
+		}
+		\draw[posline] (A2) -- (B2) node[midway, below right=1pt, font=\small\itshape, color=gray!80!black] {$r$};
+		\draw[unitarrow] ($(A2)!0cm!(B2)$) -- ($(A2)!1cm!(B2)$) node[midway, below right=-1pt, font=\bfseries\small] {$\vec{u}$};
+		\filldraw[fill=black!70, draw=black] (B2) circle (1.5pt) node[above left=2pt, font=\small\itshape] {$P'$};
+		\draw[fieldarrow, color=teal!80!black] (B2) -- ($(B2)!1.6cm!(A2)$) node[below right=-1pt, font=\bfseries] {$\vec{E}$};
+		\filldraw[fill=teal!70!black, draw=black!80, line width=0.6pt] (A2) circle (3.5pt);
+		\node[above left=3pt, font=\small\bfseries] at (A2) {$q_1$};
+		\node[badge] at (5.8, -1.0) {$q_1 < 0$};
+
+	\end{tikzpicture}
+	\caption{Orientazione del campo elettrostatico $\vec{E}$ nel punto di misura per una carica sorgente positiva $q$ (campo uscente) e una carica negativa $q_1$ (campo entrante). Il campo è un vettore applicato nel punto, non il segmento che lo congiunge alla sorgente.}
+	\label{fig:campo:campo_carica_puntiforme_infografica}
+\end{figure}
+
+\titoletto{Campo di un sistema di cariche puntiformi}
+Per il principio di sovrapposizione il campo prodotto da un sistema discreto di $N$ cariche puntiformi in un punto $P$ è la somma vettoriale dei campi delle singole cariche,
+\[
+\Ev=\sum_{i=1}^{N}\Ev_i=\sum_{i=1}^{N}\frac{1}{4\pi\epz}\,\frac{q_i}{r_i^2}\,\uv_i ,
+\]
+dove $r_i$ è la distanza di $P$ dalla carica $q_i$ e $\uv_i$ il versore diretto da $q_i$ verso $P$. Il campo si calcola in un punto dello spazio, non su una carica: nel punto non occorre che ci sia nulla.
+
+\titoletto{Esempio: quattro cariche uguali ai vertici di un quadrato}
+Quattro cariche positive uguali $q$ occupano i vertici di un quadrato di lato $d$, e si cerca il campo nel centro $P$. Le quattro distanze sono uguali a mezza diagonale, $d\sqrt2/2$, e i quattro campi hanno lo stesso modulo $E=q/(2\pi\epz d^2)$. La tentazione di sommare quattro volte il modulo è un errore grave, perché si sommano vettori: ciascun campo è uscente dalla propria carica e diretto lungo la diagonale verso il vertice opposto, e i campi dovuti a vertici opposti sono uguali e contrari. Il campo nel centro è nullo,
+\[
+\Ev_{\mathrm{tot}}=\Ev_1+\Ev_2+\Ev_3+\Ev_4=\vec 0 .
+\]
+Una carica posta ferma in $P$ e lasciata libera resta in quiete, perché campo nullo significa forza nulla.
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+
+    % Stili grafici
+    \tikzset{
+      gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+      badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+      fieldarrow/.style={line width=1.3pt, ->},
+      posline/.style={draw=gray!40, line width=0.6pt, dashed},
+      geomline/.style={draw=gray!60, line width=0.8pt}
+    }
+
+    \draw[gridline] (-3.8,-3.2) grid (3.8,3.6);
+
+    \coordinate (C)  at (0,0);
+    \coordinate (q1) at (-2.3, 2.3);
+    \coordinate (q2) at ( 2.3, 2.3);
+    \coordinate (q3) at ( 2.3,-2.3);
+    \coordinate (q4) at (-2.3,-2.3);
+
+    \draw[geomline] (q1) -- (q2) -- (q3) -- (q4) -- cycle;
+
+    \foreach \q in {q1, q2, q3, q4} {
+      \foreach \r in {0.25, 0.45, 0.65} {
+        \draw[orange!50!red, line width=0.4pt, dashed] (\q) circle (\r);
+      }
+    }
+
+    \draw[posline] (q1) -- (q3);
+    \draw[posline] (q2) -- (q4);
+
+    \draw[fieldarrow, color=orange!90!red] (C) -- ($(C)!1.5cm!(q3)$) node[below right=-2pt, font=\bfseries] {$\vec{E}_1$};
+    \draw[fieldarrow, color=orange!90!red] (C) -- ($(C)!1.5cm!(q4)$) node[below left=-2pt, font=\bfseries] {$\vec{E}_2$};
+    \draw[fieldarrow, color=orange!90!red] (C) -- ($(C)!1.5cm!(q1)$) node[above left=-2pt, font=\bfseries] {$\vec{E}_3$};
+    \draw[fieldarrow, color=orange!90!red] (C) -- ($(C)!1.5cm!(q2)$) node[above right=-2pt, font=\bfseries] {$\vec{E}_4$};
+
+    \filldraw[fill=black!70, draw=black] (C) circle (1.8pt) node[below=6pt, font=\small\itshape] {$P$};
+
+    \filldraw[fill=orange!80!red, draw=black!80, line width=0.6pt] (q1) circle (3.5pt) node[above left=2pt, font=\small\bfseries] {$q_1$};
+    \filldraw[fill=orange!80!red, draw=black!80, line width=0.6pt] (q2) circle (3.5pt) node[above right=2pt, font=\small\bfseries] {$q_2$};
+    \filldraw[fill=orange!80!red, draw=black!80, line width=0.6pt] (q3) circle (3.5pt) node[below right=2pt, font=\small\bfseries] {$q_3$};
+    \filldraw[fill=orange!80!red, draw=black!80, line width=0.6pt] (q4) circle (3.5pt) node[below left=2pt, font=\small\bfseries] {$q_4$};
+
+    \node[badge] at (0, 3.1) {$\vec{E}_{\mathrm{tot}} = \vec{E}_1 + \vec{E}_2 + \vec{E}_3 + \vec{E}_4 = \vec{0}$};
+
+  \end{tikzpicture}
+  \caption{Cancellazione a coppie dei campi elettrostatici al centro di una configurazione quadrata di quattro cariche uguali.}
+  \label{fig:campo:campo_quadrato_infografica}
+\end{figure}
+
+\titoletto{Esempio: tre cariche uguali ai vertici di un triangolo equilatero}
+Tre cariche positive uguali occupano i vertici di un triangolo equilatero, e si cerca il campo nel punto $P$ equidistante dai tre vertici, che nel triangolo equilatero è insieme baricentro, ortocentro e circocentro. I tre campi hanno lo stesso modulo $E$ e formano a due a due angoli di $120^\circ=2\pi/3$. Il problema si imposta con la scelta degli assi: si fissa l'asse $y$ lungo uno dei tre vettori, $\Ev_1$, e l'asse $x$ perpendicolare. Gli altri due vettori formano angoli uguali con l'asse $x$, da parti opposte, per cui le loro componenti $x$ sono uguali in modulo e di verso opposto e si annullano. Resta da valutare la componente $y$. L'angolo di $120^\circ$ tra $\Ev_1$ ed $\Ev_2$ si scompone in $\pi/2+\pi/6$: $\Ev_2$ forma con l'asse $x$ negativo un angolo di $\pi/6$ verso il basso, e la sua componente lungo $y$ vale $-E\sin(\pi/6)=-E/2$, cioè, in modo equivalente, $E\cos(2\pi/3)=-E/2$. Lo stesso vale per $\Ev_3$. La componente totale è
+\[
+E_y=E-\frac{E}{2}-\frac{E}{2}=0 ,
+\]
+e il campo nel centro è nullo. Il risultato è noto da Fisica 1 nel problema di tre funi tese a $120^\circ$ con la stessa tensione.
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+
+    % Stili grafici
+    \tikzset{
+      gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+      badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+      fieldarrow/.style={line width=1.3pt, ->},
+      posline/.style={draw=gray!40, line width=0.6pt, dashed},
+      geomline/.style={draw=gray!60, line width=0.8pt},
+      axis/.style={draw=gray!70, line width=0.8pt, ->}
+    }
+
+    \draw[gridline] (-3.8,-3.4) grid (3.8,3.4);
+
+    \coordinate (C)  at (0,0);
+    \coordinate (q1) at (0, -2.5);
+    \coordinate (q2) at (2.165, 1.25);
+    \coordinate (q3) at (-2.165, 1.25);
+
+    \draw[geomline] (q1) -- (q2) -- (q3) -- cycle;
+
+    \draw[axis] (-3.0, 0) -- (3.2, 0) node[right, font=\small\itshape] {$x$};
+    \draw[axis] (0, -3.0) -- (0, 2.8) node[above, font=\small\itshape] {$y$};
+
+    \foreach \q in {q1, q2, q3} {
+      \foreach \r in {0.25, 0.45, 0.65} {
+        \draw[orange!50!red, line width=0.4pt, dashed] (\q) circle (\r);
+      }
+    }
+
+    \draw[posline] (q1) -- (C);
+    \draw[posline] (q2) -- (C);
+    \draw[posline] (q3) -- (C);
+
+    \draw[fieldarrow, color=orange!90!red] (C) -- (0, 1.8) node[right=2pt, font=\bfseries] {$\vec{E}_1$};
+    \draw[fieldarrow, color=orange!90!red] (C) -- (-1.5588, -0.9) node[below left=-1pt, font=\bfseries] {$\vec{E}_2$};
+    \draw[fieldarrow, color=orange!90!red] (C) -- (1.5588, -0.9) node[below right=-1pt, font=\bfseries] {$\vec{E}_3$};
+
+    \draw[gray!60, line width=0.6pt, densely dotted] (-1.5588, -0.9) -- (0, -0.9);
+    \draw[gray!60, line width=0.6pt, densely dotted] (1.5588, -0.9) -- (0, -0.9);
+    \filldraw[fill=orange!90!red, draw=black] (0, -0.9) circle (1.2pt);
+    \node[left=3pt, font=\scriptsize\sffamily, color=gray!90!black] at (0, -0.9) {$-E/2$};
+
+    \draw[line width=0.5pt, color=gray!80!black] (0, 0.7) arc (90:210:0.7);
+    \node[font=\scriptsize\sffamily, color=gray!90!black] at (-0.6, 0.6) {$2\pi/3$};
+
+    \filldraw[fill=orange!80!red, draw=black!80, line width=0.6pt] (q1) circle (3.5pt) node[below=4pt, font=\small\bfseries] {$q_1$};
+    \filldraw[fill=orange!80!red, draw=black!80, line width=0.6pt] (q2) circle (3.5pt) node[above right=2pt, font=\small\bfseries] {$q_2$};
+    \filldraw[fill=orange!80!red, draw=black!80, line width=0.6pt] (q3) circle (3.5pt) node[above left=2pt, font=\small\bfseries] {$q_3$};
+
+    \filldraw[fill=black!70, draw=black] (C) circle (1.8pt) node[above right=2pt, font=\small\itshape] {$P$};
+
+    \node[badge] at (0, -3.8) {$E_y = E - \frac{E}{2} - \frac{E}{2} = 0$};
+
+  \end{tikzpicture}
+  \caption{Simmetria dei tre campi elettrostatici a $2\pi/3$ e scomposizione lungo l'asse $y$ al centro di un triangolo equilatero.}
+  \label{fig:campo:campo_triangolo_infografica}
+\end{figure}
+
+\titoletto{Distribuzioni continue di carica}
+Quando la carica è distribuita con continuità su una linea, su una superficie o in un volume, la si suddivide in elementi infinitesimi $\dd q$, ciascuno abbastanza piccolo da essere trattato come una carica puntiforme. Il campo di ciascun elemento è quello di una carica puntiforme, e il campo totale è la somma, cioè l'integrale vettoriale,
+\[
+\Ev=\frac{1}{4\pi\epz}\int \frac{\dd q}{r^2}\,\uv_r ,
+\]
+dove $r$ è la distanza del punto $P$ dall'elemento $\dd q$ e $\uv_r$ il versore diretto dall'elemento verso $P$; entrambi cambiano da un elemento all'altro. L'elemento di carica si esprime con la densità appropriata,
+\[
+\dd q=\lambda\,\dd l, \qquad \dd q=\sigma\,\dd S, \qquad \dd q=\rho\,\dd\tau ,
+\]
+dove $\lambda$ è la densità lineare (in $\mathrm{C\,m^{-1}}$), $\sigma$ la densità superficiale (in $\mathrm{C\,m^{-2}}$) e $\rho$ la densità volumica (in $\mathrm{C\,m^{-3}}$). Il campo si scrive quindi con un integrale di linea, di superficie o di volume,
+\[
+\Ev=\frac{1}{4\pi\epz}\int_l\frac{\lambda\,\dd l}{r^2}\,\uv_r,\qquad
+\Ev=\frac{1}{4\pi\epz}\int_S\frac{\sigma\,\dd S}{r^2}\,\uv_r,\qquad
+\Ev=\frac{1}{4\pi\epz}\int_\tau\frac{\rho\,\dd\tau}{r^2}\,\uv_r .
+\]
+Il metodo, comune a tutti i casi che seguono, ha quattro passi: si individua l'elemento infinitesimo più conveniente; si scrive il suo contributo $\dd\Ev$; si sfrutta la simmetria per eliminare le componenti che si annullano a coppie; si integra la sola componente superstite, dopo aver espresso tutto in funzione di un'unica variabile.
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+
+    \tikzset{
+      gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+      badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+      fieldarrow/.style={line width=1.3pt, ->, color=orange!90!red},
+      posline/.style={draw=gray!50, line width=0.7pt, dashed},
+      curveline/.style={draw=orange!80!black, line width=1.5pt}
+    }
+
+    \draw[gridline] (-2.2,-1.6) grid (6.8,3.8);
+
+    \coordinate (P1) at (-1.5, -0.5);
+    \coordinate (P2) at (0.0, 1.2);
+    \coordinate (P3) at (2.0, 2.5);
+    \coordinate (P)  at (4.8, 0.8);
+
+    \draw[curveline] (P1) .. controls (-0.8, 0.2) and (-0.5, 0.8) .. (P2)
+                         .. controls (0.6, 1.7) and (1.2, 2.3) .. (P3);
+
+    \foreach \r in {0.25, 0.45, 0.65} {
+      \draw[orange!50!red, line width=0.4pt, dashed] (P2) circle (\r);
+    }
+
+    \draw[line width=3.2pt, color=orange!90!red] (0.0, 1.2) -- (0.22, 1.4);
+
+    \draw[posline] (P2) -- (P) node[midway, above right=-1pt, font=\small\itshape, color=gray!80!black] {$\vec{r}$};
+
+    \filldraw[fill=black!70, draw=black] (P) circle (1.8pt) node[below right=2pt, font=\small\itshape] {$P$};
+    \draw[fieldarrow] (P) -- ($(P)!-1.8cm!(P2)$) node[above right=-1pt, font=\bfseries] {$\mathrm{d}\vec{E}$};
+
+    \filldraw[fill=orange!80!red, draw=black!80, line width=0.6pt] (P2) circle (3.0pt);
+    \node[above left=3pt, font=\small\bfseries] at (P2) {$P'$};
+    \node[above left=1pt, font=\small\bfseries, color=orange!90!red] at (0.22, 1.4) {$\mathrm{d}l$};
+    \node[right=2pt, font=\small\bfseries, color=orange!80!black] at (P3) {$l$};
+
+    \node[badge] at (5.2, 3.1) {$\mathrm{d}q = \lambda\,\mathrm{d}l$};
+
+  \end{tikzpicture}
+  \caption{Elemento di carica infinitesimo $\mathrm{d}q = \lambda\,\mathrm{d}l$ su una distribuzione lineare $l$ e campo $\mathrm{d}\vec{E}$ generato nel punto $P$.}
+  \label{fig:campo:distribuzione_lineare_infografica}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+
+    \tikzset{
+      gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+      badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+      fieldarrow/.style={line width=1.3pt, ->, color=orange!90!red},
+      posline/.style={draw=gray!50, line width=0.7pt, dashed}
+    }
+
+    \draw[gridline] (-2.2,-2.2) grid (6.8,3.8);
+
+    \coordinate (S1) at (-1.8, 1.2);
+    \coordinate (S2) at (1.5, 3.0);
+    \coordinate (S3) at (3.8, -1.2);
+    \coordinate (S4) at (0.5, -1.8);
+
+    \filldraw[fill=orange!12, draw=orange!80!black, line width=1.1pt]
+      (S1) .. controls (-0.2, 2.2) and (0.8, 2.6) .. (S2)
+           .. controls (2.6, 1.2) and (3.2, 0.2) .. (S3)
+           .. controls (2.1, -1.6) and (1.2, -1.6) .. (S4)
+           .. controls (-0.8, -1.0) and (-1.4, 0.0) .. (S1);
+
+    \coordinate (P2) at (0.4, 0.6);
+    \coordinate (P)  at (5.0, 1.4);
+
+    \foreach \r in {0.25, 0.45, 0.65} {
+      \draw[orange!50!red, line width=0.4pt, dashed] (P2) circle (\r);
+    }
+
+    \filldraw[fill=orange!80!red, draw=black!80, line width=0.6pt]
+      ($(P2)+(-0.35,-0.2)$) -- ($(P2)+(0.25,-0.25)$) -- ($(P2)+(0.38,0.22)$) -- ($(P2)+(-0.22,0.27)$) -- cycle;
+
+    \draw[posline] (P2) -- (P) node[midway, above right=-1pt, font=\small\itshape, color=gray!80!black] {$\vec{r}$};
+
+    \filldraw[fill=black!70, draw=black] (P) circle (1.8pt) node[below right=2pt, font=\small\itshape] {$P$};
+    \draw[fieldarrow] (P) -- ($(P)!-1.8cm!(P2)$) node[above right=-1pt, font=\bfseries] {$\mathrm{d}\vec{E}$};
+
+    \filldraw[fill=black!80] (P2) circle (1.8pt) node[below left=2pt, font=\small\bfseries] {$P'$};
+    \node[above=4pt, font=\small\bfseries, color=orange!90!red] at (P2) {$\mathrm{d}S$};
+    \node[below left=2pt, font=\small\bfseries, color=orange!80!black] at (S3) {$S$};
+
+    \node[badge] at (5.2, 3.1) {$\mathrm{d}q = \sigma\,\mathrm{d}S$};
+
+  \end{tikzpicture}
+  \caption{Elemento di superficie $\mathrm{d}S$ con carica $\mathrm{d}q = \sigma\,\mathrm{d}S$ appartenente alla distribuzione bidimensionale $S$.}
+  \label{fig:campo:distribuzione_superficiale_infografica}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+
+    \tikzset{
+      gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+      badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+      fieldarrow/.style={line width=1.3pt, ->, color=orange!90!red},
+      posline/.style={draw=gray!50, line width=0.7pt, dashed}
+    }
+
+    \draw[gridline] (-2.2,-2.4) grid (6.8,4.2);
+
+    \coordinate (V1) at (-0.8, 3.2);
+    \coordinate (V2) at (1.8, 3.6);
+    \coordinate (V3) at (2.2, 0.2);
+    \coordinate (V4) at (0.2, -1.8);
+    \coordinate (V5) at (-1.8, -0.6);
+
+    \filldraw[fill=orange!10, draw=orange!80!black, line width=1.1pt]
+      (V1) .. controls (0.4, 3.8) and (1.2, 3.8) .. (V2)
+           .. controls (2.6, 2.2) and (2.8, 1.2) .. (V3)
+           .. controls (1.8, -1.0) and (1.2, -1.6) .. (V4)
+           .. controls (-0.8, -2.2) and (-1.4, -1.4) .. (V5)
+           .. controls (-2.2, 0.6) and (-1.6, 2.2) .. (V1);
+
+    \draw[gray!60, line width=0.7pt, dashed]
+      (-1.7, 0.8) .. controls (-0.2, 0.2) and (0.8, 0.4) .. (2.4, 1.2);
+
+    \coordinate (P2) at (0.2, 2.0);
+    \coordinate (P)  at (5.0, 0.8);
+
+    \foreach \r in {0.28, 0.50, 0.72} {
+      \draw[orange!50!red, line width=0.4pt, dashed] (P2) circle (\r);
+    }
+
+    \begin{scope}[shift={(P2)}]
+      \filldraw[fill=orange!30, draw=orange!90!red, line width=0.5pt] (-0.2,-0.2) rectangle (0.2,0.2);
+      \filldraw[fill=orange!50, draw=orange!90!red, line width=0.5pt] (-0.2,0.2) -- (-0.05,0.38) -- (0.35,0.38) -- (0.2,0.2) -- cycle;
+      \filldraw[fill=orange!70!red, draw=orange!90!red, line width=0.5pt] (0.2,-0.2) -- (0.35,-0.02) -- (0.35,0.38) -- (0.2,0.2) -- cycle;
+    \end{scope}
+
+    \draw[posline] (P2) -- (P) node[midway, above right=-1pt, font=\small\itshape, color=gray!80!black] {$\vec{r}$};
+
+    \filldraw[fill=black!70, draw=black] (P) circle (1.8pt) node[below right=2pt, font=\small\itshape] {$P$};
+    \draw[fieldarrow] (P) -- ($(P)!-1.8cm!(P2)$) node[above right=-1pt, font=\bfseries] {$\mathrm{d}\vec{E}$};
+
+    \filldraw[fill=black!80] (P2) circle (1.6pt) node[below left=2pt, font=\small\bfseries] {$P'$};
+    \node[above=6pt, font=\small\bfseries, color=orange!90!red] at (P2) {$\mathrm{d}\tau$};
+    \node[below left=2pt, font=\small\bfseries, color=orange!80!black] at (V4) {$\tau$};
+
+    \node[badge] at (5.2, 3.3) {$\mathrm{d}q = \rho\,\mathrm{d}\tau$};
+
+  \end{tikzpicture}
+  \caption{Elemento di volume $\mathrm{d}\tau$ con carica infinitesima $\mathrm{d}q = \rho\,\mathrm{d}\tau$ all'interno del volume $\tau$.}
+  \label{fig:campo:distribuzione_volumetrica_infografica}
+\end{figure}
+
+\titoletto{Il dipolo elettrico}
+Un dipolo elettrico è formato da due cariche puntiformi uguali e opposte, $+q$ e $-q$, poste a distanza $l$. Lo caratterizza il momento di dipolo
+\[
+\vec p=q\,\vec l ,
+\]
+dove $\vec l$ è il vettore che va dalla carica negativa alla positiva; $p$ si misura in $\mathrm{C\,m}$. La molecola d'acqua ne è un esempio naturale. Per il principio di sovrapposizione il campo in un punto qualsiasi $P$ è la somma dei contributi delle due cariche,
+\[
+\Ev_0(P)=\Ev_{0+}+\Ev_{0-},
+\]
+dove $\Ev_{0+}$ è il campo della carica $+q$, uscente, ed $\Ev_{0-}$ quello della carica $-q$, entrante; il pedice $0$ ricorda che si opera nel vuoto.
+
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			fieldarrow/.style={line width=1.3pt, ->},
+			posline/.style={draw=gray!50, line width=0.7pt, dashed},
+			vectorp/.style={line width=1.5pt, ->, color=black!85}
+		}
+
+		\draw[gridline] (-3.8,-1.6) grid (5.8,5.2);
+
+		\coordinate (A) at (-2.5, 0);
+		\coordinate (B) at ( 1.5, 0);
+		\coordinate (P) at ( 2.6, 3.6);
+
+		\draw[line width=0.8pt, color=gray!70] (A) -- (B);
+		\draw[vectorp] (-1.2, 0) -- (0.5, 0) node[midway, above=2pt, font=\small\bfseries] {$\vec{p}$};
+
+		\foreach \r in {0.25, 0.45, 0.65} {
+			\draw[teal!50, line width=0.4pt, densely dotted] (A) circle (\r);
+			\draw[orange!50!red, line width=0.4pt, dashed] (B) circle (\r);
+		}
+
+		\draw[posline] (A) -- (P);
+		\draw[posline] (B) -- (P);
+
+		\node[below=4pt, font=\small\itshape, color=gray!80!black] at ($(A)!0.5!(B)$) {$l$};
+
+		\draw[fieldarrow, color=orange!90!red] (P) -- ($(P)!-1.8cm!(B)$) node[above right=-1pt, font=\bfseries] {$\vec{E}_{0+}$};
+		\draw[fieldarrow, color=teal!80!black] (P) -- ($(P)!1.5cm!(A)$) node[below left=-1pt, font=\bfseries] {$\vec{E}_{0-}$};
+
+		\filldraw[fill=black!70, draw=black] (P) circle (1.8pt) node[right=4pt, font=\small\itshape] {$P$};
+
+		\filldraw[fill=teal!70!black, draw=black!80, line width=0.6pt] (A) circle (3.5pt) node[below left=2pt, font=\small\bfseries] {$-q$};
+		\filldraw[fill=orange!80!red, draw=black!80, line width=0.6pt] (B) circle (3.5pt) node[below right=2pt, font=\small\bfseries] {$+q$};
+
+		\node[badge] at (4.0, 4.6) {$\vec{E}_0(P) = \vec{E}_{0+} + \vec{E}_{0-}$};
+
+	\end{tikzpicture}
+	\caption{Campo elettrostatico generato da un dipolo elettrico in un punto generico $P$ dello spazio.}
+	\label{fig:campo:dipolo_generico_infografica}
+\end{figure}
+
+Conviene studiare due situazioni particolari, dette prima e seconda posizione principale di Gauss. Nella prima il punto $P$ giace sulla retta che passa per le due cariche, l'asse del dipolo, a distanza $r$ dal centro $O$, dalla parte della carica positiva. I due campi hanno la direzione dell'asse e versi opposti, e il modulo del campo risultante è la differenza dei moduli:
+\[
+E_{01}=\frac{1}{4\pi\epz}\left[\frac{q}{\left(r-\frac{l}{2}\right)^{2}}-\frac{q}{\left(r+\frac{l}{2}\right)^{2}}\right]=\frac{1}{4\pi\epz}\,\frac{2\,r\,l\,q}{\left(r^{2}-\frac{l^{2}}{4}\right)^{2}} ,
+\]
+dove il secondo passaggio segue dal denominatore comune $(r^2-l^2/4)^2$ e dalla differenza $(r+l/2)^2-(r-l/2)^2=2rl$. Il campo ha il verso di $\vec p$, perché il contributo della carica più vicina, $+q$, prevale. Per punti lontani dal dipolo, $l\ll r$, il termine $l^2/4$ è trascurabile rispetto a $r^2$ e si ottiene
+\[
+\Ev_{01}\simeq\frac{1}{4\pi\epz}\,\frac{2\,\vec{p}}{r^{3}} ,
+\]
+con $p$ in $\mathrm{C\,m}$, $r$ in m ed $E$ in $\mathrm{N\,C^{-1}}$.
+
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			fieldarrow/.style={line width=1.3pt, ->},
+			posline/.style={draw=gray!50, line width=0.7pt, dashed},
+			vectorp/.style={line width=1.5pt, ->, color=black!85},
+			dimline/.style={line width=0.6pt, <->, color=gray!80!black}
+		}
+
+		\draw[gridline] (-3.8,-1.8) grid (6.8,2.2);
+
+		\coordinate (A) at (-2.8, 0);
+		\coordinate (B) at (-0.8, 0);
+		\coordinate (C) at (-1.8, 0);
+		\coordinate (P) at ( 3.8, 0);
+
+		\draw[line width=0.8pt, color=gray!70] (A) -- (B);
+		\draw[posline] (B) -- (P);
+
+		\draw[vectorp] (-2.3, 0) -- (-1.3, 0) node[midway, above=2pt, font=\small\bfseries] {$\vec{p}$};
+
+		\foreach \r in {0.25, 0.45, 0.65} {
+			\draw[teal!50, line width=0.4pt, densely dotted] (A) circle (\r);
+			\draw[orange!50!red, line width=0.4pt, dashed] (B) circle (\r);
+		}
+
+		\draw[fieldarrow, color=orange!90!red] (P) -- ($(P)+(1.8,0)$) node[above=1pt, font=\bfseries] {$\vec{E}_{0+}$};
+		\draw[fieldarrow, color=teal!80!black] (P) -- ($(P)+(-1.1,0)$) node[above=1pt, font=\bfseries] {$\vec{E}_{0-}$};
+
+		\filldraw[fill=black!70, draw=black] (P) circle (1.8pt) node[above right=3pt, font=\small\itshape] {$P$};
+
+		\filldraw[fill=teal!70!black, draw=black!80, line width=0.6pt] (A) circle (3.5pt) node[above left=2pt, font=\small\bfseries] {$-q$};
+		\filldraw[fill=orange!80!red, draw=black!80, line width=0.6pt] (B) circle (3.5pt) node[above right=2pt, font=\small\bfseries] {$+q$};
+
+		\draw[dimline] (-1.8, -1.0) -- (3.8, -1.0) node[midway, fill=white, inner sep=2pt, font=\small\itshape] {$r$};
+		\draw[gray!60, line width=0.5pt] (-1.8, -0.3) -- (-1.8, -1.2);
+		\draw[gray!60, line width=0.5pt] (3.8, -0.3) -- (3.8, -1.2);
+
+		\node[badge] at (1.5, 1.5) {$E_{01} \simeq \dfrac{2p}{4\pi\varepsilon_0 r^3} \quad (r \gg l)$};
+
+	\end{tikzpicture}
+	\caption{Prima posizione principale di Gauss: campo del dipolo nei punti dell'asse.}
+	\label{fig:campo:dipolo_asse_infografica}
+\end{figure}
+
+Nella seconda posizione il punto $P$ si trova sull'asse geometrico del dipolo, cioè sulla retta perpendicolare al segmento che congiunge le cariche e passante per il suo centro, a distanza $r$ da $O$. Tre osservazioni risolvono il problema. I due campi hanno lo stesso modulo, perché $P$ è equidistante dalle cariche,
+\[
+E_{0+}=E_{0-}=\frac{1}{4\pi\epz}\,\frac{q}{r^{2}+\frac{l^{2}}{4}} ;
+\]
+le loro componenti perpendicolari alla direzione del dipolo sono uguali e opposte e si annullano; le componenti parallele alla direzione del dipolo sono uguali e concordi, dirette in verso opposto a $\vec p$, e si sommano. Ciascuna componente parallela vale $E_{0+}\cos\beta$, dove $\beta$ è l'angolo che la congiungente carica--punto forma con la direzione del dipolo, con $\cos\beta=(l/2)/\sqrt{r^2+l^2/4}$. Il campo risultante è
+\[
+\Ev_{02}=-\frac{1}{4\pi\epz}\,\frac{q\,\vec l}{\left(r^2+\frac{l^2}{4}\right)^{3/2}}\simeq-\frac{1}{4\pi\epz}\,\frac{\vec p}{r^3}\qquad(r\gg l),
+\]
+antiparallelo a $\vec p$. In entrambe le posizioni, a grande distanza, il campo del dipolo decresce come $r^{-3}$, più rapidamente del campo di una carica puntiforme: visto da lontano il dipolo ha carica totale nulla, e i campi delle due cariche si compensano quasi del tutto. Sull'asse, a parità di distanza, il campo è doppio rispetto al piano mediano.
+
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			fieldarrow/.style={line width=1.3pt, ->},
+			posline/.style={draw=gray!50, line width=0.7pt, dashed},
+			vectorp/.style={line width=1.5pt, ->, color=black!85},
+			axisline/.style={draw=gray!70, line width=0.8pt, dashed}
+		}
+
+		\draw[gridline] (-3.8,-1.2) grid (3.8,6.2);
+
+		\coordinate (A) at (-2.0, 0);
+		\coordinate (B) at ( 2.0, 0);
+		\coordinate (C) at ( 0.0, 0);
+		\coordinate (P) at ( 0.0, 4.2);
+
+		\draw[axisline] (C) -- (0, 5.4);
+
+		\draw[line width=0.8pt, color=gray!70] (A) -- (B);
+		\draw[vectorp] (-1.2, 0) -- (1.2, 0) node[midway, below=2pt, font=\small\bfseries] {$\vec{p}$};
+
+		\foreach \r in {0.25, 0.45, 0.65} {
+			\draw[teal!50, line width=0.4pt, densely dotted] (A) circle (\r);
+			\draw[orange!50!red, line width=0.4pt, dashed] (B) circle (\r);
+		}
+
+		\draw[posline] (A) -- (P);
+		\draw[posline] (B) -- (P);
+
+		\node[left=2pt, font=\small\itshape, color=gray!80!black] at (0, 2.1) {$r$};
+
+		\coordinate (Eplus)  at ($(P)!-1.8cm!(B)$);
+		\coordinate (Eminus) at ($(P)!1.8cm!(A)$);
+		\coordinate (Eres)   at ($(Eplus)+(Eminus)-(P)$);
+
+		\draw[gray!50, line width=0.6pt, dashed] (Eplus) -- (Eres) -- (Eminus);
+		\draw[gray!40, line width=0.5pt, densely dotted] (Eplus) -- ($(P)!(Eplus)!(0,5.4)$);
+		\draw[gray!40, line width=0.5pt, densely dotted] (Eminus) -- ($(P)!(Eminus)!(0,5.4)$);
+
+		\draw[fieldarrow, color=orange!90!red] (P) -- (Eplus) node[above left=-1pt, font=\bfseries] {$\vec{E}_{0+}$};
+		\draw[fieldarrow, color=teal!80!black] (P) -- (Eminus) node[below left=-1pt, font=\bfseries] {$\vec{E}_{0-}$};
+		\draw[fieldarrow, color=purple!80!black] (P) -- (Eres) node[left=3pt, font=\bfseries] {$\vec{E}_0$};
+
+		\filldraw[fill=black!70, draw=black] (P) circle (1.8pt) node[right=4pt, font=\small\itshape] {$P$};
+
+		\filldraw[fill=teal!70!black, draw=black!80, line width=0.6pt] (A) circle (3.5pt) node[below left=2pt, font=\small\bfseries] {$-q$};
+		\filldraw[fill=orange!80!red, draw=black!80, line width=0.6pt] (B) circle (3.5pt) node[below right=2pt, font=\small\bfseries] {$+q$};
+
+		\node[badge] at (3, 5.0) {$E_{02} \simeq -\dfrac{p}{4\pi\varepsilon_0 r^3} \quad (r \gg l)$};
+
+	\end{tikzpicture}
+	\caption{Seconda posizione principale di Gauss: composizione dei campi sul piano mediano del dipolo, con risultante $\vec{E}_0$ antiparallela a $\vec{p}$.}
+	\label{fig:campo:dipolo_mediano_infografica}
+\end{figure}
+
+\titoletto{Filo rettilineo uniforme indefinito}
+Si consideri una retta di lunghezza illimitata, presa come asse $y$, sulla quale la carica è distribuita con densità lineare costante
+\[
+\lambda=\frac{\dd q}{\dd y}=\text{cost.},
+\]
+in $\mathrm{C\,m^{-1}}$. Si vuole il campo in un punto $P$ a distanza $a$ dalla retta; $O$ è il piede della perpendicolare condotta da $P$ alla retta.
+
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			fieldarrow/.style={line width=1.3pt, ->},
+			posline/.style={draw=gray!50, line width=0.7pt, dashed},
+			axisline/.style={draw=gray!70, line width=0.8pt},
+			curveline/.style={draw=orange!80!black, line width=1.5pt},
+			dimline/.style={line width=0.6pt, <->, color=gray!80!black}
+		}
+
+		\draw[gridline] (-2.4,-4.6) grid (5.6,4.6);
+
+		\coordinate (O)          at (0, 0);
+		\coordinate (P)          at (3.2, 0);
+		\coordinate (Pprime)     at (0, 2.4);
+		\coordinate (Pprime_bot) at (0, 2.15);
+		\coordinate (Pprime_top) at (0, 2.65);
+		\coordinate (Pdouble)    at (0, -2.4);
+
+		\draw[curveline] (0, -4.2) -- (0, 4.2) node[above=2pt, font=\small\bfseries, color=orange!80!black] {$y$};
+
+		\foreach \r in {0.25, 0.45, 0.65} {
+			\draw[orange!50!red, line width=0.4pt, dashed] (Pprime) circle (\r);
+			\draw[teal!50, line width=0.4pt, densely dotted] (Pdouble) circle (\r);
+		}
+
+		\draw[line width=3.5pt, color=orange!90!red] (Pprime_bot) -- (Pprime_top);
+		\draw[line width=3.5pt, color=teal!70!black] (0, -2.65) -- (0, -2.15);
+
+		\draw[posline, color=orange!80!red!60] (P) -- (Pprime_bot);
+		\draw[posline, color=orange!80!red!60] (P) -- (Pprime_top);
+		\draw[posline] (Pprime) -- (P);
+		\draw[posline] (Pdouble) -- (P);
+		\draw[axisline, dashed] (O) -- (P);
+
+		\node[above right=-1pt, font=\small\itshape, color=gray!80!black] at ($(Pprime)!0.55!(P)$) {$r$};
+		\node[below=2pt, font=\small\itshape, color=gray!80!black] at ($(O)!0.5!(P)$) {$a$};
+
+		\draw[dimline] (-0.7, 0) -- (-0.7, 2.4) node[midway, fill=white, inner sep=1.5pt, font=\small\itshape] {$y$};
+		\draw[gray!60, line width=0.5pt] (-0.2, 0) -- (-0.9, 0);
+		\draw[gray!60, line width=0.5pt] (-0.2, 2.4) -- (-0.9, 2.4);
+
+		\draw[fieldarrow, color=orange!90!red] (P) -- ($(P)!-1.8cm!(Pprime)$) node[below right=-1pt, font=\bfseries] {$\mathrm{d}\vec{E}_0$};
+		\draw[fieldarrow, color=teal!80!black] (P) -- ($(P)!-1.8cm!(Pdouble)$) node[above right=-1pt, font=\bfseries] {$\mathrm{d}\vec{E}_0'$};
+
+		\coordinate (E1) at ($(P)!-1.8cm!(Pprime)$);
+		\coordinate (E2) at ($(P)!-1.8cm!(Pdouble)$);
+		\coordinate (Eres) at ($(E1)+(E2)-(P)$);
+		\draw[gray!40, line width=0.6pt, dashed] (E1) -- (Eres) -- (E2);
+		\draw[fieldarrow, color=purple!80!black] (P) -- (Eres) node[right=2pt, font=\bfseries] {$\mathrm{d}\vec{E}_\perp$};
+
+		\draw[line width=0.5pt, color=gray!80!black] (P) +(-0.8,0) arc (180:143.13:0.8);
+		\node[font=\scriptsize\sffamily, color=gray!90!black] at ($(P)+(-1.05,0.20)$) {$\theta$};
+
+		\draw[line width=0.7pt, color=orange!90!red] (P) +({180-atan2(2.15,3.2)}:1.65cm) arc ({180-atan2(2.15,3.2)}:{180-atan2(2.65,3.2)}:1.65cm);
+		\node[font=\scriptsize\sffamily\bfseries, color=orange!90!red] at ($(P)+(-1.95, 1.28)$) {$\mathrm{d}\theta$};
+
+		\draw[line width=0.5pt, color=gray!80!black] (P) +(0.8,0) arc (0:-36.87:0.8);
+		\node[font=\scriptsize\sffamily, color=gray!90!black] at ($(P)+(1.05,-0.20)$) {$\theta$};
+
+		\draw[line width=0.5pt, color=gray!80!black] (P) +(0.8,0) arc (0:36.87:0.8);
+		\node[font=\scriptsize\sffamily, color=gray!90!black] at ($(P)+(1.05,0.20)$) {$\theta$};
+
+		\filldraw[fill=black!70, draw=black] (O) circle (1.8pt) node[below left=2pt, font=\small\bfseries] {$O$};
+		\filldraw[fill=black!70, draw=black] (P) circle (1.8pt) node[above=4pt, font=\small\itshape] {$P$};
+
+		\filldraw[fill=orange!80!red, draw=black!80, line width=0.6pt] (Pprime) circle (3.0pt);
+		\node[right=4pt, font=\small\bfseries, color=orange!90!red] at (Pprime) {$\mathrm{d}y$};
+		\node[left=2pt, font=\small\bfseries] at (Pprime) {$P'$};
+
+		\filldraw[fill=teal!70!black, draw=black!80, line width=0.6pt] (Pdouble) circle (3.0pt);
+		\node[right=4pt, font=\small\bfseries, color=teal!80!black] at (Pdouble) {$\mathrm{d}y'$};
+
+		\node[badge] at (2.6, 3.9) {$\mathrm{d}y = \dfrac{a\,\mathrm{d}\theta}{\cos^2\theta}$};
+
+	\end{tikzpicture}
+	\caption{Filo indefinito: elementi simmetrici $\mathrm{d}y$ e $\mathrm{d}y'$, angolo $\theta$ tra $PP'$ e $OP$ e angolo infinitesimo $\mathrm{d}\theta$ sotteso dall'elemento $\mathrm{d}y$ nel punto $P$.}
+	\label{fig:campo:campo_filo_verticale_dtheta_infografica}
+\end{figure}
+
+Si prende un elemento $\dd y$ centrato in un punto qualsiasi $P'$ della retta. Esiste sempre un secondo elemento $\dd y'$, in posizione simmetrica rispetto a $O$, che produce in $P$ un campo dello stesso modulo. Le componenti dei due contributi parallele alla retta sono uguali e opposte e si annullano a coppie, mentre si sommano le componenti lungo la normale $OP$. Per simmetria, dunque, il campo risultante è perpendicolare al filo, e il suo modulo è la somma delle sole componenti $\dd E_{\perp}$ lungo $OP$. Indicate con $r$ la distanza tra $P$ e $P'$ e con $\theta$ l'angolo tra $PP'$ e $OP$, la componente utile del campo dovuto a $\dd y$ vale
+\[
+\dd E_{\perp}=\frac{1}{4\pi\epz}\,\frac{\cos\theta}{r^{2}}\,\dd q=\frac{\lambda}{4\pi\epz}\,\frac{\cos\theta}{r^{2}}\,\dd y ,
+\]
+con $\lambda$ in $\mathrm{C\,m^{-1}}$, $r$ e $\dd y$ in metri e $\dd E_\perp$ in $\mathrm{N\,C^{-1}}$. Nell'integrando compaiono tre quantità variabili, $r$, $\theta$ e $y$, che vanno ricondotte a una sola; conviene l'angolo, perché sul filo indefinito i suoi estremi sono semplici. Dal triangolo rettangolo $OPP'$ si ha $y=a\tan\theta$ e
+\[
+r=\frac{a}{\cos\theta},\qquad \dd y=\frac{a\,\dd\theta}{\cos^{2}\theta}=\frac{r\,\dd\theta}{\cos\theta} .
+\]
+La seconda relazione si legge anche geometricamente nell'ingrandimento della figura seguente: l'arco $r\,\dd\theta$, perpendicolare a $PP'$, è il cateto del triangolo infinitesimo che ha per ipotenusa $\dd y$, e il loro rapporto è $\cos\theta$.
+
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			posline/.style={draw=gray!50, line width=0.7pt, dashed},
+			curveline/.style={draw=orange!80!black, line width=1.5pt},
+			zoombox/.style={draw=orange!60!black, line width=0.8pt, fill=orange!5, rounded corners=6pt}
+		}
+
+		\draw[gridline] (-5.4,-3.2) grid (5.4,3.8);
+
+		% SINISTRA: Schema contestuale con lente
+		\begin{scope}[shift={(-3.6, 0)}, scale=0.6]
+			\draw[curveline] (0, -4.2) -- (0, 4.2) node[above=1pt, font=\scriptsize\bfseries, color=orange!80!black] {$y$};
+			\coordinate (Pmini) at (3.2, 0);
+			\coordinate (Pprimemini) at (0, 2.2);
+			\draw[posline] (0,0) -- (Pmini) node[midway, below, font=\tiny] {$a$};
+			\draw[posline] (Pprimemini) -- (Pmini);
+			\draw[line width=2.5pt, color=orange!90!red] (0, 1.9) -- (0, 2.5);
+			\filldraw[fill=orange!80!red] (Pprimemini) circle (2.5pt);
+			\node[left=2pt, font=\tiny\bfseries, color=orange!90!red] at (Pprimemini) {$\mathrm{d}y$};
+			\draw[draw=orange!90!red, line width=1.0pt, fill=white, fill opacity=0.15] (Pprimemini) circle (1.0cm);
+			\draw[dashed, color=orange!60!black, line width=0.5pt] (0.6, 2.9) -- (2.0, 3.2);
+			\draw[dashed, color=orange!60!black, line width=0.5pt] (0.6, 1.5) -- (2.0, -2.8);
+		\end{scope}
+
+		% DESTRA: Ingrandimento del triangolo rettangolo
+		\begin{scope}[shift={(0.8, 0)}]
+			\filldraw[zoombox] (-1.6, -2.8) rectangle (4.2, 3.2);
+			\coordinate (A) at (0, 2.0);
+			\coordinate (B) at (0, -2.0);
+			\coordinate (C) at (1.879, 0.683);
+			\draw[line width=3.5pt, color=orange!90!red] (A) -- (B);
+			\filldraw[fill=orange!80!red, draw=black!80, line width=0.5pt] (A) circle (2.5pt);
+			\filldraw[fill=orange!80!red, draw=black!80, line width=0.5pt] (B) circle (2.5pt);
+			\draw[line width=1.1pt, color=black!75, ->] (A) -- ($(A) + (-35:3.8cm)$) node[right=2pt, font=\small\itshape] {verso $P$};
+			\draw[line width=1.1pt, color=black!75, ->] (B) -- ($(B) + (-35:3.8cm)$);
+			\draw[line width=1.4pt, color=purple!80!black] (B) -- (C);
+			\filldraw[fill=purple!80!black, draw=black!80, line width=0.5pt] (C) circle (2.0pt);
+			\draw[line width=0.6pt, color=gray!80!black]
+			($(C)!0.22cm!(B)$) -- ($(C)!0.22cm!(B) + ($(C)!0.22cm!(A)-(C)$)$) -- ($(C)!0.22cm!(A)$);
+			\draw[line width=0.5pt, color=gray!80!black] (B) +(0, 0.9) arc (90:55:0.9);
+			\node[font=\scriptsize\sffamily, color=gray!90!black] at ($(B)+(0.26, 1.25)$) {$\theta$};
+			\draw[line width=0.6pt, color=orange!90!red] (A) +(-35:1.6cm) arc (-35:{-35-atan2(3.276, 2.294)}:1.6cm);
+			\node[left=4pt, font=\small\bfseries, color=orange!90!red] at ($(A)!0.5!(B)$) {$\mathrm{d}y$};
+			\node[below right=-1pt, font=\small\bfseries, color=purple!80!black] at ($(B)!0.5!(C)$) {$r\,\mathrm{d}\theta$};
+		\end{scope}
+
+		\node[badge] at (0.8, 3.8) {$r\,\mathrm{d}\theta = \mathrm{d}y \cos\theta \implies \mathrm{d}y = \dfrac{r\,\mathrm{d}\theta}{\cos\theta}$};
+
+	\end{tikzpicture}
+	\caption{Ingrandimento del triangolo rettangolo infinitesimo in prossimità dell'elemento $\mathrm{d}y$, che evidenzia la componente perpendicolare $r\,\mathrm{d}\theta$.}
+	\label{fig:campo:ingrandimento_dy_infografica}
+\end{figure}
+
+Con queste sostituzioni l'espressione del contributo diventa
+\[
+\dd E_{\perp}=\frac{\lambda}{4\pi\epz}\,\frac{\cos\theta\cdot\cos^{2}\theta}{a^{2}}\cdot\frac{a\,\dd\theta}{\cos^{2}\theta}=\frac{\lambda}{4\pi\epz}\,\frac{\cos\theta}{a}\,\dd\theta .
+\]
+Il filo è illimitato, quindi $\theta$ varia tra $-\pi/2$ e $\pi/2$, e l'integrazione su tutta la distribuzione dà
+\[
+E_{0}=\frac{\lambda}{4\pi\epz\,a}\int_{-\pi/2}^{\pi/2}\cos\theta\,\dd\theta=\frac{\lambda}{4\pi\epz\,a}\cdot 2=\frac{1}{2\pi\epz}\,\frac{\lambda}{a} .
+\]
+Il campo decresce come $1/a$, più lentamente di quello di una carica puntiforme, e non dipende dalla posizione lungo il filo; è perpendicolare al filo, uscente se $\lambda>0$ ed entrante se $\lambda<0$. La verifica dimensionale dà $\mathrm{C\,m^{-1}}/(\mathrm{C^2\,N^{-1}\,m^{-2}}\cdot\mathrm{m})=\mathrm{N\,C^{-1}}$. Il filo indefinito non diventa mai una carica puntiforme, per quanto ci si allontani, perché la sua carica totale è infinita.
+
+\titoletto{Anello uniformemente carico}
+Un anello di raggio $R$ porta una carica distribuita con densità lineare costante $\lambda$, per una carica totale $Q$. Si cerca il campo in un punto $P$ dell'asse dell'anello, a distanza $x$ dal centro $O$. Ogni elemento $\dd l$ dell'anello, di carica $\dd q=\lambda\,\dd l$, dista da $P$
+\[
+r=\sqrt{x^2+R^2},
+\]
+lo stesso valore per tutti gli elementi: è una proprietà geometrica, perché tutti i punti dell'anello sono equidistanti da un punto dell'asse.
+
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			fieldarrow/.style={line width=1.3pt, ->},
+			posline/.style={draw=gray!50, line width=0.7pt, dashed},
+			axisline/.style={draw=gray!70, line width=0.8pt},
+			ringline/.style={draw=orange!80!black, line width=1.5pt},
+			dimline/.style={line width=0.6pt, <->, color=gray!80!black}
+		}
+
+		\draw[gridline] (-2.2,-3.6) grid (6.8,4.4);
+
+		\coordinate (O)       at (0, 0);
+		\coordinate (P)       at (3.2, 0);
+		\coordinate (Pprime)  at (0, 2.4);
+		\coordinate (Pdouble) at (0, -2.4);
+
+		\draw[axisline, ->] (-1.5, 0) -- (6.5, 0) node[right=2pt, font=\small\bfseries\itshape, color=gray!80!black] {$x$};
+		\draw[axisline, ->] (0, -3.2) -- (0, 3.8) node[above=2pt, font=\small\bfseries\itshape, color=gray!80!black] {$y$};
+
+		\draw[ringline, dashed, color=orange!70!black] (0, 2.4) arc (90:270:0.6cm and 2.4cm);
+		\draw[ringline, color=orange!90!black] (0, -2.4) arc (-90:90:0.6cm and 2.4cm);
+
+		\foreach \r in {0.25, 0.45, 0.65} {
+			\draw[orange!50!red, line width=0.4pt, dashed] (Pprime) circle (\r);
+			\draw[teal!50, line width=0.4pt, densely dotted] (Pdouble) circle (\r);
+		}
+
+		\draw[line width=3.5pt, color=orange!90!red] (-0.12, 2.37) arc (100:80:0.6cm and 2.4cm);
+		\draw[line width=3.5pt, color=teal!70!black] (-0.12, -2.37) arc (-100:-80:0.6cm and 2.4cm);
+
+		\draw[posline] (Pprime) -- (P);
+		\draw[posline] (Pdouble) -- (P);
+
+		\node[above right=-1pt, font=\small\itshape, color=gray!80!black] at ($(Pprime)!0.5!(P)$) {$r = \sqrt{x^2 + R^2}$};
+
+		\draw[dimline] (-0.8, 0) -- (-0.8, 2.4) node[midway, fill=white, inner sep=1.5pt, font=\small\itshape] {$R$};
+		\draw[gray!60, line width=0.5pt] (-0.2, 0) -- (-1.0, 0);
+		\draw[gray!60, line width=0.5pt] (-0.2, 2.4) -- (-1.0, 2.4);
+
+		\draw[dimline] (0, -1.0) -- (3.2, -1.0) node[midway, fill=white, inner sep=1.5pt, font=\small\itshape] {$x$};
+		\draw[gray!60, line width=0.5pt] (0, -0.3) -- (0, -1.2);
+		\draw[gray!60, line width=0.5pt] (3.2, -0.3) -- (3.2, -1.2);
+
+		\draw[fieldarrow, color=orange!90!red] (P) -- ($(P)!-1.8cm!(Pprime)$) node[below right=-1pt, font=\bfseries] {$\mathrm{d}\vec{E}_0$};
+		\draw[fieldarrow, color=teal!80!black] (P) -- ($(P)!-1.8cm!(Pdouble)$) node[above right=-1pt, font=\bfseries] {$\mathrm{d}\vec{E}_0'$};
+
+		\coordinate (E1) at ($(P)!-1.8cm!(Pprime)$);
+		\coordinate (E2) at ($(P)!-1.8cm!(Pdouble)$);
+		\coordinate (Eres) at ($(E1)+(E2)-(P)$);
+		\draw[gray!40, line width=0.6pt, dashed] (E1) -- (Eres) -- (E2);
+		\draw[fieldarrow, color=purple!80!black] (P) -- (Eres) node[right=2pt, font=\bfseries] {$\mathrm{d}\vec{E}_x$};
+
+		\draw[line width=0.5pt, color=gray!80!black] (P) +(-0.9,0) arc (180:143.13:0.9);
+		\node[font=\scriptsize\sffamily, color=gray!90!black] at ($(P)+(-1.15, 0.22)$) {$\theta$};
+		\draw[line width=0.5pt, color=gray!80!black] (P) +(0.9,0) arc (0:-36.87:0.9);
+		\node[font=\scriptsize\sffamily, color=gray!90!black] at ($(P)+(1.15, -0.22)$) {$\theta$};
+		\draw[line width=0.5pt, color=gray!80!black] (P) +(0.9,0) arc (0:36.87:0.9);
+		\node[font=\scriptsize\sffamily, color=gray!90!black] at ($(P)+(1.15, 0.22)$) {$\theta$};
+
+		\filldraw[fill=black!70, draw=black] (O) circle (1.8pt) node[below left=2pt, font=\small\bfseries] {$O$};
+		\filldraw[fill=black!70, draw=black] (P) circle (1.8pt) node[above=4pt, font=\small\itshape] {$P$};
+
+		\filldraw[fill=orange!80!red, draw=black!80, line width=0.6pt] (Pprime) circle (3.0pt);
+		\node[right=4pt, font=\small\bfseries, color=orange!90!red] at (Pprime) {$\mathrm{d}l$};
+		\node[left=2pt, font=\small\bfseries] at (Pprime) {$P'$};
+
+		\filldraw[fill=teal!70!black, draw=black!80, line width=0.6pt] (Pdouble) circle (3.0pt);
+		\node[right=4pt, font=\small\bfseries, color=teal!80!black] at (Pdouble) {$\mathrm{d}l'$};
+
+		\node[badge] at (3.5, 3.7) {$\mathrm{d}E_x = \mathrm{d}E_0 \cos\theta = \dfrac{1}{4\pi\varepsilon_0} \dfrac{x\,\mathrm{d}q}{(x^2+R^2)^{3/2}}$};
+
+	\end{tikzpicture}
+	\caption{Calcolo del campo elettrostatico lungo l'asse $x$ di un anello carico uniformemente di raggio $R$ per sovrapposizione degli elementi simmetrici $\mathrm{d}l$ e $\mathrm{d}l'$.}
+	\label{fig:campo:campo_anello_asse_infografica}
+\end{figure}
+
+Si osserva anzitutto la simmetria. Preso un elemento $\dd l$, per esempio all'apice dell'anello, esiste l'elemento diametralmente opposto $\dd l'$, alla stessa distanza da $P$, che produce un campo dello stesso modulo. Le componenti perpendicolari all'asse si annullano a due a due; lo stesso vale per gli elementi che, nel disegno alla lavagna, stanno davanti o dietro il piano del foglio. Resta soltanto la componente lungo l'asse $x$, e ogni elemento la produce con lo stesso angolo $\theta$ tra $PP'$ e l'asse. Si rinuncia allora alla notazione vettoriale, perché la direzione è nota, e si calcola la componente
+\[
+\dd E_x=\dd E\cos\theta=\frac{1}{4\pi\epz}\,\frac{\dd q}{r^2}\,\cos\theta .
+\]
+Il coseno si esprime in funzione di grandezze più utili: nel triangolo rettangolo di cateti $x$ e $R$, l'ipotenusa è $r$ e il cateto adiacente a $\theta$ è $x=r\cos\theta$, quindi
+\[
+\cos\theta=\frac{x}{r}=\frac{x}{(x^2+R^2)^{1/2}} .
+\]
+Il prodotto $\cos\theta/r^2$ dà $x/(x^2+R^2)^{3/2}$, e la componente assiale del contributo di un elemento è
+\[
+\dd E_x=\frac{1}{4\pi\epz}\,\frac{\lambda\,x\,\dd l}{(x^2+R^2)^{3/2}} .
+\]
+Qui si nasconde il tranello della formula: per trovare il campo totale si deve integrare, ma la variabile di integrazione è soltanto $l$. La coordinata $x$ del punto $P$, in cui si calcola il campo, è costante; costanti sono anche $\lambda$, per ipotesi, e il raggio $R$. Tutto esce dall'integrale, e resta $\oint\dd l$ esteso all'anello, cioè la lunghezza della circonferenza, $2\pi R$:
+\[
+\Ev=\frac{1}{4\pi\epz}\,\frac{\lambda\,x}{(x^2+R^2)^{3/2}}\oint_{\mathrm{anello}}\dd l\;\vec i=\frac{1}{4\pi\epz}\,\frac{\lambda\,2\pi R\,x}{(x^2+R^2)^{3/2}}\;\vec i .
+\]
+Poiché la carica totale dell'anello è l'integrale di $\dd q=\lambda\,\dd l$, cioè $Q=2\pi R\lambda$, si ottiene
+\[
+\Ev=\frac{1}{4\pi\epz}\,\frac{Q\,x}{(x^2+R^2)^{3/2}}\;\vec i ,
+\]
+con $Q$ in coulomb, $x$ e $R$ in metri ed $E$ in $\mathrm{N\,C^{-1}}$. Dimensionalmente il campo va come l'inverso del quadrato di una lunghezza, $\mathrm{m}/\mathrm{m^3}$, come deve sempre essere per un campo elettrico prodotto da una carica.
+
+Il risultato si legge nei casi limite, che conviene prevedere prima di guardare la formula. Al centro dell'anello ogni elemento produce un campo compensato da quello dell'elemento opposto, e il campo deve essere nullo; la formula dà infatti $E=0$ per $x=0$. Molto lontano dall'anello, per $x\gg R$, l'anello appare come un punto, e ci si aspetta il campo di una carica puntiforme. Se si trascura $R^2$ rispetto a $x^2$, il denominatore diventa $x^3$, e
+\[
+E_x\simeq\frac{Q}{4\pi\epz x^2} .
+\]
+Vicino al centro, per $|x|\ll R$, il denominatore si riduce a $R^3$ e il campo è lineare nella posizione,
+\[
+E_x\simeq\frac{Q\,x}{4\pi\epz R^3} .
+\]
+Tra questi due regimi il modulo del campo cresce da zero, raggiunge un massimo e torna a decrescere: la derivata di $x/(x^2+R^2)^{3/2}$, posta uguale a zero, dà $R^2-2x^2=0$, cioè il massimo cade a $x=R/\sqrt2$.
+
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			axisline/.style={draw=gray!70, line width=0.8pt, ->},
+			curveline/.style={draw=purple!85!black, line width=1.6pt},
+			refline/.style={draw=gray!60, line width=0.6pt, dashed}
+		}
+
+		\draw[gridline] (-5.2,-3.0) grid (5.2,3.4);
+
+		\draw[axisline] (-4.9, 0) -- (4.9, 0) node[right=2pt, font=\small\bfseries\itshape, color=gray!80!black] {$x$};
+		\draw[axisline] (0, -2.8) -- (0, 3.0) node[above=2pt, font=\small\bfseries\itshape, color=gray!80!black] {$E_x(x)$};
+
+		% Unità: R = 1.2 cm; massimo in x = R/sqrt(2) = 0.85 cm
+		\draw[curveline, color=orange!90!red, domain=0:4.6, samples=100, smooth]
+		plot (\x, {6.0*(\x/1.2)/((\x/1.2)^2+1)^1.5});
+		\draw[curveline, color=teal!80!black, domain=-4.6:0, samples=100, smooth]
+		plot (\x, {6.0*(\x/1.2)/((\x/1.2)^2+1)^1.5});
+
+		\draw[refline] (0.85, 0) -- (0.85, 2.31);
+		\draw[refline] (-0.85, 0) -- (-0.85, -2.31);
+		\node[below=2pt, font=\scriptsize] at (0.85, 0) {$\tfrac{R}{\sqrt2}$};
+		\node[above=2pt, font=\scriptsize] at (-0.85, 0) {$-\tfrac{R}{\sqrt2}$};
+
+
+		\filldraw[fill=purple!85!black, draw=black] (0, 0) circle (2.2pt) node[below left=2pt, font=\small\bfseries] {$O$};
+
+		\node[badge] at (2.9, 2.8) {$E_x = \dfrac{1}{4\pi\varepsilon_0}\dfrac{Q\,x}{(x^2+R^2)^{3/2}}$};
+		\node[badge] at (3.0, -1.9) {$|x|\gg R:\ E_x\simeq \dfrac{Q}{4\pi\varepsilon_0 x^2}$};
+
+	\end{tikzpicture}
+	\caption{Andamento del campo sull'asse di un anello carico ($Q>0$): nullo al centro, lineare in $x$ nelle vicinanze del centro, massimo per $|x|=R/\sqrt2$, decrescente come $1/x^2$ a grande distanza.}
+	\label{fig:campo:anello_andamento}
+\end{figure}
+
+Il comportamento lineare vicino al centro ha una conseguenza dinamica. Una carica $q<0$ di massa $m$, posta sull'asse vicino al centro di un anello con $Q>0$ e libera di muoversi lungo l'asse, subisce la forza
+\[
+F_x=qE_x=-\frac{|q|\,Q}{4\pi\epz R^3}\,x ,
+\]
+proporzionale e opposta allo spostamento: è una forza di tipo elastico, con costante $k=|q|Q/(4\pi\epz R^3)$ in $\mathrm{N\,m^{-1}}$, e il moto è armonico, di pulsazione
+\[
+\omega=\sqrt{\frac{|q|\,Q}{4\pi\epz\, m\,R^3}} .
+\]
+Il moto è armonico soltanto finché l'ampiezza è piccola rispetto a $R$; per ampiezze maggiori la forza non è più lineare e il moto, pur sempre periodico, non è più armonico. Per una carica positiva la situazione è opposta: lungo l'asse è respinta, e il centro rappresenta una posizione di equilibrio instabile.
+
+\titoletto{Disco uniformemente carico}
+Si passa da una distribuzione lineare a una distribuzione superficiale. Un disco di raggio $R$ porta una carica distribuita con densità superficiale costante $\sigma$, per una carica totale $q=\sigma\pi R^2$; si cerca il campo in un punto $P$ dell'asse, a distanza $z$ dal centro. Il problema si può risolvere con la suddivisione del disco in elementi di superficie qualunque e con l'angolo solido sotto cui $P$ vede ciascun elemento; il risultato, che conviene ricordare, si scrive
+\[
+E_z=\frac{\sigma}{2\epz}\,(1-\cos\alpha)\qquad(z>0),
+\]
+dove $\alpha$ è la semiapertura del cono con vertice in $P$ che ha per base il disco, cioè l'angolo, fisso, sotto cui $P$ vede il raggio del disco, e non l'angolo variabile $\theta$ associato al singolo elemento. Più istruttivo è un secondo schema, che sfrutta un risultato già noto. Il disco si scompone in corone circolari concentriche di raggio $s$ e spessore infinitesimo $\dd s$; ciascuna corona, proprio perché sottile, si comporta come un anello di raggio $s$. La sua area e la sua carica sono
+\[
+\dd S=2\pi s\,\dd s, \qquad \dd q=\sigma\,\dd S=\sigma\,2\pi s\,\dd s .
+\]
+La corona è una superficie, sia pure infinitesima, ma conta soltanto come striscia: per il campo in $P$ si può usare la formula dell'anello, con $\dd q$ al posto di $Q$ e $s$ al posto di $R$.
+
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			fieldarrow/.style={line width=1.3pt, ->},
+			posline/.style={draw=gray!50, line width=0.7pt, dashed},
+			axisline/.style={draw=gray!70, line width=0.8pt},
+			diskfill/.style={fill=orange!12, draw=orange!70!black, line width=1.0pt},
+			annulusfill/.style={fill=orange!60!red, draw=orange!90!red, line width=0.8pt},
+			dimline/.style={line width=0.6pt, <->, color=gray!80!black}
+		}
+
+		\draw[gridline] (-2.2,-3.6) grid (6.8,4.4);
+
+		\coordinate (O)       at (0, 0);
+		\coordinate (P)       at (3.2, 0);
+		\coordinate (Pprime)  at (0, 1.5);
+		\coordinate (Pdouble) at (0, -1.5);
+
+		\draw[axisline, ->] (-1.5, 0) -- (6.5, 0) node[right=2pt, font=\small\bfseries\itshape, color=gray!80!black] {$z$};
+		\draw[axisline, ->] (0, -3.2) -- (0, 3.8) node[above=2pt, font=\small\bfseries\itshape, color=gray!80!black] {$s$};
+
+		\filldraw[diskfill] (O) ellipse (0.6cm and 2.4cm);
+
+		\filldraw[annulusfill, even odd rule]
+		(O) ellipse (0.41cm and 1.62cm)
+		(O) ellipse (0.35cm and 1.38cm);
+
+		\draw[gray!60, line width=0.6pt, dashed] (0, 2.4) arc (90:270:0.6cm and 2.4cm);
+
+		\foreach \r in {0.25, 0.45, 0.65} {
+			\draw[orange!50!red, line width=0.4pt, dashed] (Pprime) circle (\r);
+			\draw[teal!50, line width=0.4pt, densely dotted] (Pdouble) circle (\r);
+		}
+
+		\draw[posline] (Pprime) -- (P);
+		\draw[posline] (Pdouble) -- (P);
+
+		\node[above right=-1pt, font=\small\itshape, color=gray!80!black] at ($(Pprime)!0.55!(P)$) {$r = \sqrt{z^2 + s^2}$};
+
+		\draw[dimline] (-0.8, 0) -- (-0.8, 1.5) node[midway, fill=white, inner sep=1.0pt, font=\small\itshape] {$s$};
+		\draw[gray!60, line width=0.5pt] (-0.2, 0) -- (-1.0, 0);
+		\draw[gray!60, line width=0.5pt] (-0.2, 1.5) -- (-1.0, 1.5);
+
+		\draw[dimline] (-1.6, 0) -- (-1.6, 2.4) node[midway, fill=white, inner sep=1.0pt, font=\small\itshape] {$R$};
+		\draw[gray!60, line width=0.5pt] (-0.2, 2.4) -- (-1.8, 2.4);
+
+		\draw[dimline] (0.2, 1.38) -- (0.2, 1.62);
+		\node[right=3pt, font=\scriptsize\bfseries, color=orange!90!red] at (0.2, 1.5) {$\mathrm{d}s$};
+
+		\draw[dimline] (0, -1.0) -- (3.2, -1.0) node[midway, fill=white, inner sep=1.5pt, font=\small\itshape] {$z$};
+		\draw[gray!60, line width=0.5pt] (0, -0.3) -- (0, -1.2);
+		\draw[gray!60, line width=0.5pt] (3.2, -0.3) -- (3.2, -1.2);
+
+		\draw[fieldarrow, color=orange!90!red] (P) -- ($(P)!-1.8cm!(Pprime)$) node[below right=-1pt, font=\bfseries] {$\mathrm{d}\vec{E}_0$};
+		\draw[fieldarrow, color=teal!80!black] (P) -- ($(P)!-1.8cm!(Pdouble)$) node[above right=-1pt, font=\bfseries] {$\mathrm{d}\vec{E}_0'$};
+
+		\coordinate (E1) at ($(P)!-1.8cm!(Pprime)$);
+		\coordinate (E2) at ($(P)!-1.8cm!(Pdouble)$);
+		\coordinate (Eres) at ($(E1)+(E2)-(P)$);
+		\draw[gray!40, line width=0.6pt, dashed] (E1) -- (Eres) -- (E2);
+		\draw[fieldarrow, color=purple!80!black] (P) -- (Eres) node[right=2pt, font=\bfseries] {$\mathrm{d}\vec{E}_z$};
+
+		\draw[line width=0.5pt, color=gray!80!black] (P) +(-0.9,0) arc (180:154.88:0.9);
+		\node[font=\scriptsize\sffamily, color=gray!90!black] at ($(P)+(-1.15, 0.18)$) {$\theta$};
+		\draw[line width=0.5pt, color=gray!80!black] (P) +(0.9,0) arc (0:-25.12:0.9);
+		\node[font=\scriptsize\sffamily, color=gray!90!black] at ($(P)+(1.15, -0.18)$) {$\theta$};
+		\draw[line width=0.5pt, color=gray!80!black] (P) +(0.9,0) arc (0:25.12:0.9);
+		\node[font=\scriptsize\sffamily, color=gray!90!black] at ($(P)+(1.15, 0.18)$) {$\theta$};
+
+		\filldraw[fill=black!70, draw=black] (O) circle (1.8pt) node[below left=2pt, font=\small\bfseries] {$O$};
+		\filldraw[fill=black!70, draw=black] (P) circle (1.8pt) node[above=4pt, font=\small\itshape] {$P$};
+
+		\filldraw[fill=orange!80!red, draw=black!80, line width=0.6pt] (Pprime) circle (3.0pt);
+		\node[left=3pt, font=\small\bfseries, color=orange!90!red] at (Pprime) {$\mathrm{d}S$};
+		\filldraw[fill=teal!70!black, draw=black!80, line width=0.6pt] (Pdouble) circle (3.0pt);
+
+		\node[badge] at (2.4, 3.7) {$\mathrm{d}E_z = \dfrac{\sigma\,z}{2\varepsilon_0} \dfrac{s\,\mathrm{d}s}{(z^2+s^2)^{3/2}}$};
+
+	\end{tikzpicture}
+	\caption{Scomposizione del disco in corone circolari di area $\mathrm{d}S = 2\pi s\,\mathrm{d}s$, ciascuna assimilabile a un anello, per il calcolo del campo $\mathrm{d}\vec{E}_z$ sull'asse $z$.}
+	\label{fig:campo:campo_disco_infografica}
+\end{figure}
+
+Ogni corona produce in $P$ un campo diretto lungo l'asse $z$, per cui tutti i contributi si sommano in modulo:
+\[
+\dd E_z=\frac{1}{4\pi\epz}\,\frac{z\,\dd q}{(z^2+s^2)^{3/2}}=\frac{1}{4\pi\epz}\,\frac{\sigma\,2\pi s\,z\,\dd s}{(z^2+s^2)^{3/2}}=\frac{\sigma\,z}{2\epz}\,\frac{s\,\dd s}{(z^2+s^2)^{3/2}} .
+\]
+La coordinata $z$ del punto non va dimenticata: senza di essa l'integrando avrebbe le dimensioni sbagliate. Per sommare tutte le corone, da quella di raggio $s=0$ a quella di raggio $s=R$, si fa variare $s$, mentre $z$ resta costante. Con la primitiva del riquadro dei richiami,
+\[
+E_z=\frac{\sigma z}{2\epz}\int_0^R\frac{s\,\dd s}{(z^2+s^2)^{3/2}}=\frac{\sigma z}{2\epz}\left[-\frac{1}{\sqrt{z^2+s^2}}\right]_0^R=\frac{\sigma z}{2\epz}\left[\frac{1}{|z|}-\frac{1}{\sqrt{z^2+R^2}}\right],
+\]
+cioè, dopo la messa in evidenza di $1/|z|$,
+\[
+E_z=\frac{\sigma}{2\epz}\,\frac{z}{|z|}\left[1-\frac{|z|}{\sqrt{z^2+R^2}}\right] ,
+\]
+con $\sigma$ in $\mathrm{C\,m^{-2}}$ ed $E_z$ in $\mathrm{N\,C^{-1}}$. Il fattore $z/|z|$ vale $+1$ per $z>0$ e $-1$ per $z<0$: il campo è uscente da entrambe le facce del disco. Poiché $|z|/\sqrt{z^2+R^2}=\cos\alpha$, la formula coincide con quella ottenuta con l'angolo solido.
+
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			axisline/.style={draw=gray!70, line width=0.8pt, ->},
+			curveline/.style={draw=purple!85!black, line width=1.6pt},
+			refline/.style={draw=gray!60, line width=0.6pt, dashed}
+		}
+
+		\draw[gridline] (-5.2,-3.2) grid (5.2,3.8);
+
+		\draw[axisline] (-4.8, 0) -- (4.8, 0) node[right=2pt, font=\small\bfseries\itshape, color=gray!80!black] {$z$};
+		\draw[axisline] (0, -2.8) -- (0, 3.2) node[above=2pt, font=\small\bfseries\itshape, color=gray!80!black] {$E_0(z)$};
+
+		\draw[refline] (-4.5, 2.0) -- (4.5, 2.0);
+		\draw[refline] (-4.5,-2.0) -- (4.5,-2.0);
+
+		\node[left=3pt, font=\small\sffamily] at (0, 2.0) {$+\frac{\sigma}{2\varepsilon_0}$};
+		\node[left=3pt, font=\small\sffamily] at (0,-2.0) {$-\frac{\sigma}{2\varepsilon_0}$};
+
+		\draw[curveline, color=orange!90!red, domain=0.08:4.5, samples=80, smooth]
+		plot (\x, {2.0 * (1 - \x / sqrt(\x*\x + 1.2))});
+		\draw[curveline, color=teal!80!black, domain=-4.5:-0.08, samples=80, smooth]
+		plot (\x, {-2.0 * (1 - abs(\x) / sqrt(\x*\x + 1.2))});
+
+		\filldraw[fill=white, draw=orange!90!red, line width=1.0pt] (0, 2.0) circle (2.2pt);
+		\filldraw[fill=white, draw=teal!80!black, line width=1.0pt] (0,-2.0) circle (2.2pt);
+
+		\filldraw[fill=purple!85!black, draw=black] (0, 0) circle (2.2pt) node[below left=2pt, font=\small\bfseries] {$O$};
+
+		\node[badge] at (3, 2.7) {$E_0(z) = \dfrac{\sigma}{2\varepsilon_0} \dfrac{z}{|z|} \left[1 - \dfrac{|z|}{\sqrt{z^2+R^2}}\right]$};
+
+	\end{tikzpicture}
+	\caption{Andamento del campo elettrostatico $E_0(z)$ sull'asse di un disco circolare carico di raggio $R$ ($\sigma>0$): discontinuità di ampiezza $\sigma/\varepsilon_0$ nell'attraversamento del disco.}
+	\label{fig:campo:erdas_fig48_disco}
+\end{figure}
+
+Saper tracciare il grafico a partire dalla formula è una competenza professionale, e gli assi vanno sempre nominati: in ascissa la coordinata $z$, in ordinata il campo. Lontano dal disco, per $|z|\gg R$, il termine $|z|/\sqrt{z^2+R^2}=(1+R^2/z^2)^{-1/2}\simeq1-R^2/(2z^2)$, e
+\[
+E_z\simeq\frac{\sigma}{2\epz}\,\frac{R^2}{2z^2}=\frac{\sigma\pi R^2}{4\pi\epz z^2}=\frac{q}{4\pi\epz z^2},
+\]
+il campo della carica puntiforme $q$, come ci si aspetta da un disco visto da lontano. Man mano che ci si avvicina al disco dalla parte delle $z$ positive, il termine sottratto all'unità tende a zero, e il campo cresce fino al valore limite. Lontano dal disco, al contrario, si sottrae all'unità una quantità sempre più vicina a uno: il campo tende a zero. Per $z\to0^{\pm}$ i limiti sono
+\[
+\lim_{z\to 0^{+}} E_z = \frac{\sigma}{2\epz}, \qquad \lim_{z\to 0^{-}} E_z = -\frac{\sigma}{2\epz} .
+\]
+Se si pratica un forellino microscopico nel disco e si «spunta» dall'altra parte, il campo, che era diretto nel verso positivo dell'asse, si rovescia senza passare per valori intermedi: nel punto $z=0$ c'è una discontinuità di ampiezza $\sigma/\epz$. Molto vicino al disco, d'altra parte, la distanza dal bordo è enorme rispetto alla distanza dalla superficie, e il disco appare come un piano infinito: il valore $\sigma/(2\epz)$ è anticipazione del campo del piano indefinito.
+
+\titoletto{Moto di una carica attraverso un disco forato}
+Il campo del disco permette di discutere la dinamica di una carica di prova lungo l'asse, nell'ipotesi che il disco abbia un forellino al centro, di raggio $a$ piccolo rispetto a $R$, e che l'attrito sia trascurabile. Per una carica positiva su un disco positivo la forza segue il campo, perché il campo è definito per cariche positive: quando si avvicina al disco la carica è respinta, e se viene spinta attraverso il foro, appena spunta dall'altra parte è respinta di nuovo, ma nel verso opposto. In entrambi i casi la carica tende ad allontanarsi dal disco.
+
+Per una carica negativa la situazione si capovolge. Lasciata libera sull'asse, la carica è attratta dal disco e accelera; giunta al foro, non si ferma, perché possiede massa inerziale e quindi velocità; oltrepassato il disco, è attratta all'indietro e rallenta finché si arresta, per poi tornare verso il disco e ripetere il moto. La carica oscilla, e la ragione è la conservazione dell'energia: il campo elettrostatico è conservativo, come si vedrà con il potenziale, e la carica possiede un'energia potenziale. Durante l'avvicinamento l'energia potenziale si converte in cinetica, che è massima al passaggio per il disco, dove l'energia potenziale è minima; oltre il disco l'energia cinetica si riconverte in potenziale, e il punto di inversione, in assenza di attrito, si trova alla stessa distanza da cui la carica era partita.
+
+L'oscillazione, però, è armonica soltanto in un caso preciso, ed è importante non confondere i due regimi. Se l'ampiezza è grande rispetto al raggio $a$ del foro ma piccola rispetto a $R$, la carica vede praticamente il disco pieno, il cui campo vicino alla superficie vale quasi $\sigma/(2\epz)$ in modulo e cambia verso nell'attraversamento del disco: la forza ha modulo pressoché costante, $|q|\sigma/(2\epz)$, e non è del tipo $-kz$. Il moto è periodico, composto da tratti uniformemente accelerati, ma non è armonico. Se invece l'ampiezza è piccola rispetto al raggio del foro, il disco forato si comporta come una corona circolare, il cui campo al centro è nullo e cresce linearmente con $z$, come per l'anello: la forza è del tipo $F=-kz$ e il moto è armonico. Questo secondo caso è svolto con i numeri nell'esercizio guida.
+
+\titoletto{Piano indefinito uniformemente carico}
+Un piano indefinito si ottiene dal disco nel limite $R\to\infty$. Il termine $|z|/\sqrt{z^2+R^2}$ tende a zero, e dal risultato del disco discende immediatamente
+\[
+E_z = \begin{cases} +\dfrac{\sigma}{2\epz} & \text{per } z>0 ,\\[1.5ex] -\dfrac{\sigma}{2\epz} & \text{per } z<0 .\end{cases}
+\]
+Il segno meno per $z<0$ indica soltanto che, dalla parte negativa, il campo è diretto contro il verso positivo dell'asse: il campo è uscente da entrambe le facce per $\sigma>0$. Ne segue un campo uniforme, indipendente dalla distanza dal piano, e c'è una ragione semplice: la distanza conta quando una sua variazione altera la percezione della forma dell'oggetto. Una sfera, un anello o un disco visti da lontano diventano un punto, e il loro campo tende a zero; un piano infinito, visto da qualunque distanza, resta un piano infinito, e il suo campo non tende a zero. Nel grafico i due rami del disco si raddrizzano in due semirette orizzontali. Le linee di campo si rappresentano parallele ed equispaziate, uscenti da entrambi i lati del piano. Lo stesso risultato si otterrà in modo più rapido con la legge di Gauss.
+
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			fieldarrow/.style={line width=1.3pt, ->, color=orange!90!red},
+			planefill/.style={fill=orange!12, draw=orange!80!black, line width=1.0pt}
+		}
+
+		\draw[gridline] (-4.6,-3.6) grid (4.6,3.8);
+
+		\coordinate (L1) at (-0.3, -2.0);
+		\coordinate (L2) at (-0.1, -0.7);
+		\coordinate (L3) at (0.1, 0.6);
+		\coordinate (L4) at (0.3, 1.9);
+
+		\draw[fieldarrow] (L1) -- ($(L1)+(-2.5,0)$);
+		\draw[fieldarrow] (L2) -- ($(L2)+(-2.5,0)$);
+		\draw[fieldarrow] (L3) -- ($(L3)+(-2.5,0)$);
+		\draw[fieldarrow] (L4) -- ($(L4)+(-2.5,0)$) node[left=2pt, font=\bfseries] {$\vec{E}$};
+
+		\filldraw[planefill] (-0.8, -3.0) -- (0.8, -1.5) -- (0.8, 3.0) -- (-0.8, 1.5) -- cycle;
+
+		\node[color=orange!90!red, font=\bfseries\small] at (-0.2, -2.2) {$+$};
+		\node[color=orange!90!red, font=\bfseries\small] at ( 0.3, -1.4) {$+$};
+		\node[color=orange!90!red, font=\bfseries\small] at (-0.3, -0.6) {$+$};
+		\node[color=orange!90!red, font=\bfseries\small] at ( 0.1,  0.2) {$+$};
+		\node[color=orange!90!red, font=\bfseries\small] at (-0.2,  1.1) {$+$};
+		\node[color=orange!90!red, font=\bfseries\small] at ( 0.3,  2.0) {$+$};
+
+		\node[above=2pt, font=\small\bfseries, color=orange!80!black] at (-0.5, 2.5) {$\sigma > 0$};
+
+		\draw[fieldarrow] (L1) -- ($(L1)+(2.5,0)$);
+		\draw[fieldarrow] (L2) -- ($(L2)+(2.5,0)$);
+		\draw[fieldarrow] (L3) -- ($(L3)+(2.5,0)$);
+		\draw[fieldarrow] (L4) -- ($(L4)+(2.5,0)$) node[right=2pt, font=\bfseries] {$\vec{E}$};
+
+		\node[badge] at (2, 3.4) {$E = \dfrac{\sigma}{2\varepsilon_0}$};
+
+	\end{tikzpicture}
+	\caption{Campo elettrostatico uniforme generato da un piano indefinito con densità di carica positiva $\sigma$: linee parallele, equispaziate, uscenti da entrambi i lati.}
+	\label{fig:campo:piano_verticale_infografica}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			axisline/.style={draw=gray!70, line width=0.8pt, ->},
+			curveline/.style={draw=purple!85!black, line width=1.6pt},
+			refline/.style={draw=gray!60, line width=0.6pt, dashed}
+		}
+
+		\draw[gridline] (-4.8,-3.2) grid (4.8,3.8);
+
+		\draw[axisline] (-4.4, 0) -- (4.4, 0) node[right=2pt, font=\small\bfseries\itshape, color=gray!80!black] {$z$};
+		\draw[axisline] (0, -2.8) -- (0, 3.2) node[above=2pt, font=\small\bfseries\itshape, color=gray!80!black] {$E_0(z)$};
+
+		\draw[refline] (-4.2, 2.0) -- (4.2, 2.0);
+		\draw[refline] (-4.2,-2.0) -- (4.2,-2.0);
+
+		\node[left=3pt, font=\small\sffamily] at (0, 2.0) {$+\frac{\sigma}{2\varepsilon_0}$};
+		\node[left=3pt, font=\small\sffamily] at (1.2,-2.0) {$-\frac{\sigma}{2\varepsilon_0}$};
+
+		\draw[curveline, color=orange!90!red] (0.08, 2.0) -- (4.2, 2.0);
+		\draw[curveline, color=teal!80!black] (-4.2,-2.0) -- (-0.08,-2.0);
+
+		\filldraw[fill=white, draw=orange!90!red, line width=1.0pt] (0, 2.0) circle (2.2pt);
+		\filldraw[fill=white, draw=teal!80!black, line width=1.0pt] (0,-2.0) circle (2.2pt);
+
+		\filldraw[fill=purple!85!black, draw=black] (0, 0) circle (2.2pt) node[below left=2pt, font=\small\bfseries] {$O$};
+
+		\node[badge] at (3, 3.2) {$E_0(z) = \begin{cases} +\dfrac{\sigma}{2\varepsilon_0} & \text{per } z > 0 \\[1ex] -\dfrac{\sigma}{2\varepsilon_0} & \text{per } z < 0 \end{cases}$};
+
+	\end{tikzpicture}
+	\caption{Andamento del campo elettrostatico $E_0(z)$ generato da un piano indefinito uniformemente carico.}
+	\label{fig:campo:erdas_fig49_piano}
+\end{figure}
+
+Una carica posta vicino al piano è soggetta a una forza costante, $\Fv=q\Ev$; forza costante significa accelerazione costante, e lungo l'asse il moto è rettilineo uniformemente accelerato, nel verso positivo dell'asse dalla parte delle $z$ positive e nel verso negativo dall'altra, per una carica positiva su un piano positivo. È lo stesso moto di un corpo in caduta libera nel campo gravitazionale presso il suolo, anch'esso uniforme.
+
+\titoletto{Doppio strato}
+Un doppio strato è formato da due piani indefiniti paralleli, uniformemente carichi con densità $+\sigma$ e $-\sigma$. Il campo si ricava per sovrapposizione dei campi dei due piani, ciascuno di modulo $\sigma/(2\epz)$: il piano positivo produce un campo uscente, il negativo un campo entrante. Nella regione compresa tra i piani i due campi hanno lo stesso verso, dal piano positivo al negativo, e si sommano,
+\[
+E=\frac{\sigma}{2\epz}+\frac{\sigma}{2\epz}=\frac{\sigma}{\epz},
+\]
+mentre nelle due regioni esterne hanno versi opposti e si annullano,
+\[
+E=0 .
+\]
+Il risultato va memorizzato, perché viene chiesto sempre: il doppio strato è il modello del condensatore piano. I condensatori sono presenti in qualunque elettrodomestico, e ciascuno li usa ogni giorno per ore: lo schermo di un telefono è uno schermo capacitivo, e il dito che lo tocca diventa una delle armature, modifica il campo elettrico locale, e il dispositivo riconosce in quale punto è avvenuto il contatto.
+
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			fieldarrow_pos/.style={line width=1.1pt, ->, color=orange!90!red},
+			fieldarrow_neg/.style={line width=1.1pt, ->, color=teal!80!black},
+			fieldarrow_tot/.style={line width=1.4pt, ->, color=purple!85!black},
+			planefill_pos/.style={fill=orange!12, draw=orange!80!black, line width=1.0pt},
+			planefill_neg/.style={fill=teal!10, draw=teal!80!black, line width=1.0pt}
+		}
+
+		\draw[gridline] (-5.6,-3.6) grid (5.6,3.8);
+
+		% DOMINIO I: Esterno sinistro
+		\coordinate (I1) at (-2.3, 0.8);
+		\coordinate (I2) at (-2.3, -1.2);
+		\draw[fieldarrow_pos] (I1) -- ($(I1)+(-1.6,0)$) node[above left=-2pt, font=\bfseries\scriptsize] {$\vec{E}_+$};
+		\draw[fieldarrow_pos] (I2) -- ($(I2)+(-1.6,0)$);
+		\draw[fieldarrow_neg] ($(I1)+(-1.6,0)$) -- (I1) node[midway, below, font=\bfseries\scriptsize] {$\vec{E}_-$};
+		\draw[fieldarrow_neg] ($(I2)+(-1.6,0)$) -- (I2);
+
+		% DOMINIO II: Regione interna
+		\coordinate (II1) at (-1.3, 0.8);
+		\coordinate (II2) at (-1.3, -1.2);
+		\draw[fieldarrow_pos] (II1) -- ($(II1)+(1.2,0)$) node[above left=-2pt, font=\bfseries\scriptsize] {$\vec{E}_+$};
+		\draw[fieldarrow_pos] (II2) -- ($(II2)+(1.2,0)$);
+		\draw[fieldarrow_neg] ($(II1)+(1.3,0)$) -- ($(II1)+(2.5,0)$) node[above right=-2pt, font=\bfseries\scriptsize] {$\vec{E}_-$};
+		\draw[fieldarrow_neg] ($(II2)+(1.3,0)$) -- ($(II2)+(2.5,0)$);
+		\draw[fieldarrow_tot] (-1.3, -0.2) -- (1.3, -0.2) node[midway, above=2pt, font=\bfseries] {$\vec{E}$};
+
+		% DOMINIO III: Esterno destro
+		\coordinate (III1) at (2.3, 0.8);
+		\coordinate (III2) at (2.3, -1.2);
+		\draw[fieldarrow_pos] (III1) -- ($(III1)+(1.6,0)$) node[above right=-2pt, font=\bfseries\scriptsize] {$\vec{E}_+$};
+		\draw[fieldarrow_pos] (III2) -- ($(III2)+(1.6,0)$);
+		\draw[fieldarrow_neg] ($(III1)+(1.6,0)$) -- (III1) node[midway, below, font=\bfseries\scriptsize] {$\vec{E}_-$};
+		\draw[fieldarrow_neg] ($(III2)+(1.6,0)$) -- (III2);
+
+		% PIANI
+		\filldraw[planefill_pos] (-2.4, -2.8) -- (-1.2, -1.3) -- (-1.2, 2.7) -- (-2.4, 1.2) -- cycle;
+		\filldraw[planefill_neg] (1.2, -2.8) -- (2.4, -1.3) -- (2.4, 2.7) -- (1.2, 1.2) -- cycle;
+
+		\node[color=orange!90!red, font=\bfseries\small] at (-2.0, -1.8) {$+$};
+		\node[color=orange!90!red, font=\bfseries\small] at (-1.5, -0.8) {$+$};
+		\node[color=orange!90!red, font=\bfseries\small] at (-2.0,  0.2) {$+$};
+		\node[color=orange!90!red, font=\bfseries\small] at (-1.5,  1.2) {$+$};
+		\node[color=orange!90!red, font=\bfseries\small] at (-2.0,  2.0) {$+$};
+		\node[above=2pt, font=\small\bfseries, color=orange!90!red] at (-1.8, 2.2) {$+\sigma$};
+
+		\node[color=teal!80!black, font=\bfseries\small] at (1.6, -1.8) {$-$};
+		\node[color=teal!80!black, font=\bfseries\small] at (2.1, -0.8) {$-$};
+		\node[color=teal!80!black, font=\bfseries\small] at (1.6,  0.2) {$-$};
+		\node[color=teal!80!black, font=\bfseries\small] at (2.1,  1.2) {$-$};
+		\node[color=teal!80!black, font=\bfseries\small] at (1.6,  2.0) {$-$};
+		\node[above=2pt, font=\small\bfseries, color=teal!80!black] at (1.8, 2.2) {$-\sigma$};
+
+		\node[badge] at (-3.8, 3.2) {$E = 0$};
+		\node[badge] at (0, 3.2) {$E = \dfrac{\sigma}{2\varepsilon_0} + \dfrac{\sigma}{2\varepsilon_0} = \dfrac{\sigma}{\varepsilon_0}$};
+		\node[badge] at (3.8, 3.2) {$E = 0$};
+
+	\end{tikzpicture}
+	\caption{Campo elettrostatico generato da un doppio strato di carica con densità $+\sigma$ e $-\sigma$: elisione dei campi all'esterno ($E = 0$) e somma concordante all'interno ($E = \sigma/\varepsilon_0$).}
+	\label{fig:campo:doppio_strato_infografica}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			axisline/.style={draw=gray!70, line width=0.8pt, ->},
+			curveline/.style={draw=purple!85!black, line width=1.6pt},
+			refline/.style={draw=gray!60, line width=0.6pt, dashed}
+		}
+
+		\draw[gridline] (-5.2,-1.6) grid (5.2,4.2);
+
+		\coordinate (z1) at (-2.0, 0);
+		\coordinate (z2) at ( 2.0, 0);
+
+		\draw[axisline] (-4.8, 0) -- (4.8, 0) node[right=2pt, font=\small\bfseries\itshape, color=gray!80!black] {$z$};
+		\draw[axisline] (0, -0.8) -- (0, 3.6) node[above=2pt, font=\small\bfseries\itshape, color=gray!80!black] {$E_0(z)$};
+
+		\draw[refline] (-2.0, 0) -- (-2.0, 3.0);
+		\draw[refline] ( 2.0, 0) -- ( 2.0, 3.0);
+		\draw[refline] (-4.5, 2.6) -- (4.5, 2.6);
+		\draw[refline] (-4.5, 1.3) -- (4.5, 1.3);
+
+		\node[below=4pt, font=\small\bfseries, color=orange!90!red] at (z1) {$+\sigma$};
+		\node[below=4pt, font=\small\bfseries, color=teal!80!black] at (z2) {$-\sigma$};
+		\node[left=3pt, font=\small\sffamily] at (0, 2.6) {$\frac{\sigma}{\varepsilon_0}$};
+		\node[left=3pt, font=\small\sffamily] at (0, 1.3) {$\frac{\sigma}{2\varepsilon_0}$};
+
+		\draw[curveline, color=teal!80!black] (-4.5, 0) -- (-2.08, 0);
+		\draw[curveline, color=orange!90!red] (-1.92, 2.6) -- (1.92, 2.6);
+		\draw[curveline, color=teal!80!black] (2.08, 0) -- (4.5, 0);
+
+		\filldraw[fill=white, draw=teal!80!black, line width=1.0pt] (-2.0, 0) circle (2.2pt);
+		\filldraw[fill=white, draw=orange!90!red, line width=1.0pt] (-2.0, 2.6) circle (2.2pt);
+		\filldraw[fill=white, draw=orange!90!red, line width=1.0pt] (2.0, 2.6) circle (2.2pt);
+		\filldraw[fill=white, draw=teal!80!black, line width=1.0pt] (2.0, 0) circle (2.2pt);
+
+		\filldraw[fill=purple!85!black, draw=black] (-2.0, 1.3) circle (2.4pt);
+		\filldraw[fill=purple!85!black, draw=black] (2.0, 1.3) circle (2.4pt);
+
+		\filldraw[fill=black!70, draw=black] (0, 0) circle (1.8pt) node[below left=2pt, font=\small\bfseries] {$O$};
+
+		\node[badge] at (0, 5) {$E_{\text{int}} = \dfrac{\sigma}{\varepsilon_0}, \quad E_{\text{est}} = 0, \quad E_{\text{piano}} = \dfrac{\sigma}{2\varepsilon_0}$};
+
+	\end{tikzpicture}
+	\caption{Andamento del campo elettrostatico $E_0(z)$ in funzione della coordinata $z$ per un doppio strato di carica; sui piani il campo assume il valore medio $\sigma/(2\varepsilon_0)$ tra i due valori limite.}
+	\label{fig:campo:erdas_fig50_doppio_strato}
+\end{figure}
+
+\titoletto{Strato sferico uniformemente carico}
+Uno strato sferico è una superficie sferica di raggio $R$ uniformemente carica con densità $\sigma$, per una carica totale $q=4\pi R^2\sigma$; non va confuso con una sfera piena carica in volume, che si comporta in modo un po' diverso. Prima di ogni calcolo si può prevedere il campo da lontano: come ogni distribuzione finita, la sfera vista da lontano diventa una carica puntiforme, con campo $q/(4\pi\epz r^2)$. Il calcolo esplicito è più laborioso dei precedenti, e all'esame non viene richiesto nei dettagli, ma il suo risultato va ricordato con sicurezza.
+
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			fieldarrow/.style={line width=1.3pt, ->},
+			posline/.style={draw=gray!50, line width=0.7pt, dashed},
+			axisline/.style={draw=gray!70, line width=0.8pt},
+			ringdashed/.style={draw=orange!90!red, line width=0.8pt, dashed},
+			dimline/.style={line width=0.6pt, <->, color=gray!80!black}
+		}
+
+		\draw[gridline] (-3.2,-3.2) grid (8.2,3.6);
+
+		\coordinate (O) at (0,0);
+		\coordinate (P) at (5.0,0);
+
+		\coordinate (Q)  at (1.472, 1.635);
+		\coordinate (Q2) at (1.293, 1.780);
+		\coordinate (Qprime)  at (1.472, -1.635);
+		\coordinate (Qprime2) at (1.293, -1.780);
+
+		\shade[ball color=orange!25, opacity=0.42] (O) circle (2.2cm);
+		\draw[line width=0.9pt, color=black!85] (O) circle (2.2cm);
+
+		\draw[gray!50, line width=0.5pt, dashed] (2.2,0) arc (0:180:2.2cm and 0.55cm);
+		\draw[gray!70, line width=0.6pt] (-2.2,0) arc (180:360:2.2cm and 0.55cm);
+
+		\draw[ringdashed] (Q) arc (90:-90:0.65cm and 1.635cm);
+		\draw[ringdashed] (Q) arc (90:270:0.65cm and 1.635cm);
+		\draw[ringdashed] (Q2) arc (90:-90:0.68cm and 1.780cm);
+		\draw[ringdashed] (Q2) arc (90:270:0.68cm and 1.780cm);
+
+		\foreach \r in {0.22, 0.42} {
+			\draw[orange!50!red, line width=0.4pt, dashed] (Q) circle (\r);
+			\draw[teal!50, line width=0.4pt, densely dotted] (Qprime) circle (\r);
+		}
+
+		\draw[axisline, dashed, ->] (O) -- (7.8, 0);
+		\draw[posline] (O) -- (Q);
+		\draw[posline] (O) -- (Q2);
+		\draw[posline] (Q) -- (P);
+		\draw[posline] (Qprime) -- (P);
+
+		\draw[posline] (O) -- (-2.068, -0.752) node[midway, below left=-2pt, font=\small\itshape, color=black] {$R$};
+
+		\draw[axisline, dashed] (5.0, -1.6) -- (5.0, 1.6);
+
+		\draw[fieldarrow, color=teal!80!black] (P) -- ($(P)!-1.6cm!(Qprime)$) coordinate (E2) node[above right=-1pt, font=\bfseries] {$\mathrm{d}\vec{E}_0'$};
+		\draw[fieldarrow, color=orange!90!red] (P) -- ($(P)!-1.6cm!(Q)$) coordinate (E1) node[below right=-1pt, font=\bfseries] {$\mathrm{d}\vec{E}_0$};
+
+		\coordinate (Eres) at ($(E1)+(E2)-(P)$);
+		\draw[gray!50, line width=0.6pt, dashed] (E1) -- (Eres) -- (E2);
+		\draw[gray!50, line width=0.5pt, densely dotted] (E1) -- ($(P)!(E1)!(5.0, 1.6)$);
+		\draw[gray!50, line width=0.5pt, densely dotted] (E2) -- ($(P)!(E2)!(5.0, 1.6)$);
+
+		\draw[line width=0.5pt, color=black] (O) +(0.8,0) arc (0:48:0.8);
+		\node[font=\small\sffamily] at (1.05, 0.45) {$\theta$};
+
+		\draw[line width=0.5pt, color=black] (P) +(-0.9,0) arc (180:155.15:0.9);
+		\node[font=\small\sffamily] at (3.85, 0.22) {$\varphi$};
+
+		\node[above right=1pt, font=\small\itshape, color=black] at ($(Q)!0.45!(P)$) {$x$};
+
+		\draw[dimline] (0.0, -1.6) -- (5.0, -1.6) node[midway, fill=white, inner sep=2pt, font=\small\itshape] {$r$};
+		\draw[gray!60, line width=0.5pt] (0.8, -1.2) -- (0.8, -1.9);
+		\draw[gray!60, line width=0.5pt] (5.0, -0.3) -- (5.0, -1.9);
+
+		\filldraw[fill=black] (O) circle (1.5pt) node[below left=1pt, font=\small\bfseries] {$O$};
+		\filldraw[fill=black] (P) circle (1.5pt) node[above left=1pt, font=\small\itshape] {$P$};
+		\node[above right=1pt, font=\small\bfseries] at (Q) {$Q$};
+		\node[below right=1pt, font=\small\bfseries] at (Qprime) {$Q'$};
+
+		\node[badge] at (2.5, 3.2) {$x^2 = r^2 + R^2 - 2rR\cos\theta$};
+
+	\end{tikzpicture}
+	\caption{Geometria d'integrazione per lo strato sferico: la fascia di colatitudine $\theta$ e larghezza $R\,\mathrm{d}\theta$ è un anello, i cui punti distano $x$ da $P$; $r$ è la distanza di $P$ dal centro $O$.}
+	\label{fig:campo:strato_sferico_campo_elettrostatico}
+\end{figure}
+
+Il metodo è ancora quello degli anelli, con una complicazione: gli anelli ora scorrono sulla sfera, e al variare della loro posizione cambiano sia il raggio sia la distanza dal punto. Si fissa il punto $P$ a distanza $r$ dal centro $O$ e si prende come asse la retta $OP$. La fascia sferica di colatitudine $\theta$, misurata da $O$ rispetto all'asse, e larghezza $R\,\dd\theta$ è un anello di area e carica
+\[
+\dd S=2\pi R^2\sin\theta\,\dd\theta,\qquad \dd q=\sigma\,2\pi R^2\sin\theta\,\dd\theta .
+\]
+Tutti i punti della fascia distano $x$ da $P$; per simmetria il campo della fascia giace sull'asse, e ciascun elemento contribuisce con la componente $\dd E\cos\varphi$, dove $\varphi$ è l'angolo in $P$ tra la congiungente con la fascia e l'asse. Il teorema di Carnot, applicato al triangolo di lati $R$, $r$, $x$, fornisce le due relazioni
+\[
+x^2=r^2+R^2-2rR\cos\theta, \qquad R^2=x^2+r^2-2xr\cos\varphi ,
+\]
+la prima con l'angolo $\theta$ in $O$, la seconda con l'angolo $\varphi$ in $P$; dalla seconda
+\[
+\cos\varphi=\frac{x^2+r^2-R^2}{2xr} .
+\]
+Conviene usare $x$ come variabile di integrazione. Conviene differenziare la prima relazione, a $r$ e $R$ fissati: $2x\,\dd x=2rR\sin\theta\,\dd\theta$, cioè
+\[
+\sin\theta\,\dd\theta=\frac{x\,\dd x}{rR} .
+\]
+Il contributo della fascia diventa
+\[
+\dd E=\frac{1}{4\pi\epz}\,\frac{\dd q}{x^2}\cos\varphi=\frac{1}{4\pi\epz}\,\frac{\sigma\,2\pi R^2}{x^2}\,\frac{x\,\dd x}{rR}\,\frac{x^2+r^2-R^2}{2xr}=\frac{\sigma R}{4\epz r^2}\left[1+\frac{r^2-R^2}{x^2}\right]\dd x ,
+\]
+e la primitiva è
+\[
+\int\left[1+\frac{r^2-R^2}{x^2}\right]\dd x = x - \frac{r^2-R^2}{x} .
+\]
+Per un punto esterno, $r>R$, la distanza $x$ varia da $r-R$ (fascia più vicina, $\theta=0$) a $r+R$ (fascia più lontana, $\theta=\pi$). Poiché $(r^2-R^2)/(r+R)=r-R$ e $(r^2-R^2)/(r-R)=r+R$, la primitiva vale $2R$ nell'estremo superiore e $-2R$ in quello inferiore, e l'integrale è $4R$:
+\[
+E=\frac{\sigma R}{4\epz r^2}\cdot4R=\frac{\sigma R^2}{\epz r^2}=\frac{1}{4\pi\epz}\,\frac{q}{r^2}\qquad(r\ge R) .
+\]
+Il risultato è notevole: non soltanto da lontano, ma in ogni punto esterno, lo strato sferico si comporta come se tutta la carica fosse concentrata nel centro. Il campo cresce man mano che ci si avvicina alla sfera e raggiunge sulla superficie il valore massimo $q/(4\pi\epz R^2)=\sigma/\epz$.
+
+Per un punto interno, $r<R$, la distanza $x$ varia da $R-r$ a $R+r$. Ora $(r^2-R^2)/(R+r)=r-R$ e $(r^2-R^2)/(R-r)=-(R+r)$, e la primitiva vale $2R$ in entrambi gli estremi: l'integrale è nullo,
+\[
+E=0\qquad(r<R) .
+\]
+Il risultato si può intuire nel centro, dove ogni elemento di carica è compensato da quello diametralmente opposto e una carica di prova resterebbe ferma; il calcolo mostra che il campo è nullo in tutti i punti interni, anche lontani dal centro. I contributi delle cariche più vicine, più intensi, sono compensati esattamente da quelli delle cariche più lontane, più numerose, e la compensazione è esatta grazie alla dipendenza dall'inverso del quadrato della distanza.
+
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[>=Stealth, font=\small\sffamily]
+
+		\tikzset{
+			gridline/.style={draw=gray!20, line width=0.3pt, dashed},
+			badge/.style={draw=gray!40, fill=gray!10, rounded corners=3pt, inner xsep=8pt, inner ysep=4pt, font=\small\sffamily},
+			axisline/.style={draw=gray!70, line width=0.8pt, ->},
+			curveline/.style={draw=purple!85!black, line width=1.6pt},
+			refline/.style={draw=gray!60, line width=0.6pt, dashed}
+		}
+
+		\draw[gridline] (-0.8,-0.8) grid (8.2,4.0);
+
+		\draw[axisline] (-0.4, 0) -- (8.0, 0) node[right=2pt, font=\small\bfseries\itshape, color=gray!80!black] {$r$};
+		\draw[axisline] (0, -0.4) -- (0, 3.6) node[above=2pt, font=\small\bfseries\itshape, color=gray!80!black] {$E(r)$};
+
+		% R = 1.8 cm, E(R) = 2.8 cm
+		\draw[refline] (1.8, 0) -- (1.8, 3.0);
+		\draw[refline] (0, 2.8) -- (2.6, 2.8);
+		\node[below=3pt, font=\small\itshape] at (1.8, 0) {$R$};
+		\node[left=3pt, font=\small\sffamily] at (0, 2.8) {$\frac{q}{4\pi\varepsilon_0 R^2}$};
+		\node[left=3pt, font=\small\sffamily] at (0, 1.4) {$\frac{\sigma}{2\varepsilon_0}$};
+
+		\draw[curveline, color=teal!80!black] (0, 0) -- (1.72, 0);
+		\draw[curveline, color=orange!90!red, domain=1.8:7.6, samples=80, smooth]
+		plot (\x, {2.8*(1.8/\x)^2});
+
+		\filldraw[fill=white, draw=teal!80!black, line width=1.0pt] (1.8, 0) circle (2.2pt);
+		\filldraw[fill=orange!90!red, draw=black, line width=0.6pt] (1.8, 2.8) circle (2.2pt);
+		\filldraw[fill=purple!85!black, draw=black] (1.8, 1.4) circle (2.0pt);
+
+		\node[badge] at (5.4, 3.4) {$E=0\ (r<R),\quad E=\dfrac{1}{4\pi\varepsilon_0}\dfrac{q}{r^2}\ (r\ge R)$};
+		\node[badge] at (5.2, 1.2) {salto $\sigma/\varepsilon_0$ in $r=R$};
+
+	\end{tikzpicture}
+	\caption{Andamento del modulo del campo di uno strato sferico uniformemente carico in funzione della distanza dal centro: nullo all'interno, coulombiano all'esterno, con una discontinuità di ampiezza $\sigma/\varepsilon_0$ sulla superficie.}
+	\label{fig:campo:strato_sferico_andamento}
+\end{figure}
+
+Il quadro complessivo presenta una discontinuità vistosa. Per chi proviene dall'esterno il campo cresce come $1/r^2$ fino al valore $q/(4\pi\epz R^2)$ sulla superficie, e appena si entra nella sfera crolla a zero e vi resta. Il salto vale $q/(4\pi\epz R^2)=\sigma/\epz$, lo stesso del disco e del piano. Più sottile è la questione del valore esatto «sulla» superficie, perché un vero strato di carica ha uno spessore; per una superficie ideale il campo nei punti della superficie assume il valore medio tra i due limiti, $\sigma/(2\epz)$, come per il piano indefinito. Lo stesso risultato si ritroverà in poche righe con la legge di Gauss, che è una delle equazioni di Maxwell; all'esame è proprio con Gauss che lo si chiede, ma la conclusione va ricordata comunque: fuori dalla sfera uniformemente carica il campo è quello di una carica puntiforme posta nel centro, dentro la sfera il campo è nullo.
+
+\renewcommand{\richiamoprefix}{Richiamo --- }
+\begin{richiamo}{linee di forza del campo}
+Le linee di forza del campo elettrostatico sono curve che in ogni punto hanno per tangente la direzione del campo e sono orientate nel suo verso. Si addensano dove l'intensità del campo è maggiore, perché il numero di linee per unità di superficie trasversa è proporzionale al modulo del campo; non si incrociano mai, perché in ogni punto il campo è unico; hanno origine dalle cariche positive e terminano su quelle negative, o all'infinito. Il campo di una carica puntiforme positiva si rappresenta con semirette uscenti, quello del piano indefinito con rette parallele ed equispaziate; la freccia di orientamento si disegna in un punto della linea, perché la linea non è un vettore.
+\end{richiamo}
+
+\titoletto{Interpretazione fisica e casi limite.}
+I risultati del capitolo si leggono meglio nei casi estremi. Il confronto fa emergere due regolarità. La prima riguarda la grande distanza. Ogni distribuzione di estensione finita e carica totale $q$ non nulla, vista da una distanza grande rispetto alle proprie dimensioni, produce il campo di una carica puntiforme, $q/(4\pi\epz r^2)$: lo si è verificato per l'anello ($x\gg R$), per il disco ($|z|\gg R$) e per lo strato sferico, per il quale il risultato vale addirittura in ogni punto esterno. Fanno eccezione due casi istruttivi. Il dipolo ha carica totale nulla, e il suo campo decresce più rapidamente, come $1/r^3$. Filo e piano indefiniti, all'opposto, hanno carica totale infinita e non diventano mai «puntiformi»: il campo del filo decresce come $1/a$, quello del piano non decresce affatto. Le tre leggi di potenza, $r^{0}$, $r^{-1}$ e $r^{-2}$ per il piano, il filo e la carica puntiforme, corrispondono a sorgenti estese in due, una e zero dimensioni.
+
+La seconda regolarità riguarda le superfici cariche. Nell'attraversamento di una superficie con densità $\sigma$ la componente del campo normale alla superficie subisce un salto pari a $\sigma/\epz$: da $+\sigma/(2\epz)$ a $-\sigma/(2\epz)$ per il disco e per il piano, da $\sigma/\epz$ a zero per ciascuna armatura del doppio strato e per lo strato sferico. Vicino a qualunque superficie carica, a distanza piccola rispetto alle dimensioni e ai raggi di curvatura, la superficie appare piana, e il campo del piano indefinito ne è l'approssimazione locale. Il risultato si ritroverà come conseguenza diretta della legge di Gauss.
+
+Nel centro delle distribuzioni simmetriche il campo è nullo per compensazione: al centro del quadrato e del triangolo equilatero di cariche uguali, al centro dell'anello e in tutti i punti interni dello strato sferico. Nelle vicinanze di un punto di campo nullo il campo è spesso lineare nella distanza, come per l'anello e per la corona circolare, e la forza su una carica di segno opposto alla sorgente è del tipo $-kx$: compare l'oscillatore armonico. Dove invece il campo è uniforme, come vicino al piano, la forza è costante e il moto è uniformemente accelerato.
+
+\medskip
+
+\titoletto{Speciale esami precedenti.}
+\noindent\textsc{Domande orali tipiche.} La domanda più probabile è la descrizione del campo generato da una carica puntiforme. La risposta comincia alla lavagna con un disegno ordinato: la sorgente $q$, positiva per convenzione; un punto $P$ qualunque; la distanza $r$ e il versore $\uv_r$; il vettore campo applicato in $P$, diretto lungo la congiungente e uscente. Segue la formula in modulo e poi in forma vettoriale, con la freccia e il versore, notando che non c'è segno meno perché campo e versore sono concordi per $q>0$. La mezz'ora dell'orale è a disposizione del candidato: conviene essere tranquilli e precisi, né veloci né lenti, perché un disegno ambiguo fa nascere nel docente il dubbio che il concetto non sia chiaro. Altrettanto frequente è la definizione del campo, che va data direttamente, senza passare dalla forza di Coulomb: $\Ev=\Fv/q_0$, forza sulla carica di prova positiva divisa per la carica stessa, oppure forza che agisce sull'unità di carica positiva, con la precisazione $q_0\to0$ e il suo significato. A questa si collega la domanda sul perché del campo, cioè la velocità finita di propagazione dei segnali e la realtà fisica del campo, meno frequente ma da conoscere.
+
+Per le distribuzioni continue non si chiede di ricordare a memoria le formule di anello, disco o filo: si chiede il ragionamento, cioè la scelta dell'elemento infinitesimo, l'uso della simmetria per eliminare le componenti, l'individuazione della variabile di integrazione e l'impostazione dell'integrale. Quando il ragionamento procede correttamente, il docente passa spesso a un'altra domanda prima che il calcolo sia concluso, a meno che il risultato non serva per proseguire. Vanno invece sapute con sicurezza le conclusioni fisiche: il campo dell'anello al centro e da lontano, il campo del disco vicino e lontano con la discontinuità, il campo del piano indefinito $\sigma/(2\epz)$ e quello del doppio strato, $\sigma/\epz$ all'interno e nullo all'esterno, che viene chiesto sempre. Lo strato sferico non si chiede con il calcolo diretto, troppo lungo, ma con la legge di Gauss; il risultato, campo puntiforme all'esterno e nullo all'interno, va comunque ricordato. Le equazioni di Maxwell, al contrario delle formule delle distribuzioni, devono essere sapute a memoria con precisione.
+
+Ricorrono infine domande di dinamica che uniscono il campo alla Fisica 1: che moto compie una carica vicino a un piano carico (uniformemente accelerato, perché forza costante significa accelerazione costante); perché oscilla una carica negativa che attraversa un disco forato positivo (perché l'energia si conserva, con lo scambio tra energia potenziale e cinetica descritto nel testo); quando l'oscillazione è armonica (quando la forza è del tipo $-kx$). Alla domanda «perché oscilla?» la risposta «perché oscilla» non è una risposta; quella corretta parte dalla forza e arriva all'energia.
+
+\medskip
+
+\noindent\textsc{Tipologie di esercizi scritti.} Gli esercizi del capitolo si raggruppano in poche famiglie. Si incontra anzitutto il calcolo di forze e campi prodotti da sistemi discreti di cariche, con la sovrapposizione vettoriale e la scomposizione trigonometrica: cariche ai vertici di quadrati, triangoli, rettangoli, con il campo da calcolare al centro o in un vertice, e la determinazione dei punti in cui il campo si annulla. Altrettanto frequente è la stima di ordini di grandezza: forza di Coulomb tra particelle elementari, confronto con la gravità, peso equivalente di una forza. Un terzo gruppo riguarda il calcolo del campo sull'asse di distribuzioni con simmetria assiale, anello, disco, corona circolare, segmento di filo finito, con l'integrazione su una sola variabile e la verifica dei casi limite. Negli esercizi più completi il campo si unisce alla dinamica: moto di una carica in un campo uniforme, piccole oscillazioni sull'asse di un anello o di una corona, con il calcolo della costante elastica equivalente, della pulsazione e del periodo, eventualmente con la conservazione dell'energia per ricavare la velocità.
+
+\medskip
+
+\noindent\textsc{Gli errori più penalizzati.} Il più grave è sommare i moduli di vettori che hanno direzioni diverse, come nel caso delle quattro cariche al centro del quadrato, dove la somma dei moduli dà quattro volte il campo di una carica invece di zero. Altrettanto penalizzato è il disegno del campo come segmento che congiunge la sorgente al punto, anziché come vettore applicato nel punto. Nelle distribuzioni continue l'errore tipico è trattare come variabile di integrazione la coordinata del punto in cui si calcola il campo, che è invece costante, o dimenticarla dopo una sostituzione, con il risultato di un campo dalle dimensioni sbagliate: un campo elettrico prodotto da una carica va sempre dimensionalmente come $\mathrm{C}/\mathrm{m^2}$ moltiplicato per $1/\epz$. Seguono l'uso dei gradi al posto dei radianti, i grafici con gli assi privi di nome, la dimenticanza della lunghezza della circonferenza o dell'area di una corona circolare, la conversione delle potenze di dieci eseguita dopo l'elevamento al quadrato.
+
+Una classe a sé raccoglie gli errori di linguaggio e di concetto. L'avverbio «istantaneamente» non si usa per la propagazione di un'interazione. Il coulomb è un'unità derivata dall'ampere, e non il contrario. Somma delle forze nulla significa quiete o moto rettilineo uniforme, non assenza di forze. Il campo esiste indipendentemente dalla carica di prova. Un moto oscillatorio non è necessariamente armonico: lo è solo se la forza è proporzionale e opposta allo spostamento.
+
+\medskip
+
+\titoletto{Esercizio guida risolto.}
+Una corona circolare piana, di raggio interno $a=2{,}0\un{cm}$ e raggio esterno $b=4{,}0\un{cm}$, è uniformemente carica con densità superficiale $\sigma=1{,}0\times10^{-8}\un{C\,m^{-2}}$. Una particella di massa $m=1{,}0\times10^{-6}\un{kg}$ e carica $q=-1{,}0\times10^{-7}\un{C}$ può scorrere senza attrito lungo una guida rettilinea isolante, orizzontale, che coincide con l'asse $z$ della corona; il peso è equilibrato dalla reazione della guida. La particella viene abbandonata da ferma sull'asse a $z_0=2{,}0\un{mm}$ dal centro. Si chiede il campo sull'asse, la natura del moto, il periodo delle oscillazioni e la velocità massima.
+
+Il campo si ottiene con lo stesso procedimento del disco, con la scomposizione della corona in anelli di raggio $s$ e spessore $\dd s$, ma con $s$ variabile tra $a$ e $b$ invece che tra $0$ e $R$. Con la stessa primitiva, per $z>0$,
+\[
+E_z=\frac{\sigma z}{2\epz}\int_a^b\frac{s\,\dd s}{(z^2+s^2)^{3/2}}=\frac{\sigma\,z}{2\epz}\left[\frac{1}{\sqrt{z^2+a^2}}-\frac{1}{\sqrt{z^2+b^2}}\right] ,
+\]
+espressione che vale anche per $z<0$ e che, a differenza di quella del disco, si annulla per $z=0$: al centro della corona non c'è carica, e i contributi degli anelli si compensano come al centro di un singolo anello. Per $|z|\ll a$ lo sviluppo $(1+\epsilon)^{-1/2}\simeq1-\epsilon/2$ con $\epsilon=z^2/a^2$ dà
+\[
+\frac{1}{\sqrt{z^2+a^2}}=\frac1a\left(1+\frac{z^2}{a^2}\right)^{-1/2}\simeq\frac1a\left(1-\frac{z^2}{2a^2}\right),
+\]
+e analogamente per $b$. Al primo ordine in $z$ restano i termini $1/a$ e $1/b$, e il campo è lineare,
+\[
+E_z\simeq\frac{\sigma}{2\epz}\left(\frac1a-\frac1b\right)z .
+\]
+La forza sulla particella negativa è
+\[
+F_z=qE_z=-\frac{|q|\,\sigma}{2\epz}\left(\frac1a-\frac1b\right)z=-k\,z,
+\qquad
+k=\frac{|q|\,\sigma}{2\epz}\left(\frac1a-\frac1b\right) ,
+\]
+proporzionale e opposta allo spostamento: il moto è armonico. Numericamente $\sigma/(2\epz)=1{,}0\times10^{-8}/(2\cdot8{,}85\times10^{-12})\un{N\,C^{-1}}\simeq5{,}65\times10^{2}\un{N\,C^{-1}}$ e $1/a-1/b=(50-25)\un{m^{-1}}=25\un{m^{-1}}$, per cui
+\[
+k\simeq1{,}0\times10^{-7}\cdot5{,}65\times10^{2}\cdot25\un{N\,m^{-1}}\simeq1{,}4\times10^{-3}\un{N\,m^{-1}} ,
+\]
+con controllo dimensionale $\mathrm{C}\cdot\mathrm{N\,C^{-1}}\cdot\mathrm{m^{-1}}=\mathrm{N\,m^{-1}}$. L'equazione del moto $m\ddot z=-kz$ descrive un oscillatore armonico di pulsazione e periodo
+\[
+\omega=\sqrt{\frac{k}{m}}=\sqrt{\frac{1{,}41\times10^{-3}}{1{,}0\times10^{-6}}}\un{rad\,s^{-1}}\simeq 38\un{rad\,s^{-1}},\qquad
+T=\frac{2\pi}{\omega}\simeq 0{,}17\un{s} .
+\]
+La particella oscilla tra $z=+2{,}0\un{mm}$ e $z=-2{,}0\un{mm}$ e attraversa a ogni semiperiodo il foro centrale. La velocità è massima al passaggio per il centro, dove tutta l'energia potenziale iniziale $\tfrac12kz_0^2\simeq2{,}8\times10^{-9}\un{J}$ si è convertita in energia cinetica:
+\[
+v_{\max}=\omega\,z_0\simeq38\cdot2{,}0\times10^{-3}\un{m\,s^{-1}}\simeq7{,}5\times10^{-2}\un{m\,s^{-1}} .
+\]
+
+Resta da verificare l'ipotesi che giustifica il risultato. L'approssimazione lineare richiede $|z|\ll a$; con $z_0/a=0{,}1$ il primo termine trascurato modifica la forza di una frazione $\tfrac12z_0^2\,(a^{-3}-b^{-3})/(a^{-1}-b^{-1})\simeq0{,}9\%$, e l'approssimazione è eccellente. I punti in cui si sbaglia più spesso sono tre. L'errore più comune è trattare $z$ come variabile di integrazione, mentre si integra sul raggio $s$ degli anelli. Altrettanto insidioso è applicare la formula lineare per ampiezze confrontabili con il raggio del foro: se il foro fosse molto più piccolo dell'ampiezza, la particella vedrebbe in pratica un disco pieno, con forza di modulo quasi costante $|q|\sigma/(2\epz)$ che cambia verso al passaggio attraverso il disco, e il moto, pur periodico, non sarebbe armonico; si noti che per $a\to0$ la costante $k$ diverge, segno che la regione di linearità si restringe fino a scomparire. Resta, infine, il segno della carica, spesso dimenticato: una particella positiva sull'asse di una corona positiva non oscilla, perché il centro è per lei una posizione di equilibrio instabile lungo l'asse.
+
+\end{document}

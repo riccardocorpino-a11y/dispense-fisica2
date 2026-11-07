@@ -1,14 +1,28 @@
 % =====================================================================
 %  preambolo.tex  -  Dispense di Fisica 2
 %
-%  Uso in ogni dispensa (e nel testo unico):
-%      \documentclass[11pt,a4paper]{article}
-%      \input{preambolo}
-%      \begin{document} ... \end{document}
+%  Organizzazione dei file (pacchetto subfiles):
+%
+%    main.tex (testo unico)
+%        \documentclass[11pt,a4paper]{article}
+%        \input{preambolo}
+%        \begin{document}
+%        \subfile{dispensa_preliminari}
+%        ...
+%        \end{document}
+%
+%    ogni dispensa
+%        \documentclass[main.tex]{subfiles}
+%        \begin{document} ... \end{document}
+%
+%  Ogni dispensa si compila da sola (usa il preambolo di main.tex)
+%  oppure dentro main.tex. Le righe di una dispensa prima di
+%  \begin{document} vengono ignorate: le impostazioni locali
+%  (per esempio \renewcommand{\richiamoprefix}{...}) vanno scritte
+%  dopo \begin{document}.
 %
 %  Compatibile con pdfLaTeX, XeLaTeX e LuaLaTeX (il motore viene
-%  riconosciuto da solo). Le macro e gli ambienti di tutte le
-%  dispense precedenti sono qui riuniti senza conflitti.
+%  riconosciuto da solo).
 % =====================================================================
 
 % ---------------------------------------------------------------------
@@ -83,10 +97,19 @@
   \noindent{\large\scshape #1}\par\nopagebreak\smallskip\noindent}
 
 % ---------------------------------------------------------------------
-%  7. Riquadri di richiamo
-%     \begin{richiamo}{titolo} ... \end{richiamo}
-%     \begin{riquadro}{titolo} ... \end{riquadro}   (identico, alias)
-%     Per anteporre un prefisso fisso ai titoli:
+%  7. Riquadri di richiamo (numerati)
+%     \begin{riquadro}[label=ric:pot:sferiche]{Richiamo di Matematica: coordinate sferiche}
+%       ...
+%     \end{riquadro}
+%     L'etichetta va nell'opzione label=..., NON come \label dentro il
+%     riquadro (nei riquadri spezzabili andrebbe persa).
+%     Rimando nel testo:  si veda il Richiamo~\ref{ric:pot:sferiche}
+%
+%     \begin{richiamo}{...} e' un alias di riquadro e condivide la
+%     stessa numerazione. Il titolo stampato e':
+%         <numero>. \richiamoprefix <titolo>
+%     \richiamoprefix e' vuoto per default; per anteporre un prefisso
+%     fisso, dopo \begin{document}:
 %         \renewcommand{\richiamoprefix}{Richiamo di Fisica 1 --- }
 % ---------------------------------------------------------------------
 \newcommand{\richiamoprefix}{}
@@ -101,10 +124,17 @@
   before upper={\singlespacing}
 }}
 
-\newtcolorbox{richiamo}[1]{richiamo style, title={\richiamoprefix #1}}
-\newtcolorbox{riquadro}[1]{richiamo style, title={\richiamoprefix #1}}
+\newtcolorbox[auto counter]{riquadro}[2][]{richiamo style,
+  title={\thetcbcounter.~\richiamoprefix #2}, #1}
+\newtcolorbox[use counter from=riquadro]{richiamo}[2][]{richiamo style,
+  title={\thetcbcounter.~\richiamoprefix #2}, #1}
 
 % ---------------------------------------------------------------------
-%  8. Collegamenti ipertestuali (sempre per ultimo)
+%  8. Dispense come file separati
+% ---------------------------------------------------------------------
+\usepackage{subfiles}
+
+% ---------------------------------------------------------------------
+%  9. Collegamenti ipertestuali (sempre per ultimo)
 % ---------------------------------------------------------------------
 \usepackage[hidelinks]{hyperref}
